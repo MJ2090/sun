@@ -15,6 +15,7 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    question.choice_set.create(choice_text='Not much', votes=0)
     return render(request, 'detail.html', {'question': question})
 
 def results(request, question_id):
