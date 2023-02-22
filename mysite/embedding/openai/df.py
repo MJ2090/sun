@@ -228,5 +228,7 @@ Our approach is simple:
 
 Of course we do not suggest that our approach is perfect. No medical system in the world functions without difficulties and hurdles along the way. But we know it’s working.
     """
-    generate_scraped_csv_2(("my_text", my_text))
+
+    my_texts = [("ss", my_text)]
+    generate_scraped_csv_2(my_texts)
     return generate_embedding_csv()
