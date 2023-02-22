@@ -12,7 +12,7 @@ Names:""".format(animal.capitalize())
 
 response = openai.Completion.create(
   model="text-davinci-003",
-  prompt=generate_prompt(animal),
+  prompt=generate_prompt("Lion"),
   temperature=0.6
 )
 
