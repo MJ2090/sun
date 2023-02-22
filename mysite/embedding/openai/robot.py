@@ -4,7 +4,7 @@ import tiktoken
 import openai
 import numpy as np
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
-import o4
+import df
 
 ################################################################################
 ### Step 12
@@ -84,15 +84,21 @@ def answer_question(
 ################################################################################
 
 
-df = o4.get_df()
+def run_it():
+    df = df.get_df()
+    qs = ["What day is it?",
+          "What is Done?",
+          "What is ADHD?",
+          "How to treat ADHD?",
+          "How many people have ADHD?",
+          "Where are you",
+          "How do patients like Done.?"]
+    for q in qs:
+        print("Question:")
+        print(q)
+        print("Answer:")
+        print(answer_question(df, question=q, debug=False))
+        print("=======================")
 
 
-print(answer_question(df, question="What day is it?", debug=False))
-print("=======================")
-print(answer_question(df, question="What is Done?"))
-print("=======================")
-print(answer_question(df, question="What is Done.?"))
-print("=======================")
-print(answer_question(df, question="What is Done.'s mission?"))
-print("=======================")
-print(answer_question(df, question="What is ADHD?"))
+run_it()

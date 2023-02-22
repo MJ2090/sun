@@ -93,10 +93,7 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
     return chunks
 
 
-def get_df():
-    crawl.crawl(full_url)
-    generate_scraped_csv()
-
+def generate_embedding_csv():
     ################################################################################
     ### Step 7
     ################################################################################
@@ -159,3 +156,8 @@ def get_df():
     df.head()
 
     return df
+
+def get_df():
+    crawl.crawl(full_url)
+    generate_scraped_csv()
+    generate_embedding_csv()
