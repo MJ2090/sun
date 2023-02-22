@@ -160,4 +160,4 @@ def generate_embedding_csv():
 def get_df():
     crawl.crawl(full_url)
     generate_scraped_csv()
-    generate_embedding_csv()
+    return generate_embedding_csv()
