@@ -85,7 +85,7 @@ def answer_question(
 
 
 def run_it():
-    df = df.get_df()
+    my_df = df.get_df()
     qs = ["What day is it?",
           "What is Done?",
           "What is ADHD?",
@@ -97,7 +97,7 @@ def run_it():
         print("Question:")
         print(q)
         print("Answer:")
-        print(answer_question(df, question=q, debug=False))
+        print(answer_question(my_df, question=q, debug=False))
         print("=======================")
 
 
