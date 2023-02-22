@@ -102,7 +102,7 @@ def run_it():
 
 
 def run_it_2():
-    my_df = df.get_df()
+    my_df = df.get_df_2()
     qs = ["What day is it?",
           "What is Done?",
           "What is ADHD?",
@@ -119,4 +119,4 @@ def run_it_2():
 
 
 
-run_it()
+run_it_2()
