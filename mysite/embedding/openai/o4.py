@@ -7,14 +7,13 @@ import pandas as pd
 import tiktoken
 import openai
 import numpy as np
-from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 import crawl
 
 # Define root domain to crawl
 domain = "www.donefirst.com"
 full_url = "https://www.donefirst.com/company/our-mission"
+max_tokens = 500
 
-crawl.crawl(full_url)
 
 ################################################################################
 ### Step 5
@@ -31,47 +30,32 @@ def remove_newlines(serie):
 ### Step 6
 ################################################################################
 
-# Create a list to store the text files
-texts = []
 
-# Get all the text files in the text directory
-for file in os.listdir("text/" + domain + "/"):
-    # Open the file and read the text
-    with open("text/" + domain + "/" + file, "r", encoding="UTF-8") as f:
-        text = f.read()
+def generate_scraped_csv():
+    # Create a list to store the text files
+    texts = []
 
-        # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
-        texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
+    # Get all the text files in the text directory
+    for file in os.listdir("text/" + domain + "/"):
+        # Open the file and read the text
+        with open("text/" + domain + "/" + file, "r", encoding="UTF-8") as f:
+            text = f.read()
 
-# Create a dataframe from the list of texts
-df = pd.DataFrame(texts, columns=['fname', 'text'])
+            # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
+            texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
 
-# Set the text column to be the raw text with the newlines removed
-df['text'] = df.fname + ". " + remove_newlines(df.text)
-df.to_csv('processed/scraped.csv')
-df.head()
+    # Create a dataframe from the list of texts
+    df = pd.DataFrame(texts, columns=['fname', 'text'])
 
-################################################################################
-### Step 7
-################################################################################
+    # Set the text column to be the raw text with the newlines removed
+    df['text'] = df.fname + ". " + remove_newlines(df.text)
+    df.to_csv('processed/scraped.csv')
+    df.head()
 
-# Load the cl100k_base tokenizer which is designed to work with the ada-002 model
-tokenizer = tiktoken.get_encoding("cl100k_base")
-
-df = pd.read_csv('processed/scraped.csv', index_col=0)
-df.columns = ['title', 'text']
-
-# Tokenize the text and save the number of tokens to a new column
-df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
-
-# Visualize the distribution of the number of tokens per row using a histogram
-df.n_tokens.hist()
 
 ################################################################################
 ### Step 8
 ################################################################################
-
-max_tokens = 500
 
 
 # Function to split the text into chunks of a maximum number of tokens
@@ -109,136 +93,69 @@ def split_into_many(text, max_tokens=max_tokens):
     return chunks
 
 
-shortened = []
+def get_df():
+    crawl.crawl(full_url)
+    generate_scraped_csv()
 
-# Loop through the dataframe
-for row in df.iterrows():
+    ################################################################################
+    ### Step 7
+    ################################################################################
 
-    # If the text is None, go to the next row
-    if row[1]['text'] is None:
-        continue
+    # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
+    tokenizer = tiktoken.get_encoding("cl100k_base")
 
-    # If the number of tokens is greater than the max number of tokens, split the text into chunks
-    if row[1]['n_tokens'] > max_tokens:
-        shortened += split_into_many(row[1]['text'])
+    df = pd.read_csv('processed/scraped.csv', index_col=0)
+    df.columns = ['title', 'text']
 
-    # Otherwise, add the text to the list of shortened texts
-    else:
-        shortened.append(row[1]['text'])
+    # Tokenize the text and save the number of tokens to a new column
+    df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
 
-################################################################################
-### Step 9
-################################################################################
+    # Visualize the distribution of the number of tokens per row using a histogram
+    df.n_tokens.hist()
+    shortened = []
 
-df = pd.DataFrame(shortened, columns=['text'])
-df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
-df.n_tokens.hist()
+    # Loop through the dataframe
+    for row in df.iterrows():
 
-################################################################################
-### Step 10
-################################################################################
+        # If the text is None, go to the next row
+        if row[1]['text'] is None:
+            continue
 
-# Note that you may run into rate limit issues depending on how many files you try to embed
-# Please check out our rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits
+        # If the number of tokens is greater than the max number of tokens, split the text into chunks
+        if row[1]['n_tokens'] > max_tokens:
+            shortened += split_into_many(row[1]['text'])
 
-df['embeddings'] = df.text.apply(
-    lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
-df.to_csv('processed/embeddings.csv')
-df.head()
+        # Otherwise, add the text to the list of shortened texts
+        else:
+            shortened.append(row[1]['text'])
 
-################################################################################
-### Step 11
-################################################################################
+    ################################################################################
+    ### Step 9
+    ################################################################################
 
-df = pd.read_csv('processed/embeddings.csv', index_col=0)
-df['embeddings'] = df['embeddings'].apply(eval).apply(np.array)
+    df = pd.DataFrame(shortened, columns=['text'])
+    df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
+    df.n_tokens.hist()
 
-df.head()
+    ################################################################################
+    ### Step 10
+    ################################################################################
 
+    # Note that you may run into rate limit issues depending on how many files you try to embed
+    # Please check out our rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits
 
-################################################################################
-### Step 12
-################################################################################
+    df['embeddings'] = df.text.apply(
+        lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
+    df.to_csv('processed/embeddings.csv')
+    df.head()
 
-def create_context(question, df, max_len=1800):
-    """
-    Create a context for a question by finding the most similar context from the dataframe
-    """
+    ################################################################################
+    ### Step 11
+    ################################################################################
 
-    # Get the embeddings for the question
-    q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
+    df = pd.read_csv('processed/embeddings.csv', index_col=0)
+    df['embeddings'] = df['embeddings'].apply(eval).apply(np.array)
 
-    # Get the distances from the embeddings
-    df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values, distance_metric='cosine')
+    df.head()
 
-    returns = []
-    cur_len = 0
-
-    # Sort by distance and add the text to the context until the context is too long
-    for i, row in df.sort_values('distances', ascending=True).iterrows():
-
-        # Add the length of the text to the current length
-        cur_len += row['n_tokens'] + 4
-
-        # If the context is too long, break
-        if cur_len > max_len:
-            break
-
-        # Else add it to the text that is being returned
-        returns.append(row["text"])
-
-    # Return the context
-    return "\n\n###\n\n".join(returns)
-
-def answer_question(
-        df,
-        model="text-davinci-003",
-        question="Am I allowed to publish model outputs to Twitter, without a human review?",
-        max_len=1800,
-        debug=False,
-        max_tokens=150,
-        stop_sequence=None
-):
-    """
-    Answer a question based on the most similar context from the dataframe texts
-    """
-    context = create_context(
-        question,
-        df,
-        max_len=max_len,
-    )
-    # If debug, print the raw model response
-    if debug:
-        print("Context:\n" + context)
-        print("\n\n")
-
-    try:
-        # Create a completions using the questin and context
-        response = openai.Completion.create(
-            prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
-            temperature=0,
-            max_tokens=max_tokens,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=stop_sequence,
-            model=model,
-        )
-        return response["choices"][0]["text"].strip()
-    except Exception as e:
-        print(e)
-        return ""
-
-################################################################################
-### Step 13
-################################################################################
-
-print(answer_question(df, question="What day is it?", debug=False))
-print("=======================")
-print(answer_question(df, question="What is Done?"))
-print("=======================")
-print(answer_question(df, question="What is Done.?"))
-print("=======================")
-print(answer_question(df, question="What is Done.'s mission?"))
-print("=======================")
-print(answer_question(df, question="What is ADHD?"))
+    return df
