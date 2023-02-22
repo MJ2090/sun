@@ -115,8 +115,8 @@ def run_it_2():
         print(q)
         print("Answer:")
         print(answer_question(my_df, question=q))
-        print("=======================")
+        print("=======================\n\n\n")
 
 
 
-run_it()
+run_it_2()
