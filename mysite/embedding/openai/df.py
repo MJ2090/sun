@@ -58,14 +58,14 @@ def generate_scraped_csv_2(my_texts):
     # Create a list to store the text files
     texts = my_texts
 
-    # Get all the text files in the text directory
-    for file in os.listdir("text/" + domain + "/"):
-        # Open the file and read the text
-        with open("text/" + domain + "/" + file, "r", encoding="UTF-8") as f:
-            text = f.read()
-
-            # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
-            texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
+    # # Get all the text files in the text directory
+    # for file in os.listdir("text/" + domain + "/"):
+    #     # Open the file and read the text
+    #     with open("text/" + domain + "/" + file, "r", encoding="UTF-8") as f:
+    #         text = f.read()
+    #
+    #         # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
+    #         texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
 
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
@@ -223,5 +223,5 @@ Our approach is simple:
 
 Of course we do not suggest that our approach is perfect. No medical system in the world functions without difficulties and hurdles along the way. But we know it’s working.
     """
-    generate_scraped_csv_2(my_text)
+    generate_scraped_csv_2([my_text])
     return generate_embedding_csv()
