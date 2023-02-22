@@ -10,11 +10,6 @@ import os
 # Regex pattern to match a URL
 HTTP_URL_PATTERN = r'^http[s]*://.+'
 
-# Define root domain to crawl
-domain = "www.donefirst.com"
-full_url = "https://www.donefirst.com/company/our-mission"
-
-
 # Create a class to parse the HTML and get the hyperlinks
 class HyperlinkParser(HTMLParser):
     def __init__(self):
@@ -29,7 +24,6 @@ class HyperlinkParser(HTMLParser):
         # If the tag is an anchor tag and it has an href attribute, add the href attribute to the list of hyperlinks
         if tag == "a" and "href" in attrs:
             self.hyperlinks.append(attrs["href"])
-
 
 ################################################################################
 ### Step 2
@@ -57,7 +51,6 @@ def get_hyperlinks(url):
     parser.feed(html)
 
     return parser.hyperlinks
-
 
 ################################################################################
 ### Step 3
@@ -142,7 +135,6 @@ def crawl(url):
             f.write(text)
 
         # Get the hyperlinks from the URL and add them to the queue
-
 
 #         for link in get_domain_hyperlinks(local_domain, url):
 #             if link not in seen:

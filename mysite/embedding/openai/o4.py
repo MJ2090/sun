@@ -17,9 +17,7 @@ HTTP_URL_PATTERN = r'^http[s]*://.+'
 domain = "www.donefirst.com"
 full_url = "https://www.donefirst.com/company/our-mission"
 
-
 crawl.crawl(full_url)
-
 
 ################################################################################
 ### Step 5
