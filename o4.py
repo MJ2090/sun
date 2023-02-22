@@ -100,7 +100,6 @@ def get_domain_hyperlinks(local_domain, url):
     # Return the list of hyperlinks that are within the same domain
     return list(set(clean_links))
 
-
 ################################################################################
 ### Step 4
 ################################################################################
@@ -167,7 +166,6 @@ def remove_newlines(serie):
     serie = serie.str.replace('  ', ' ')
     serie = serie.str.replace('  ', ' ')
     return serie
-
 
 ################################################################################
 ### Step 6
@@ -313,7 +311,6 @@ def create_context(
 
     # Get the distances from the embeddings
     df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values, distance_metric='cosine')
-
 
     returns = []
     cur_len = 0
