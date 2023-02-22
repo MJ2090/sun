@@ -47,12 +47,17 @@ def generate_scraped_csv():
     # Create a dataframe from the list of texts
     print(texts)
     print("enddd")
+    print(len(texts))
+    print("enddd")
+    print(texts[0])
+    print("enddd")
     df = pd.DataFrame(texts, columns=['fname', 'text'])
 
     # Set the text column to be the raw text with the newlines removed
     df['text'] = df.fname + ". " + remove_newlines(df.text)
     df.to_csv('processed/scraped.csv')
     df.head()
+
 
 def generate_scraped_csv_2(my_texts):
     # Create a list to store the text files
