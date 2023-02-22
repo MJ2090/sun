@@ -96,8 +96,9 @@ def run_it():
     for q in qs:
         print("Question:")
         print(q)
+        print my_df
         print("Answer:")
-        print(answer_question(my_df, question=q, debug=False))
+        print(answer_question(my_df, question=q))
         print("=======================")
 
 
