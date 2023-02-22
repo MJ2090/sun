@@ -21,7 +21,7 @@ from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 HTTP_URL_PATTERN = r'^http[s]*://.+'
 
 # Define root domain to crawl
-domain = "openai.com"
+domain = "www.donefirst.com"
 full_url = "https://www.donefirst.com/company/our-mission"
 
 # Create a class to parse the HTML and get the hyperlinks
