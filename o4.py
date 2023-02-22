@@ -380,5 +380,11 @@ def answer_question(
 ################################################################################
 
 print(answer_question(df, question="What day is it?", debug=False))
-
+print("=======================")
 print(answer_question(df, question="What is Done?"))
+print("=======================")
+print(answer_question(df, question="What is Done.?"))
+print("=======================")
+print(answer_question(df, question="What is Done.'s mission?"))
+print("=======================")
+print(answer_question(df, question="What is ADHD?"))
