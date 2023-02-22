@@ -10,9 +10,6 @@ import numpy as np
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 import crawl
 
-# Regex pattern to match a URL
-HTTP_URL_PATTERN = r'^http[s]*://.+'
-
 # Define root domain to crawl
 domain = "www.donefirst.com"
 full_url = "https://www.donefirst.com/company/our-mission"
@@ -163,9 +160,7 @@ df.head()
 ### Step 12
 ################################################################################
 
-def create_context(
-        question, df, max_len=1800, size="ada"
-):
+def create_context(question, df, max_len=1800):
     """
     Create a context for a question by finding the most similar context from the dataframe
     """
@@ -195,13 +190,11 @@ def create_context(
     # Return the context
     return "\n\n###\n\n".join(returns)
 
-
 def answer_question(
         df,
         model="text-davinci-003",
         question="Am I allowed to publish model outputs to Twitter, without a human review?",
         max_len=1800,
-        size="ada",
         debug=False,
         max_tokens=150,
         stop_sequence=None
@@ -213,7 +206,6 @@ def answer_question(
         question,
         df,
         max_len=max_len,
-        size=size,
     )
     # If debug, print the raw model response
     if debug:
@@ -236,7 +228,6 @@ def answer_question(
     except Exception as e:
         print(e)
         return ""
-
 
 ################################################################################
 ### Step 13
