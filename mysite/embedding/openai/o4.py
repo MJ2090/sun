@@ -59,7 +59,7 @@ def generate_scraped_csv():
 
 
 # Function to split the text into chunks of a maximum number of tokens
-def split_into_many(text, max_tokens=max_tokens):
+def split_into_many(text, tokenizer, max_tokens=max_tokens):
     # Split the text into sentences
     sentences = text.split('. ')
 
@@ -123,7 +123,7 @@ def get_df():
 
         # If the number of tokens is greater than the max number of tokens, split the text into chunks
         if row[1]['n_tokens'] > max_tokens:
-            shortened += split_into_many(row[1]['text'])
+            shortened += split_into_many(row[1]['text'], tokenizer)
 
         # Otherwise, add the text to the list of shortened texts
         else:
