@@ -1,3 +1,11 @@
 <h1>{{ aa }}</h1>
 
-kkk
+<form action="{% url 'polls:vote' %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>koko</h1></legend>
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+</fieldset>
+<input type="submit" value="Vote">
+</form>
