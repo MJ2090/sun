@@ -151,7 +151,7 @@ def generate_embedding_csv():
     ################################################################################
 
     df = pd.DataFrame(shortened, columns=['text'])
-    df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
+    df['n_tokens'] = df.text.apply(myf)
     df.n_tokens.hist()
 
     ################################################################################
