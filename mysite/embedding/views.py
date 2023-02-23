@@ -12,6 +12,8 @@ def index(request):
         form = TrainingForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            if form.cleaned_data["password"] != "sky":
+                return render(request, 'embedding/error.html', {})
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:

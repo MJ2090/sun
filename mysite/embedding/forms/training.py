@@ -2,6 +2,8 @@ from django import forms
 
 
 class TrainingForm(forms.Form):
+    password = forms.CharField(required=True, max_length=100, widget=forms.Textarea(
+                                 attrs={'class': 'password', 'placeholder': ":D"}))
     q1 = forms.CharField(required=True, max_length=200, widget=forms.Textarea(
                                  attrs={'class': 'question', 'placeholder': "Limit 200 chars, required"}))
     q2 = forms.CharField(required=False, max_length=200, widget=forms.Textarea(
