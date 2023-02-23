@@ -47,11 +47,11 @@ CEO Kris Marszalek said in a blog post that the crypto exchange grew “ambitiou
     qs = ["What day is it?",
           "Which company have laid off people?",
           "How many people are laid off by Amazon?",
-          "When did Crypto.com lay off people?",
-          "Why Amazon cut staff?",
+          "How many people are laid off by Microsoft?",
+          "Is layoff good or bad?",
           "How is Microsoft doing in the year 2022?",
           "How do patients like Done.?",
-          "who is Kris Marszalek?"]
+          "What's the relation between Crypto.com and Kris Marszalek?"]
     for q in qs:
         print("Question:")
         print(q)
