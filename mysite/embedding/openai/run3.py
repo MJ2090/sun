@@ -8,7 +8,7 @@ import embedding.openai.robot
 def run_it_3(my_text, qs):
     my_texts = [("ss", my_text)]
 
-    my_df = df.get_df(my_texts)
+    my_df = embedding.openai.df.get_df(my_texts)
     ans = []
     for q in qs:
         ans.append("Question:")
