@@ -17,15 +17,15 @@ def index(request):
             # redirect to a new URL:
             my_text = form.cleaned_data["message"]
             qs = [form.cleaned_data["q1"]]
-            if "q2" in form.cleaned_data:
+            if "q2" in form.cleaned_data and form.cleaned_data["q2"] != "":
                 qs.append(form.cleaned_data["q2"])
-            if "q3" in form.cleaned_data:
+            if "q3" in form.cleaned_data and form.cleaned_data["q3"] != "":
                 qs.append(form.cleaned_data["q3"])
-            if "q4" in form.cleaned_data:
+            if "q4" in form.cleaned_data and form.cleaned_data["q4"] != "":
                 qs.append(form.cleaned_data["q4"])
             print(my_text, qs)
             ans = run_it_3(my_text, qs)
-            return HttpResponseRedirect("thanks/")
+            return render(request, 'embedding/thanks.html', {'ans': ans})
         else:
             print("Data not clean!")
 
