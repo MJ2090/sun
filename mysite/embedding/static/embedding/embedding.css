@@ -13,5 +13,9 @@
 }
 
 .submit {
-    padding-top: 100px;
+    padding-top: 30px;
+}
+.question {
+    width: 90%;
+    height: 100px;
 }

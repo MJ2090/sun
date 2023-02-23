@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from embedding.forms.training import TrainingForm
+from embedding.openai.run3 import run_it_3
 from django.shortcuts import render
 
 
@@ -9,14 +10,23 @@ def index(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = TrainingForm(request.POST)
-        print(9999)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            print(form.cleaned_data['message'])
-            return HttpResponseRedirect('thanks/')
+            my_text = form.cleaned_data["message"]
+            qs = [form.cleaned_data["q1"]]
+            if "q2" in form.cleaned_data:
+                qs.append(form.cleaned_data["q2"])
+            if "q3" in form.cleaned_data:
+                qs.append(form.cleaned_data["q3"])
+            if "q4" in form.cleaned_data:
+                qs.append(form.cleaned_data["q4"])
+            print(my_text, qs)
+            return HttpResponseRedirect("thanks/")
+        else:
+            print("Data not clean!")
 
     # if a GET (or any other method) we'll create a blank form
     else:
