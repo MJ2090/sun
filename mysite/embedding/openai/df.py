@@ -106,8 +106,12 @@ def generate_embedding_csv():
     def myf(x):
         print('00000000')
         print(x)
+        print('00000000 end', len(x))
         if pd.isna(x):
+            print('is nan')
             return 0
+
+        print('is not nan')
         return len(tokenizer.encode(x))
 
     # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
