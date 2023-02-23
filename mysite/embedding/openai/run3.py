@@ -1,5 +1,5 @@
-import embedding.openai.df
-import embedding.openai.robot
+import embedding.openai.df as df
+import embedding.openai.robot as robot
 import sys
 
 
@@ -10,7 +10,7 @@ def run_it_3(my_text, qs):
     my_texts = [("ss", my_text)]
     print(sys.path)
 
-    my_df = embedding.openai.df.get_df(my_texts)
+    my_df = df.get_df(my_texts)
     ans = []
     for q in qs:
         ans.append("Question:")
