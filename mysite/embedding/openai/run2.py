@@ -49,9 +49,10 @@ CEO Kris Marszalek said in a blog post that the crypto exchange grew “ambitiou
           "How many people are laid off by Amazon?",
           "How many people are laid off by Microsoft?",
           "Is layoff good or bad?",
-          "How is Microsoft doing in the year 2022?",
+          "How is Microsoft doing?",
           "How do patients like Done.?",
-          "What's the relation between Crypto.com and Kris Marszalek?"]
+          "What's the relation between Crypto.com and Kris Marszalek?",
+          "What did Kris Marszalek say in terms of layoff?"]
     for q in qs:
         print("Question:")
         print(q)
