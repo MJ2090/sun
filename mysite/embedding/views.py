@@ -24,6 +24,7 @@ def index(request):
             if "q4" in form.cleaned_data:
                 qs.append(form.cleaned_data["q4"])
             print(my_text, qs)
+            ans = run_it_3(my_text, qs)
             return HttpResponseRedirect("thanks/")
         else:
             print("Data not clean!")

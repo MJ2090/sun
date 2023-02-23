@@ -9,12 +9,13 @@ def run_it_3(my_text, qs):
     my_texts = [("ss", my_text)]
 
     my_df = df.get_df(my_texts)
+    ans = []
     for q in qs:
-        print("Question:")
-        print(q)
-        print("Answer:")
-        print(robot.answer_question(my_df, question=q))
-        print("=======================\n\n\n")
+        ans.append("Question:")
+        ans.append(q)
+        ans.append("Answer:")
+        ans.append(robot.answer_question(my_df, question=q))
+        ans.append("=======================\n\n\n")
 
-
-run_it_3()
+    print("\n".join(ans))
+    return ans
