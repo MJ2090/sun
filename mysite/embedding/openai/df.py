@@ -106,7 +106,7 @@ def generate_embedding_csv():
     def myf(x):
         print('00000000')
         print(x)
-        print('00000000 end', len(x))
+        print('00000000 end')
         if pd.isna(x):
             print('is nan')
             return 0
