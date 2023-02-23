@@ -1,8 +1,4 @@
-import os
-import pandas as pd
-import tiktoken
 import openai
-import numpy as np
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
 ################################################################################
