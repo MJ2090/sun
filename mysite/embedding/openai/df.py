@@ -110,6 +110,8 @@ def generate_embedding_csv():
     df.columns = ['title', 'text']
 
     # Tokenize the text and save the number of tokens to a new column
+    print('3333333333333333')
+    print(df.text)
     df['n_tokens'] = df.text.apply(lambda x: len(tokenizer.encode(x)))
 
     # Visualize the distribution of the number of tokens per row using a histogram
