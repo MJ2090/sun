@@ -20,3 +20,5 @@ def run_it_1():
         print("Answer:")
         print(robot.answer_question(my_df, question=q))
         print("=======================")
+
+run_it_1()

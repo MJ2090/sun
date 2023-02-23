@@ -58,3 +58,5 @@ def run_it_2():
         print("Answer:")
         print(robot.answer_question(my_df, question=q))
         print("=======================\n\n\n")
+
+run_it_2()
