@@ -7,7 +7,7 @@
 <body>
     <script src="{% static 'embedding/embedding.js' %}"></script>
     <h1>Train a new embedding model</h1>
-    <form action="/embedding/" method="post" onsubmit="return confirmSubmit()">
+    <form action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
         <div class="message">
             <h2>Training text</h2>
