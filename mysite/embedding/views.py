@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from forms.training import TrainingForm
+from embedding.forms.training import TrainingForm
 from django.shortcuts import render
 
 
