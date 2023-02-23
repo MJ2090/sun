@@ -54,6 +54,8 @@ def generate_scraped_csv(my_texts=None):
 
     # Set the text column to be the raw text with the newlines removed
     df['text'] = df.fname + ". " + remove_newlines(df.text)
+    print(df.text)
+    print("==========================")
     df.to_csv('processed/scraped.csv')
     df.head()
 
