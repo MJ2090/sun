@@ -23,9 +23,8 @@ def index(request):
                 qs.append(form.cleaned_data["q3"])
             if "q4" in form.cleaned_data and form.cleaned_data["q4"] != "":
                 qs.append(form.cleaned_data["q4"])
-            print(my_text, qs)
             ans = run_it_3(my_text, qs)
-            return render(request, 'embedding/thanks.html', {'ans': "\n".join(ans)})
+            return render(request, 'embedding/thanks.html', {'ans': ans})
         else:
             print("Data not clean!")
 

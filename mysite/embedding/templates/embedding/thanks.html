@@ -3,7 +3,10 @@
 <body>
 <h1>Answers to the questions:</h1>
 <div>
-{{ ans }}
+{% for a in ans %}
+    <div>{{ a.Question }}</div>
+    <div>{{ a.Answer }}</div>
+{% endfor %}
 </div>
 <h2>Thanks!</h2>
 </body>
