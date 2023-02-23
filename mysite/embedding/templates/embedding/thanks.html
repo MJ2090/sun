@@ -4,8 +4,11 @@
 <h1>Answers to the questions:</h1>
 <div>
 {% for a in ans %}
-    <div>{{ a.Question }}</div>
-    <div>{{ a.Answer }}</div>
+    <div>
+        <h2>Question {{ forloop.counter }}</h2>
+        <p>{{ a.Question }}</p>
+        <p>{{ a.Answer }}</p>
+    </div>
 {% endfor %}
 </div>
 <h2>Thanks!</h2>
