@@ -1,5 +1,6 @@
 import embedding.openai.df
 import embedding.openai.robot
+import sys
 
 
 ################################################################################
@@ -7,6 +8,7 @@ import embedding.openai.robot
 ################################################################################
 def run_it_3(my_text, qs):
     my_texts = [("ss", my_text)]
+    print(sys.path)
 
     my_df = embedding.openai.df.get_df(my_texts)
     ans = []
