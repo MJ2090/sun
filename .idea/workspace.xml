@@ -43,6 +43,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mysite/embedding/static/embedding" />
       <recent name="$PROJECT_DIR$/mysite/embedding/openai" />
       <recent name="$PROJECT_DIR$/mysite/embedding/templates/embedding" />
     </key>
@@ -57,7 +58,10 @@
       <updated>1677090003335</updated>
       <workItem from="1677090004956" duration="13285000" />
       <workItem from="1677163425300" duration="544000" />
-      <workItem from="1677164156377" duration="584000" />
+      <workItem from="1677164156377" duration="2391000" />
+      <workItem from="1677167679622" duration="439000" />
+      <workItem from="1677171258778" duration="429000" />
+      <workItem from="1677171728369" duration="436000" />
     </task>
     <servers />
   </component>
