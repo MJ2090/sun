@@ -20,10 +20,10 @@ max_tokens = 500
 ################################################################################
 
 def remove_newlines(serie):
-    serie = serie.str.replace('\n', ' ')
-    serie = serie.str.replace('\\n', ' ')
-    serie = serie.str.replace('  ', ' ')
-    serie = serie.str.replace('  ', ' ')
+    serie = serie.str.replace('\n', ' ', regex=False)
+    serie = serie.str.replace('\\n', ' ', regex=False)
+    serie = serie.str.replace('  ', ' ', regex=False)
+    serie = serie.str.replace('  ', ' ', regex=False)
     return serie
 
 ################################################################################
@@ -47,6 +47,8 @@ def generate_scraped_csv(my_texts=None):
 
     print("==========================")
     print("text length is", len(texts[0][1]))
+    print("text is", texts[0][1])
+    print("==========================")
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
 
