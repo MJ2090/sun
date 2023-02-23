@@ -46,7 +46,7 @@ def generate_scraped_csv(my_texts=None):
                 texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
 
     print("==========================")
-    print("text length is", len(texts))
+    print("text length is", len(texts[0][1]))
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
 
