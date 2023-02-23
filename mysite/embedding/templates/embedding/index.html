@@ -2,10 +2,14 @@
 {% load static %}
 
 <head>
+    <script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+    <script src="{% static 'embedding/embedding.js' %}"></script>
 <link rel="stylesheet" href="{% static 'embedding/embedding.css' %}">
     </head>
 <body>
-    <script src="{% static 'embedding/embedding.js' %}"></script>
     <h1>Train a new embedding model</h1>
     <form action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
