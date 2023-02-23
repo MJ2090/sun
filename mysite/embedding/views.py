@@ -25,7 +25,7 @@ def index(request):
                 qs.append(form.cleaned_data["q4"])
             print(my_text, qs)
             ans = run_it_3(my_text, qs)
-            return render(request, 'embedding/thanks.html', {'ans': ans})
+            return render(request, 'embedding/thanks.html', {'ans': "\n".join(ans)})
         else:
             print("Data not clean!")
 

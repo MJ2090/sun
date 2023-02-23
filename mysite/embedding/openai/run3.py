@@ -17,7 +17,7 @@ def run_it_3(my_text, qs):
         ans.append(q)
         ans.append("Answer:")
         ans.append(robot.answer_question(my_df, question=q))
-        ans.append("=======================\n\n\n")
+        ans.append("=======================\n\n\n\r\n\r")
 
     print("\n".join(ans))
     return ans
