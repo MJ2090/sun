@@ -38,7 +38,7 @@ def embedding(request):
     else:
         form = TrainingForm()
 
-    return render(request, 'embedding/index.html', {'form': form, 'aa': 'sssss'})
+    return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
 
 
 def answer(request):
