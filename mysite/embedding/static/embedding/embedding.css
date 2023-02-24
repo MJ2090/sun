@@ -32,3 +32,13 @@
 .container-grey {
     background-color: #f4f4f4;
 }
+
+.review {
+    color: #8b8b8b;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.section-header {
+    font-size: 2.5rem;
+}
