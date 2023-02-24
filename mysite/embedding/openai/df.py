@@ -121,6 +121,7 @@ def generate_embedding_csv():
 
     df = pd.read_csv('processed/scraped.csv', index_col=0)
     df.text.replace(np.nan, "")
+    df.dropna()
     df.columns = ['title', 'text']
 
     # Tokenize the text and save the number of tokens to a new column
