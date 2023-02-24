@@ -5,7 +5,11 @@ from embedding.openai.run3 import run_it_3
 from django.shortcuts import render
 
 
-def index(request):
+def home(request):
+    return render(request, 'embedding/home.html', {'aa': 'sssss'})
+
+
+def embedding(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
