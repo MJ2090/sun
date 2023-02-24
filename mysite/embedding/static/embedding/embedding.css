@@ -24,3 +24,11 @@
     width: 90%;
     height: 50px;
 }
+
+.container-white {
+    margin-top: 20px;
+}
+
+.container-grey {
+    background-color: #f4f4f4;
+}
