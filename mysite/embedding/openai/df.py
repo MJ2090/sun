@@ -45,17 +45,11 @@ def generate_scraped_csv(my_texts=None):
                 # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
                 texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
 
-    print("==========================")
-    print("text length is", len(texts[0][1]))
-    print("text is", texts[0][1])
-    print("==========================")
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
 
     # Set the text column to be the raw text with the newlines removed
     df['text'] = df.fname + ". " + remove_newlines(df.text)
-    print(df.text)
-    print("==========================")
     df.to_csv('processed/scraped.csv')
     df.head()
 
@@ -106,14 +100,9 @@ def generate_embedding_csv():
     ################################################################################
 
     def myf(x):
-        print('00000000')
-        print(x)
-        print('00000000 end')
         if pd.isna(x):
-            print('is nan')
             return 0
 
-        print('is not nan')
         return len(tokenizer.encode(x))
 
     # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
@@ -125,8 +114,6 @@ def generate_embedding_csv():
     df.columns = ['title', 'text']
 
     # Tokenize the text and save the number of tokens to a new column
-    print('3333333333333333')
-    print(df.text)
     df['n_tokens'] = df.text.apply(myf)
 
     # Visualize the distribution of the number of tokens per row using a histogram
