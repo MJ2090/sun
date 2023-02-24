@@ -1,15 +1,14 @@
-<html>
-{% load static %}
+{% extends "base.html" %}
 
-<head>
-    <script
-  src="https://code.jquery.com/jquery-3.6.3.min.js"
-  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-  crossorigin="anonymous"></script>
+{% block privatecss %}
+    <link rel="stylesheet" href="{% static 'embedding/embedding.css' %}">
+{% endblock %}
+
+{% block privatejs %}
     <script src="{% static 'embedding/embedding.js' %}"></script>
-<link rel="stylesheet" href="{% static 'embedding/embedding.css' %}">
-    </head>
-<body>
+{% endblock %}
+
+{% block main %}
     <h1>Train a new embedding model</h1>
     <form action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
@@ -45,5 +44,4 @@
             <input type="submit" value="Submit">
         </div>
     </form>
-</body>
-</html>
+{% endblock %}

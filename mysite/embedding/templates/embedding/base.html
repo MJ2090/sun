@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AI Sea</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700'
+          rel='stylesheet' type='text/css'>
+
+    <!-- Favicons -->
+    <link rel="icon" href="{{ path_root}}img/favicon.ico">
+
+    {% block privatecss %}
+    {% endblock %}
+    {% block privatejs %}
+    {% endblock %}
+</head>
+
+<body class="login-page">
+
+{% block main %}
+{% endblock %}
+
+</body>
+</html>
