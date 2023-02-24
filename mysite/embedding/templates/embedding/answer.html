@@ -1,6 +1,6 @@
-<html>
-<head></head>
-<body>
+{% extends "embedding/base.html" %}
+
+{% block main %}
 <h1>Answers to the questions:</h1>
 <div>
 {% for a in ans %}
@@ -12,5 +12,4 @@
 {% endfor %}
 </div>
 <h2>Thanks!</h2>
-</body>
-</html>
+{% endblock %}

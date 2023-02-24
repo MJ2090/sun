@@ -26,7 +26,7 @@ def index(request):
             if "q4" in form.cleaned_data and form.cleaned_data["q4"] != "":
                 qs.append(form.cleaned_data["q4"])
             ans = run_it_3(my_text, qs)
-            return render(request, 'embedding/thanks.html', {'ans': ans})
+            return render(request, 'embedding/answer.html', {'ans': ans})
         else:
             print("Data not clean!")
 
@@ -37,5 +37,5 @@ def index(request):
     return render(request, 'embedding/index.html', {'form': form, 'aa': 'sssss'})
 
 
-def thanks(request):
-    return render(request, 'embedding/thanks.html', {'aa': 'sssss'})
+def answer(request):
+    return render(request, 'embedding/answer.html', {'aa': 'sssss'})
