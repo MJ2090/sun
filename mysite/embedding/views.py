@@ -51,6 +51,7 @@ def answer(request):
 
 def translation(request):
     # if this is a POST request we need to process the form data
+    print('iom here trans')
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = TranslationForm(request.POST)
@@ -78,6 +79,7 @@ def translation(request):
 
 def grammar(request):
     # if this is a POST request we need to process the form data
+    print('iom here grammar')
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = GrammarForm(request.POST)
