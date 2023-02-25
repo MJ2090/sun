@@ -10,39 +10,52 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Train a new embedding model</h1>
-    <form action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
-    {% csrf_token %}
-        <div>
-            <h2>Security word</h2>
-            {{ form.password }}
-        </div>
-        <div class="message">
-            <h2>Training text</h2>
-            {{ form.message }}
-        </div>
-        <div>
-            <h2>Question 1</h2>
-            {{ form.q1 }}
-        </div>
-        <div>
-            <h2>Question 2</h2>
-            {{ form.q2 }}
-        </div>
-        <div>
-            <h2>Question 3</h2>
-            {{ form.q3 }}
-        </div>
-        <div>
-            <h2>Question 4</h2>
-            {{ form.q4 }}
-        </div>
-        <div>
-            <h2>Question 5</h2>
-            {{ form.q5 }}
-        </div>
-        <div class="submit">
-            <input type="submit" value="Submit">
-        </div>
-    </form>
+    <div class="container px-4 py-5">
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Train an embedding model</h4>
+        <form class="needs-validation" novalidate="" action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
+          {% csrf_token %}
+            <div class="row g-3">
+
+            <div class="col-12">
+              <label for="email" class="form-label">Secret Word</label>
+              {{ form.password }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Training Text</label>
+              {{ form.message }}
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Question 1</label>
+              {{ form.q1 }}
+            </div>
+            <div class="col-12">
+              <label for="address2" class="form-label">Question 2</label>
+              {{ form.q2 }}
+            </div>
+            <div class="col-12">
+              <label for="address2" class="form-label">Question 3</label>
+              {{ form.q3 }}
+            </div>
+            <div class="col-12">
+              <label for="address2" class="form-label">Question 4</label>
+              {{ form.q4 }}
+            </div>
+            <div class="col-12">
+              <label for="address2" class="form-label">Question 5</label>
+              {{ form.q5 }}
+            </div>
+          </div>
+
+            <hr class="my-4">
+            
+          <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
+        </form>
+      </div>
+    </div>
 {% endblock %}
