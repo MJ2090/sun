@@ -18,5 +18,5 @@ def run_it_4(original_text):
         prompt=generate_prompt(original_text),
         temperature=0
     )
-    print response
+    print(response)
     return response
