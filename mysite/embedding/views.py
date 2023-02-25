@@ -3,7 +3,9 @@ from django.template import loader
 from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
+from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
+from embedding.openai.run5 import run_it_5
 from django.shortcuts import render
 
 
