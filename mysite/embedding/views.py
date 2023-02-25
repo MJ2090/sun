@@ -51,6 +51,14 @@ def answer(request):
     return render(request, 'embedding/answer.html', {'aa': 'sssss'})
 
 
+def about(request):
+    return render(request, 'embedding/about.html', {'aa': 'sssss'})
+
+
+def contact(request):
+    return render(request, 'embedding/contact.html', {'aa': 'sssss'})
+
+
 def translation(request):
     # if this is a POST request we need to process the form data
     print('iom here trans')
