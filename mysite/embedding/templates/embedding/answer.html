@@ -1,6 +1,7 @@
 {% extends "embedding/base.html" %}
 
 {% block main %}
+    <div class="container px-4 py-5">
 <h1>Answers to the questions:</h1>
 <div>
 {% for a in ans %}
@@ -12,4 +13,5 @@
 {% endfor %}
 </div>
 <h2>Thanks!</h2>
+    </div>
 {% endblock %}

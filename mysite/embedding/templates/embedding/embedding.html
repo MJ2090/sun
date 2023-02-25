@@ -13,6 +13,13 @@
     <div class="container px-4 py-5">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Train an embedding model</h4>
+        <div class="instruction">
+            <p>Instructions:</p>
+            <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
+            <p>2. Provide some text to the model, from where the model will learn knowledge.</p>
+            <p>3. Provide at least 1 question.</p>
+            <p>4. Press OK, then the model will try to answer the questions.</p>
+        </div>
         <form class="needs-validation" novalidate="" action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
           {% csrf_token %}
             <div class="row g-3">
@@ -53,7 +60,7 @@
           </div>
 
             <hr class="my-4">
-            
+
           <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
         </form>
       </div>
