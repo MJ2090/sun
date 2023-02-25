@@ -1,5 +1,10 @@
 {% extends "embedding/base.html" %}
 
+{% block privatecss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'embedding/answer.css' %}">
+{% endblock %}
+
 {% block main %}
     <div class="container px-4 py-5">
         {% if ans %}
@@ -17,7 +22,7 @@
 
         {% if translated_text %}
         <h1>Translated text:</h1>
-            {{ translated_text }}
+            <p class="translated-text">{{ translated_text }}</p>
         {% endif %}
 
         <h2>Thanks!</h2>
