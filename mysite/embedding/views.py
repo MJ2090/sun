@@ -59,7 +59,8 @@ def translation(request):
             # ...
             # redirect to a new URL:
             original_text = form.cleaned_data["text"]
-            translated_text = run_it_4(original_text)
+            openai_response = run_it_4(original_text)
+            translated_text = openai_response["choices"][0]["text"]
             return render(request, 'embedding/answer.html', {'ans': translated_text})
         else:
             print("Data not clean!")
