@@ -62,7 +62,7 @@ def translation(request):
             openai_response = run_it_4(original_text)
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
-            return render(request, 'embedding/answer.html', {'ans': translated_text})
+            return render(request, 'embedding/answer.html', {'translated_text': translated_text})
         else:
             print("Data not clean!")
 

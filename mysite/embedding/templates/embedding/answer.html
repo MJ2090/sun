@@ -2,16 +2,25 @@
 
 {% block main %}
     <div class="container px-4 py-5">
-<h1>Answers to the questions:</h1>
-<div>
-{% for a in ans %}
-    <div>
-        <h2>Question {{ forloop.counter }}</h2>
-        <p>{{ a.Question }}</p>
-        <p>{{ a.Answer }}</p>
+        {% if ans %}
+        <h1>Answers to the questions:</h1>
+        <div>
+        {% for a in ans %}
+            <div>
+               <h2>Question {{ forloop.counter }}</h2>
+               <p>{{ a.Question }}</p>
+              <p>{{ a.Answer }}</p>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if translated_text %}
+        <h1>Translated text:</h1>
+            {{ translated_text }}
+        {% endif %}
+
+        <h2>Thanks!</h2>
     </div>
-{% endfor %}
-</div>
-<h2>Thanks!</h2>
-    </div>
+
 {% endblock %}
