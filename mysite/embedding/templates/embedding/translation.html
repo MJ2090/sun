@@ -1,0 +1,47 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'embedding/embedding.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+    <script src="{% static 'embedding/embedding.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container px-4 py-5">
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Translation</h4>
+        <div class="instruction">
+            <p>Instructions:</p>
+            <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
+            <p>2. Provide some text to the left panel.</p>
+            <p>4. Press OK. Currently only English to Chinese is supported.</p>
+        </div>
+        <form class="needs-validation" novalidate="" action="/translation/" method="post" onsubmit="return confirmSubmit(this)">
+          {% csrf_token %}
+            <div class="row g-3">
+
+            <div class="col-12">
+              <label for="email" class="form-label">Secret Word</label>
+              {{ form.password }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Original Text</label>
+              {{ form.text }}
+            </div>
+
+          </div>
+
+            <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

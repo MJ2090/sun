@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from embedding.forms.training import TrainingForm
-from embedding.openai.run3 import run_it_3
+from embedding.forms.translation import TranslationForm
+from embedding.openai.run4 import run_it_4
 from django.shortcuts import render
 
 
@@ -43,3 +44,28 @@ def embedding(request):
 
 def answer(request):
     return render(request, 'embedding/answer.html', {'aa': 'sssss'})
+
+
+def translation(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = TranslationForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            if form.cleaned_data["password"] != "sky":
+                return render(request, 'embedding/error.html', {})
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            original_text = form.cleaned_data["text"]
+            translated_text = run_it_4(original_text)
+            return render(request, 'embedding/answer.html', {'ans': translated_text})
+        else:
+            print("Data not clean!")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = TranslationForm()
+
+    return render(request, 'embedding/translation.html', {'form': form, 'aa': 'sssss'})

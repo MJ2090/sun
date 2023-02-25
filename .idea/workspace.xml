@@ -69,11 +69,21 @@
       <workItem from="1677212218757" duration="346000" />
       <workItem from="1677212602964" duration="47000" />
       <workItem from="1677212733758" duration="15000" />
-      <workItem from="1677212883766" duration="28207000" />
+      <workItem from="1677212883766" duration="30706000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mysite/embedding/openai/run3.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
