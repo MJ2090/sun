@@ -47,6 +47,10 @@ def embedding(request):
     return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
 
 
+def chat(request):
+    return render(request, 'embedding/chat.html', {'aa': 'sssss'})
+
+
 def answer(request):
     return render(request, 'embedding/answer.html', {'aa': 'sssss'})
 
@@ -57,6 +61,10 @@ def about(request):
 
 def contact(request):
     return render(request, 'embedding/contact.html', {'aa': 'sssss'})
+
+
+def signin(request):
+    return render(request, 'embedding/signin.html', {'aa': 'sssss'})
 
 
 def translation(request):

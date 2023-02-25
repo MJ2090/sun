@@ -12,4 +12,6 @@ urlpatterns = [
     path('answer/', views.answer, name='answer'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
+    path('chat/', views.chat, name='chat'),
+    path('signin/', views.signin, name='signin'),
 ]
