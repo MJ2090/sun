@@ -16,7 +16,8 @@ def run_it_4(original_text):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=generate_prompt(original_text),
-        temperature=0
+        temperature=0,
+        max_tokens=1000
     )
     print(response)
     return response
