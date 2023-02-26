@@ -129,7 +129,7 @@ def image(request):
                 return render(request, 'embedding/error.html', {})
             description = form.cleaned_data["text"]
             openai_response = run_it_8(description)
-            image_url = openai_response["choices"][0]["text"]
+            image_url = openai_response['data'][0]['url']
             print(image_url)
             return render(request, 'embedding/answer.html', {'image_url': image_url})
         else:
