@@ -21,7 +21,7 @@ function init() {
         async_call();
     });
 
-    $("textarea[name='message']").keyup(function(e){
+    $("textarea[name='message']").keydown(function(e){
         if(e.keyCode == 13) {
             async_call();
         }
