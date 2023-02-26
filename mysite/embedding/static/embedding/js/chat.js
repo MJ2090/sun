@@ -12,6 +12,7 @@ function async_call() {
             textarea.val( response);
             textarea.prop( "disabled", false );
             textarea.focus();
+            $('.word-count').val(response.length + ' chars');
         },
     })
 }
