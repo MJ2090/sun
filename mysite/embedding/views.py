@@ -4,10 +4,12 @@ from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
 from embedding.forms.summary import SummaryForm
+from embedding.forms.chat import ChatForm
 from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
 from embedding.openai.run5 import run_it_5
 from embedding.openai.run6 import run_it_6
+from embedding.openai.run7 import run_it_7
 from django.shortcuts import render
 
 
@@ -47,8 +49,18 @@ def embedding(request):
     return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
 
 
+def sendchat(request):
+    message = request.POST['message']
+    pre = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
+    openai_response = run_it_7(pre + message)
+    ai_message = openai_response["choices"][0]["text"]
+    return HttpResponse(ai_message + "\nAI: That's ok!\nHuman: ")
+
+
 def chat(request):
-    return render(request, 'embedding/chat.html', {'aa': 'sssss'})
+    initial_dict = {"message": 'Human: '}
+    form = ChatForm(initial = initial_dict)
+    return render(request, 'embedding/chat.html', {'form': form})
 
 
 def answer(request):
