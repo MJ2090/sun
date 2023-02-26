@@ -1,5 +1,10 @@
 {% extends "embedding/base.html" %}
 
+{% block privatecss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
+{% endblock %}
+
 {% block privatejs %}
     {% load static %}
     <script src="{% static 'embedding/js/chat.js' %}"></script>
@@ -14,6 +19,7 @@
             <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
             <p>2. Type something and click GO!</p>
         </div>
+        <p class="chat-prompt">The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</p>
         <form class="needs-validation" novalidate="" action="/sendchat/" method="post" onsubmit="return confirmSubmit(this)">
           {% csrf_token %}
             <div class="row g-3">
