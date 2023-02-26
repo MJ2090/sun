@@ -54,7 +54,7 @@ def sendchat(request):
     pre = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
     openai_response = run_it_7(pre + message)
     ai_message = openai_response["choices"][0]["text"]
-    return HttpResponse(ai_message + "\nAI: That's ok!\nHuman: ")
+    return HttpResponse(ai_message + "\nHuman: ")
 
 
 def chat(request):
