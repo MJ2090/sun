@@ -35,6 +35,11 @@
             <p class="translated-text">{{ summary_text }}</p>
         {% endif %}
 
+        {% if image_url %}
+        <h1>Generated image from the protmpt:</h1>
+            <img src="{{ image_url }}">
+        {% endif %}
+
         <h2>Thanks!</h2>
     </div>
 

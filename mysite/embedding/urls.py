@@ -16,4 +16,5 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signup/', views.signup, name='signup'),
     path('sendchat/', views.sendchat, name='sendchat'),
+    path('image/', views.image, name='image'),
 ]

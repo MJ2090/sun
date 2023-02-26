@@ -4,12 +4,14 @@ from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
 from embedding.forms.summary import SummaryForm
+from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
 from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
 from embedding.openai.run5 import run_it_5
 from embedding.openai.run6 import run_it_6
 from embedding.openai.run7 import run_it_7
+from embedding.openai.run8 import run_it_8
 from django.shortcuts import render
 
 
@@ -114,6 +116,30 @@ def translation(request):
         form = TranslationForm()
 
     return render(request, 'embedding/translation.html', {'form': form, 'aa': 'sssss'})
+
+
+def image(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ImageForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            if form.cleaned_data["password"] != "sky":
+                return render(request, 'embedding/error.html', {})
+            description = form.cleaned_data["text"]
+            openai_response = run_it_8(description)
+            image_url = openai_response["choices"][0]["text"]
+            print(image_url)
+            return render(request, 'embedding/answer.html', {'image_url': image_url})
+        else:
+            print("Data not clean!")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ImageForm()
+
+    return render(request, 'embedding/image.html', {'form': form})
 
 
 def grammar(request):
