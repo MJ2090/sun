@@ -67,6 +67,10 @@ def signin(request):
     return render(request, 'embedding/signin.html', {'aa': 'sssss'})
 
 
+def signup(request):
+    return render(request, 'embedding/signup.html', {'aa': 'sssss'})
+
+
 def translation(request):
     # if this is a POST request we need to process the form data
     print('iom here trans')
