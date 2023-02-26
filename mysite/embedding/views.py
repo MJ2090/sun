@@ -52,7 +52,9 @@ def embedding(request):
 def sendchat(request):
     message = request.POST['message']
     password = request.POST['password']
-    print(999, password)
+    if password != "sky":
+        return render(request, 'embedding/error.html', {})
+
     pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
