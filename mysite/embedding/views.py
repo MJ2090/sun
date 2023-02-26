@@ -6,6 +6,7 @@ from embedding.forms.grammar import GrammarForm
 from embedding.forms.summary import SummaryForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
+from embedding.forms.signuo import SignupForm
 from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
 from embedding.openai.run5 import run_it_5
@@ -71,23 +72,47 @@ def chat(request):
 
 
 def answer(request):
-    return render(request, 'embedding/answer.html', {'aa': 'sssss'})
+    return render(request, 'embedding/answer.html')
 
 
 def about(request):
-    return render(request, 'embedding/about.html', {'aa': 'sssss'})
+    return render(request, 'embedding/about.html')
 
 
 def contact(request):
-    return render(request, 'embedding/contact.html', {'aa': 'sssss'})
+    return render(request, 'embedding/contact.html')
 
 
 def signin(request):
-    return render(request, 'embedding/signin.html', {'aa': 'sssss'})
+    return render(request, 'embedding/signin.html')
+
+
+def signup_async(request):
+    return True
 
 
 def signup(request):
-    return render(request, 'embedding/signup.html', {'aa': 'sssss'})
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SignupForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            if form.cleaned_data["password"] != "sky":
+                return render(request, 'embedding/error.html', {})
+            original_text = form.cleaned_data["text"]
+            openai_response = run_it_6(original_text)
+            summary_text = openai_response["choices"][0]["text"]
+            print(summary_text)
+            return render(request, 'embedding/answer.html', {'summary_text': summary_text})
+        else:
+            print("Data not clean!")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SignupForm()
+
+    return render(request, 'embedding/signup.html', {'form': form})
 
 
 def translation(request):
