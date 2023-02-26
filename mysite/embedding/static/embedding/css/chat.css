@@ -8,3 +8,9 @@
 .word-count {
     color: red;
 }
+
+.chat-word-count {
+    color: #8b8b8b;
+    font-size: 16px;
+    font-style: italic;
+}
