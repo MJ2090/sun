@@ -1,0 +1,47 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'embedding/css/image.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+    <script src="{% static 'embedding/js/image.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container px-4 py-5">
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Image generation</h4>
+        <div class="instruction">
+            <p>Instructions:</p>
+            <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
+            <p>2. Provide some text to describe the image.</p>
+            <p>3. Press OK.</p>
+        </div>
+        <form class="needs-validation" novalidate="" action="/image/" method="post" onsubmit="return confirmSubmit(this)">
+          {% csrf_token %}
+            <div class="row g-3">
+
+            <div class="col-12">
+              <label for="password" class="form-label">Secret Word</label>
+              {{ form.password }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Image description</label>
+              {{ form.text }}
+            </div>
+
+          </div>
+
+            <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
