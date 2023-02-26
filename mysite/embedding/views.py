@@ -52,7 +52,7 @@ def embedding(request):
 def sendchat(request):
     message = request.POST['message']
     pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
-    post_text = "\nAI:"
+    post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
     ai_message = openai_response["choices"][0]["text"]
     return HttpResponse(ai_message + "\nHuman: ")
