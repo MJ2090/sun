@@ -1,6 +1,6 @@
 function async_call() {
     let textarea = $("textarea[name='message']");
-    let password = $("textarea[name='password']");
+    let password = $("input[name='password']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     textarea.prop( "disabled", true );
     $.ajax({
@@ -16,6 +16,9 @@ function async_call() {
             textarea.focus();
             $('.word-count').text(response.length + ' chars');
         },
+        error: function (response) {
+            textarea.prop( "disabled", false );
+        }
     })
 }
 
