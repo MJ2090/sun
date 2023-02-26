@@ -10,7 +10,7 @@ function init() {
                     csrfmiddlewaretoken: csrf.val(),
             },
             success: function (response) {
-                textarea.append(response);
+                textarea.val( response);
                 textarea.prop( "disabled", false );
                 textarea.focus();
             },

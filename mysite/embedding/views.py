@@ -55,7 +55,7 @@ def sendchat(request):
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
     ai_message = openai_response["choices"][0]["text"]
-    return HttpResponse(ai_message + "\nHuman: ")
+    return HttpResponse(pre_text + message + post_text + ai_message + "\nHuman: ")
 
 
 def chat(request):
