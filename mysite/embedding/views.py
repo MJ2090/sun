@@ -17,7 +17,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'embedding/home.html', {'aa': 'sssss'})
+    return render(request, 'embedding/home.html')
 
 
 def embedding(request):
@@ -117,7 +117,6 @@ def signup(request):
 
 def translation(request):
     # if this is a POST request we need to process the form data
-    print('iom here trans')
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = TranslationForm(request.POST)
