@@ -47,3 +47,12 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.form-email {
+  border-radius: 0;
+  border-bottom: 0;
+}
+
+.signin-btn {
+  margin-top: 20px;
+}

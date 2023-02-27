@@ -16,10 +16,17 @@ from embedding.openai.run6 import run_it_6
 from embedding.openai.run7 import run_it_7
 from embedding.openai.run8 import run_it_8
 from django.shortcuts import render
+from django.db import transaction
+from .utils import load_random_string
+from embedding.models import UserProfile
 
 
 def home(request):
-    return render(request, 'embedding/home.html')
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = ''
+    return render(request, 'embedding/home.html', {'username': username})
 
 
 def embedding(request):
@@ -85,6 +92,11 @@ def contact(request):
     return render(request, 'embedding/contact.html')
 
 
+def signout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return HttpResponseRedirect('/')
+
 def signin(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -96,8 +108,9 @@ def signin(request):
             password = form.cleaned_data["password"]
 
             if do_login(request, username, password):
-                return render(request, 'embedding/home.html', {"username": "lolo"})
-            return render(request, 'embedding/home.html')
+                return HttpResponseRedirect('/')
+            else:
+                return render(request, 'embedding/error.html', {})
         else:
             print("Data not clean!")
 
@@ -119,13 +132,12 @@ def signup(request):
         form = SignupForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
-            original_text = form.cleaned_data["text"]
-            openai_response = run_it_6(original_text)
-            summary_text = openai_response["choices"][0]["text"]
-            print(summary_text)
-            return render(request, 'embedding/answer.html', {'summary_text': summary_text})
+            cd = form.cleaned_data
+            username = cd["username"]
+            password = cd["password"]
+            email = cd["email"]
+            do_register(cd)
+            return HttpResponseRedirect("/")
         else:
             print("Data not clean!")
 
@@ -241,3 +253,18 @@ def do_login(request, username, password):
         auth.login(request, user)
         return True
     return False
+
+
+def do_register(cd):
+    print(9999)
+    with transaction.atomic():
+        userProfile = UserProfile.objects.create_user(username=cd.get('username', ''),
+                                                      password=cd.get('password', ''),
+                                                      )
+        userProfile.is_staff = False
+        userProfile.is_superuser = False
+        print(99991)
+        userProfile.external_id = load_random_string(20)
+        userProfile.save()
+        print(99992)
+    return userProfile
