@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.contrib import auth
 from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
@@ -7,6 +8,7 @@ from embedding.forms.summary import SummaryForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
 from embedding.forms.signup import SignupForm
+from embedding.forms.signin import SigninForm
 from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
 from embedding.openai.run5 import run_it_5
@@ -67,7 +69,7 @@ def sendchat(request):
 
 def chat(request):
     initial_dict = {"message": 'Human: '}
-    form = ChatForm(initial = initial_dict)
+    form = ChatForm(initial=initial_dict)
     return render(request, 'embedding/chat.html', {'form': form})
 
 
@@ -84,7 +86,26 @@ def contact(request):
 
 
 def signin(request):
-    return render(request, 'embedding/signin.html')
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SigninForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+
+            if do_login(request, username, password):
+                return render(request, 'embedding/home.html', {"username": "lolo"})
+            return render(request, 'embedding/home.html')
+        else:
+            print("Data not clean!")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SigninForm()
+
+    return render(request, 'embedding/signin.html', {'form': form})
 
 
 def signup_async(request):
@@ -212,3 +233,11 @@ def summary(request):
         form = SummaryForm()
 
     return render(request, 'embedding/summary.html', {'form': form})
+
+
+def do_login(request, username, password):
+    user = auth.authenticate(username=username, password=password)
+    if user:
+        auth.login(request, user)
+        return True
+    return False

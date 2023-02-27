@@ -36,3 +36,8 @@ body {
   color: #8b8b8b;
   font-size: 12px;
 }
+
+.form-username {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

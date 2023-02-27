@@ -8,13 +8,15 @@
 {% block body %}
     <body class="text-center">
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form class="needs-validation" novalidate="" action="/signin/" method="post">
+      {% csrf_token %}
       <a href="/">
-    <img class="mb-4" src="{% static 'embedding/img/download.png' %}" alt="" width="72" height="72">
-             </a>
+        <img class="mb-4" src="{% static 'embedding/img/download.png' %}" alt="" width="72" height="72">
+      </a>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
+        {{ form.username }}
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
