@@ -16,10 +16,12 @@ from embedding.openai.run5 import run_it_5
 from embedding.openai.run6 import run_it_6
 from embedding.openai.run7 import run_it_7
 from embedding.openai.run8 import run_it_8
+from embedding.models import TokenConsumption
 from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string
 from embedding.models import UserProfile
+from embedding.static_values import MODEL_TYPES
 
 
 def home(request):
@@ -71,6 +73,7 @@ def sendchat(request):
     pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
+    record_consumption(request, MODEL_TYPES, openai_response, password)
     ai_message = openai_response["choices"][0]["text"]
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
@@ -266,6 +269,16 @@ def summary(request):
     return render(request, 'embedding/summary.html', {'form': form})
 
 
+def collection(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+        left_token = request.user.left_token
+    else:
+        username = ''
+        left_token = 0
+    return render(request, 'embedding/collection.html', {'username': username, 'left_token': left_token})
+
+
 def do_login(request, username, password):
     user = auth.authenticate(username=username, password=password)
     if user:
@@ -275,15 +288,21 @@ def do_login(request, username, password):
 
 
 def do_register(cd):
-    print(9999)
     with transaction.atomic():
         userProfile = UserProfile.objects.create_user(username=cd.get('username', ''),
                                                       password=cd.get('password', ''),
                                                       )
         userProfile.is_staff = False
         userProfile.is_superuser = False
-        print(99991)
         userProfile.external_id = load_random_string(20)
         userProfile.save()
-        print(99992)
     return userProfile
+
+
+def record_consumption(request, model_type, openai_response, secret):
+    token_amount = openai_response["usage"]["total_tokens"]
+    consumption = TokenConsumption.objects.create(user=request.user,
+                                                  model_type=model_type,
+                                                  token_amount=token_amount,
+                                                  secret=secret)
+    consumption.save()

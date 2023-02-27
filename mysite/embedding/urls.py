@@ -18,4 +18,5 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('sendchat/', views.sendchat, name='sendchat'),
     path('image/', views.image, name='image'),
+    path('collection/', views.collection, name='collection'),
 ]

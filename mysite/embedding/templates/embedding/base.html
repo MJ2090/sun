@@ -47,7 +47,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">My Collection</a></li>
+          <li><a href="/collection/" class="nav-link px-2 text-white">My Collection</a></li>
           <li><a href="/about/" class="nav-link px-2 text-white">About</a></li>
           <li><a href="/contact/" class="nav-link px-2 text-white">Contact</a></li>
         </ul>
@@ -63,7 +63,11 @@
             Hi, {{ username }}
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="/signout/">Sign out</a></li>
+              <li><a class="dropdown-item" href="/collection/">My collection</a></li>
+              <li><a class="dropdown-item" href="/collection/">Settings</a></li>
+              <li><a class="dropdown-item" href="/collection/">Payments</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/signout/">Sign out</a></li>
           </ul>
         </div>
             <!-- END User signed in -->

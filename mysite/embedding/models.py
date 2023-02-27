@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-
+import embedding.static_values as sc
 
 class UserProfileManager(UserManager):
     def search_user_by_username(self, user_name):
@@ -28,6 +28,14 @@ class UserProfile(AbstractUser):
     external_id = models.CharField(max_length=20, default='')
     max_token = models.IntegerField(default=100000)
     used_token = models.IntegerField(default=0)
+    left_token = models.IntegerField(default=100000)
 
     def __unicode__(self):
         return u'%s %s' % (self.username, self.external_id)
+
+
+class TokenConsumption(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
+    token_amount = models.IntegerField(default=0)
+    model_type = models.IntegerField(default=0, choices=sc.MODEL_TYPES)
+    secret = models.CharField(max_length=20, default='')
