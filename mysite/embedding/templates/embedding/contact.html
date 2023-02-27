@@ -1,7 +1,8 @@
 {% extends "embedding/base.html" %}
 
 {% block main %}
-    <div class="container col-md-7 col-lg-8">
+    <div class="container px-4 py-5">
+    <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Contact us</h4>
         <form action="/contact/" method="post" class="needs-validation">
             {% csrf_token %}
@@ -40,4 +41,5 @@
           <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
         </form>
       </div>
+    </div>
 {% endblock %}
