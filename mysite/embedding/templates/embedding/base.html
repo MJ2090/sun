@@ -56,10 +56,28 @@
           <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
 
-        <div class="text-end">
-          <a href="/signin/"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
-          <a href="/signup/"><button type="button" class="btn btn-warning">Sign-up</button></a>
-        </div>
+        {% if username %}
+            <!-- User account -->
+            <div class="pull-right">
+                <div class="dropdown user-account">
+                    <a class="dropdown-toggle" href="/home/" data-toggle="dropdown">
+                        <div class="display-pc-only">Hi, {{ username }}</div>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{ path_root }}mylogout/">{% trans "Logout" %}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END User signed in -->
+        {% else %}
+            <!-- User account -->
+{#            <div class="text-end">#}
+{#              <a href="/signin/"><button type="button" class="btn btn-outline-light me-2">Login</button></a>#}
+{#              <a href="/signup/"><button type="button" class="btn btn-warning">Sign-up</button></a>#}
+{#            </div>#}
+        {% endif %}
+        <!-- END User account -->
       </div>
     </div>
 </header>

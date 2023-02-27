@@ -6,7 +6,7 @@ from embedding.forms.grammar import GrammarForm
 from embedding.forms.summary import SummaryForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
-from embedding.forms.signuo import SignupForm
+from embedding.forms.signup import SignupForm
 from embedding.openai.run3 import run_it_3
 from embedding.openai.run4 import run_it_4
 from embedding.openai.run5 import run_it_5
