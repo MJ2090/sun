@@ -26,6 +26,8 @@ class UserProfile(AbstractUser):
     objects = UserProfileManager()
 
     external_id = models.CharField(max_length=20, default='')
+    max_token = models.IntegerField(default=100000)
+    used_token = models.IntegerField(default=0)
 
     def __unicode__(self):
         return u'%s %s' % (self.username, self.external_id)
