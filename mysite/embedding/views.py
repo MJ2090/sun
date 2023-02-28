@@ -21,7 +21,7 @@ from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string
 from embedding.models import UserProfile
-from embedding.static_values import MODEL_TYPES
+import embedding.static_values as sc
 
 
 def home(request):
@@ -73,7 +73,7 @@ def sendchat(request):
     pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
-    record_consumption(request, MODEL_TYPES.MODEL_TYPES_CHAT, openai_response, password)
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, password)
     ai_message = openai_response["choices"][0]["text"]
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
