@@ -308,6 +308,6 @@ def record_consumption(request, model_type, openai_response, secret):
     consumption.save()
 
 def get_user(request):
-    if request.is_authenticated:
+    if request.user.is_authenticated:
         return request.user
     return UserProfile.objects.get(username="a")
