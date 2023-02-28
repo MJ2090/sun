@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 import embedding.static_values as sc
 
+
 class UserProfileManager(UserManager):
     def search_user_by_username(self, user_name):
         return self.filter(username__contains=user_name)

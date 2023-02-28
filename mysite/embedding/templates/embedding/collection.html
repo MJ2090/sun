@@ -4,9 +4,13 @@
 
     <div class="container px-4 py-5">
     <div class="col-md-7 col-lg-8">
+        {% if user.is_authenticated %}
         <h4 class="mb-3">My Collection</h4>
-    <p> Hi {{ username }},</p>
-    <p> You have {{ left_token }} tokens left</p>
+        <p> Hi {{ user.username }},</p>
+        <p> You have {{ user.left_token }} tokens left</p>
+        {% else %}
+        <h4 class="mb-3">Please sign in</h4>
+        {% endif %}
     </div>
     </div>
 {% endblock %}

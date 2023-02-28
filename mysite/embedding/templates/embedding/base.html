@@ -56,11 +56,11 @@
           <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
 
-        {% if username %}
+        {% if user.is_authenticated %}
             <!-- User account -->
             <div class="dropdown text-end">
           <a href="#" class="home-username d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Hi, {{ username }}
+            Hi, {{ user.username }}
           </a>
           <ul class="dropdown-menu text-small" style="">
               <li><a class="dropdown-item" href="/collection/">My collection</a></li>

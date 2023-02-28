@@ -19,20 +19,18 @@ from embedding.openai.run8 import run_it_8
 from embedding.models import TokenConsumption
 from django.shortcuts import render
 from django.db import transaction
-from .utils import load_random_string
+from .utils import load_random_string, get_basic_data
 from embedding.models import UserProfile
 import embedding.static_values as sc
 
 
 def home(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-    else:
-        username = ''
-    return render(request, 'embedding/home.html', {'username': username})
+    ret = get_basic_data(request)
+    return render(request, 'embedding/home.html', ret)
 
 
 def embedding(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -53,7 +51,8 @@ def embedding(request):
             if "q4" in form.cleaned_data and form.cleaned_data["q4"] != "":
                 qs.append(form.cleaned_data["q4"])
             ans = run_it_3(my_text, qs)
-            return render(request, 'embedding/answer.html', {'ans': ans})
+            ret['ans'] = ans
+            return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
 
@@ -79,20 +78,25 @@ def sendchat(request):
 
 
 def chat(request):
+    ret = get_basic_data(request)
     initial_dict = {"message": 'Human: '}
     form = ChatForm(initial=initial_dict)
-    return render(request, 'embedding/chat.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/chat.html', ret)
 
 
 def answer(request):
-    return render(request, 'embedding/answer.html')
+    ret = get_basic_data(request)
+    return render(request, 'embedding/answer.html', ret)
 
 
 def about(request):
-    return render(request, 'embedding/about.html')
+    ret = get_basic_data(request)
+    return render(request, 'embedding/about.html', ret)
 
 
 def contact(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
 
     if request.method == 'POST':
@@ -111,7 +115,8 @@ def contact(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ContactForm()
-    return render(request, 'embedding/contact.html', {'form': form})
+    ret['form'] =form
+    return render(request, 'embedding/contact.html', ret)
 
 
 def signout(request):
@@ -120,6 +125,7 @@ def signout(request):
     return HttpResponseRedirect('/')
 
 def signin(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -140,7 +146,8 @@ def signin(request):
     else:
         form = SigninForm()
 
-    return render(request, 'embedding/signin.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/signin.html', ret)
 
 
 def signup_async(request):
@@ -148,6 +155,7 @@ def signup_async(request):
 
 
 def signup(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -157,8 +165,8 @@ def signup(request):
             cd = form.cleaned_data
             username = cd["username"]
             password = cd["password"]
-            email = cd["email"]
             do_register(cd)
+            do_login(request, username, password)
             return HttpResponseRedirect("/")
         else:
             print("Data not clean!")
@@ -166,11 +174,12 @@ def signup(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SignupForm()
-
-    return render(request, 'embedding/signup.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/signup.html', ret)
 
 
 def translation(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -178,7 +187,7 @@ def translation(request):
         # check whether it's valid:
         if form.is_valid():
             if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
+                return render(request, 'embedding/error.html', ret)
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
@@ -186,7 +195,8 @@ def translation(request):
             openai_response = run_it_4(original_text)
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
-            return render(request, 'embedding/answer.html', {'translated_text': translated_text})
+            ret['translated_text'] = translated_text
+            return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
 
@@ -194,10 +204,12 @@ def translation(request):
     else:
         form = TranslationForm()
 
-    return render(request, 'embedding/translation.html', {'form': form, 'aa': 'sssss'})
+    ret['form'] = form
+    return render(request, 'embedding/translation.html', ret)
 
 
 def image(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -205,23 +217,25 @@ def image(request):
         # check whether it's valid:
         if form.is_valid():
             if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
+                return render(request, 'embedding/error.html', ret)
             description = form.cleaned_data["text"]
             openai_response = run_it_8(description)
             image_url = openai_response['data'][0]['url']
             print(image_url)
-            return render(request, 'embedding/answer.html', {'image_url': image_url})
+            ret['image_url'] = image_url
+            return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ImageForm()
-
-    return render(request, 'embedding/image.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/image.html', ret)
 
 
 def grammar(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -229,12 +243,13 @@ def grammar(request):
         # check whether it's valid:
         if form.is_valid():
             if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
+                return render(request, 'embedding/error.html', ret)
             original_text = form.cleaned_data["text"]
             openai_response = run_it_5(original_text)
             fixed_text = openai_response["choices"][0]["text"]
             print(fixed_text)
-            return render(request, 'embedding/answer.html', {'fixed_text': fixed_text})
+            ret['fixed_text'] = fixed_text
+            return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
 
@@ -242,10 +257,12 @@ def grammar(request):
     else:
         form = GrammarForm()
 
-    return render(request, 'embedding/grammar.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/grammar.html', ret)
 
 
 def summary(request):
+    ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -258,6 +275,7 @@ def summary(request):
             openai_response = run_it_6(original_text)
             summary_text = openai_response["choices"][0]["text"]
             print(summary_text)
+            ret['summary_text'] = summary_text
             return render(request, 'embedding/answer.html', {'summary_text': summary_text})
         else:
             print("Data not clean!")
@@ -266,17 +284,13 @@ def summary(request):
     else:
         form = SummaryForm()
 
-    return render(request, 'embedding/summary.html', {'form': form})
+    ret['form'] = form
+    return render(request, 'embedding/summary.html', ret)
 
 
 def collection(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-        left_token = request.user.left_token
-    else:
-        username = ''
-        left_token = 0
-    return render(request, 'embedding/collection.html', {'username': username, 'left_token': left_token})
+    ret = get_basic_data(request)
+    return render(request, 'embedding/collection.html', ret)
 
 
 def do_login(request, username, password):
@@ -306,6 +320,7 @@ def record_consumption(request, model_type, openai_response, secret):
                                                   token_amount=token_amount,
                                                   secret=secret)
     consumption.save()
+
 
 def get_user(request):
     if request.user.is_authenticated:
