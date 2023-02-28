@@ -6,3 +6,6 @@ class SigninForm(forms.Form):
                                  attrs={'class': 'form-control form-username', 'placeholder': "username"}))
     password = forms.CharField(required=True, max_length=20, widget=forms.PasswordInput(
                                  attrs={'class': 'form-control form-password', 'placeholder': "********"}))
+    next = forms.CharField(required=False,
+                           max_length=200,
+                           )

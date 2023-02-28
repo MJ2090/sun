@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
@@ -135,9 +136,18 @@ def signin(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
 
+            print(88)
             if do_login(request, username, password):
-                return HttpResponseRedirect('/')
+                print(881)
+                # Redirect to a success page.
+                print(form.cleaned_data, 4444, request.GET, request.POST)
+                next_url = form.cleaned_data.get('next', '/')
+                if (not next_url) or next_url.strip() == '':
+                    next_url = '/'
+                return HttpResponseRedirect(next_url)
             else:
+
+                print(882)
                 return render(request, 'embedding/error.html', {})
         else:
             print("Data not clean!")
@@ -145,6 +155,8 @@ def signin(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SigninForm()
+        form.fields['next'].initial = request.GET.get('next', None)
+        print(884)
 
     ret['form'] = form
     return render(request, 'embedding/signin.html', ret)
@@ -288,6 +300,7 @@ def summary(request):
     return render(request, 'embedding/summary.html', ret)
 
 
+@login_required
 def collection(request):
     ret = get_basic_data(request)
     return render(request, 'embedding/collection.html', ret)
