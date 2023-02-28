@@ -301,8 +301,13 @@ def do_register(cd):
 
 def record_consumption(request, model_type, openai_response, secret):
     token_amount = openai_response["usage"]["total_tokens"]
-    consumption = TokenConsumption.objects.create(user=request.user,
+    consumption = TokenConsumption.objects.create(user=get_user(request),
                                                   model_type=model_type,
                                                   token_amount=token_amount,
                                                   secret=secret)
     consumption.save()
+
+def get_user(request):
+    if request.is_authenticated:
+        return request.user
+    return UserProfile.objects.get(username="a")
