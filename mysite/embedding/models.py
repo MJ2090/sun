@@ -40,5 +40,8 @@ class TokenConsumption(models.Model):
     model_type = models.IntegerField(default=0, choices=sc.MODEL_TYPES)
     secret = models.CharField(max_length=20, default='')
 
+    def __str__(self):
+        return u'%s %s %s %s' % (self.user.username, self.token_amount, self.model_type, self.secret)
+
     def __unicode__(self):
         return u'%s %s %s %s' % (self.user.username, self.token_amount, self.model_type, self.secret)
