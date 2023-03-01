@@ -76,7 +76,7 @@ def sendchat(request):
         "Common AI": "",
         "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
         "Mr. President": "In this conversation, AI acts as the President Biden of USA. He serves his contry.\n",
-        "Therapist": "In this conversation, AI acts as a top ranked Therapist. He is always nice, friendly and very helpful to his patients.\n",
+        "Therapist": "In this conversation, AI acts as a top ranked Therapist. He always speaks a lot, providing advices to his patients. He is always nice, friendly and very helpful to his patients.\n",
     }
     print(999, pre_text_dict)
     pre_text = pre_text_dict.get(character, "")
