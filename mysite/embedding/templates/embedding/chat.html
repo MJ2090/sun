@@ -19,23 +19,26 @@
             <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
             <p>2. Type something and click GO!</p>
         </div>
-        <div class="col-12">
-          <label for="password" class="form-label">Secret Word</label>
-          {{ form.password }}
-          <div class="invalid-feedback">
-            :D
-          </div>
-        </div>
-        <div class="col-12">
-          <label for="character" class="form-label">Choose an character</label>
-          {{ form.character }}
-          <div class="invalid-feedback">
-            :D
-          </div>
-        </div>
-        <p class="chat-prompt">The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</p>
         <form class="needs-validation" novalidate="" action="/sendchat/" method="post" onsubmit="return confirmSubmit(this)">
           {% csrf_token %}
+            <div class="row g-3">
+            <div class="col-12">
+              <label for="password" class="form-label">Secret Word</label>
+              {{ form.password }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="character" class="form-label">Choose an character</label>
+              {{ form.character }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
+            </div>
+            <p class="chat-prompt">The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</p>
+
             <div class="row g-3">
 
             <div class="col-12">
@@ -43,7 +46,7 @@
             </div>
 
           </div>
-        <p class="chat-word-count">Total Text Length: <span class="word-count"></span></p>
+            <p class="chat-word-count">Total Text Length: <span class="word-count"></span></p>
 
             <hr class="my-4">
 
