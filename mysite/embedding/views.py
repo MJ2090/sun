@@ -75,7 +75,7 @@ def sendchat(request):
     pre_text_dict = {
         "Common AI": "",
         "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
-        "Mr. President": "In this conversation, AI acts as the President Biden of USA."
+        "Mr. President": "In this conversation, AI acts as the President Biden of USA. He speaks in a very mean and rude way."
     }
     print(999, pre_text_dict)
     pre_text = pre_text_dict.get(character, "")

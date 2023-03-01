@@ -17,7 +17,7 @@ MODEL_TYPES = (
 
 CHAT_TYPES_NO = 'Common AI'
 CHAT_TYPES_ASSISTANT = 'Assistant'
-CHAT_TYPES_PRESIDENT = 'President Biden'
+CHAT_TYPES_PRESIDENT = 'Mr. President'
 CHAT_TYPES = (
     (CHAT_TYPES_NO, 'Common AI'),
     (CHAT_TYPES_ASSISTANT, 'Virtual Assistant'),
