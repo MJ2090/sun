@@ -19,7 +19,7 @@
             <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
             <p>2. Type something and click GO!</p>
         </div>
-        <form class="needs-validation" novalidate="" action="/sendchat/" method="post" onsubmit="return confirmSubmit(this)">
+        <form class="needs-validation" novalidate="" action="/sendchat/" method="post">
           {% csrf_token %}
             <div class="row g-3">
             <div class="col-12">
