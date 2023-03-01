@@ -71,12 +71,13 @@ def sendchat(request):
     if password != "sky":
         return HttpResponse("wrong secret word.")
 
-    print(character)
+    print("c is", character)
     pre_text_dict = {
         "Common AI": "",
         "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
         "Mr. President": "In this conversation, AI acts as the President Biden of USA."
     }
+    print(999, pre_text_dict)
     pre_text = pre_text_dict.get(character, "")
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
