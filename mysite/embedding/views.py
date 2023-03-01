@@ -96,6 +96,16 @@ def about(request):
     return render(request, 'embedding/about.html', ret)
 
 
+def payments(request):
+    ret = get_basic_data(request)
+    return render(request, 'embedding/payments.html', ret)
+
+
+def settings(request):
+    ret = get_basic_data(request)
+    return render(request, 'embedding/settings.html', ret)
+
+
 def contact(request):
     ret = get_basic_data(request)
     # if this is a POST request we need to process the form data

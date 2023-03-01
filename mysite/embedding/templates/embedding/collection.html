@@ -7,7 +7,7 @@
         {% if user.is_authenticated %}
         <h4 class="mb-3">My Collection</h4>
         <p> Hi {{ user.username }},</p>
-        <p> You have used {{ user.used_token }} tokens, with {{ user.left_token }} tokens left</p>
+        <p> You have used {{ user.used_token }} tokens, with {{ user.left_token }} tokens left.</p>
         {% else %}
         <h4 class="mb-3">Please sign in</h4>
         {% endif %}
