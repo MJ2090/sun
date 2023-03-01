@@ -4,6 +4,7 @@ function async_call() {
     let character = $("select[name='character']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     textarea.prop( "disabled", true );
+    character.prop( "disabled", true );
     $.ajax({
         type: 'POST',
         url: "/sendchat/",
