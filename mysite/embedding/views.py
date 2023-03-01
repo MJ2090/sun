@@ -67,10 +67,17 @@ def embedding(request):
 def sendchat(request):
     message = request.POST['message']
     password = request.POST['password']
+    character = request.POST['character']
     if password != "sky":
         return HttpResponse("wrong secret word.")
 
-    pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
+    print(character)
+    pre_text_dict = {
+        "Common AI": "",
+        "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
+        "Mr. President": "In this conversation, AI acts as the President Biden of USA."
+    }
+    pre_text = pre_text_dict.get(character, "")
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
     ai_message = openai_response["choices"][0]["text"]

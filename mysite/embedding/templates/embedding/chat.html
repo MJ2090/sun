@@ -26,6 +26,13 @@
             :D
           </div>
         </div>
+        <div class="col-12">
+          <label for="character" class="form-label">Choose an character</label>
+          {{ form.character }}
+          <div class="invalid-feedback">
+            :D
+          </div>
+        </div>
         <p class="chat-prompt">The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</p>
         <form class="needs-validation" novalidate="" action="/sendchat/" method="post" onsubmit="return confirmSubmit(this)">
           {% csrf_token %}

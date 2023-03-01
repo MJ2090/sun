@@ -14,3 +14,12 @@ MODEL_TYPES = (
     (MODEL_TYPES_GRAMMAR, 'GRAMMAR'),
     (MODEL_TYPES_SUMMARY, 'SUMMARY'),
 )
+
+CHAT_TYPES_NO = 'Common AI'
+CHAT_TYPES_ASSISTANT = 'Assistant'
+CHAT_TYPES_PRESIDENT = 'President Biden'
+CHAT_TYPES = (
+    (CHAT_TYPES_NO, 'Common AI'),
+    (CHAT_TYPES_ASSISTANT, 'Virtual Assistant'),
+    (CHAT_TYPES_PRESIDENT, 'Mr. President'),
+)
