@@ -73,8 +73,8 @@ def sendchat(request):
     pre_text = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n"
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, password)
     ai_message = openai_response["choices"][0]["text"]
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, password)
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
 
@@ -208,6 +208,7 @@ def translation(request):
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
             ret['translated_text'] = translated_text
+            record_consumption(request, sc.MODEL_TYPES_TRANSLATE, openai_response, form.cleaned_data["password"])
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -261,6 +262,7 @@ def grammar(request):
             fixed_text = openai_response["choices"][0]["text"]
             print(fixed_text)
             ret['fixed_text'] = fixed_text
+            record_consumption(request, sc.MODEL_TYPES_GRAMMAR, openai_response, form.cleaned_data["password"])
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -288,6 +290,7 @@ def summary(request):
             summary_text = openai_response["choices"][0]["text"]
             print(summary_text)
             ret['summary_text'] = summary_text
+            record_consumption(request, sc.MODEL_TYPES_SUMMARY, openai_response, form.cleaned_data["password"])
             return render(request, 'embedding/answer.html', {'summary_text': summary_text})
         else:
             print("Data not clean!")
@@ -327,12 +330,17 @@ def do_register(cd):
 
 
 def record_consumption(request, model_type, openai_response, secret):
-    token_amount = openai_response["usage"]["total_tokens"]
-    consumption = TokenConsumption.objects.create(user=get_user(request),
-                                                  model_type=model_type,
-                                                  token_amount=token_amount,
-                                                  secret=secret)
-    consumption.save()
+    with transaction.atomic():
+        token_amount = openai_response["usage"]["total_tokens"]
+        consumption = TokenConsumption.objects.create(user=get_user(request),
+                                                      model_type=model_type,
+                                                      token_amount=token_amount,
+                                                      secret=secret)
+        consumption.save()
+        if request.user.is_authenticated:
+            request.user.left_token -= token_amount
+            request.user.used_token += token_amount
+            request.user.save()
 
 
 def get_user(request):
