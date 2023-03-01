@@ -39,7 +39,7 @@ function init() {
 
     $("input[name='password']").keydown(function(e){
         if(e.keyCode == 13) {
-            async_call();
+            return false;
         }
     });
 }
