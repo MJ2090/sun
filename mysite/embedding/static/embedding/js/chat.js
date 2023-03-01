@@ -2,6 +2,7 @@ function async_call() {
     let textarea = $("textarea[name='message']");
     let password = $("input[name='password']");
     let character = $("select[name='character']");
+    let model = $("select[name='training_model']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     textarea.prop( "disabled", true );
     character.prop( "disabled", true );
@@ -12,6 +13,7 @@ function async_call() {
             message: textarea.val(),
             character: character.val(),
             csrfmiddlewaretoken: csrf.val(),
+            model: model.val(),
         },
         success: function (response) {
             textarea.val( response);
@@ -35,7 +37,6 @@ function init() {
             async_call();
         }
     });
-
 
     $("input[name='password']").keydown(function(e){
         if(e.keyCode == 13) {

@@ -10,3 +10,4 @@ class ChatForm(forms.Form):
                                  attrs={'class': 'message form-control', 'placeholder': "Limit 10,000 chars. "
                                                                                             "Required"}))
     character = forms.ChoiceField(required=True, choices=sc.CHAT_TYPES, widget=forms.Select(attrs={'class': 'character form-select', }))
+    training_model = forms.ChoiceField(required=True, choices=sc.TRAINING_MODELS, widget=forms.Select(attrs={'class': 'character form-select', }))

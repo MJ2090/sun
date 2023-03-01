@@ -11,12 +11,8 @@ from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
+from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8
 from embedding.openai.run3 import run_it_3
-from embedding.openai.run4 import run_it_4
-from embedding.openai.run5 import run_it_5
-from embedding.openai.run6 import run_it_6
-from embedding.openai.run7 import run_it_7
-from embedding.openai.run8 import run_it_8
 from embedding.models import TokenConsumption
 from django.shortcuts import render
 from django.db import transaction
@@ -68,17 +64,17 @@ def sendchat(request):
     message = request.POST['message']
     password = request.POST['password']
     character = request.POST['character']
+    model = request.POST.get('model', '')
+    print('model is ', model)
     if password != "sky":
         return HttpResponse("wrong secret word.")
 
-    print("c is", character)
     pre_text_dict = {
         "Common AI": "",
         "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
         "Mr. President": "In this conversation, AI acts as the President Biden of USA. He serves his contry.\n",
         "Therapist": "In this conversation, AI acts as a top ranked Therapist. He always speaks a lot, providing advices to his patients. He is always nice, friendly and very helpful to his patients.\n",
     }
-    print(999, pre_text_dict)
     pre_text = pre_text_dict.get(character, "")
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text)
