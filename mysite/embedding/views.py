@@ -77,7 +77,7 @@ def sendchat(request):
     }
     pre_text = pre_text_dict.get(character, "")
     post_text = "\nAI: "
-    openai_response = run_it_7(pre_text + message + post_text)
+    openai_response = run_it_7(pre_text + message + post_text, model=model)
     ai_message = openai_response["choices"][0]["text"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, password)
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
@@ -219,7 +219,7 @@ def translation(request):
             # ...
             # redirect to a new URL:
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_4(original_text)
+            openai_response = run_it_4(original_text, model='text-ada-001')
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
             ret['translated_text'] = translated_text
@@ -273,7 +273,7 @@ def grammar(request):
             if form.cleaned_data["password"] != "sky":
                 return render(request, 'embedding/error.html', ret)
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_5(original_text)
+            openai_response = run_it_5(original_text, model='text-ada-001')
             fixed_text = openai_response["choices"][0]["text"]
             print(fixed_text)
             ret['fixed_text'] = fixed_text
@@ -301,7 +301,7 @@ def summary(request):
             if form.cleaned_data["password"] != "sky":
                 return render(request, 'embedding/error.html', {})
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_6(original_text)
+            openai_response = run_it_6(original_text, model='text-ada-001')
             summary_text = openai_response["choices"][0]["text"]
             print(summary_text)
             ret['summary_text'] = summary_text

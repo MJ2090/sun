@@ -30,11 +30,11 @@ TRAINING_MODELS_A = 'text-ada-001'
 TRAINING_MODELS_B = 'text-babbage-001'
 TRAINING_MODELS_C = 'text-curie-001'
 TRAINING_MODELS_D = 'text-davinci-003'
-TRAINING_MODELS_A1 = 'text-davinci-003'
+TRAINING_MODELS_A1 = 'ada:ft-personal-2023-03-01-22-16-31'
 TRAINING_MODELS = (
     (TRAINING_MODELS_A, 'OpenAI text model A'),
     (TRAINING_MODELS_B, 'OpenAI text model B'),
     (TRAINING_MODELS_C, 'OpenAI text model C'),
     (TRAINING_MODELS_D, 'OpenAI text model D'),
-    (TRAINING_MODELS_D, 'OpenAI fine tuning text model A1'),
+    (TRAINING_MODELS_A1, 'OpenAI fine tuning text model A1'),
 )
