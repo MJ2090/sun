@@ -75,7 +75,7 @@ def run_it_7(prompt, model):
         prompt=prompt,
         temperature=0,
         max_tokens=1000,
-        stop=["\n###"]
+        stop=["###"]
     )
     print(response)
     return response
