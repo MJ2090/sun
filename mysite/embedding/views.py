@@ -11,7 +11,7 @@ from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
-from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8
+from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3
 from embedding.models import TokenConsumption
 from django.shortcuts import render
@@ -19,6 +19,7 @@ from django.db import transaction
 from .utils import load_random_string, get_basic_data
 from embedding.models import UserProfile
 import embedding.static_values as sc
+import json
 
 
 def home(request):
@@ -60,14 +61,30 @@ def embedding(request):
     return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
 
 
-def sendchat(request):
-    message = request.POST['message']
-    password = request.POST['password']
-    character = request.POST['character']
+def sendchat_t(request):
     model = request.POST.get('model', '')
-    print('model is ', model)
-    if password != "sky":
-        return HttpResponse("wrong secret word.")
+    new_message = request.POST['message']
+    character = request.POST['character']
+    history = request.POST.get('history')
+    my_json = json.loads(history)
+    print(my_json)
+    messages = [{"role": "system", "content": "You are a helpful AI"}]
+    messages.extend(my_json)
+    messages.append({"role": "user", "content": new_message})
+    print(messages)
+    openai_response = run_it_9(messages, model=model)
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
+    return HttpResponse(ai_message)
+
+def sendchat(request):
+    model = request.POST.get('model', '')
+    if model=="gpt-3.5-turbo":
+        return sendchat_t(request)
+    message = request.POST['message']
+    character = request.POST['character']
+    history = request.POST.get('history')
+    print('model is ', model, history)
 
     pre_text_dict = {
         "Common AI": "",
@@ -79,14 +96,13 @@ def sendchat(request):
     post_text = "\nAI: "
     openai_response = run_it_7(pre_text + message + post_text, model=model)
     ai_message = openai_response["choices"][0]["text"]
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, password)
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
 
 def chat(request):
     ret = get_basic_data(request)
-    initial_dict = {"message": 'Human: '}
-    form = ChatForm(initial=initial_dict)
+    form = ChatForm()
     ret['form'] = form
     return render(request, 'embedding/chat.html', ret)
 
@@ -213,17 +229,12 @@ def translation(request):
         form = TranslationForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', ret)
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_4(original_text, model='text-ada-001')
+            openai_response = run_it_4(original_text, model='text-davinci-003')
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
             ret['translated_text'] = translated_text
-            record_consumption(request, sc.MODEL_TYPES_TRANSLATE, openai_response, form.cleaned_data["password"])
+            record_consumption(request, sc.MODEL_TYPES_TRANSLATE, openai_response)
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -270,14 +281,12 @@ def grammar(request):
         form = GrammarForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', ret)
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_5(original_text, model='text-ada-001')
+            openai_response = run_it_5(original_text, model='text-davinci-003')
             fixed_text = openai_response["choices"][0]["text"]
             print(fixed_text)
             ret['fixed_text'] = fixed_text
-            record_consumption(request, sc.MODEL_TYPES_GRAMMAR, openai_response, form.cleaned_data["password"])
+            record_consumption(request, sc.MODEL_TYPES_GRAMMAR, openai_response)
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -298,14 +307,11 @@ def summary(request):
         form = SummaryForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
             original_text = form.cleaned_data["text"]
-            openai_response = run_it_6(original_text, model='text-ada-001')
+            openai_response = run_it_6(original_text, model='text-davinci-003')
             summary_text = openai_response["choices"][0]["text"]
-            print(summary_text)
             ret['summary_text'] = summary_text
-            record_consumption(request, sc.MODEL_TYPES_SUMMARY, openai_response, form.cleaned_data["password"])
+            record_consumption(request, sc.MODEL_TYPES_SUMMARY, openai_response)
             return render(request, 'embedding/answer.html', {'summary_text': summary_text})
         else:
             print("Data not clean!")
@@ -344,7 +350,7 @@ def do_register(cd):
     return userProfile
 
 
-def record_consumption(request, model_type, openai_response, secret):
+def record_consumption(request, model_type, openai_response, secret=''):
     with transaction.atomic():
         token_amount = openai_response["usage"]["total_tokens"]
         consumption = TokenConsumption.objects.create(user=get_user(request),

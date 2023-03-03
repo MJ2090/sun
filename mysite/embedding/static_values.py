@@ -26,13 +26,15 @@ CHAT_TYPES = (
     (CHAT_TYPES_THERAPIST, 'Therapist'),
 )
 
+TRAINING_MODELS_T = 'gpt-3.5-turbo'
 TRAINING_MODELS_D = 'text-davinci-003'
 TRAINING_MODELS_C = 'text-curie-001'
 TRAINING_MODELS_A1 = 'ada:ft-personal-2023-03-01-22-16-31'
 TRAINING_MODELS_C1 = 'curie:ft-personal:done-2023-03-01-23-56-55'
 TRAINING_MODELS = (
-    (TRAINING_MODELS_D, 'OpenAI text model D'),
-    (TRAINING_MODELS_C, 'OpenAI text model C'),
-    (TRAINING_MODELS_A1, 'OpenAI fine tuning text model A1'),
-    (TRAINING_MODELS_C1, 'OpenAI fine tuning text model C1'),
+    (TRAINING_MODELS_T, 'OpenAI text model T'),
+    # (TRAINING_MODELS_D, 'OpenAI text model D'),
+    # (TRAINING_MODELS_C, 'OpenAI text model C'),
+    # (TRAINING_MODELS_A1, 'OpenAI fine tuning text model A1'),
+    # (TRAINING_MODELS_C1, 'OpenAI fine tuning text model C1'),
 )

@@ -33,7 +33,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/minjunzhu/Desktop/First/mysite/fine",
+    "last_opened_file_path": "/Users/minjunzhu/Desktop/First/mysite/embedding/templates/embedding",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -43,8 +43,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mysite/fine" />
       <recent name="$PROJECT_DIR$/mysite/embedding/templates/embedding" />
+      <recent name="$PROJECT_DIR$/mysite/fine" />
       <recent name="$PROJECT_DIR$/mysite/embedding/forms" />
       <recent name="$PROJECT_DIR$/mysite/embedding/openai" />
       <recent name="$PROJECT_DIR$/mysite/embedding/static/embedding" />
@@ -111,7 +111,7 @@
       <workItem from="1677574499648" duration="5899000" />
       <workItem from="1677648449423" duration="755000" />
       <workItem from="1677649364554" duration="1417000" />
-      <workItem from="1677650835569" duration="17963000" />
+      <workItem from="1677650835569" duration="32742000" />
     </task>
     <servers />
   </component>

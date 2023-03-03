@@ -1,4 +1,5 @@
 import openai
+import embedding.static_values as sc
 
 def generate_prompt_6(original_text):
     prompt = """Generate the tl;dr for the input text.
@@ -42,6 +43,7 @@ def run_it_4(original_text, model):
         temperature=0,
         max_tokens=1000
     )
+    print(model, generate_prompt_4(original_text))
     print(response)
     return response
 
@@ -86,6 +88,17 @@ def run_it_8(prompt):
         prompt=prompt,
         n=1,
         size="512x512"
+    )
+    print(response)
+    return response
+
+
+def run_it_9(messages, model):
+    response = openai.ChatCompletion.create(
+        model=model,
+        temperature=0.2,
+        max_tokens=1000,
+        messages=messages,
     )
     print(response)
     return response

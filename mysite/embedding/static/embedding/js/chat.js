@@ -1,29 +1,57 @@
 function async_call() {
-    let textarea = $("textarea[name='message']");
-    let password = $("input[name='password']");
+    let new_msg = $("input[name='message']");
     let character = $("select[name='character']");
     let model = $("select[name='training_model']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
-    textarea.prop( "disabled", true );
+    let old_msg = $(".dialogue");
+    let history_msg = [];
+    let role = "user";
+    for (let i=0; i<old_msg.length; i++) {
+        let dic = {"role": role, "content": old_msg.get(i).innerText}
+        history_msg.push(dic);
+        if (role == "user") {
+            role = "assistant";
+        } else {
+            role = "user";
+        }
+    }
+    let history = JSON.stringify(history_msg)
+    new_msg.prop( "disabled", true );
     character.prop( "disabled", true );
+    let new_msg_text = new_msg.val();
+    new_msg.val('');
+
+    let content = $('.message-container');
+
+    let human_title = $("div[name='human_title']").clone();
+    content.append(human_title.get(0));
+
+    let human_msg = $("p[name='human_msg']").clone();
+    human_msg.text(new_msg_text);
+    content.append(human_msg.get(0));
+
     $.ajax({
         type: 'POST',
         url: "/sendchat/",
-        data: {password: password.val(),
-            message: textarea.val(),
+        data: {message: new_msg_text,
             character: character.val(),
+            history: history,
             csrfmiddlewaretoken: csrf.val(),
             model: model.val(),
         },
         success: function (response) {
-            textarea.val( response);
-            textarea.prop( "disabled", false );
-            textarea.focus();
+            new_msg.prop( "disabled", false );
+            new_msg.focus();
             $('.word-count').text(response.length + ' chars');
+            let content = $('.message-container');
+
+            let ai_title = $("div[name='ai_title']").clone();
+            content.append(ai_title.get(0));
+
+            let ai_msg = $("p[name='ai_msg']").clone();
+            ai_msg.text(response);
+            content.append(ai_msg.get(0));
         },
-        error: function (response) {
-            textarea.prop( "disabled", false );
-        }
     })
 }
 
@@ -32,15 +60,9 @@ function init() {
         async_call();
     });
 
-    $("textarea[name='message']").keydown(function(e){
+    $("input[name='message']").keydown(function(e){
         if(e.keyCode == 13) {
-            // return false;
             async_call();
-        }
-    });
-
-    $("input[name='password']").keydown(function(e){
-        if(e.keyCode == 13) {
             return false;
         }
     });
