@@ -3,5 +3,6 @@
 
 # the local db
 *.sqlite3
+mysite/db.sqlite3
 
 *.DS_Store
