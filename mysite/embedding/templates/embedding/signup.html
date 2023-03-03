@@ -1,37 +1,39 @@
 {% extends "embedding/base_no_header.html" %}
 
 {% block privatecss %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'embedding/css/signin.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/signin.css' %}">
 {% endblock %}
 
 {% block body %}
-    <body class="text-center">
-<main class="form-signin w-100 m-auto">
-  <form class="needs-validation" action="/signup/" method="post">
+
+<body class="text-center">
+  <main class="form-signin w-100 m-auto">
+    <form class="needs-validation" action="/signup/" method="post">
       {% csrf_token %}
       <a href="/">
         <img class="mb-4" src="{% static 'embedding/img/download.png' %}" alt="" width="72" height="72">
       </a>
-    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+      <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-    <div class="form-floating">
+      <div class="form-floating">
         {{ form.username}}
         <label for="floatingInput">User name</label>
-    </div>
-    <div class="form-floating">
+      </div>
+      <div class="form-floating">
         {{ form.email}}
         <label for="floatingPassword">Email address</label>
-    </div>
-    <div class="form-floating">
-      {{ form.password}}
+      </div>
+      <div class="form-floating">
+        {{ form.password}}
         <label for="floatingPassword">Password</label>
-    </div>
-    <p class="terms">By signing up and using our services, you agree to the <a href="/about/">Terms and Conditions</a></p>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+      </div>
+      <p class="terms">By signing up and using our services, you agree to the <a href="/about/">Terms and Conditions</a>
+      </p>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
       <p class="terms">Already got an account? <a href="/signin/">Sign in here</a></p>
       <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
-  </form>
-</main>
+    </form>
+  </main>
 </body>
 {% endblock %}

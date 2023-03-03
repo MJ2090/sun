@@ -1,34 +1,35 @@
 {% extends "embedding/base_no_header.html" %}
 
 {% block privatecss %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'embedding/css/signin.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/signin.css' %}">
 {% endblock %}
 
 {% block body %}
-    <body class="text-center">
-<main class="form-signin w-100 m-auto">
-  <form class="needs-validation" novalidate="" action="/signin/" method="post">
+
+<body class="text-center">
+  <main class="form-signin w-100 m-auto">
+    <form class="needs-validation" novalidate="" action="/signin/" method="post">
       {% csrf_token %}
       <div style="display:none">{{ form.next }}</div>
       <a href="/">
         <img class="mb-4" src="{% static 'embedding/img/download.png' %}" alt="" width="72" height="72">
       </a>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <div class="form-floating">
+      <div class="form-floating">
         {{ form.username }}
-      <label for="floatingInput">User name </label>
-    </div>
-    <div class="form-floating">
-      {{ form.password }}
+        <label for="floatingInput">User name </label>
+      </div>
+      <div class="form-floating">
+        {{ form.password }}
         <label for="password">Password</label>
-    </div>
+      </div>
 
-    <button class="signin-btn w-100 btn btn-lg btn-primary" type="submit">Welcome back</button>
-    <p class="terms">No account? <a href="/signup/">Sign up here</a></p>
-    <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
-  </form>
-</main>
+      <button class="signin-btn w-100 btn btn-lg btn-primary" type="submit">Welcome back</button>
+      <p class="terms">No account? <a href="/signup/">Sign up here</a></p>
+      <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
+    </form>
+  </main>
 </body>
 {% endblock %}

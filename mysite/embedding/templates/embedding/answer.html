@@ -1,46 +1,46 @@
 {% extends "embedding/base.html" %}
 
 {% block privatecss %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'embedding/css/answer.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/answer.css' %}">
 {% endblock %}
 
 {% block main %}
-    <div class="container px-4 py-5">
-        {% if ans %}
-        <h1>Answers to the questions:</h1>
-        <div>
+<div class="container px-4 py-5">
+    {% if ans %}
+    <h1>Answers to the questions:</h1>
+    <div>
         {% for a in ans %}
-            <div>
-               <h2>Question {{ forloop.counter }}</h2>
-               <p>{{ a.Question }}</p>
-              <p>{{ a.Answer }}</p>
-            </div>
-        {% endfor %}
+        <div>
+            <h2>Question {{ forloop.counter }}</h2>
+            <p>{{ a.Question }}</p>
+            <p>{{ a.Answer }}</p>
         </div>
-        {% endif %}
-
-        {% if translated_text %}
-        <h1>Translated text:</h1>
-            <p class="translated-text">{{ translated_text }}</p>
-        {% endif %}
-
-        {% if fixed_text %}
-        <h1>Text after fixing grammar issues:</h1>
-            <p class="translated-text">{{ fixed_text }}</p>
-        {% endif %}
-
-        {% if summary_text %}
-        <h1>Summary from the input text:</h1>
-            <p class="translated-text">{{ summary_text }}</p>
-        {% endif %}
-
-        {% if image_url %}
-        <h1>Generated image from the protmpt:</h1>
-            <img src="{{ image_url }}">
-        {% endif %}
-
-        <h2>Thanks!</h2>
+        {% endfor %}
     </div>
+    {% endif %}
+
+    {% if translated_text %}
+    <h1>Translated text:</h1>
+    <p class="translated-text">{{ translated_text }}</p>
+    {% endif %}
+
+    {% if fixed_text %}
+    <h1>Text after fixing grammar issues:</h1>
+    <p class="translated-text">{{ fixed_text }}</p>
+    {% endif %}
+
+    {% if summary_text %}
+    <h1>Summary from the input text:</h1>
+    <p class="translated-text">{{ summary_text }}</p>
+    {% endif %}
+
+    {% if image_url %}
+    <h1>Generated image from the protmpt:</h1>
+    <img src="{{ image_url }}">
+    {% endif %}
+
+    <h2>Thanks!</h2>
+</div>
 
 {% endblock %}
