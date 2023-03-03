@@ -27,3 +27,8 @@
 .hidden {
     display: none;
 }
+
+.message-container {
+    height: 300px;
+    overflow: scroll;
+}

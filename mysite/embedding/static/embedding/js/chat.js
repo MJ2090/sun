@@ -1,8 +1,12 @@
 function async_call() {
     let new_msg = $("input[name='message']");
+    if (new_msg.val() == "") {
+        return;
+    }
     let character = $("select[name='character']");
     let model = $("select[name='training_model']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
+    let model_selector = $("select[name='training_model']");
     let old_msg = $(".dialogue");
     let history_msg = [];
     let role = "user";
@@ -18,6 +22,7 @@ function async_call() {
     let history = JSON.stringify(history_msg)
     new_msg.prop( "disabled", true );
     character.prop( "disabled", true );
+    model_selector.prop( "disabled", true );
     let new_msg_text = new_msg.val();
     new_msg.val('');
 
@@ -30,6 +35,7 @@ function async_call() {
     human_msg.addClass("dialogue");
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
+    $(".message-container").animate({ scrollTop: $(document).height() }, "fast");
 
     $.ajax({
         type: 'POST',
@@ -53,6 +59,7 @@ function async_call() {
             ai_msg.text(response);
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
+            $(".message-container").animate({ scrollTop: $(document).height() }, "fast");
         },
     })
 }
