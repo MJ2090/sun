@@ -28,7 +28,7 @@
     display: none;
 }
 
-.message-container {
+.message-outer-container {
     height: 300px;
     overflow: scroll;
 }

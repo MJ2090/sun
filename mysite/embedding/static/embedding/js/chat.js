@@ -35,7 +35,7 @@ function async_call() {
     human_msg.addClass("dialogue");
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
-    $(".message-container").animate({ scrollTop: $(document).height() }, "fast");
+    $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     $.ajax({
         type: 'POST',
@@ -59,7 +59,7 @@ function async_call() {
             ai_msg.text(response);
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
-            $(".message-container").animate({ scrollTop: $(document).height() }, "fast");
+            $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
         },
     })
 }
