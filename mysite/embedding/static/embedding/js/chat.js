@@ -27,6 +27,7 @@ function async_call() {
     content.append(human_title.get(0));
 
     let human_msg = $("p[name='human_msg']").clone();
+    human_msg.addClass("dialogue");
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
 
@@ -50,6 +51,7 @@ function async_call() {
 
             let ai_msg = $("p[name='ai_msg']").clone();
             ai_msg.text(response);
+            ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
         },
     })

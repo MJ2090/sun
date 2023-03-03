@@ -67,7 +67,6 @@ def sendchat_t(request):
     character = request.POST['character']
     history = request.POST.get('history')
     my_json = json.loads(history)
-    print(my_json)
 
     pre_text_dict = {
         "Common AI": "You are a helpful AI, you respect human beings.",
@@ -75,8 +74,11 @@ def sendchat_t(request):
         "Mr. President": "You act as the President Biden of USA who serves his country and people.\n",
         "Therapist": "You act as a top ranked Therapist. you speaks a lot, providing practical advices to your patients. You are always nice, friendly and very helpful to your patients.\n",
     }
+    print("4444444444444")
+    print(my_json, character, character=="Mr. President", pre_text_dict.get(character))
     
-    messages = [{"role": "system", "content": pre_text_dict.get("character")}]
+    messages = [{"role": "system", "content": pre_text_dict.get(character)},
+                {"role": "assistant", "content": "Hi i'm a therapist, what brings you here?"}]
     messages.extend(my_json)
     messages.append({"role": "user", "content": new_message})
     print(messages)
