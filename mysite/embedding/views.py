@@ -68,7 +68,15 @@ def sendchat_t(request):
     history = request.POST.get('history')
     my_json = json.loads(history)
     print(my_json)
-    messages = [{"role": "system", "content": "You are a helpful AI"}]
+
+    pre_text_dict = {
+        "Common AI": "You are a helpful AI, you respect human beings.",
+        "Assistant": "You are an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
+        "Mr. President": "You act as the President Biden of USA who serves his country and people.\n",
+        "Therapist": "You act as a top ranked Therapist. you speaks a lot, providing practical advices to your patients. You are always nice, friendly and very helpful to your patients.\n",
+    }
+    
+    messages = [{"role": "system", "content": pre_text_dict.get("character")}]
     messages.extend(my_json)
     messages.append({"role": "user", "content": new_message})
     print(messages)
@@ -76,6 +84,7 @@ def sendchat_t(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
     return HttpResponse(ai_message)
+
 
 def sendchat(request):
     model = request.POST.get('model', '')
