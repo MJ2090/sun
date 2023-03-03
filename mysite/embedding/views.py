@@ -69,12 +69,11 @@ def sendchat_t(request):
     my_json = json.loads(history)
 
     pre_text_dict = {
-        "Common AI": "You are a helpful AI, you respect human beings.",
+        "Common AI": "You are a smart and knowledgeable chatbot built by humans. You respect human beings.",
         "Assistant": "You are an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
         "Mr. President": "You act as the President Biden of USA who serves his country and people.\n",
-        "Therapist": "You act as a top ranked Therapist. you speaks a lot, providing practical advices to your patients. You are always nice, friendly and very helpful to your patients.\n",
+        "Therapist": "You act as a professional therapist. You hold strong therapy knowledge. You care about patients who feel sad, depressed, helpless or unhappy. You provide practical advices to patients. You are always nice, friendly and very helpful to patients.\n",
     }
-    print("4444444444444")
     print(my_json, character, character=="Mr. President", pre_text_dict.get(character))
     
     messages = [{"role": "system", "content": pre_text_dict.get(character)},
