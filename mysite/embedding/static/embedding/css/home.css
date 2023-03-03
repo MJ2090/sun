@@ -1,0 +1,46 @@
+.message {
+    width: 90%;
+}
+
+.message textarea {
+    width: 100%;
+    height: 70%;
+}
+
+.training-text {
+    height: 500px;
+}
+
+.submit {
+    padding-top: 30px;
+}
+.question {
+    height: 100px;
+}
+
+.password {
+    width: 90%;
+    height: 50px;
+}
+
+.container-white {
+    margin-top: 20px;
+}
+
+.container-grey {
+    background-color: #f4f4f4;
+}
+
+.review {
+    color: #8b8b8b;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.section-header {
+    font-size: 2.5rem;
+}
+
+.text-bold {
+    font-weight: bold;
+}
