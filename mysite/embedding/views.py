@@ -94,10 +94,6 @@ def sendchat_t(request):
     character = request.POST['character']
 
     my_m = PromptModel.objects.get(name=character)
-    ss="""
-    [{"role":"system","content":"you are an AI with really, really bad temper, very easily offended or annoyed, usually speaks very loudly."},
-    {"role":"assistant","content":"Okay I got it, I am an AI with really bad temper, I’m easy to annoyed and usually I speak loudly."}]
-    """
     messages = json.loads(my_m.history)
     history = request.POST.get('history')
     my_json = json.loads(history)
