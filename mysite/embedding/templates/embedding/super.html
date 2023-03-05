@@ -1,0 +1,41 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/embedding.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/embedding.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Sudo functions</h4>
+    <div class="instruction">
+      <p>Add a new prompt based model</p>
+    </div>
+    <form class="needs-validation" novalidate="" action="/super/" method="post" onsubmit="return confirmSubmit(this)">
+      {% csrf_token %}
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label for="address2" class="form-label">Model Name</label>
+          {{ form.name }}
+        </div>
+
+        <div class="col-12">
+          <label for="address2" class="form-label">Dialogue History</label>
+          {{ form.history }}
+        </div>
+
+      </div>
+
+      <hr class="my-4">
+
+      <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

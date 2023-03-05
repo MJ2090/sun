@@ -16,11 +16,13 @@ MODEL_TYPES = (
 )
 
 CHAT_TYPES_NO = 'Common AI'
+CHAT_TYPES_TT1 = 'tt1'
 CHAT_TYPES_ASSISTANT = 'Assistant'
 CHAT_TYPES_PRESIDENT = 'Mr. President'
 CHAT_TYPES_THERAPIST = 'Therapist'
 CHAT_TYPES = (
     (CHAT_TYPES_NO, 'Common AI'),
+    (CHAT_TYPES_TT1, 'TT 1'),
     (CHAT_TYPES_ASSISTANT, 'Virtual Assistant'),
     (CHAT_TYPES_PRESIDENT, 'Mr. President'),
     (CHAT_TYPES_THERAPIST, 'Therapist'),

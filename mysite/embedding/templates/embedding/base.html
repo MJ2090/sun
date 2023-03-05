@@ -32,15 +32,6 @@
   {% endblock %}
   {% block privatejs %}
   {% endblock %}
-
-  <style>
-    .form-control::placeholder {
-      /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: #8a8888;
-      opacity: 1;
-      /* Firefox */
-    }
-  </style>
 </head>
 
 <body class="login-page">
@@ -58,12 +49,10 @@
           <li><a href="/collection/" class="nav-link px-2 text-white">My Collection</a></li>
           <li><a href="/about/" class="nav-link px-2 text-white">About</a></li>
           <li><a href="/contact/" class="nav-link px-2 text-white">Contact</a></li>
+          {% if user.is_superuser %}
+          <li><a href="/super/" class="nav-link px-2 text-white">Hello Admin</a></li>
+          {% endif %}
         </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-            aria-label="Search">
-        </form>
 
         {% if user.is_authenticated %}
         <!-- User account -->

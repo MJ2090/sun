@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from embedding.forms.training import TrainingForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
+from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.summary import SummaryForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
@@ -13,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3
-from embedding.models import TokenConsumption
+from embedding.models import TokenConsumption, PromptModel
 from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string, get_basic_data
@@ -61,10 +62,38 @@ def embedding(request):
     return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
 
 
+def add_prompt_model(request):
+    ret = get_basic_data(request)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PromptModelForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            cd = form.cleaned_data
+            name = cd.get('name', '')
+            history = cd.get('history')
+            new_model = PromptModel.objects.create(owner=get_user(request),
+                                                name=name,
+                                                history=history)
+            new_model.save()
+            return HttpResponse('Done sir.')
+        else:
+            print("Data not clean!")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PromptModelForm()
+
+    return render(request, 'embedding/super.html', {'form': form,})
+
+
 def sendchat_t(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
+    print(4444, character)
+
     history = request.POST.get('history')
     my_json = json.loads(history)
 
@@ -74,13 +103,21 @@ def sendchat_t(request):
         "Mr. President": "You act as the President Biden of USA who serves his country and people.\n",
         "Therapist": "You act as a professional therapist. You hold strong therapy knowledge. You care about patients who feel sad, depressed, helpless or unhappy. You provide practical advices to patients. You are always nice, friendly and very helpful to patients.\n",
     }
-    print(my_json, character, character=="Mr. President", pre_text_dict.get(character))
-    
     messages = [{"role": "system", "content": pre_text_dict.get(character)},
                 {"role": "assistant", "content": "Hi i'm a therapist, what brings you here?"}]
     messages.extend(my_json)
+
+
+    my_m = PromptModel.objects.get(name=character)
+    print(8888, my_m.history)
+    ss="""
+    [{"role":"system","content":"you are an AI with really, really bad temper, very easily offended or annoyed, usually speaks very loudly."},
+    {"role":"assistant","content":"Okay I got it, I am an AI with really bad temper, I’m easy to annoyed and usually I speak loudly."}]
+    """
+    messages = json.loads(my_m.history)
+
     messages.append({"role": "user", "content": new_message})
-    print(messages)
+    print(343434, messages)
     openai_response = run_it_9(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
@@ -89,7 +126,7 @@ def sendchat_t(request):
 
 def sendchat(request):
     model = request.POST.get('model', '')
-    if model=="gpt-3.5-turbo":
+    if model == "gpt-3.5-turbo":
         return sendchat_t(request)
     message = request.POST['message']
     character = request.POST['character']
@@ -157,7 +194,7 @@ def contact(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ContactForm()
-    ret['form'] =form
+    ret['form'] = form
     return render(request, 'embedding/contact.html', ret)
 
 
@@ -165,6 +202,7 @@ def signout(request):
     if request.user.is_authenticated:
         auth.logout(request)
     return HttpResponseRedirect('/')
+
 
 def signin(request):
     ret = get_basic_data(request)
@@ -244,7 +282,8 @@ def translation(request):
             translated_text = openai_response["choices"][0]["text"]
             print(translated_text)
             ret['translated_text'] = translated_text
-            record_consumption(request, sc.MODEL_TYPES_TRANSLATE, openai_response)
+            record_consumption(
+                request, sc.MODEL_TYPES_TRANSLATE, openai_response)
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -296,7 +335,8 @@ def grammar(request):
             fixed_text = openai_response["choices"][0]["text"]
             print(fixed_text)
             ret['fixed_text'] = fixed_text
-            record_consumption(request, sc.MODEL_TYPES_GRAMMAR, openai_response)
+            record_consumption(
+                request, sc.MODEL_TYPES_GRAMMAR, openai_response)
             return render(request, 'embedding/answer.html', ret)
         else:
             print("Data not clean!")
@@ -321,7 +361,8 @@ def summary(request):
             openai_response = run_it_6(original_text, model='text-davinci-003')
             summary_text = openai_response["choices"][0]["text"]
             ret['summary_text'] = summary_text
-            record_consumption(request, sc.MODEL_TYPES_SUMMARY, openai_response)
+            record_consumption(
+                request, sc.MODEL_TYPES_SUMMARY, openai_response)
             return render(request, 'embedding/answer.html', {'summary_text': summary_text})
         else:
             print("Data not clean!")
@@ -351,7 +392,8 @@ def do_login(request, username, password):
 def do_register(cd):
     with transaction.atomic():
         userProfile = UserProfile.objects.create_user(username=cd.get('username', ''),
-                                                      password=cd.get('password', ''),
+                                                      password=cd.get(
+                                                          'password', ''),
                                                       )
         userProfile.is_staff = False
         userProfile.is_superuser = False

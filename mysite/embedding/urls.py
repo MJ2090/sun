@@ -22,4 +22,5 @@ urlpatterns = [
     path('sendchat/', views.sendchat, name='sendchat'),
     path('image/', views.image, name='image'),
     path('collection/', views.collection, name='collection'),
+    path('super/', views.add_prompt_model, name='add_prompt_model'),
 ]

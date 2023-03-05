@@ -46,3 +46,12 @@ class TokenConsumption(models.Model):
 
     def __unicode__(self):
         return u'%s %s %s %s' % (self.user.username, self.token_amount, self.model_type, self.secret)
+    
+
+class PromptModel(models.Model):
+    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
+    name = models.CharField(max_length=20, default='')
+    history = models.CharField(max_length=1000, default='')
+
+    def __str__(self):
+        return u'%s %s %s' % (self.owner.username, self.name, self.history)

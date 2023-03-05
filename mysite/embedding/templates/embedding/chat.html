@@ -15,32 +15,6 @@
   <h4 class="mb-3">Enjoy a chat with AI</h4>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
-    <div class="col-md-7 col-lg-8">
-      <div class="chat-prompt">Conversation starts here.</div>
-      <div class="row g-3">
-        <div class="hidden">
-          <div name="human_title" class="dialogue-title">
-            You
-          </div>
-          <div name="ai_title" class="dialogue-title">
-            ChatBot
-          </div>
-          <p name="human_msg" class="dialogue-message">
-          </p>
-          <p name="ai_msg" class="dialogue-message">
-          </p>
-        </div>
-        <div class="message-outer-container">
-          <div class="message-container">
-          </div>
-        </div>
-        <div class="input-group">
-          {{ form.message }}
-          <button type="button" class="btn btn-primary send-button">Go</button>
-        </div>
-      </div>
-      <p class="chat-word-count">Text Length: <span class="word-count"></span></p>
-    </div>
 
     <div class="col-md-4 col-lg-3">
       <div class="row g-3">
@@ -66,6 +40,32 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-md-7 col-lg-8">
+      <div class="chat-prompt">Conversation starts here.</div>
+      <div class="row g-3">
+        <div class="hidden">
+          <div name="human_title" class="dialogue-title">
+            You
+          </div>
+          <div name="ai_title" class="dialogue-title">
+            ChatBot
+          </div>
+          <p name="human_msg" class="dialogue-message">
+          </p>
+          <p name="ai_msg" class="dialogue-message">
+          </p>
+        </div>
+        <div class="message-outer-container">
+          <div class="message-container">
+          </div>
+        </div>
+        <div class="input-group">
+          {{ form.message }}
+          <button type="button" class="btn btn-primary send-button">Go</button>
+        </div>
+      </div>
+      <p class="chat-word-count">Text Length: <span class="word-count"></span></p>
     </div>
   </form>
 </div>
