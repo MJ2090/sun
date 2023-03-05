@@ -35,6 +35,11 @@ function async_call() {
     human_msg.addClass("dialogue");
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
+
+    let ai_title = $("div[name='ai_title']").clone();
+    content.append(ai_title.get(0));
+    
+    $("div[name='spinner").show();
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     $.ajax({
@@ -52,9 +57,7 @@ function async_call() {
             $('.word-count').text(response.length + ' chars');
             let content = $('.message-container');
 
-            let ai_title = $("div[name='ai_title']").clone();
-            content.append(ai_title.get(0));
-
+            $("div[name='spinner").hide();
             let ai_msg = $("p[name='ai_msg']").clone();
             ai_msg.text(response);
             ai_msg.addClass("dialogue");
