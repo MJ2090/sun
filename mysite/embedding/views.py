@@ -92,32 +92,21 @@ def sendchat_t(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
-    print(4444, character)
-
-    history = request.POST.get('history')
-    my_json = json.loads(history)
-
-    pre_text_dict = {
-        "Common AI": "You are a smart and knowledgeable chatbot built by humans. You respect human beings.",
-        "Assistant": "You are an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
-        "Mr. President": "You act as the President Biden of USA who serves his country and people.\n",
-        "Therapist": "You act as a professional therapist. You hold strong therapy knowledge. You care about patients who feel sad, depressed, helpless or unhappy. You provide practical advices to patients. You are always nice, friendly and very helpful to patients.\n",
-    }
-    messages = [{"role": "system", "content": pre_text_dict.get(character)},
-                {"role": "assistant", "content": "Hi i'm a therapist, what brings you here?"}]
-    messages.extend(my_json)
-
 
     my_m = PromptModel.objects.get(name=character)
-    print(8888, my_m.history)
     ss="""
     [{"role":"system","content":"you are an AI with really, really bad temper, very easily offended or annoyed, usually speaks very loudly."},
     {"role":"assistant","content":"Okay I got it, I am an AI with really bad temper, I’m easy to annoyed and usually I speak loudly."}]
     """
     messages = json.loads(my_m.history)
-
+    history = request.POST.get('history')
+    my_json = json.loads(history)
+    messages.extend(my_json)
     messages.append({"role": "user", "content": new_message})
-    print(343434, messages)
+
+    print("Character: ", character)
+    print("Msg sent to openai: ", messages)
+
     openai_response = run_it_9(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
