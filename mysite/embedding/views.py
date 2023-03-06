@@ -274,6 +274,9 @@ def send_translation(request):
 
 def image_async(request):
     description = request.POST.get('original_text', '')
+    style = request.POST.get('style', '')
+    if style != '':
+        description += '. In ' + style + ' style.'
     openai_response = run_it_8(description)
     generated_url = openai_response['data'][0]['url']
     record_consumption(

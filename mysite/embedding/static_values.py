@@ -40,3 +40,22 @@ TRAINING_MODELS = (
     # (TRAINING_MODELS_A1, 'OpenAI fine tuning text model A1'),
     # (TRAINING_MODELS_C1, 'OpenAI fine tuning text model C1'),
 )
+
+IMAGE_TYPES_DEFAULT = ''
+IMAGE_TYPES_PICASSO = 'Picasso'
+IMAGE_TYPES_MONET = 'Monet'
+IMAGE_TYPES_VANGOGH = 'Vincent van Gogh'
+IMAGE_TYPES_DALI = 'Salvador Dalí'
+IMAGE_TYPES_MICHELANGELO = 'Michelangelo'
+IMAGE_TYPES_COMICS = 'comics'
+IMAGE_TYPES_BLACK_WHITE = 'black and white'
+IMAGE_TYPES =(
+    (IMAGE_TYPES_DEFAULT, 'Default style'),
+    (IMAGE_TYPES_PICASSO, 'Picasso'),
+    (IMAGE_TYPES_MONET, 'Monet'),
+    (IMAGE_TYPES_VANGOGH, 'Vincent van Gog'),
+    (IMAGE_TYPES_DALI, 'Salvador Dalí'),
+    (IMAGE_TYPES_MICHELANGELO, 'Michelangelo'),
+    (IMAGE_TYPES_COMICS, 'comics'),
+    (IMAGE_TYPES_BLACK_WHITE, 'black and white'),
+)
