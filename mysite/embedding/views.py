@@ -272,29 +272,19 @@ def send_translation(request):
     return render(request, 'embedding/translation.html', ret)
 
 
+def image_async(request):
+    description = request.POST.get('original_text', '')
+    openai_response = run_it_8(description)
+    generated_url = openai_response['data'][0]['url']
+    record_consumption(
+        request, sc.MODEL_TYPES_IMAGE, openai_response)
+    print(generated_url)
+    return HttpResponse(generated_url.strip())
+
+
 def image(request):
     ret = get_basic_data(request)
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = ImageForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', ret)
-            description = form.cleaned_data["text"]
-            openai_response = run_it_8(description)
-            image_url = openai_response['data'][0]['url']
-            print(image_url)
-            ret['image_url'] = image_url
-            return render(request, 'embedding/answer.html', ret)
-        else:
-            print("Data not clean!")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = ImageForm()
-    ret['form'] = form
+    ret['form'] = ImageForm()
     return render(request, 'embedding/image.html', ret)
 
 
@@ -375,7 +365,10 @@ def do_register(cd):
 
 def record_consumption(request, model_type, openai_response, secret=''):
     with transaction.atomic():
-        token_amount = openai_response["usage"]["total_tokens"]
+        if model_type == sc.MODEL_TYPES_IMAGE:
+            token_amount = 0
+        else:
+            token_amount = openai_response["usage"]["total_tokens"]
         consumption = TokenConsumption.objects.create(user=get_user(request),
                                                       model_type=model_type,
                                                       token_amount=token_amount,

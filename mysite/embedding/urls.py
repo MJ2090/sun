@@ -26,4 +26,5 @@ urlpatterns = [
     path('grammar_async/', views.grammar_async, name='grammar_async'),
     path('summary_async/', views.summary_async, name='summary_async'),
     path('translation_async/', views.translation_async, name='translation_async'),
+    path('image_async/', views.image_async, name='image_async'),
 ]
