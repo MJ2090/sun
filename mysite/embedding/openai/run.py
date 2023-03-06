@@ -21,7 +21,7 @@ def generate_prompt_5(original_text):
     input: When yoo misspell smething, you spell it worng.
     output: When you misspell something, you spell it wrong.
     input: {}
-    output:"""
+    output: """
     return prompt.format(original_text)
 
 def generate_prompt_4(original_text):
@@ -31,7 +31,7 @@ def generate_prompt_4(original_text):
     input: I'm from China
     output: 我来自中国
     input: {}
-    output:"""
+    output: """
     return prompt.format(original_text)
 
 

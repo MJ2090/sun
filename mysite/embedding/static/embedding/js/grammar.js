@@ -3,6 +3,8 @@ function async_call() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let fixed_text = $("textarea[name='fixed_text']");
     fixed_text.val('');
+    fixed_text.hide();
+    $("div[name='spinner").show();
     $.ajax({
         type: 'POST',
         url: "/send_grammar/",
@@ -12,6 +14,8 @@ function async_call() {
         },
         success: function (response) {
             fixed_text.val(response);
+            $("div[name='spinner").hide();
+            fixed_text.show();
         },
     })
 }
