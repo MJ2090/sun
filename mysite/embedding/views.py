@@ -199,8 +199,6 @@ def signin(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
-
-            print(88)
             if do_login(request, username, password):
                 print(881)
                 # Redirect to a success page.
@@ -210,9 +208,7 @@ def signin(request):
                     next_url = '/'
                 return HttpResponseRedirect(next_url)
             else:
-
-                print(882)
-                return render(request, 'embedding/error.html', {})
+                return render(request, 'embedding/error.html', {'Your account does not exist or has been accidently deleted, sorry about that.'})
         else:
             print("Data not clean!")
 
