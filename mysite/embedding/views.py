@@ -74,8 +74,8 @@ def add_prompt_model(request):
             name = cd.get('name', '')
             history = cd.get('history')
             new_model = PromptModel.objects.create(owner=get_user(request),
-                                                name=name,
-                                                history=history)
+                                                   name=name,
+                                                   history=history)
             new_model.save()
             return HttpResponse('Done sir.')
         else:
@@ -85,7 +85,7 @@ def add_prompt_model(request):
     else:
         form = PromptModelForm()
 
-    return render(request, 'embedding/super.html', {'form': form,})
+    return render(request, 'embedding/super.html', {'form': form, })
 
 
 def sendchat_t(request):
@@ -319,33 +319,23 @@ def grammar_async(request):
 
 def grammar(request):
     ret = get_basic_data(request)
-    ret['form'] =  GrammarForm()
+    ret['form'] = GrammarForm()
     return render(request, 'embedding/grammar.html', ret)
+
+
+def send_summary(request):
+    original_text = request.POST.get('original_text', '')
+    openai_response = run_it_6(original_text, model='text-davinci-003')
+    summary_text = openai_response["choices"][0]["text"]
+    record_consumption(
+        request, sc.MODEL_TYPES_SUMMARY, openai_response)
+    print(summary_text)
+    return HttpResponse(summary_text)
 
 
 def summary(request):
     ret = get_basic_data(request)
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = SummaryForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            original_text = form.cleaned_data["text"]
-            openai_response = run_it_6(original_text, model='text-davinci-003')
-            summary_text = openai_response["choices"][0]["text"]
-            ret['summary_text'] = summary_text
-            record_consumption(
-                request, sc.MODEL_TYPES_SUMMARY, openai_response)
-            return render(request, 'embedding/answer.html', {'summary_text': summary_text})
-        else:
-            print("Data not clean!")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SummaryForm()
-
-    ret['form'] = form
+    ret['form'] = SummaryForm()
     return render(request, 'embedding/summary.html', ret)
 
 
