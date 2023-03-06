@@ -11,17 +11,21 @@
 
 {% block main %}
 <div class="container px-4 py-5">
-  <div class="col-md-7 col-lg-8">
-    <h4 class="mb-3">Train an embedding model</h4>
-    <div class="instruction">
-      <p>Instructions:</p>
-      <p>1. Provide some text to the model, from where the model will learn knowledge.</p>
-      <p>2. Provide at least 1 question.</p>
-      <p>3. Press OK, then the model will try to answer the questions.</p>
+  <h4 class="mb-3">Train an embedding model</h4>
+  <form class="needs-validation" novalidate="" action="/embedding/" method="post" onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
+    <div class="col-md-4 col-lg-3">
+      <div class="row g-3">
+        <div class="instruction">
+          <p>Instructions:</p>
+          <p>1. Provide some text to the model, from where the model will learn knowledge.</p>
+          <p>2. Provide at least 1 question.</p>
+          <p>3. Press OK, then the model will try to answer the questions.</p>
+        </div>
+      </div>
     </div>
-    <form class="needs-validation" novalidate="" action="/embedding/" method="post"
-      onsubmit="return confirmSubmit(this)">
-      {% csrf_token %}
+
+    <div class="col-md-7 col-lg-8">
       <div class="row g-3">
 
         <div class="col-12">
@@ -53,8 +57,8 @@
 
       <hr class="my-4">
 
-      <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
-    </form>
-  </div>
+      <button class="w-100 btn btn-primary btn-md" type="submit">GO</button>
+  </form>
+</div>
 </div>
 {% endblock %}
