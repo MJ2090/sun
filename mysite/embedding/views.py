@@ -399,4 +399,4 @@ def record_consumption(request, model_type, openai_response, secret=''):
 def get_user(request):
     if request.user.is_authenticated:
         return request.user
-    return UserProfile.objects.get(username="a")
+    return UserProfile.objects.get(username="default_user")

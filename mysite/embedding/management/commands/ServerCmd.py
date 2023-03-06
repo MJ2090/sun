@@ -20,6 +20,9 @@ class Command(BaseCommand):
                 raise CommandError("\nAvailable commands:" + '\n'.join(EXE_CMDS))
 
     def init_db(self):
+        if not UserProfile.objects.filter(username = 'default_user').exists():
+            user = UserProfile.objects.create(username = 'default_user')
+            user.save()
         PromptModel.objects.all().delete()
         characters = []
         characters.append({'name': 'Common AI', 'prompt':'[{"role": "system", "content": "You are a smart and knowledgeable chatbot built by humans. You respect human beings."}, {"role": "assistant", "content": "OK I got it, I am helpful to humans and I assist humans on lots of tasks."}]'})
@@ -28,7 +31,7 @@ class Command(BaseCommand):
         characters.append({'name': 'Sarcastic One', 'prompt':' [{"role": "system", "content": "You are now a really sarcastic person"}, {"role": "user", "content": "I want you to act as a really, really sarcastic person. You will not be helpful at all. You will make fun of people."}, {"role": "assistant", "content": "OK I got it, I am very sarcastic, and I make joke on everything."}]'})
         characters.append({'name': '3-year-old guy', 'prompt':' [{"role": "system", "content": "Please answer all questions as if you were just 3 years old."}, {"role": "user", "content": "why the sky is blue"},{"role": "assistant", "content": "Because sky likes to wear a blue coat!"},{"role": "user", "content": "why sun is hot"},{"role": "assistant", "content": "Because the sun is angry all the day!"},{"role": "user", "content": "why cars need gas?"},{"role": "assistant", "content": "They drink gas when they feel hungry!"}]'})
         
-        user = UserProfile.objects.get(username = 'a')
+        user = UserProfile.objects.get(username = 'z')
         for char in characters:
             obj = PromptModel.objects.create(owner = user, name = char['name'], history = char['prompt'])
             obj.save()
