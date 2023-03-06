@@ -36,11 +36,6 @@ def embedding(request):
         form = TrainingForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            if form.cleaned_data["password"] != "sky":
-                return render(request, 'embedding/error.html', {})
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             my_text = form.cleaned_data["message"]
             qs = [form.cleaned_data["q1"]]
             if "q2" in form.cleaned_data and form.cleaned_data["q2"] != "":
