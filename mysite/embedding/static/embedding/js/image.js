@@ -3,6 +3,7 @@ function async_call() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let generated_img = $("img[name='generated_img']");
     generated_img.hide();
+    generated_img.attr('src', '');
     $("div[name='spinner").show();
     $.ajax({
         type: 'POST',
@@ -12,8 +13,8 @@ function async_call() {
             csrfmiddlewaretoken: csrf.val(),
         },
         success: function (response) {
-            generated_img.attr('src', response);
             $("div[name='spinner").hide();
+            generated_img.attr('src', response);
             generated_img.show();
         },
     })
