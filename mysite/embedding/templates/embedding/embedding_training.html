@@ -1,0 +1,57 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/embedding_training.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/embedding_training.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">Train an embedding model</h4>
+  <form class="row needs-validation" novalidate="" action="/embedding_training/" method="post"
+    onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
+    <div class="col-md-4 col-lg-3">
+      <div class="row g-3">
+        <div class="instruction">
+          <p>Instructions:</p>
+          <p>1. Provide some text to the model, from where the model will learn knowledge.</p>
+          <p>2. Provide at least 1 question.</p>
+          <p>3. Press OK, then the model will try to answer the questions.</p>
+        </div>
+        <a href="/embedding_question/"><button class="w-100 btn btn-primary btn-md" type="button">Ask Questions</button></a>
+      </div>
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label for="name" class="form-label">Model name</label>
+          {{ form.name }}
+        </div>
+
+        <div class="col-12">
+          <label for="text" class="form-label">Training Text</label>
+          {{ form.text }}
+        </div>
+
+      </div>
+
+      <div class="spinner" name="spinner" style="display: none">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+      <p name="response"></p>
+      <hr class="my-4">
+
+      <button class="send-button w-100 btn btn-primary btn-md" type="submit">GO</button>
+  </form>
+</div>
+</div>
+{% endblock %}

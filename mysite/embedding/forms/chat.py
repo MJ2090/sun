@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import ModelForm
 from embedding.models import PromptModel
 
 import embedding.static_values as sc

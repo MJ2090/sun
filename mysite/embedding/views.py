@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from embedding.forms.training import TrainingForm
+from embedding.forms.embedding import TrainingForm, QuestionForm
 from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
 from embedding.forms.prompt_model import PromptModelForm
@@ -13,7 +13,7 @@ from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
-from embedding.openai.run3 import run_it_3
+from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel
 from django.shortcuts import render
 from django.db import transaction
@@ -26,6 +26,37 @@ import json
 def home(request):
     ret = get_basic_data(request)
     return render(request, 'embedding/home.html', ret)
+
+
+def embedding_training(request):
+    ret = get_basic_data(request)
+    ret['form'] = TrainingForm()
+    return render(request, 'embedding/embedding_training.html', ret)
+
+
+def embedding_training_async(request):
+    text = request.POST.get('text', '')
+    name = request.POST.get('name', '')
+    print(8888, text, name)
+    openai_response = run_it_3_training(name, text, request)
+    answer = openai_response
+    print(answer)
+    return HttpResponse('new model has finished training.')
+
+
+def embedding_question(request):
+    ret = get_basic_data(request)
+    ret['form'] = QuestionForm()
+    return render(request, 'embedding/embedding_question.html', ret)
+
+
+def embedding_question_async(request):
+    question = request.POST.get('question', '')
+    character = request.POST.get('character', '')
+    openai_response = run_it_3_question(question, character)
+    answer = openai_response
+    print(answer)
+    return HttpResponse(answer.strip())
 
 
 def embedding(request):
