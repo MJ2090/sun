@@ -314,7 +314,7 @@ def grammar_async(request):
     record_consumption(
         request, sc.MODEL_TYPES_GRAMMAR, openai_response)
     print(fixed_text)
-    return HttpResponse(fixed_text)
+    return HttpResponse(fixed_text.strip())
 
 
 def grammar(request):
