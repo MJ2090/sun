@@ -7,7 +7,7 @@ function async_call() {
     $("div[name='spinner").show();
     $.ajax({
         type: 'POST',
-        url: "/send_summary/",
+        url: "/summary_async/",
         data: {
             original_text: original_text.val(),
             csrfmiddlewaretoken: csrf.val(),

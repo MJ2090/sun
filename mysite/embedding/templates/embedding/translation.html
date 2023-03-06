@@ -2,39 +2,53 @@
 
 {% block privatecss %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'embedding/css/embedding.css' %}">
+<link rel="stylesheet" href="{% static 'embedding/css/translation.css' %}">
 {% endblock %}
 
 {% block privatejs %}
-<script src="{% static 'embedding/js/embedding.js' %}"></script>
+<script src="{% static 'embedding/js/translation.js' %}"></script>
 {% endblock %}
 
 {% block main %}
 <div class="container px-4 py-5">
-  <div class="col-md-7 col-lg-8">
+  <form class="row needs-validation" novalidate="" action="/translation/" method="post"
+    onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
     <h4 class="mb-3">Translation</h4>
-    <div class="instruction">
-      <p>Instructions:</p>
-      <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
-      <p>2. Provide some text to the left panel.</p>
-      <p>3. Press OK. Currently only English to Chinese is supported.</p>
+
+    <div class="col-md-4 col-lg-3">
+      <div class="row g-3">
+        <div class="instruction">
+          <p>Instructions:</p>
+          <p>1. Provide some text to the original text panel.</p>
+          <p>2. Press GO. Currently only English to Chinese is supported.</p>
+        </div>
+      </div>
     </div>
-    <form class="needs-validation" novalidate="" action="/translation/" method="post"
-      onsubmit="return confirmSubmit(this)">
-      {% csrf_token %}
+
+    <div class="col-md-7 col-lg-8">
       <div class="row g-3">
 
-        <div class="col-12">
-          <label for="address2" class="form-label">Original Text</label>
+        <div class="col-6">
+          <label for="text" class="form-label">Original Text</label>
           {{ form.text }}
+        </div>
+        <div class="col-6">
+          <label for="translated_text" class="form-label">Translated Text</label>
+          {{ form.translated_text }}
+          <div class="spinner" name="spinner" style="display: none">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
         </div>
 
       </div>
 
       <hr class="my-4">
 
-      <button class="w-100 btn btn-primary btn-lg" type="submit">GO</button>
-    </form>
-  </div>
+      <button class="send-button w-100 btn btn-primary btn-md" type="button">GO</button>
+  </form>
+</div>
 </div>
 {% endblock %}

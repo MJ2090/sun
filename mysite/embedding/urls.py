@@ -23,6 +23,7 @@ urlpatterns = [
     path('image/', views.image, name='image'),
     path('collection/', views.collection, name='collection'),
     path('super/', views.add_prompt_model, name='add_prompt_model'),
-    path('send_grammar/', views.grammar_async, name='grammar_async'),
-    path('send_summary/', views.send_summary, name='send_summary'),
+    path('grammar_async/', views.grammar_async, name='grammar_async'),
+    path('summary_async/', views.summary_async, name='summary_async'),
+    path('translation_async/', views.translation_async, name='translation_async'),
 ]

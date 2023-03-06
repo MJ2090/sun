@@ -254,7 +254,7 @@ def signup(request):
     return render(request, 'embedding/signup.html', ret)
 
 
-def translation(request):
+def send_translation(request):
     ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -307,6 +307,22 @@ def image(request):
     return render(request, 'embedding/image.html', ret)
 
 
+def translation_async(request):
+    original_text = request.POST.get('original_text', '')
+    openai_response = run_it_4(original_text, model='text-davinci-003')
+    translated_text = openai_response["choices"][0]["text"]
+    record_consumption(
+        request, sc.MODEL_TYPES_TRANSLATE, openai_response)
+    print(translated_text)
+    return HttpResponse(translated_text.strip())
+
+
+def translation(request):
+    ret = get_basic_data(request)
+    ret['form'] = TranslationForm()
+    return render(request, 'embedding/translation.html', ret)
+
+
 def grammar_async(request):
     original_text = request.POST.get('original_text', '')
     openai_response = run_it_5(original_text, model='text-davinci-003')
@@ -323,14 +339,14 @@ def grammar(request):
     return render(request, 'embedding/grammar.html', ret)
 
 
-def send_summary(request):
+def summary_async(request):
     original_text = request.POST.get('original_text', '')
     openai_response = run_it_6(original_text, model='text-davinci-003')
     summary_text = openai_response["choices"][0]["text"]
     record_consumption(
         request, sc.MODEL_TYPES_SUMMARY, openai_response)
     print(summary_text)
-    return HttpResponse(summary_text)
+    return HttpResponse(summary_text.strip())
 
 
 def summary(request):
