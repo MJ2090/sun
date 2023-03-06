@@ -11,16 +11,27 @@
 
 {% block main %}
 <div class="container px-4 py-5">
+  <h4 class="mb-3">Summary of a text</h4>
+  <form class="needs-validation" novalidate="" action="/summary/" method="post" onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
+
+    <div class="col-md-4 col-lg-3">
+      <div class="row g-3">
+        <div class="instruction">
+          <p>Instructions:</p>
+          <p>1. Provide some text to the input panel.</p>
+          <p>2. Press OK.</p>
+        </div>
+      </div>
+    </div>
+
   <div class="col-md-7 col-lg-8">
-    <h4 class="mb-3">Summary of a text</h4>
     <div class="instruction">
       <p>Instructions:</p>
       <p>1. Provide a correct secret word. Ask MJ if you don't have one.</p>
       <p>2. Provide some text to the input panel.</p>
       <p>3. Press OK.</p>
     </div>
-    <form class="needs-validation" novalidate="" action="/summary/" method="post" onsubmit="return confirmSubmit(this)">
-      {% csrf_token %}
       <div class="row g-3">
 
         <div class="col-12">

@@ -28,7 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = ["52.10.1.27",
                  "34.222.45.176",
                  "127.0.0.1",
-                 "asuperdomain.com"]
+                 "asuperdomain.com",
+                 "www.asuperdomain.com"]
 
 
 # Application definition
