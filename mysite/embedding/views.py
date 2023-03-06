@@ -307,30 +307,19 @@ def image(request):
     return render(request, 'embedding/image.html', ret)
 
 
+def grammar_async(request):
+    original_text = request.POST.get('original_text', '')
+    openai_response = run_it_5(original_text, model='text-davinci-003')
+    fixed_text = openai_response["choices"][0]["text"]
+    record_consumption(
+        request, sc.MODEL_TYPES_GRAMMAR, openai_response)
+    print(fixed_text)
+    return HttpResponse(fixed_text)
+
+
 def grammar(request):
     ret = get_basic_data(request)
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = GrammarForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            original_text = form.cleaned_data["text"]
-            openai_response = run_it_5(original_text, model='text-davinci-003')
-            fixed_text = openai_response["choices"][0]["text"]
-            print(fixed_text)
-            ret['fixed_text'] = fixed_text
-            record_consumption(
-                request, sc.MODEL_TYPES_GRAMMAR, openai_response)
-            return render(request, 'embedding/answer.html', ret)
-        else:
-            print("Data not clean!")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = GrammarForm()
-
-    ret['form'] = form
+    ret['form'] =  GrammarForm()
     return render(request, 'embedding/grammar.html', ret)
 
 
