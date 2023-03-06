@@ -208,7 +208,7 @@ def signin(request):
                     next_url = '/'
                 return HttpResponseRedirect(next_url)
             else:
-                return render(request, 'embedding/error.html', {'Your account does not exist or has been accidently deleted, sorry about that.'})
+                return render(request, 'embedding/error.html', {'error_message': 'Your account does not exist or has been accidently deleted, sorry about that.'})
         else:
             print("Data not clean!")
 
