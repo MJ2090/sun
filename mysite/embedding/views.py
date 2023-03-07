@@ -14,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
-from embedding.models import TokenConsumption, PromptModel
+from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string, get_basic_data
@@ -39,9 +39,11 @@ def embedding_training_async(request):
     name = request.POST.get('name', '')
     print(8888, text, name)
     openai_response = run_it_3_training(text)
-    answer = openai_response
-    print(answer)
-    return HttpResponse('new model has finished training.')
+    new_model = EmbeddingModel.objects.get_or_create(
+        name=name, owner=request.owner, uuid=openai_response)
+    new_model.save()
+    print(openai_response)
+    return HttpResponse('new model with uuid ' + openai_response + 'has finished training.')
 
 
 def embedding_question(request):
