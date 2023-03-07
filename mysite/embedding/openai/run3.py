@@ -25,7 +25,6 @@ def run_it_3(my_text, qs):
 
 
 def run_it_3_question(question, random_str):
-    print(question, 'is sssssss')
     file_path = 'processed_csv/' + random_str + '.csv'
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
@@ -36,6 +35,9 @@ def run_it_3_question(question, random_str):
 def run_it_3_training(text):
     my_texts = [("embedding", text)]
     my_df = df.get_df(my_texts)
+    my_df.head()
+    print(my_df)
+    print(my_df.head())
     random_str = ''.join(secrets.choice(
         string.ascii_uppercase + string.digits) for i in range(10))
     
