@@ -30,7 +30,7 @@ def run_it_3_question(question, random_str):
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     print(3333, my_df)
-    ans = robot.answer_question(my_df, question="why")
+    ans = robot.answer_question(my_df, question=question)
     return ans
 
 
