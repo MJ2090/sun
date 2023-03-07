@@ -51,7 +51,7 @@ def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()
     if not request.user.is_authenticated:
-        ret['error'] = 'No Q&A bot found, please login and create new models.'
+        ret['error_msg'] = 'No Q&A bot found, please login and create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
     models = EmbeddingModel.objects.filter(owner=request.user)
     ret['form'].fields['character'].choices = []
