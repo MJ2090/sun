@@ -26,7 +26,7 @@ def run_it_3(my_text, qs):
 def run_it_3_question(question, random_str):
     print(question, 'is sssssss')
     file_path = 'processed_csv/' + random_str + '.csv'
-    my_df = pd.read_csv(file_path)
+    my_df = pd.read_csv(file_path, index_col=0)
     ans = robot.answer_question(my_df, question="why")
     return ans
 
