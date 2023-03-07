@@ -21,8 +21,11 @@ def run_it_3(my_text, qs):
     return ans
 
 
-def run_it_3_question(question, character):
-    return "ssss"
+def run_it_3_question(question, random_str):
+    file_path = 'processed_csv/' + random_str + '.csv'
+    my_df = df.read_csv(file_path)
+    ans = robot.answer_question(my_df, question=question)
+    return ans
 
 
 def run_it_3_training(text):
