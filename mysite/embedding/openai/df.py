@@ -1,5 +1,5 @@
 ################################################################################
-### Step 1
+# Step 1
 ################################################################################
 
 import os
@@ -16,7 +16,7 @@ max_tokens = 500
 
 
 ################################################################################
-### Step 5
+# Step 5
 ################################################################################
 
 def remove_newlines(serie):
@@ -27,7 +27,7 @@ def remove_newlines(serie):
     return serie
 
 ################################################################################
-### Step 6
+# Step 6
 ################################################################################
 
 
@@ -43,7 +43,8 @@ def generate_scraped_csv(my_texts=None):
                 text = f.read()
 
                 # Omit the first 11 lines and the last 4 lines, then replace -, _, and #update with spaces.
-                texts.append((file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
+                texts.append(
+                    (file[11:-4].replace('-', ' ').replace('_', ' ').replace('#update', ''), text))
 
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
@@ -55,7 +56,7 @@ def generate_scraped_csv(my_texts=None):
 
 
 ################################################################################
-### Step 8
+# Step 8
 ################################################################################
 
 
@@ -65,7 +66,8 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
     sentences = text.split('. ')
 
     # Get the number of tokens for each sentence
-    n_tokens = [len(tokenizer.encode(" " + sentence)) for sentence in sentences]
+    n_tokens = [len(tokenizer.encode(" " + sentence))
+                for sentence in sentences]
 
     chunks = []
     tokens_so_far = 0
@@ -96,7 +98,7 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
 def generate_embedding_csv():
     ################################################################################
-    ### Step 7
+    # Step 7
     ################################################################################
 
     def myf(x):
@@ -136,7 +138,7 @@ def generate_embedding_csv():
             shortened.append(row[1]['text'])
 
     ################################################################################
-    ### Step 9
+    # Step 9
     ################################################################################
 
     df = pd.DataFrame(shortened, columns=['text'])
@@ -144,7 +146,7 @@ def generate_embedding_csv():
     df.n_tokens.hist()
 
     ################################################################################
-    ### Step 10
+    # Step 10
     ################################################################################
 
     # Note that you may run into rate limit issues depending on how many files you try to embed
@@ -156,7 +158,7 @@ def generate_embedding_csv():
     df.head()
 
     ################################################################################
-    ### Step 11
+    # Step 11
     ################################################################################
 
     df = pd.read_csv('processed/embeddings.csv', index_col=0)
@@ -166,7 +168,7 @@ def generate_embedding_csv():
     return df
 
 
-def get_df(my_texts = None):
-    crawl.crawl(full_url)
+def get_df(my_texts=None):
+    # crawl.crawl(full_url)
     generate_scraped_csv(my_texts)
     return generate_embedding_csv()
