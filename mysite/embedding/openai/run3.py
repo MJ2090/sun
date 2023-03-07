@@ -28,6 +28,7 @@ def run_it_3_question(question, random_str):
     file_path = 'processed_csv/' + random_str + '.csv'
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
+    print(5555, my_df)
     ans = robot.answer_question(my_df, question="why")
     return ans
 
