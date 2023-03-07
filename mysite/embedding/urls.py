@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # ex: /embedding/
+    # ex: /summary/
     path('', views.home, name='index'),
     path('summary/', views.summary, name='summary'),
     path('grammar/', views.grammar, name='grammar'),
@@ -16,7 +16,6 @@ urlpatterns = [
          name='embedding_training'),
     path('embedding_training_async/', views.embedding_training_async,
          name='embedding_training_async'),
-    path('embedding/', views.embedding, name='embedding'),
     path('answer/', views.answer, name='answer'),
     path('about/', views.about, name='about'),
     path('settings/', views.settings, name='settings'),

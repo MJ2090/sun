@@ -62,35 +62,6 @@ def embedding_question_async(request):
     return HttpResponse(answer.strip())
 
 
-def embedding(request):
-    ret = get_basic_data(request)
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = TrainingForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            my_text = form.cleaned_data["message"]
-            qs = [form.cleaned_data["q1"]]
-            if "q2" in form.cleaned_data and form.cleaned_data["q2"] != "":
-                qs.append(form.cleaned_data["q2"])
-            if "q3" in form.cleaned_data and form.cleaned_data["q3"] != "":
-                qs.append(form.cleaned_data["q3"])
-            if "q4" in form.cleaned_data and form.cleaned_data["q4"] != "":
-                qs.append(form.cleaned_data["q4"])
-            ans = run_it_3(my_text, qs)
-            ret['ans'] = ans
-            return render(request, 'embedding/answer.html', ret)
-        else:
-            print("Data not clean!")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = TrainingForm()
-
-    return render(request, 'embedding/embedding.html', {'form': form, 'aa': 'sssss'})
-
-
 def add_prompt_model(request):
     ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
