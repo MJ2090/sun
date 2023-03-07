@@ -43,7 +43,6 @@ def embedding_training_async(request):
     openai_response = run_it_3_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
-    new_model.save()
     print(openai_response)
     return HttpResponse('new model with uuid ' + openai_response + 'has finished training.')
 
