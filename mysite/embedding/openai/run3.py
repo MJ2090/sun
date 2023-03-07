@@ -36,8 +36,8 @@ def run_it_3_training(text):
     my_texts = [("embedding", text)]
     my_df = df.get_df(my_texts)
     my_df.head()
-    print(my_df)
-    print(my_df.head())
+    print(1111, my_df)
+    print(2222, my_df.head())
     random_str = ''.join(secrets.choice(
         string.ascii_uppercase + string.digits) for i in range(10))
     
