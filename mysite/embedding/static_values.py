@@ -53,7 +53,7 @@ IMAGE_TYPES =(
     (IMAGE_TYPES_DEFAULT, 'Default style'),
     (IMAGE_TYPES_PICASSO, 'Picasso'),
     (IMAGE_TYPES_MONET, 'Monet'),
-    (IMAGE_TYPES_VANGOGH, 'Vincent van Gog'),
+    (IMAGE_TYPES_VANGOGH, 'Vincent van Gogh'),
     (IMAGE_TYPES_DALI, 'Salvador Dalí'),
     (IMAGE_TYPES_MICHELANGELO, 'Michelangelo'),
     (IMAGE_TYPES_COMICS, 'comics'),
