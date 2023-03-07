@@ -10,12 +10,6 @@ class TrainingForm(forms.Form):
 
 
 class QuestionForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(QuestionForm, self).__init__(*args, **kwargs)
-        self.fields['character'] = forms.ChoiceField(
-            widget=forms.Select(attrs={'class': 'character form-select', }),
-            choices=[(o.uuid, o.name) for o in EmbeddingModel.objects.all()]
-        )
     character = forms.ChoiceField(required=True, choices=(), widget=forms.Select(
         attrs={'class': 'character form-select', }))
     question = forms.CharField(required=True, max_length=200, widget=forms.Textarea(

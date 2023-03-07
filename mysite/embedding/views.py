@@ -50,6 +50,13 @@ def embedding_training_async(request):
 def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()
+    if not request.user.is_authenticated:
+        ret['error'] = 'No Q&A bot found, please login and create new models.'
+        return render(request, 'embedding/embedding_question.html', ret)
+    models = EmbeddingModel.objects.filter(owner=request.user)
+    ret['form'].fields['character'].choices = []
+    for my_model in models:
+        ret['form'].fields['character'].choices.append(my_model.uuid, my_model.name)
     return render(request, 'embedding/embedding_question.html', ret)
 
 
