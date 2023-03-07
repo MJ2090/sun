@@ -1,4 +1,8 @@
 .embedding-question {
+    height: 100px;
+}
+
+.embedding-answer {
     height: 300px;
 }
 
