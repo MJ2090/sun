@@ -16,6 +16,7 @@ def run_it_3(my_text, qs):
     for q in qs:
         tmp = {"Question": q, "Answer": robot.answer_question(
             my_df, question=q)}
+        print('originalllllll', my_df, q)
         ans.append(tmp)
 
     print(ans)
