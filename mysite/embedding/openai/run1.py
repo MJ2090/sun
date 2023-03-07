@@ -1,5 +1,6 @@
 import df
 import robot
+import numpy as np
 
 
 ################################################################################
@@ -7,6 +8,7 @@ import robot
 ################################################################################
 def run_it_1():
     my_df = df.get_df()
+    my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     qs = ["What day is it?",
           "What is Done?",
           "What is ADHD?",

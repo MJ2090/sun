@@ -1,5 +1,6 @@
 import df
 import robot
+import numpy as np
 
 
 ################################################################################
@@ -44,6 +45,7 @@ CEO Kris Marszalek said in a blog post that the crypto exchange grew “ambitiou
     my_texts = [("ss", my_text)]
 
     my_df = df.get_df(my_texts)
+    my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     qs = ["What day is it?",
           "Which company have laid off people?",
           "How many people are laid off by Amazon?",

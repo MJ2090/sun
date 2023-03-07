@@ -13,6 +13,7 @@ import numpy as np
 def run_it_3(my_text, qs):
     my_texts = [("embedding", my_text)]
     my_df = df.get_df(my_texts)
+    my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     ans = []
     for q in qs:
         tmp = {"Question": q, "Answer": robot.answer_question(
@@ -50,4 +51,5 @@ def run_it_3_training(text):
 
     my_df = pd.read_csv(file_path, index_col=0)
     print(2222, my_df)
+    random_str = ''
     return random_str
