@@ -2,6 +2,7 @@ import embedding.openai.df as df
 import embedding.openai.robot as robot
 import secrets
 import string
+import pandas as pd
 import os
 
 
@@ -23,7 +24,7 @@ def run_it_3(my_text, qs):
 
 def run_it_3_question(question, random_str):
     file_path = 'processed_csv/' + random_str + '.csv'
-    my_df = df.read_csv(file_path)
+    my_df = pd.read_csv(file_path)
     ans = robot.answer_question(my_df, question=question)
     return ans
 
