@@ -30,12 +30,14 @@
       </div>
     </div>
 
+    {% if error_msg %}
     <div class="col-md-7 col-lg-8">
-      {% if error_msg %}
       <div class="row g-3">
         <p>{{ error_msg }}</p>
       </div>
-      {% else %}
+    </div>
+    {% else %}
+    <div class="col-md-7 col-lg-8">
       <div class="row g-3">
         <div class="col-12">
           <label for="character" class="form-label">Choose Q&A model</label>
@@ -59,11 +61,12 @@
           </div>
         </div>
       </div>
-      {% endif %}
 
       <hr class="my-4">
 
       <button class="send-button w-100 btn btn-primary btn-md" type="submit">GO</button>
+    </div>
+    {% endif %}
   </form>
 </div>
 </div>
