@@ -38,7 +38,7 @@ def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
     print(8888, text, name)
-    openai_response = run_it_3_training(name, text, request)
+    openai_response = run_it_3_training(text)
     answer = openai_response
     print(answer)
     return HttpResponse('new model has finished training.')
