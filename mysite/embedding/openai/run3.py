@@ -39,17 +39,15 @@ def run_it_3_training(text):
     my_df = df.get_df(my_texts)
     my_df.head()
     print(1111, my_df)
-    # random_str = ''.join(secrets.choice(
-    #     string.ascii_uppercase + string.digits) for i in range(10))
-    
-    # file_path = 'processed_csv/' + random_str + '.csv'
-    # if not os.path.exists('processed_csv/'):
-    #     os.mkdir('processed_csv')
-    file_path = 'sss.csv'
-    my_df.to_csv(file_path)
+    random_str = ''.join(secrets.choice(
+        string.ascii_uppercase + string.digits) for i in range(10))
 
+    file_path = 'processed_csv/' + random_str + '.csv'
+    if not os.path.exists('processed_csv/'):
+        os.mkdir('processed_csv')
+
+    my_df.to_csv(file_path)
 
     my_df = pd.read_csv(file_path, index_col=0)
     print(2222, my_df)
-    random_str = ''
     return random_str
