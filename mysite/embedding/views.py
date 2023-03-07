@@ -54,9 +54,15 @@ def embedding_question(request):
         ret['error_msg'] = 'No Q&A bot found, please login and create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
     models = EmbeddingModel.objects.filter(owner=request.user)
+
+    if len(models) == 0:
+        ret['error_msg'] = 'No Q&A bot found, please create new models.'
+        return render(request, 'embedding/embedding_question.html', ret)
+
     ret['form'].fields['character'].choices = []
     for my_model in models:
-        ret['form'].fields['character'].choices.append((my_model.uuid, my_model.name))
+        ret['form'].fields['character'].choices.append(
+            (my_model.uuid, my_model.name))
     return render(request, 'embedding/embedding_question.html', ret)
 
 
