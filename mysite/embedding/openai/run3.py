@@ -45,4 +45,9 @@ def run_it_3_training(text):
     if not os.path.exists('processed_csv/'):
         os.mkdir('processed_csv')
     my_df.to_csv(file_path)
+
+
+    my_df = pd.read_csv(file_path, index_col=0)
+    print(3333, my_df)
+    print(4444, my_df.head())
     return random_str
