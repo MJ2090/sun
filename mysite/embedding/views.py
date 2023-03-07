@@ -28,12 +28,14 @@ def home(request):
     return render(request, 'embedding/home.html', ret)
 
 
+@login_required
 def embedding_training(request):
     ret = get_basic_data(request)
     ret['form'] = TrainingForm()
     return render(request, 'embedding/embedding_training.html', ret)
 
 
+@login_required
 def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
