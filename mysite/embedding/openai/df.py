@@ -160,6 +160,8 @@ def generate_embedding_csv():
     ################################################################################
 
     df = pd.read_csv('processed/embeddings.csv', index_col=0)
+
+    print(4444, df)
     df['embeddings'] = df['embeddings'].apply(eval).apply(np.array)
 
     df.head()

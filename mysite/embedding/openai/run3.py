@@ -28,7 +28,7 @@ def run_it_3_question(question, random_str):
     file_path = 'processed_csv/' + random_str + '.csv'
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
-    print(5555, my_df)
+    print(3333, my_df)
     ans = robot.answer_question(my_df, question="why")
     return ans
 
@@ -38,7 +38,6 @@ def run_it_3_training(text):
     my_df = df.get_df(my_texts)
     my_df.head()
     print(1111, my_df)
-    print(2222, my_df.head())
     random_str = ''.join(secrets.choice(
         string.ascii_uppercase + string.digits) for i in range(10))
     
@@ -49,6 +48,5 @@ def run_it_3_training(text):
 
 
     my_df = pd.read_csv(file_path, index_col=0)
-    print(3333, my_df)
-    print(4444, my_df.head())
+    print(2222, my_df)
     return random_str
