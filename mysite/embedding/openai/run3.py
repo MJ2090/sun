@@ -29,5 +29,5 @@ def run_it_3_training(text):
     my_df = df.get_df(my_texts)
     file_name = ''.join(secrets.choice(
         string.ascii_uppercase + string.digits) for i in range(10))
-    my_df.to_csv(file_name + '.csv')
+    my_df.to_csv('processed_csv/' + file_name + '.csv')
     return file_name
