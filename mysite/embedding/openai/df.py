@@ -160,7 +160,10 @@ def generate_embedding_csv():
     ################################################################################
 
     df = pd.read_csv('processed/embeddings.csv', index_col=0)
-    df['embeddings'] = df['embeddings'].apply(eval).apply(np.array)
+    print(811, df)
+    df.to_csv('d32222.csv')
+    df = pd.read_csv('d32222.csv', index_col=0)
+    print(711, df)
 
     df.head()
 
