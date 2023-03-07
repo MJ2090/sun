@@ -44,7 +44,7 @@ def embedding_training_async(request):
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
     print(openai_response)
-    return HttpResponse('new model with uuid ' + openai_response + ' has finished training.')
+    return HttpResponse('new model ' + name + ' has finished training.')
 
 
 def embedding_question(request):
