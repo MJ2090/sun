@@ -70,11 +70,11 @@ function async_call() {
             $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
             if (enable_speech[0].checked && audio_address != '') {
-                let source = $("source[name='source'");
+                let source = $("source[name='source']");
                 source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
-                let audio = $("audio[name='audio'");
+                let audio = $("audio[name='audio']");
                 audio[0].load();
-                audio[0].play();
+                //audio[0].play();
             }
         },
     })
@@ -94,6 +94,10 @@ function init() {
 
     $("input[name='show_controls']").click(function () {
         let audio = $("audio[name='audio'").toggle(this.checked);
+    });
+
+    $("audio[name='audio'").on('canplaythrough', function () {
+        this.play();
     });
 
     $("input[name='message']").keydown(function (e) {
