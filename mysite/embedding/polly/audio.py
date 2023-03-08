@@ -35,8 +35,6 @@ def generate_audio(text, speaker):
         # ensure the close method of the stream object will be called automatically
         # at the end of the with statement's scope.
         with closing(response["AudioStream"]) as stream:
-            print('pppppppp', os.getcwd(), "speech.mp3")
-
             random_str = ''.join(secrets.choice(
                 string.ascii_uppercase + string.digits) for i in range(10))
             output = os.path.join(
