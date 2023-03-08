@@ -122,14 +122,12 @@ def sendchat_t(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    if character=='3-year-old guy':
+    if character == '3-year-old guy':
         speaker = 'Ivy'
     elif character == 'Therapist':
         speaker = 'Salli'
-    elif character == '我讲中文':
-        speaker = 'Zhiyu'
     else:
-        speaker = 'Ruth'
+        speaker = 'Zhiyu'
     if enable_speech == 'true':
         audio_address = generate_audio(ai_message, speaker)
     else:
