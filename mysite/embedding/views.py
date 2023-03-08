@@ -20,6 +20,7 @@ from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string, get_basic_data
 from embedding.models import UserProfile
+from embedding.models import Contact
 import embedding.static_values as sc
 import json
 
@@ -197,6 +198,8 @@ def contact(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # name = form.cleaned_data["username"]
+            data = Contact(username=form.cleaned_data["username"], email=form.cleaned_data["email"], message=form.cleaned_data["message"])
+            data.save()
             print(form.cleaned_data, 88888)
             # ...
             # redirect to a new URL:

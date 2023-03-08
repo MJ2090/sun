@@ -64,3 +64,11 @@ class EmbeddingModel(models.Model):
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
+    
+    
+class Contact(models.Model):        
+    username = models.CharField(max_length=100, default='')
+    email = models.EmailField(max_length=100, default='')
+    message = models.CharField(max_length=100, default='')
+    def __str__(self):
+        return self.username
