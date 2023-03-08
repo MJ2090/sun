@@ -12,7 +12,7 @@ from tempfile import gettempdir
 relative_path = '/embedding/static/embedding/media'
 
 
-def generate_audio(text):
+def generate_audio(text, speaker):
     # Create a client using the credentials and region defined in the [adminuser]
     # section of the AWS credentials file (~/.aws/credentials).
     session = Session(profile_name="default")
@@ -21,7 +21,8 @@ def generate_audio(text):
     try:
         # Request speech synthesis
         response = polly.synthesize_speech(Text=text, OutputFormat="mp3",
-                                           VoiceId="Joanna")
+                                           VoiceId=speaker,
+                                           Engine='neural')
     except (BotoCoreError, ClientError) as error:
         # The service returned an error, exit gracefully
         print(error)
