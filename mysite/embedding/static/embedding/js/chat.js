@@ -86,11 +86,14 @@ function init() {
     });
 
     $("input[name='enable_speech']").click(function () {
-        console.log(8888);
         if (!this.checked) {
             let audio = $("audio[name='audio'");
             audio[0].pause();
         }
+    });
+
+    $("input[name='show_controls']").click(function () {
+        let audio = $("audio[name='audio'").toggle(this.checked);
     });
 
     $("input[name='message']").keydown(function (e) {

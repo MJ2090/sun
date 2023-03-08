@@ -65,9 +65,13 @@
             <div class="bounce3"></div>
           </div>
         </div>
-        <div class="form-check form-switch">
-          <label class="form-check-label" for="enable_speech">AI Speech</label>
+        <div class="col-md-4 col-4 form-check form-switch">
+          <label class="form-check-label" for="enable_speech">Enable AI speech</label>
           {{ form.enable_speech }}
+        </div>
+        <div class="col-md-4 col-4 form-check form-switch">
+          <label class="form-check-label" for="show_controls">Show control panel</label>
+          <input type="checkbox" name="show_controls" class="form-check-input">
         </div>
         <div class="input-group">
           {{ form.message }}
