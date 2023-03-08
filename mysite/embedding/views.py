@@ -106,7 +106,7 @@ def sendchat_t(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
-    enable_speech = request.POST.get('enable_speech', False)
+    enable_speech = request.POST.get('enable_speech', '')
 
     my_m = PromptModel.objects.get(name=character)
     messages = json.loads(my_m.history)
@@ -130,7 +130,7 @@ def sendchat_t(request):
         speaker = 'Zhiyu'
     else:
         speaker = 'Ruth'
-    if enable_speech:
+    if enable_speech == 'true':
         audio_address = generate_audio(ai_message, speaker)
     else:
         audio_address = ''
