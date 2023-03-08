@@ -106,7 +106,7 @@ def sendchat_t(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
-    enable_speech = request.POST['enable_speech']
+    enable_speech = request.POST.get('enable_speech', False)
 
     my_m = PromptModel.objects.get(name=character)
     messages = json.loads(my_m.history)
