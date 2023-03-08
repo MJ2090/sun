@@ -12,6 +12,7 @@ from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
+from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
@@ -119,6 +120,9 @@ def sendchat_t(request):
     openai_response = run_it_9(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
+
+    generate_audio(ai_message)
+
     return HttpResponse(ai_message)
 
 
