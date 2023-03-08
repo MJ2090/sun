@@ -33,7 +33,7 @@ def generate_audio(text):
         # at the end of the with statement's scope.
         with closing(response["AudioStream"]) as stream:
             print('pppppppp', os.getcwd(), "speech.mp3")
-            output = os.path.join(os.getcwd(), relative_path, "speech.mp3")
+            output = os.path.join(os.getcwd()+relative_path, "speech.mp3")
 
             try:
                 # Open a file for writing the output as a binary stream
