@@ -8,7 +8,7 @@ import subprocess
 from tempfile import gettempdir
 
 
-def generate_audio():
+def generate_audio(text):
     # Create a client using the credentials and region defined in the [adminuser]
     # section of the AWS credentials file (~/.aws/credentials).
     session = Session(profile_name="default")
@@ -16,7 +16,7 @@ def generate_audio():
 
     try:
         # Request speech synthesis
-        response = polly.synthesize_speech(Text="Hello world!", OutputFormat="mp3",
+        response = polly.synthesize_speech(Text=text, OutputFormat="mp3",
                                            VoiceId="Joanna")
     except (BotoCoreError, ClientError) as error:
         # The service returned an error, exit gracefully
