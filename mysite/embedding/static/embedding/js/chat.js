@@ -52,7 +52,7 @@ function async_call() {
             history: history,
             csrfmiddlewaretoken: csrf.val(),
             model: model.val(),
-            enable_speech: enable_speech.val(),
+            enable_speech: enable_speech[0].checked,
         },
         success: function (response) {
             data = JSON.parse(response);
