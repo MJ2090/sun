@@ -60,7 +60,6 @@ function async_call() {
             audio_address = data.audio_address
             new_msg.prop("disabled", false);
             new_msg.focus();
-            $('.word-count').text(ai_message.length + ' chars');
             let content = $('.message-container');
 
             $("div[name='spinner").hide();
