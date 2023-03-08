@@ -16,3 +16,4 @@ class ChatForm(forms.Form):
                                  attrs={'class': 'form-control', 'placeholder': "Type your thoughts"}))
     character = forms.ChoiceField(required=True, choices=sc.CHAT_TYPES, widget=forms.Select(attrs={'class': 'character form-select', }))
     training_model = forms.ChoiceField(required=True, choices=sc.TRAINING_MODELS, widget=forms.Select(attrs={'class': 'character form-select', }))
+    enable_speech = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-check-input', }))

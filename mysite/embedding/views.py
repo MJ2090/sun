@@ -106,6 +106,7 @@ def sendchat_t(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
+    enable_speech = request.POST['enable_speech']
 
     my_m = PromptModel.objects.get(name=character)
     messages = json.loads(my_m.history)
@@ -121,9 +122,12 @@ def sendchat_t(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    generate_audio(ai_message)
+    if enable_speech:
+        audio_address = generate_audio(ai_message)
+    else:
+        audio_address = ''
 
-    return HttpResponse(ai_message)
+    return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
 def sendchat(request):

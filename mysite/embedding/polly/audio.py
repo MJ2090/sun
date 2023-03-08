@@ -4,11 +4,13 @@ from botocore.exceptions import BotoCoreError, ClientError
 from contextlib import closing
 import os
 import sys
-import subprocess
+import secrets
+import string
 from tempfile import gettempdir
 
 
 relative_path = '/embedding/static/embedding/media'
+
 
 def generate_audio(text):
     # Create a client using the credentials and region defined in the [adminuser]
@@ -33,7 +35,11 @@ def generate_audio(text):
         # at the end of the with statement's scope.
         with closing(response["AudioStream"]) as stream:
             print('pppppppp', os.getcwd(), "speech.mp3")
-            output = os.path.join(os.getcwd()+relative_path, "speech.mp3")
+
+            random_str = ''.join(secrets.choice(
+                string.ascii_uppercase + string.digits) for i in range(10))
+            output = os.path.join(
+                os.getcwd()+relative_path, random_str + ".mp3")
 
             try:
                 # Open a file for writing the output as a binary stream
@@ -43,8 +49,9 @@ def generate_audio(text):
                 # Could not write to file, exit gracefully
                 print(error)
                 sys.exit(-1)
+            return random_str
 
     else:
         # The response didn't contain audio data, exit gracefully
         print("Could not stream audio")
-        sys.exit(-1)
+        return ''

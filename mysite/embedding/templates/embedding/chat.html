@@ -65,10 +65,17 @@
             <div class="bounce3"></div>
           </div>
         </div>
+        <div class="form-check form-switch">
+          <label class="form-check-label" for="enable_speech">Speech</label>
+          {{ form.enable_speech }}
+        </div>
         <div class="input-group">
           {{ form.message }}
           <button type="button" class="btn btn-primary send-button">Go</button>
         </div>
+        <audio class="hidden" name="audio" controlsid="music">
+          <source name="source" src="/static/embedding/media/FUQDLV79WO.mp3">
+        </audio>
       </div>
       <p class="chat-word-count">Text Length: <span class="word-count"></span></p>
     </div>

@@ -7,11 +7,12 @@ function async_call() {
     let model = $("select[name='training_model']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let model_selector = $("select[name='training_model']");
+    let enable_speech = $("input[name='enable_speech']");
     let old_msg = $(".dialogue");
     let history_msg = [];
     let role = "user";
-    for (let i=0; i<old_msg.length; i++) {
-        let dic = {"role": role, "content": old_msg.get(i).innerText}
+    for (let i = 0; i < old_msg.length; i++) {
+        let dic = { "role": role, "content": old_msg.get(i).innerText }
         history_msg.push(dic);
         if (role == "user") {
             role = "assistant";
@@ -20,9 +21,9 @@ function async_call() {
         }
     }
     let history = JSON.stringify(history_msg)
-    new_msg.prop( "disabled", true );
-    character.prop( "disabled", true );
-    model_selector.prop( "disabled", true );
+    new_msg.prop("disabled", true);
+    character.prop("disabled", true);
+    model_selector.prop("disabled", true);
     let new_msg_text = new_msg.val();
     new_msg.val('');
 
@@ -38,42 +39,63 @@ function async_call() {
 
     let ai_title = $("div[name='ai_title']").clone();
     content.append(ai_title.get(0));
-    
+
     $("div[name='spinner").show();
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     $.ajax({
         type: 'POST',
         url: "/sendchat/",
-        data: {message: new_msg_text,
+        data: {
+            message: new_msg_text,
             character: character.val(),
             history: history,
             csrfmiddlewaretoken: csrf.val(),
             model: model.val(),
+            enable_speech: enable_speech.val(),
         },
         success: function (response) {
-            new_msg.prop( "disabled", false );
+            data = JSON.parse(response);
+            ai_message = data.ai_message
+            audio_address = data.audio_address
+            new_msg.prop("disabled", false);
             new_msg.focus();
-            $('.word-count').text(response.length + ' chars');
+            $('.word-count').text(ai_message.length + ' chars');
             let content = $('.message-container');
 
             $("div[name='spinner").hide();
             let ai_msg = $("p[name='ai_msg']").clone();
-            ai_msg.text(response);
+            ai_msg.text(ai_message);
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
             $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+
+            if (enable_speech[0].checked && audio_address != '') {
+                let source = $("source[name='source'");
+                source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
+                let audio = $("audio[name='audio'");
+                audio[0].load();
+                audio[0].play();
+            }
         },
     })
 }
 
 function init() {
-    $('.send-button').click(function(){
+    $('.send-button').click(function () {
         async_call();
     });
 
-    $("input[name='message']").keydown(function(e){
-        if(e.keyCode == 13) {
+    $("input[name='enable_speech']").click(function () {
+        console.log(8888);
+        if (!this.checked) {
+            let audio = $("audio[name='audio'");
+            audio[0].pause();
+        }
+    });
+
+    $("input[name='message']").keydown(function (e) {
+        if (e.keyCode == 13) {
             async_call();
             return false;
         }
