@@ -16,3 +16,4 @@ class QuestionForm(forms.Form):
         attrs={'class': 'embedding-question form-control', 'placeholder': "Limit 200 chars"}))
     answer = forms.CharField(required=True, max_length=2000, widget=forms.Textarea(
         attrs={'disabled': 'true', 'class': 'embedding-answer form-control', 'placeholder': "..."}))
+    enable_speech = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-check-input', }))

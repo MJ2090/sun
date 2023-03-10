@@ -31,11 +31,8 @@
 .message-outer-container {
   height: 300px;
   overflow: scroll;
-}
-
-.message-outer-container {
   background-color: #f8f8f8;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 }
 
 .spinner {
