@@ -52,17 +52,19 @@ def embedding_training_async(request):
 def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()
+    owned_models = []
+    public_models = []
     if not request.user.is_authenticated:
         models_public = EmbeddingModel.objects.filter(is_public=True)
     else:
         owned_models = EmbeddingModel.objects.filter(owner=request.user)
-        models_public = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
+        public_models = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
 
     ret['form'].fields['character'].choices = []
     for my_model in owned_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
-    for my_model in models_public:
+    for my_model in public_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
         
