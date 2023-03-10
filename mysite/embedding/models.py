@@ -61,7 +61,7 @@ class EmbeddingModel(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
     name = models.CharField(max_length=20, default='')
     uuid = models.CharField(max_length=10, default='')
-    is_public = models.BooleanField(default=False)
+    #is_public = models.BooleanField(default=False)
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
