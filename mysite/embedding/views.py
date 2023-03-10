@@ -83,7 +83,7 @@ def embedding_question_async(request):
     print(answer)
 
     if enable_speech == 'true':
-        audio_address = generate_audio(answer, 'Zhiyu')
+        audio_address = generate_audio(answer, 'Stephen')
     else:
         audio_address = ''
     return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address}))
