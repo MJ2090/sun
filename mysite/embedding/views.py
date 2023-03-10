@@ -55,7 +55,7 @@ def embedding_question(request):
     owned_models = []
     public_models = []
     if not request.user.is_authenticated:
-        models_public = EmbeddingModel.objects.filter(is_public=True)
+        public_models = EmbeddingModel.objects.filter(is_public=True)
     else:
         owned_models = EmbeddingModel.objects.filter(owner=request.user)
         public_models = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
