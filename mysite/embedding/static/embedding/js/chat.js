@@ -74,7 +74,6 @@ function async_call() {
                 source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
                 let audio = $("audio[name='audio']");
                 audio[0].load();
-                //audio[0].play();
             }
         },
     })
