@@ -55,14 +55,15 @@ def embedding_question(request):
     if not request.user.is_authenticated:
         ret['error_msg'] = 'No Q&A bot found, please login and create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
-    models = EmbeddingModel.objects.filter(owner=request.user)
-
-    if len(models) == 0:
+    all_models = EmbeddingModel.objects.filter(owner=request.user)
+    models_public = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
+    all_models.extend(models_public)
+    if len(all_models) == 0:
         ret['error_msg'] = 'No Q&A bot found, please create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
 
     ret['form'].fields['character'].choices = []
-    for my_model in models:
+    for my_model in all_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
     return render(request, 'embedding/embedding_question.html', ret)
