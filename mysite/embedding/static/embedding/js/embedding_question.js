@@ -3,6 +3,7 @@ function async_call() {
   let character = $("select[name='character']");
   let csrf = $("input[name='csrfmiddlewaretoken']");
   let answer = $("textarea[name='answer']");
+  let enable_speech = $("input[name='enable_speech']");
   answer.val('');
   answer.hide();
   $("div[name='spinner").show();
@@ -13,6 +14,7 @@ function async_call() {
       question: question.val(),
       character: character.val(),
       csrfmiddlewaretoken: csrf.val(),
+      enable_speech: enable_speech[0].checked,
     },
     success: function (response) {
       let data = JSON.parse(response);
