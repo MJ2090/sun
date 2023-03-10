@@ -56,6 +56,13 @@ function init() {
     async_call();
     return false;
   });
+
+  $("textarea[name='question']").keydown(function (e) {
+    if (e.keyCode == 13) {
+        async_call();
+        return false;
+    }
+});
 }
 
 $(document).ready(function () {
