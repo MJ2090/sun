@@ -80,10 +80,7 @@ function async_call() {
 }
 
 function init() {
-    $('.send-button').click(function () {
-        async_call();
-    });
-
+    // Audio play starts
     $("input[name='enable_speech']").click(function () {
         if (!this.checked) {
             let audio = $("audio[name='audio'");
@@ -97,6 +94,11 @@ function init() {
 
     $("audio[name='audio'").on('canplaythrough', function () {
         this.play();
+    });
+    // Audio play ends
+
+    $('.send-button').click(function () {
+        async_call();
     });
 
     $("input[name='message']").keydown(function (e) {

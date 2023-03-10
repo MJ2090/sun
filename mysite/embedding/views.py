@@ -78,10 +78,15 @@ def embedding_question(request):
 def embedding_question_async(request):
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
-    openai_response = run_it_3_question(question, character)
-    answer = openai_response
+    enable_speech = request.POST.get('enable_speech', '')
+    answer = run_it_3_question(question, character)
     print(answer)
-    return HttpResponse(answer.strip())
+
+    if enable_speech == 'true':
+        audio_address = generate_audio(answer, 'Zhiyu')
+    else:
+        audio_address = ''
+    return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address}))
 
 
 def add_prompt_model(request):

@@ -15,14 +15,41 @@ function async_call() {
       csrfmiddlewaretoken: csrf.val(),
     },
     success: function (response) {
+      data = JSON.parse(response);
+      answer = data.answer
+      audio_address = data.audio_address
       answer.val(response);
       $("div[name='spinner").hide();
       answer.show();
+
+      if (enable_speech[0].checked && audio_address != '') {
+        let source = $("source[name='source']");
+        source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
+        let audio = $("audio[name='audio']");
+        audio[0].load();
+      }
     },
   })
 }
 
 function init() {
+  // Audio play starts
+  $("input[name='enable_speech']").click(function () {
+    if (!this.checked) {
+      let audio = $("audio[name='audio'");
+      audio[0].pause();
+    }
+  });
+
+  $("input[name='show_controls']").click(function () {
+    let audio = $("audio[name='audio'").toggle(this.checked);
+  });
+
+  $("audio[name='audio'").on('canplaythrough', function () {
+    this.play();
+  });
+  // Audio play ends
+
   $('.send-button').click(function () {
     async_call();
     return false;
