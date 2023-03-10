@@ -55,9 +55,9 @@ function async_call() {
             enable_speech: enable_speech[0].checked,
         },
         success: function (response) {
-            data = JSON.parse(response);
-            ai_message = data.ai_message
-            audio_address = data.audio_address
+            let data = JSON.parse(response);
+            let ai_message = data.ai_message
+            let audio_address = data.audio_address
             new_msg.prop("disabled", false);
             new_msg.focus();
             let content = $('.message-container');

@@ -15,10 +15,10 @@ function async_call() {
       csrfmiddlewaretoken: csrf.val(),
     },
     success: function (response) {
-      data = JSON.parse(response);
-      answer = data.answer
-      audio_address = data.audio_address
-      answer.val(response);
+      let data = JSON.parse(response);
+      let my_answer = data.answer
+      let audio_address = data.audio_address
+      answer.val(my_answer);
       $("div[name='spinner").hide();
       answer.show();
 
