@@ -52,11 +52,11 @@ def embedding_training_async(request):
 def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()
-    # if not request.user.is_authenticated:
-    #     ret['error_msg'] = 'No Q&A bot found, please login and create new models.'
-    #     return render(request, 'embedding/embedding_question.html', ret)
-    owned_models = EmbeddingModel.objects.filter(owner=request.user)
-    models_public = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
+    if not request.user.is_authenticated:
+        models_public = EmbeddingModel.objects.filter(is_public=True)
+    else:
+        owned_models = EmbeddingModel.objects.filter(owner=request.user)
+        models_public = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
 
     ret['form'].fields['character'].choices = []
     for my_model in owned_models:
