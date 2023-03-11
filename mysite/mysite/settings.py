@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ["52.10.1.27",
                  "34.222.45.176",
                  "127.0.0.1",
                  "asuperdomain.com",
-                 "www.asuperdomain.com"]
+                 "www.asuperdomain.com",
+                 "localhost"]
 
 
 # Application definition
@@ -133,3 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'embedding.UserProfile'
 
 LOGIN_URL='/signin/'
+
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
