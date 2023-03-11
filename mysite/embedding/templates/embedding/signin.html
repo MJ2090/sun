@@ -5,16 +5,15 @@
 <link rel="stylesheet" href="{% static 'embedding/css/signin.css' %}">
 {% endblock %}
 
+{% block privatejs %}
+{% load static %}
+<script src="{% static 'embedding/js/signin.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-    <div id="g_id_onload"
-     data-client_id="396220595083-r61knuu3e39e7sj5dg0lcto14gno54jj.apps.googleusercontent.com"
-     data-context="signin"
-     data-login_uri="https://127.0.0.1:8000"
-     data-itp_support="true">
-</div>
     <form class="needs-validation" novalidate="" action="/signin/" method="post">
       {% csrf_token %}
       <div style="display:none">{{ form.next }}</div>
@@ -34,8 +33,15 @@
 
       <button class="signin-btn w-100 btn btn-lg btn-primary" type="submit">Welcome back</button>
       <p class="terms">No account? <a href="/signup/">Sign up here</a></p>
-      <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
+
     </form>
+    <div id="g_id_onload" data-client_id="396220595083-r61knuu3e39e7sj5dg0lcto14gno54jj.apps.googleusercontent.com"
+      data-context="signin" data-ux_mode="redirect" data-callback="my_callback" data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with"
+      data-size="large" data-logo_alignment="left" data-width="300">
+    </div>
   </main>
 </body>
 {% endblock %}

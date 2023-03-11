@@ -136,3 +136,5 @@ AUTH_USER_MODEL = 'embedding.UserProfile'
 LOGIN_URL='/signin/'
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+CSRF_TRUSTED_ORIGINS = ['https://accounts.google.com']
