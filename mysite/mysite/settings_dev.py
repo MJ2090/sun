@@ -11,4 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from mysite.settings_base import *
 
+print('in dev.......')
+
 DEBUG = True

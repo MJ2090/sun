@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import socket
 
-if socket.gethostname() == 'ip-172-31-23-237':
+if socket.gethostname() == 'prod':
     from mysite.settings_prod import *
 else:
     from mysite.settings_dev import *
