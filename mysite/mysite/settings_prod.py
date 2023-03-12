@@ -17,4 +17,4 @@ DEBUG = False
 
 # Note: Replace 'supersecure.codes' with your domain
 STATIC_ROOT = "/var/www/asuperdomain.com/static"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "embedding/static"]
