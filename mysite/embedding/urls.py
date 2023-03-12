@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from . import views
 
@@ -35,3 +36,5 @@ urlpatterns = [
     path('translation_async/', views.translation_async, name='translation_async'),
     path('image_async/', views.image_async, name='image_async'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
