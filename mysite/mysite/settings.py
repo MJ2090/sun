@@ -13,6 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import socket
 
 if socket.gethostname() == 'ip-172-31-23-237':
-    from settings_prod import *
+    from mysite.settings_prod import *
 else:
-    from settings_dev import *
+    from mysite.settings_dev import *
