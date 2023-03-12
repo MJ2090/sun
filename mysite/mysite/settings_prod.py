@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from mysite.settings_base import *
 
 DEBUG = False
+SECURE_HSTS_SECONDS = 300
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
