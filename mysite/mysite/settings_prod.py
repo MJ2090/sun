@@ -14,3 +14,7 @@ from mysite.settings_base import *
 print('In prod............')
 
 DEBUG = False
+
+# Note: Replace 'supersecure.codes' with your domain
+STATIC_ROOT = "/var/www/asuperdomain.com/static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
