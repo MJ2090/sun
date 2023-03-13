@@ -23,3 +23,14 @@ SECURE_HSTS_SECONDS = 60  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mysite',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'zhuminjun1',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
