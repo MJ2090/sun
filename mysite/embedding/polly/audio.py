@@ -9,7 +9,7 @@ import string
 from tempfile import gettempdir
 
 
-relative_path = '/embedding/static/embedding/media'
+relative_path = '/var/www/asuperdomain.com/static/embedding/media'
 
 
 def generate_audio(text, speaker):
@@ -37,8 +37,7 @@ def generate_audio(text, speaker):
         with closing(response["AudioStream"]) as stream:
             random_str = ''.join(secrets.choice(
                 string.ascii_uppercase + string.digits) for i in range(10))
-            output = os.path.join(
-                os.getcwd()+relative_path, random_str + ".mp3")
+            output = os.path.join(relative_path, random_str + ".mp3")
 
             try:
                 # Open a file for writing the output as a binary stream

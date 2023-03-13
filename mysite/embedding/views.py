@@ -232,7 +232,6 @@ def signout(request):
 
 
 def signin(request):
-    print('88888888888888')
     ret = get_basic_data(request)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
