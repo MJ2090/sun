@@ -123,6 +123,7 @@ def add_prompt_model(request):
 def sendchat_home(request):
     new_message = request.POST['message']
     use_embedding = request.POST.get('use_embedding')
+    use_embedding = True
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'Done FAQ')
