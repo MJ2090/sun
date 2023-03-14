@@ -128,7 +128,7 @@ def sendchat_home(request):
         answer = run_it_3_question(new_message, 'Done FAQ')
         return HttpResponse(json.dumps({'ai_message': answer}))
 
-    my_m = PromptModel.objects.get(name='Common AI')
+    my_m = PromptModel.objects.get(name='Done FAQ')
     messages = json.loads(my_m.history)
     history = request.POST.get('history')
     my_json = json.loads(history)
