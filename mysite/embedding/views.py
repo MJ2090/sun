@@ -124,7 +124,7 @@ def sendchat_home(request):
     new_message = request.POST['message']
     use_embedding = request.POST.get('use_embedding')
     use_embedding = True
-    use_gpt = True
+    use_gpt = False
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'NX32LBMJ3E')
