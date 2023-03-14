@@ -127,7 +127,8 @@ def sendchat_home(request):
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'NX32LBMJ3E')
-        return HttpResponse(json.dumps({'ai_message': answer}))
+        if not answer == "I don't know":
+            return HttpResponse(json.dumps({'ai_message': answer}))
 
     my_m = PromptModel.objects.get(name='Done FAQ')
     messages = json.loads(my_m.history)
