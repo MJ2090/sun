@@ -28,6 +28,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('sendchat/', views.sendchat, name='sendchat'),
+    path('sendchat_home/', views.sendchat_home, name='sendchat_home'),
     path('image/', views.image, name='image'),
     path('collection/', views.collection, name='collection'),
     path('super/', views.add_prompt_model, name='add_prompt_model'),

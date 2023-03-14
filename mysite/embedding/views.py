@@ -12,6 +12,7 @@ from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
+from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
@@ -29,6 +30,7 @@ def home(request):
     ret = get_basic_data(request)
     if request.user.is_authenticated and request.user.username == 'z':
         ret['enable_home_chat'] = True
+        ret['home_chat_form'] = HomeChatForm()
     return render(request, 'embedding/home.html', ret)
 
 
@@ -43,7 +45,7 @@ def embedding_training(request):
 def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
-    print(8888, text, name)
+    print('embedding_training_async', text, name)
     openai_response = run_it_3_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
@@ -116,6 +118,30 @@ def add_prompt_model(request):
         form = PromptModelForm()
 
     return render(request, 'embedding/super.html', {'form': form, })
+
+
+def sendchat_home(request):
+    new_message = request.POST['message']
+    use_embedding = request.POST.get('use_embedding')
+
+    if use_embedding:
+        answer = run_it_3_question(new_message, 'Done FAQ')
+        return HttpResponse(json.dumps({'ai_message': answer}))
+
+    my_m = PromptModel.objects.get(name='Common AI')
+    messages = json.loads(my_m.history)
+    history = request.POST.get('history')
+    my_json = json.loads(history)
+    messages.extend(my_json)
+    messages.append({"role": "user", "content": new_message})
+
+    print("Msg sent to openai: ", messages)
+
+    openai_response = run_it_9(messages, model='gpt-3.5-turbo')
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
+
+    return HttpResponse(json.dumps({'ai_message': ai_message}))
 
 
 def sendchat_t(request):

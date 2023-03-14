@@ -6,6 +6,8 @@ import pandas as pd
 import os
 import numpy as np
 
+relative_path = '/var/www/asuperdomain.com/static/embedding/data/'
+
 
 ################################################################################
 # Step 13
@@ -26,7 +28,7 @@ def run_it_3(my_text, qs):
 
 
 def run_it_3_question(question, random_str):
-    file_path = 'processed_csv/' + random_str + '.csv'
+    file_path = relative_path + random_str + '.csv'
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     ans = robot.answer_question(my_df, question=question)
@@ -40,9 +42,9 @@ def run_it_3_training(text):
     random_str = ''.join(secrets.choice(
         string.ascii_uppercase + string.digits) for i in range(10))
 
-    file_path = 'processed_csv/' + random_str + '.csv'
-    if not os.path.exists('processed_csv/'):
-        os.mkdir('processed_csv')
+    file_path = relative_path + random_str + '.csv'
+    if not os.path.exists(relative_path):
+        os.mkdir(relative_path)
 
     my_df.to_csv(file_path)
 

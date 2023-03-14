@@ -3,11 +3,7 @@ function async_call() {
     if (new_msg.val() == "") {
         return;
     }
-    let character = $("select[name='character']");
-    let model = $("select[name='training_model']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
-    let model_selector = $("select[name='training_model']");
-    let enable_speech = $("input[name='enable_speech']");
     let old_msg = $(".dialogue");
     let history_msg = [];
     let role = "user";
@@ -22,8 +18,6 @@ function async_call() {
     }
     let history = JSON.stringify(history_msg)
     new_msg.prop("disabled", true);
-    character.prop("disabled", true);
-    model_selector.prop("disabled", true);
     let new_msg_text = new_msg.val();
     new_msg.val('');
 
@@ -41,23 +35,19 @@ function async_call() {
     content.append(ai_title.get(0));
 
     $("div[name='spinner").show();
-    $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+    $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     $.ajax({
         type: 'POST',
-        url: "/sendchat/",
+        url: "/sendchat_home/",
         data: {
             message: new_msg_text,
-            character: character.val(),
             history: history,
             csrfmiddlewaretoken: csrf.val(),
-            model: model.val(),
-            enable_speech: enable_speech[0].checked,
         },
         success: function (response) {
             let data = JSON.parse(response);
             let ai_message = data.ai_message
-            let audio_address = data.audio_address
             new_msg.prop("disabled", false);
             new_msg.focus();
             let content = $('.message-container');
@@ -67,35 +57,32 @@ function async_call() {
             ai_msg.text(ai_message);
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
-            $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
-
-            if (enable_speech[0].checked && audio_address != '') {
-                let source = $("source[name='source']");
-                source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
-                let audio = $("audio[name='audio']");
-                audio[0].load();
-            }
+            $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
         },
     })
 }
 
+function open_chat() {
+    $("div[name='home_chat_icon']").hide();
+    $("div[name='home_chat_content']").fadeIn(300);
+    $("input[name='message']").focus();
+}
+
+function close_chat() {
+    $("div[name='home_chat_icon']").show();
+    $("div[name='home_chat_content']").fadeOut(300);
+}
+
 function init() {
-    // Audio play starts
-    $("input[name='enable_speech']").click(function () {
-        if (!this.checked) {
-            let audio = $("audio[name='audio'");
-            audio[0].pause();
-        }
+    $("div[name='home_chat_icon']").click(function () {
+        open_chat();
     });
 
-    $("input[name='show_controls']").click(function () {
-        let audio = $("audio[name='audio'").toggle(this.checked);
+    $("div[name='home_chat_close_icon']").click(function () {
+        close_chat();
     });
 
-    $("audio[name='audio'").on('canplaythrough', function () {
-        this.play();
-    });
-    // Audio play ends
+    
 
     $('.send-button').click(function () {
         async_call();

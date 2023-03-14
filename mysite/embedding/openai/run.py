@@ -43,7 +43,6 @@ def run_it_4(original_text, model):
         temperature=0,
         max_tokens=1000
     )
-    print(model, generate_prompt_4(original_text))
     print(response)
     return response
 
