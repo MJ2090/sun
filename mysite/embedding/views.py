@@ -124,14 +124,14 @@ def sendchat_home(request):
     new_message = request.POST['message']
     use_embedding = request.POST.get('use_embedding')
     use_embedding = True
-    use_gpt = False
+    use_gpt = True
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'NX32LBMJ3E')
         if not answer == "I don't know.":
             return HttpResponse(json.dumps({'ai_message': answer}))
     if answer == "I don't know." and not use_gpt:
-        return HttpResponse(json.dumps({'ai_message': 'Sorry I cannot help you with that.'}))
+        return HttpResponse(json.dumps({'ai_message': 'Sorry, but I cannot help you with that.'}))
 
     my_m = PromptModel.objects.get(name='Done FAQ')
     messages = json.loads(my_m.history)
