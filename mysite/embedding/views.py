@@ -28,9 +28,8 @@ import json
 
 def home(request):
     ret = get_basic_data(request)
-    if request.user.is_authenticated and request.user.username == 'z':
-        ret['enable_home_chat'] = True
-        ret['home_chat_form'] = HomeChatForm()
+    ret['enable_home_chat'] = True
+    ret['home_chat_form'] = HomeChatForm()
     return render(request, 'embedding/home.html', ret)
 
 
