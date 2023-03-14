@@ -27,6 +27,8 @@ import json
 
 def home(request):
     ret = get_basic_data(request)
+    if request.user.is_authenticated and request.user.username == 'z':
+        ret['enable_home_chat'] = True
     return render(request, 'embedding/home.html', ret)
 
 
@@ -58,7 +60,8 @@ def embedding_question(request):
         public_models = EmbeddingModel.objects.filter(is_public=True)
     else:
         owned_models = EmbeddingModel.objects.filter(owner=request.user)
-        public_models = EmbeddingModel.objects.filter(is_public=True).exclude(owner=request.user)
+        public_models = EmbeddingModel.objects.filter(
+            is_public=True).exclude(owner=request.user)
 
     ret['form'].fields['character'].choices = []
     for my_model in owned_models:
@@ -67,7 +70,7 @@ def embedding_question(request):
     for my_model in public_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
-        
+
     if len(ret['form'].fields['character'].choices) == 0:
         ret['error_msg'] = 'No Q&A bot found, please create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
@@ -210,7 +213,8 @@ def contact(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # name = form.cleaned_data["username"]
-            data = Contact(username=form.cleaned_data["username"], email=form.cleaned_data["email"], message=form.cleaned_data["message"])
+            data = Contact(
+                username=form.cleaned_data["username"], email=form.cleaned_data["email"], message=form.cleaned_data["message"])
             data.save()
             print(form.cleaned_data, 88888)
             # ...

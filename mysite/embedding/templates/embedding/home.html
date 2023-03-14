@@ -5,6 +5,15 @@
 <link rel="stylesheet" href="{% static 'embedding/css/home.css' %}">
 {% endblock %}
 
+{% if enable_home_chat %}
+{% block privatefeature %}
+{% load static %}
+<!-- Home chat -->
+<link rel="stylesheet" href="{% static 'embedding/css/home_chat.css' %}">
+<script src="{% static 'embedding/js/home_hat.js' %}"></script>
+{% endblock %}
+{% endif %}
+
 {% block main %}
 
 <!--Hero -->
@@ -57,7 +66,8 @@
           </div>
         </a>
         <h3 class="fs-2">Chat</h3>
-        <p>A great chatbot that simulates human-like conversations with users. Chat and have fun with different characters!
+        <p>A great chatbot that simulates human-like conversations with users. Chat and have fun with different
+          characters!
         </p>
         <a href="/chat/" class="icon-link d-inline-flex align-items-center">
           Try it out <i width="1em" height="1em" class="bi bi-chevron-right"></i>
@@ -71,7 +81,8 @@
           </div>
         </a>
         <h3 class="fs-2">Image Innovation</h3>
-        <p>Meet Piccaso and Monet here, generating master pieces based on pure texted description! Use your imagination and build your innovation, we handle
+        <p>Meet Piccaso and Monet here, generating master pieces based on pure texted description! Use your imagination
+          and build your innovation, we handle
           the rest.</p>
         <a href="image/" class="icon-link d-inline-flex align-items-center">
           Try it out <i width="1em" height="1em" class="bi bi-chevron-right"></i>
@@ -131,8 +142,9 @@
     <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
       <div class="col d-flex flex-column align-items-start gap-2">
         <h3 class="fw-bold">A.I. as a Service. Need more text to put in this place.</h3>
-        <p class="text-muted">When we talk about AI, we talk about a kind of <span class="text-bold">Valuable, Affordable, Customizable and
-          Accessible</span> technology that leads your business to a predictable and sustainable success.</p>
+        <p class="text-muted">When we talk about AI, we talk about a kind of <span class="text-bold">Valuable,
+            Affordable, Customizable and
+            Accessible</span> technology that leads your business to a predictable and sustainable success.</p>
         <a href="#" class="btn btn-primary btn-lg">
           <i width="1em" height="1em" class="bi-ubuntu"></i>
           Try it by yourself now
