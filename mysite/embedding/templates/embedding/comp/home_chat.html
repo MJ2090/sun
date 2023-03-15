@@ -1,0 +1,67 @@
+<!-- Home Chat Start -->
+<div>
+    <div class="hidden">
+        <div name="human_title" class="dialogue-title">
+            😀 You
+        </div>
+        <div name="ai_title" class="dialogue-title">
+            🧑🏼 Done.
+        </div>
+        <p name="human_msg" class="dialogue-message">
+        </p>
+        <p name="ai_msg" class="dialogue-message">
+        </p>
+    </div>
+    <div name="home_chat_icon">
+        <div
+            class="home-chat-icon  d-inline-flex align-items-center justify-content-center text-bg-primary fs-1 rounded-5">
+            <i width="1em" height="1em" class="bi-emoji-smile"></i>
+        </div>
+    </div>
+    <div style="display: none" name="home_chat_content" class="home-chat-content">
+        <form class="" novalidate="" method="post">
+            {% csrf_token %}
+            <div class="">
+                <div class="message-outer-container">
+                    <div class="message-header">
+                        <div
+                            class="home-chat-header-icon  d-inline-flex align-items-center justify-content-center text-bg-primary fs-1 rounded-5">
+                            <i width="1em" height="1em" class="bi-emoji-smile"></i>
+                        </div>
+                        <div class="company">
+                            <div class="header" style="color: rgb(0, 0, 0);">
+                                Done.
+                            </div>
+                            <div class="status" style="color: rgb(155, 166, 179);">
+                                Online
+                            </div>
+                        </div>
+                        <div name="home_chat_close_icon"
+                            class="home-chat-close-icon d-inline-flex align-items-center fs-1">
+                            <i width="1em" height="1em" class="bi-x"></i>
+                        </div>
+                    </div>
+                    <div class="message-inner-container">
+                        <div class="message-container">
+                            <div name="ai_title" class="dialogue-title">
+                                🧑🏼 Done.
+                            </div>
+                            <p name="ai_msg" class="dialogue-message dialogue">Hello! How can I assist you today?</p>
+                        </div>
+                        <div class="spinner" name="spinner" style="display: none">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        {{ home_chat_form.message }}
+                        <button type="button" class="home-chat-message-send btn btn-primary send-button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Home Chat End -->
