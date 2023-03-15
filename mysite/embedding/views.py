@@ -30,7 +30,16 @@ def home(request):
     ret = get_basic_data(request)
     ret['enable_home_chat'] = True
     ret['home_chat_form'] = HomeChatForm()
+    if request.user.is_authenticated and request.user.username == 'z':
+        return render(request, 'embedding/home_2.html', ret)
     return render(request, 'embedding/home.html', ret)
+
+
+def home2(request):
+    ret = get_basic_data(request)
+    ret['enable_home_chat'] = True
+    ret['home_chat_form'] = HomeChatForm()
+    return render(request, 'embedding/home_2.html', ret)
 
 
 @login_required
@@ -148,7 +157,7 @@ def sendchat_home(request):
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
 
-def sendchat_t(request):
+def sendchat_async(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
@@ -185,7 +194,7 @@ def sendchat_t(request):
 def sendchat(request):
     model = request.POST.get('model', '')
     if model == "gpt-3.5-turbo":
-        return sendchat_t(request)
+        return sendchat_async(request)
     message = request.POST['message']
     character = request.POST['character']
     history = request.POST.get('history')

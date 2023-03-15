@@ -36,8 +36,59 @@
   {% endblock %}
 </head>
 
-<body class="login-page">
+<body>
+  {% if use_new_header %}
+  <header class="p-3">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img class="bi me-2" width="40" height="38" role="img" aria-label="AI Playground"
+            src="{% static 'embedding/img/anti-icon.png' %}">
+        </a>
 
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/" class="nav-link px-2 link-dark">Home</a></li>
+          <li><a href="/about/" class="nav-link px-2 link-secondary">About</a></li>
+          <li><a href="/contact/" class="nav-link px-2 link-secondary">Contact</a></li>
+          <li><a href="/contact/" class="nav-link px-2 link-secondary">Pricing</a></li>
+          <li><a href="/collection/" class="nav-link px-2 link-secondary">My Collection</a></li>
+          <li><a href="/contact/" class="nav-link px-2 link-secondary">Lab</a></li>
+          {% if user.is_superuser %}
+          <li><a href="/super/" class="nav-link px-2 text-white">Hello Admin</a></li>
+          {% endif %}
+        </ul>
+
+        {% if user.is_authenticated %}
+        <!-- User account -->
+        <div class="dropdown text-end">
+          <a href="#" class="text-dark d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Welcome back, {{ user.username }}
+          </a>
+          <ul class="dropdown-menu text-small">
+            <li><a class="dropdown-item" href="/collection/">My collection</a></li>
+            <li><a class="dropdown-item" href="/settings/">Settings</a></li>
+            <li><a class="dropdown-item" href="/payments/">Payments</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/signout/">Sign out</a></li>
+          </ul>
+        </div>
+        <!-- END User signed in -->
+        {% else %}
+        <!-- User account -->
+        <div class="text-end">
+          <a href="/signin/"><button type="button" class="btn btn-light text-dark me-2">Login</button></a>
+          <a href="/signup/"><button type="button" class="btn btn-primary">Sign-up</button></a>
+        </div>
+        {% endif %}
+        <!-- END User account -->
+        
+      </div>
+    </div>
+  </header>
+  {% else %}
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -85,6 +136,7 @@
       </div>
     </div>
   </header>
+  {% endif %}
 
   {% block main %}
   {% endblock %}

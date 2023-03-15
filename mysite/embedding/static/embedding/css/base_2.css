@@ -1,12 +1,6 @@
 .feature-icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: .75rem;
-}
-
-.new-feature-icon {
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: .75rem;
 }
 
@@ -49,6 +43,8 @@
 .home-username {
   color: white;
 }
+
+
 
 .footer-container {
   position: fixed;
