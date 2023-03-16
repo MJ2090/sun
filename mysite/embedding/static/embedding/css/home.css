@@ -1,3 +1,8 @@
+html,
+body {
+    height: 100%;
+}
+
 .message {
     width: 90%;
 }
@@ -26,6 +31,7 @@
 
 .container-white {
     margin-top: 20px;
+    min-height: calc(100% - 180px);
 }
 
 .container-grey {
@@ -44,12 +50,6 @@
 
 .text-bold {
     font-weight: bold;
-}
-
-
-.footer-container {
-    position: fixed;
-    bottom: 0;
 }
 
 .feature {
