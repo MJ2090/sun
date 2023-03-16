@@ -42,17 +42,16 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img class="bi me-2" width="40" height="38" role="img" aria-label="AI Playground"
+          <img class="bi me-2" width="40" height="40" role="img" aria-label="AI Playground"
             src="{% static 'embedding/img/anti-icon.png' %}">
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" class="nav-link px-2 link-dark">Home</a></li>
-          <li><a href="/about/" class="nav-link px-2 link-secondary">About</a></li>
-          <li><a href="/contact/" class="nav-link px-2 link-secondary">Contact</a></li>
-          <li><a href="/contact/" class="nav-link px-2 link-secondary">Pricing</a></li>
-          <li><a href="/collection/" class="nav-link px-2 link-secondary">My Collection</a></li>
-          <li><a href="/contact/" class="nav-link px-2 link-secondary">Lab</a></li>
+          <li><a href="/" class="nav-link px-2 {% if current_page == 'home' %} link-dark {% else %} link-secondary{% endif %}">Home</a></li>
+          <li><a href="/about/" class="nav-link px-2 {% if current_page == 'about' %} link-dark {% else %} link-secondary{% endif %}">About</a></li>
+          <li><a href="/contact/" class="nav-link px-2 {% if current_page == 'contact' %} link-dark {% else %} link-secondary{% endif %}">Contact</a></li>
+          <li><a href="/pricing/" class="nav-link px-2 {% if current_page == 'pricing' %} link-dark {% else %} link-secondary{% endif %}">Pricing</a></li>
+          <li><a href="/lab/" class="nav-link px-2 {% if current_page == 'lab' %} link-dark {% else %} link-secondary{% endif %}">Done. Lab</a></li>
           {% if user.is_superuser %}
           <li><a href="/super/" class="nav-link px-2 text-white">Hello Admin</a></li>
           {% endif %}
@@ -99,7 +98,6 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-          <li><a href="/collection/" class="nav-link px-2 text-white">My Collection</a></li>
           <li><a href="/about/" class="nav-link px-2 text-white">About</a></li>
           <li><a href="/contact/" class="nav-link px-2 text-white">Contact</a></li>
           {% if user.is_superuser %}

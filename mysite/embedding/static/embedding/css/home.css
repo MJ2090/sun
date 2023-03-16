@@ -14,6 +14,7 @@
 .submit {
     padding-top: 30px;
 }
+
 .question {
     height: 100px;
 }
@@ -43,4 +44,49 @@
 
 .text-bold {
     font-weight: bold;
+}
+
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+}
+
+.feature {
+    opacity: 0.8;
+}
+
+.feature:hover {
+    opacity: 1.0;
+    cursor: pointer;
+}
+
+.feature-red {
+    background-color: #ef4146;
+    color: white;
+}
+
+.feature-purple {
+    background-color: #5436da;
+    color: white;
+}
+
+.feature-orange {
+    background-color: #f4ac36;
+    color: white;
+}
+
+.feature-green {
+    background-color: #19c37d;
+    color: white;
+}
+
+.feature-cyan {
+    background-color: #197cc3;
+    color: white;
+}
+
+.description p {
+    font-family: emoji;
+    font-style: italic;
 }

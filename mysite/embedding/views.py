@@ -19,7 +19,7 @@ from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
-from .utils import load_random_string, get_basic_data
+from .utils import load_random_string, get_basic_data, enable_new_home
 from embedding.models import UserProfile
 from embedding.models import Contact
 import embedding.static_values as sc
@@ -30,7 +30,7 @@ def home(request):
     ret = get_basic_data(request)
     ret['enable_home_chat'] = True
     ret['home_chat_form'] = HomeChatForm()
-    if request.user.is_authenticated and request.user.username == 'z':
+    if enable_new_home(request):
         return render(request, 'embedding/home_2.html', ret)
     return render(request, 'embedding/home.html', ret)
 
@@ -228,6 +228,7 @@ def answer(request):
 
 def about(request):
     ret = get_basic_data(request)
+    ret['current_page'] = 'about'
     return render(request, 'embedding/about.html', ret)
 
 
@@ -240,9 +241,17 @@ def settings(request):
     ret = get_basic_data(request)
     return render(request, 'embedding/settings.html', ret)
 
+def lab(request):
+    ret = get_basic_data(request)
+    ret['current_page'] = 'lab'
+    ret['enable_home_chat'] = True
+    ret['home_chat_form'] = HomeChatForm()
+    return render(request, 'embedding/lab.html', ret)
+
 
 def contact(request):
     ret = get_basic_data(request)
+    ret['current_page'] = 'contact'
     # if this is a POST request we need to process the form data
 
     if request.method == 'POST':
@@ -432,8 +441,14 @@ def summary(request):
 @login_required
 def collection(request):
     ret = get_basic_data(request)
+    ret['current_page'] = 'collection'
     return render(request, 'embedding/collection.html', ret)
 
+
+def pricing(request):
+    ret = get_basic_data(request)
+    ret['current_page'] = 'pricing'
+    return render(request, 'embedding/pricing.html', ret)
 
 def do_login(request, username, password):
     user = auth.authenticate(username=username, password=password)
@@ -477,3 +492,4 @@ def get_user(request):
     if request.user.is_authenticated:
         return request.user
     return UserProfile.objects.get(username="default_user")
+

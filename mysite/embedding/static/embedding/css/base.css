@@ -49,17 +49,3 @@
 .home-username {
   color: white;
 }
-
-.footer-container {
-  position: fixed;
-  bottom: 0;
-}
-
-.feature {
-  opacity: 0.8;
-}
-
-.feature:hover {
-  opacity: 1.0;
-  cursor: pointer;
-}

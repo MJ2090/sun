@@ -1,10 +1,33 @@
 {% extends "embedding/base.html" %}
 
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/about.css' %}">
+{% endblock %}
+
 {% block main %}
 
 <div class="container px-4 py-5">
     <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Welcome to our about page.</h4>
+        <div class="about-question">
+            <h4 class="mb-3">Who are you</h4>
+            <p>We are L5.</p>
+        </div>
+        <div class="about-question">
+            <h4 class="mb-3">What is this about</h4>
+            <p>This website brings together several interesting AI products.</p>
+        </div>
+        <div class="about-question">
+            <h4 class="mb-3">What is your mission</h4>
+            <p>We make the most advanced AI technology available and accessible to everyone in the world.</p>
+            <p>When we talk about AI, we want to talk about a technology that is Valuable, Accessible, Affordable and
+                Customizable to everyone who is in need.</p>
+        </div>
+        <div class="about-question">
+            <h4 class="mb-3">I have new feature requests</h4>
+            <p>Awesome!</p>
+            <p>Please let us know your feedback through the <a href="/contact/">Contact Us</a> link.</p>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -17,4 +17,9 @@ def get_basic_data(request):
         ret['user'] = request.user
         if request.user.username == 'z':
             ret['use_new_header'] = True
+    ret['current_page'] = 'home'
     return ret
+
+
+def enable_new_home(request):
+    return request.user.is_authenticated and request.user.username == 'z'
