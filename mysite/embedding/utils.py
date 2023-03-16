@@ -22,4 +22,4 @@ def get_basic_data(request):
 
 
 def enable_new_home(request):
-    return request.user.is_authenticated and request.user.username == 'z'
+    return True

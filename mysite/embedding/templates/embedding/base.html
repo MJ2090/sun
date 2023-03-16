@@ -38,31 +38,47 @@
 
 <body>
   {% if use_new_header %}
-  <header class="p-3">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img class="bi me-2" width="40" height="40" role="img" aria-label="AI Playground"
-            src="{% static 'embedding/img/anti-icon.png' %}">
-        </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" class="nav-link px-2 {% if current_page == 'home' %} link-dark {% else %} link-secondary{% endif %}">Home</a></li>
-          <li><a href="/about/" class="nav-link px-2 {% if current_page == 'about' %} link-dark {% else %} link-secondary{% endif %}">About</a></li>
-          <li><a href="/contact/" class="nav-link px-2 {% if current_page == 'contact' %} link-dark {% else %} link-secondary{% endif %}">Contact</a></li>
-          <li><a href="/pricing/" class="nav-link px-2 {% if current_page == 'pricing' %} link-dark {% else %} link-secondary{% endif %}">Pricing</a></li>
-          <li><a href="/lab/" class="nav-link px-2 {% if current_page == 'lab' %} link-dark {% else %} link-secondary{% endif %}">Done. Lab</a></li>
+  <nav class="navbar navbar-expand-sm">
+    <div class="container-fluid container">
+      <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
+        <img class="bi me-2" width="40" height="40" role="img" aria-label="AI Playground"
+          src="{% static 'embedding/img/anti-icon.png' %}">
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto nav col-10 col-lg-auto me-lg-auto justify-content-center mb-md-0">
+          <li class="nav-item"><a href="/"
+              class="nav-link px-2 {% if current_page == 'home' %} link-dark {% else %} link-secondary{% endif %}">Home</a>
+          </li>
+          <li class="nav-item"><a href="/about/"
+              class="nav-link px-2 {% if current_page == 'about' %} link-dark {% else %} link-secondary{% endif %}">About</a>
+          </li>
+          <li class="nav-item"><a href="/contact/"
+              class="nav-link px-2 {% if current_page == 'contact' %} link-dark {% else %} link-secondary{% endif %}">Contact</a>
+          </li>
+          <li><a href="/pricing/"
+              class="nav-link px-2 {% if current_page == 'pricing' %} link-dark {% else %} link-secondary{% endif %}">Pricing</a>
+          </li>
+          <li><a href="/lab/"
+              class="nav-link px-2 {% if current_page == 'lab' %} link-dark {% else %} link-secondary{% endif %}">Done.
+              Lab</a></li>
           {% if user.is_superuser %}
-          <li><a href="/super/" class="nav-link px-2 text-white">Hello Admin</a></li>
           {% endif %}
         </ul>
+
 
         {% if user.is_authenticated %}
         <!-- User account -->
         <div class="dropdown text-end">
           <a href="#" class="text-dark d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Welcome back, {{ user.username }}
+            Welcome, {{ user.username }}
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="/collection/">My collection</a></li>
@@ -83,10 +99,12 @@
         </div>
         {% endif %}
         <!-- END User account -->
-        
+
+
       </div>
     </div>
-  </header>
+  </nav>
+
   {% else %}
   <header class="p-3 text-bg-dark">
     <div class="container">
