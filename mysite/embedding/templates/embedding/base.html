@@ -43,6 +43,33 @@
         <img class="bi me-2" width="40" height="40" role="img" aria-label="AI Playground"
           src="{% static 'embedding/img/anti-icon.png' %}">
       </a>
+
+      {% if user.is_authenticated %}
+      <!-- User account -->
+      <div class="dropdown text-end mobile-only">
+        <a href="#" class="text-dark d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Hi, {{ user.username }}
+        </a>
+        <ul class="dropdown-menu text-small">
+          <li><a class="dropdown-item" href="/collection/">My collection</a></li>
+          <li><a class="dropdown-item" href="/settings/">Settings</a></li>
+          <li><a class="dropdown-item" href="/payments/">Payments</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="/signout/">Sign out</a></li>
+        </ul>
+      </div>
+      <!-- END User signed in -->
+      {% else %}
+      <!-- User account -->
+      <div class="text-end mobile-only">
+        <a href="/signin/"><button type="button" class="btn btn-primary">Login</button></a>
+      </div>
+      {% endif %}
+      <!-- END User account -->
+
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -73,7 +100,7 @@
 
         {% if user.is_authenticated %}
         <!-- User account -->
-        <div class="dropdown text-end">
+        <div class="dropdown text-end desktop-only">
           <a href="#" class="text-dark d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
             Hi, {{ user.username }}
@@ -91,7 +118,7 @@
         <!-- END User signed in -->
         {% else %}
         <!-- User account -->
-        <div class="text-end">
+        <div class="text-end desktop-only">
           <a href="/signin/"><button type="button" class="btn btn-primary">Login</button></a>
         </div>
         {% endif %}

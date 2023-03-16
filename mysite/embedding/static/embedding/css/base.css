@@ -49,3 +49,15 @@
 .home-username {
   color: white;
 }
+
+@media (max-width:575px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width:576px) {
+  .mobile-only {
+    display: none;
+  }
+}
