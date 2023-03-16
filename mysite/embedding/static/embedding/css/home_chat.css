@@ -46,7 +46,7 @@
 
 .message-inner-container {
   overflow: scroll;
-  height: 400px;
+  height: calc(100vh - 195px);
   padding: 20px;
 }
 
