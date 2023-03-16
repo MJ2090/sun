@@ -48,11 +48,11 @@ function setup_hover() {
     $("div[name='feature_grammar']").hover(hover1, hover2);
 }
 
-function init() {
+function home_init() {
     welcome();
     setup_hover();
 }
 
 $(document).ready(function () {
-    init();
+    home_init();
 })
