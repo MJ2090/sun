@@ -5,14 +5,14 @@
 <link rel="stylesheet" href="{% static 'embedding/css/home.css' %}">
 {% endblock %}
 
-{% if enable_home_chat %}
 {% block privatefeature %}
+{% if enable_home_chat %}
 {% load static %}
 <!-- Home chat -->
 <link rel="stylesheet" href="{% static 'embedding/css/home_chat.css' %}">
 <script src="{% static 'embedding/js/home_chat.js' %}"></script>
-{% endblock %}
 {% endif %}
+{% endblock %}
 
 {% block main %}
 
