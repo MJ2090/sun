@@ -28,16 +28,8 @@ import json
 
 def home(request):
     ret = get_basic_data(request)
-    ret['enable_home_chat'] = True
     ret['home_chat_form'] = HomeChatForm()
     return render(request, 'embedding/home.html', ret)
-
-
-def home2(request):
-    ret = get_basic_data(request)
-    ret['enable_home_chat'] = True
-    ret['home_chat_form'] = HomeChatForm()
-    return render(request, 'embedding/home_2.html', ret)
 
 
 @login_required
@@ -244,7 +236,7 @@ def lab(request):
     ret['current_page'] = 'lab'
     ret['enable_home_chat'] = True
     ret['home_chat_form'] = HomeChatForm()
-    return render(request, 'embedding/lab.html', ret)
+    return render(request, 'embedding/home.html', ret)
 
 
 def contact(request):

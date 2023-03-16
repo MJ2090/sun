@@ -10,6 +10,15 @@
 <script src="{% static 'embedding/js/home.js' %}"></script>
 {% endblock %}
 
+{% block privatefeature %}
+{% if enable_home_chat %}
+{% load static %}
+<!-- Home chat -->
+<link rel="stylesheet" href="{% static 'embedding/css/home_chat.css' %}">
+<script src="{% static 'embedding/js/home_chat.js' %}"></script>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 <!--Hero -->
 <div class="container-white">
@@ -111,5 +120,9 @@
         </div>
     </footer>
 </div>
+
+{% if enable_home_chat %}
+  {% include "comp/home_chat.html" %}
+{% endif %}
 
 {% endblock %}

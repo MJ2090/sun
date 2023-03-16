@@ -73,7 +73,7 @@ function close_chat() {
     $("div[name='home_chat_content']").fadeOut(300);
 }
 
-function init() {
+function home_chat_init() {
     $("div[name='home_chat_icon']").click(function () {
         open_chat();
     });
@@ -97,5 +97,5 @@ function init() {
 }
 
 $(document).ready(function () {
-    init();
+    home_chat_init();
 })
