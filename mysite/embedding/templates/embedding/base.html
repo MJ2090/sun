@@ -76,7 +76,7 @@
         <div class="dropdown text-end">
           <a href="#" class="text-dark d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Welcome, {{ user.username }}
+            Hi, {{ user.username }}
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="/collection/">My collection</a></li>
@@ -91,10 +91,9 @@
         <!-- END User signed in -->
         {% else %}
         <!-- User account -->
-        <!-- <div class="text-end">
-          <a href="/signin/"><button type="button" class="btn btn-light text-dark me-2">Login</button></a>
-          <a href="/signup/"><button type="button" class="btn btn-primary">Sign-up</button></a>
-        </div> -->
+        <div class="text-end">
+          <a href="/signin/"><button type="button" class="btn btn-primary">Login</button></a>
+        </div>
         {% endif %}
         <!-- END User account -->
 

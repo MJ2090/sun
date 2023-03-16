@@ -30,8 +30,6 @@ def home(request):
     ret = get_basic_data(request)
     ret['enable_home_chat'] = True
     ret['home_chat_form'] = HomeChatForm()
-    if enable_new_home(request):
-        return render(request, 'embedding/home_2.html', ret)
     return render(request, 'embedding/home.html', ret)
 
 
