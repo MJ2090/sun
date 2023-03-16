@@ -44,10 +44,20 @@
 
 .message-container {}
 
-.message-inner-container {
-  overflow: scroll;
-  height: calc(100vh - 195px);
-  padding: 20px;
+@media (min-width:961px) {
+  .message-inner-container {
+    overflow: scroll;
+    height: calc(100vh - 195px);
+    padding: 20px;
+  }
+}
+
+@media (max-width:960px) {
+  .message-inner-container {
+    overflow: scroll;
+    height: calc(100vh - 295px);
+    padding: 20px;
+  }
 }
 
 .message-header {
