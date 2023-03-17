@@ -140,7 +140,6 @@ def sendchat_home(request):
             answer = "You can do a free self assessment by clicking the link below."
             return_dict['action_message'] = answer
             return_dict['ai_action'] = 1
-            return HttpResponse(json.dumps({'ai_message': answer, 'ai_action': 1}))
         
     if len(return_dict) > 0:
         return HttpResponse(json.dumps(return_dict))
