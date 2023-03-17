@@ -29,9 +29,11 @@ def generate_prompt_5(original_text):
 def run_it_4(original_text, model):
     messages = [
         {"role": "system", "content": "You are a helpful assistant that translates English to Chinese."},
-        {"role": "user", "content": "Translate the following English text to French: {}".format(
+        {"role": "user", "content": "Translate the following English text to Chinese: {}".format(
             original_text)},
     ]
+
+    print(messages)
 
     response = openai.ChatCompletion.create(
         model=model,
