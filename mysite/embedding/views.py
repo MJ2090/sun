@@ -15,7 +15,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_8, run_it_9
-from embedding.openai.run3 import run_it_3_question, run_it_3_training
+from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -123,11 +123,17 @@ def sendchat_home(request):
     use_embedding = request.POST.get('use_embedding')
     use_embedding = True
     use_gpt = True
+    use_action = True
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'NX32LBMJ3E')
         if not answer == "I don't know.":
             return HttpResponse(json.dumps({'ai_message': answer}))
+    if use_action:
+        action = run_it_3_action(new_message, model='gpt-3.5-turbo')
+        if action > 0:
+            answer = "You can do a free self assessment by clicking the link below."
+            return HttpResponse(json.dumps({'ai_message': answer, 'ai_action': action}))
     if answer == "I don't know." and not use_gpt:
         return HttpResponse(json.dumps({'ai_message': 'Sorry, but I cannot help you with that.'}))
 
@@ -230,6 +236,7 @@ def payments(request):
 def settings(request):
     ret = get_basic_data(request)
     return render(request, 'embedding/settings.html', ret)
+
 
 def lab(request):
     ret = get_basic_data(request)
@@ -413,6 +420,7 @@ def pricing(request):
     ret['current_page'] = 'pricing'
     return render(request, 'embedding/pricing.html', ret)
 
+
 def do_login(request, username, password):
     user = auth.authenticate(username=username, password=password)
     if user:
@@ -455,4 +463,3 @@ def get_user(request):
     if request.user.is_authenticated:
         return request.user
     return UserProfile.objects.get(username="default_user")
-

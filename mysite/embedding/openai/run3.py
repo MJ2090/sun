@@ -5,6 +5,7 @@ import string
 import pandas as pd
 import os
 import numpy as np
+import openai
 
 relative_path = '/var/www/asuperdomain.com/static/embedding/data/'
 
@@ -33,6 +34,25 @@ def run_it_3_question(question, random_str):
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     ans = robot.answer_question(my_df, question=question)
     return ans
+
+def run_it_3_action(question, model):
+    msg = """
+    A and B are talking with each other, if A says "{}", is it logically correct for B to reply as “You can take the self assessment on our website”? Please only give a score between 1 and 10 and don't explain, where 1 means totally not possible, and 10 means very probably.
+    """.format(question)
+    messages = [
+        {"role": "user", "content": msg},
+    ]
+    response = openai.ChatCompletion.create(
+        model=model,
+        temperature=0,
+        max_tokens=1000,
+        messages=messages,
+    )
+    response = response.replace('.', '')
+    print('run_it_3_action ', response)
+    if response.isnumeric() and int(response)>8:
+        return 1
+    return 0
 
 
 def run_it_3_training(text):
