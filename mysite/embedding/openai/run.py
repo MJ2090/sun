@@ -11,30 +11,12 @@ def generate_prompt_6(original_text):
     return prompt.format(original_text)
 
 
-def generate_prompt_5(original_text):
-    prompt = """Correct the input text to standard English, fix all the misspelled words, grammatical errors and syntax errors.
-    input: How old is you?
-    output: How old are you?
-    input: She no went to the market.
-    output: She did not go to the market.
-    input: Please wait me! I are coming son!
-    output: Please wait for me! I am coming soon!
-    input: When yoo misspell smething, you spell it worng.
-    output: When you misspell something, you spell it wrong.
-    input: {}
-    output: """
-    return prompt.format(original_text)
-
-
-def run_it_4(original_text, model):
+def run_it_translate(original_text, model):
     messages = [
         {"role": "system", "content": "You are a helpful assistant that translates English to Chinese."},
         {"role": "user", "content": "Translate the following English text to Chinese: {}".format(
             original_text)},
     ]
-
-    print(messages)
-
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
@@ -47,13 +29,26 @@ def run_it_4(original_text, model):
     return response
 
 
-def run_it_5(original_text, model):
+def run_it_grammar(original_text, model):
+    messages = [
+        {"role": "system", "content": "You correct the input text to standard English, fix all the misspelled words, grammatical and syntax errors."},
+        {"role": "user", "content": "How old is you?"},
+        {"role": "assistant", "content": "How old are you?"},
+        {"role": "user", "content": "She no went to the market."},
+        {"role": "assistant", "content": "She did not go to the market."},
+        {"role": "user", "content": "Please wait me! I are coming son!"},
+        {"role": "assistant", "content": "Please wait for me! I am coming soon!"},
+        {"role": "user", "content": "When yoo misspell smething, you spell it worng."},
+        {"role": "assistant", "content": "When you misspell something, you spell it wrong."},
+        {"role": "user", "content": "{}".format(original_text)},
+    ]
+
     print(original_text)
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         model=model,
-        prompt=generate_prompt_5(original_text),
-        temperature=0,
-        max_tokens=1000
+        temperature=0.2,
+        max_tokens=1000,
+        messages=messages,
     )
     print(response)
     return response

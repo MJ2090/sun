@@ -14,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
+from embedding.openai.run import run_it_translate, run_it_grammar, run_it_6, run_it_7, run_it_8, run_it_9
 from embedding.openai.run3 import run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -355,7 +355,7 @@ def image(request):
 
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = run_it_4(original_text, model='gpt-3.5-turbo')
+    openai_response = run_it_translate(original_text, model='gpt-3.5-turbo')
     translated_text = openai_response['choices'][0]['message']['content']
     record_consumption(
         request, sc.MODEL_TYPES_TRANSLATE, openai_response)
@@ -371,7 +371,7 @@ def translation(request):
 
 def grammar_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = run_it_5(original_text, model='text-davinci-003')
+    openai_response = run_it_grammar(original_text, model='gpt-3.5-turbo')
     fixed_text = openai_response["choices"][0]["text"]
     record_consumption(
         request, sc.MODEL_TYPES_GRAMMAR, openai_response)
