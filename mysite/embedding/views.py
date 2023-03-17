@@ -135,8 +135,8 @@ def sendchat_home(request):
         openai_response = run_it_3_action(new_message, model='gpt-3.5-turbo')
         action_score = openai_response["choices"][0]["message"]["content"]
         action_score = action_score.replace('.', '').replace('\n', '').replace(' ', '')
-        print('action_score= ', action_score)
-        if action_score.isnumeric() and int(action_score) > 8:
+        print('action_score= ', action_score, action_score.isnumeric())
+        if action_score.isnumeric() and int(action_score) >= 8:
             print('inside')
             answer = "You can do a free self assessment by clicking the link below."
             return_dict['action_message'] = answer
