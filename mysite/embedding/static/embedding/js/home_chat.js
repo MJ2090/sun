@@ -56,7 +56,7 @@ function async_call() {
 
             $("div[name='spinner").hide();
 
-            if (ai_message != '') {
+            if (ai_message) {
                 let ai_msg = $("p[name='ai_msg']").clone();
                 ai_msg.text(ai_message);
                 ai_msg.addClass("dialogue");
