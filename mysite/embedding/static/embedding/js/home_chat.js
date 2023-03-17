@@ -48,6 +48,7 @@ function async_call() {
         success: function (response) {
             let data = JSON.parse(response);
             let ai_message = data.ai_message
+            let action_message = data.action_message
             let content = $('.message-container');
 
             new_msg.prop("disabled", false);
@@ -55,13 +56,19 @@ function async_call() {
 
             $("div[name='spinner").hide();
 
-            let ai_msg = $("p[name='ai_msg']").clone();
-            ai_msg.text(ai_message);
-            ai_msg.addClass("dialogue");
-            content.append(ai_msg.get(0));
+            if (ai_message != '') {
+                let ai_msg = $("p[name='ai_msg']").clone();
+                ai_msg.text(ai_message);
+                ai_msg.addClass("dialogue");
+                content.append(ai_msg.get(0));
+            }
 
             let action = data.ai_action;
             if (action == '1') {
+                ai_msg = $("p[name='ai_msg']").clone();
+                ai_msg.text(action_message);
+                content.append(ai_msg.get(0));
+
                 let action_msg = $("a[name='ai_action']").clone();
                 content.append(action_msg.get(0));
             }

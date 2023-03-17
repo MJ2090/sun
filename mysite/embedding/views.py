@@ -124,11 +124,13 @@ def sendchat_home(request):
     use_embedding = True
     use_gpt = True
     use_action = True
+    return_dict = {}
 
     if use_embedding:
         answer = run_it_3_question(new_message, 'NX32LBMJ3E')
         if not answer == "I don't know.":
-            return HttpResponse(json.dumps({'ai_message': answer}))
+            return_dict['ai_message'] = answer
+            # return HttpResponse(json.dumps({'ai_message': answer}))
     if use_action:
         openai_response = run_it_3_action(new_message, model='gpt-3.5-turbo')
         action_score = openai_response["choices"][0]["message"]["content"]
@@ -136,8 +138,14 @@ def sendchat_home(request):
         print('action_score= ', action_score)
         if action_score.isnumeric() and int(action_score) > 8:
             answer = "You can do a free self assessment by clicking the link below."
+            return_dict['action_message'] = answer
+            return_dict['ai_action'] = 1
             return HttpResponse(json.dumps({'ai_message': answer, 'ai_action': 1}))
-    if answer == "I don't know." and not use_gpt:
+        
+    if len(return_dict) > 0:
+        return HttpResponse(json.dumps(return_dict))
+    
+    if not use_gpt:
         return HttpResponse(json.dumps({'ai_message': 'Sorry, but I cannot help you with that.'}))
 
     my_m = PromptModel.objects.get(name='Done FAQ')
