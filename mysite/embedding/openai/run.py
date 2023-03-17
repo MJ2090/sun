@@ -1,6 +1,7 @@
 import openai
 import embedding.static_values as sc
 
+
 def generate_prompt_6(original_text):
     prompt = """Generate the tl;dr for the input text.
     input: A neutron star is the collapsed core of a massive supergiant star, which had a total mass of between 10 and 25 solar masses, possibly more if the star was especially metal-rich.[1] Neutron stars are the smallest and densest stellar objects, excluding black holes and hypothetical white holes, quark stars, and strange stars.[2] Neutron stars have a radius on the order of 10 kilometres (6.2 mi) and a mass of about 1.4 solar masses.[3] They result from the supernova explosion of a massive star, combined with gravitational collapse, that compresses the core past white dwarf star density to that of atomic nuclei.
@@ -24,25 +25,22 @@ def generate_prompt_5(original_text):
     output: """
     return prompt.format(original_text)
 
-def generate_prompt_4(original_text):
-    prompt = """Translate the input from English to Chinese.
-    input: Hello
-    output: 你好
-    input: I'm from China
-    output: 我来自中国
-    input: {}
-    output: """
-    return prompt.format(original_text)
-
 
 def run_it_4(original_text, model):
-    print(original_text)
-    response = openai.Completion.create(
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant that translates English to Chinese."},
+        {"role": "user", "content": "Translate the following English text to French: {}".format(
+            original_text)},
+    ]
+
+    response = openai.ChatCompletion.create(
         model=model,
-        prompt=generate_prompt_4(original_text),
-        temperature=0,
-        max_tokens=1000
+        temperature=0.2,
+        max_tokens=1000,
+        messages=messages,
     )
+
+    print(original_text)
     print(response)
     return response
 

@@ -15,7 +15,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_4, run_it_5, run_it_6, run_it_7, run_it_8, run_it_9
-from embedding.openai.run3 import run_it_3, run_it_3_question, run_it_3_training
+from embedding.openai.run3 import run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -334,33 +334,6 @@ def signup(request):
     return render(request, 'embedding/signup.html', ret)
 
 
-def send_translation(request):
-    ret = get_basic_data(request)
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = TranslationForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            original_text = form.cleaned_data["text"]
-            openai_response = run_it_4(original_text, model='text-davinci-003')
-            translated_text = openai_response["choices"][0]["text"]
-            print(translated_text)
-            ret['translated_text'] = translated_text
-            record_consumption(
-                request, sc.MODEL_TYPES_TRANSLATE, openai_response)
-            return render(request, 'embedding/answer.html', ret)
-        else:
-            print("Data not clean!")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = TranslationForm()
-
-    ret['form'] = form
-    return render(request, 'embedding/translation.html', ret)
-
-
 def image_async(request):
     description = request.POST.get('original_text', '')
     style = request.POST.get('style', '')
@@ -383,7 +356,7 @@ def image(request):
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
     openai_response = run_it_4(original_text, model='text-davinci-003')
-    translated_text = openai_response["choices"][0]["text"]
+    translated_text = openai_response['choices'][0]['message']['content']
     record_consumption(
         request, sc.MODEL_TYPES_TRANSLATE, openai_response)
     print(translated_text)
