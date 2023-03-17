@@ -130,10 +130,13 @@ def sendchat_home(request):
         if not answer == "I don't know.":
             return HttpResponse(json.dumps({'ai_message': answer}))
     if use_action:
-        action = run_it_3_action(new_message, model='gpt-3.5-turbo')
-        if action > 0:
+        openai_response = run_it_3_action(new_message, model='gpt-3.5-turbo')
+        action_score = openai_response["choices"][0]["message"]["content"]
+        action_score = action_score.replace('.', '').replace('\n', '')
+        print('action_score= ', action_score)
+        if action_score.isnumeric() and int(action_score) > 8:
             answer = "You can do a free self assessment by clicking the link below."
-            return HttpResponse(json.dumps({'ai_message': answer, 'ai_action': action}))
+            return HttpResponse(json.dumps({'ai_message': answer, 'ai_action': 1}))
     if answer == "I don't know." and not use_gpt:
         return HttpResponse(json.dumps({'ai_message': 'Sorry, but I cannot help you with that.'}))
 

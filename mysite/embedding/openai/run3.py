@@ -30,6 +30,8 @@ def run_it_3(my_text, qs):
 
 def run_it_3_question(question, random_str):
     file_path = relative_path + random_str + '.csv'
+    if not os.path.exists(file_path):
+        return "I don't know."
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     ans = robot.answer_question(my_df, question=question)
@@ -48,11 +50,8 @@ def run_it_3_action(question, model):
         max_tokens=1000,
         messages=messages,
     )
-    response = response.replace('.', '')
     print('run_it_3_action ', response)
-    if response.isnumeric() and int(response)>8:
-        return 1
-    return 0
+    return response
 
 
 def run_it_3_training(text):

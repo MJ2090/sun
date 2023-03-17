@@ -164,3 +164,14 @@
     transform: scale(1.0);
   }
 }
+
+.dialogue-action {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.dialogue-action p {
+  margin: 0;
+  text-align: center;
+}

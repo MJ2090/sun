@@ -4,11 +4,11 @@ function async_call() {
         return;
     }
     let csrf = $("input[name='csrfmiddlewaretoken']");
-    let old_msg = $(".dialogue");
+    let old_msgs = $(".dialogue");
     let history_msg = [];
     let role = "user";
-    for (let i = 0; i < old_msg.length; i++) {
-        let dic = { "role": role, "content": old_msg.get(i).innerText }
+    for (let i = 0; i < old_msgs.length; i++) {
+        let dic = { "role": role, "content": old_msgs.get(i).innerText }
         history_msg.push(dic);
         if (role == "user") {
             role = "assistant";
@@ -48,15 +48,24 @@ function async_call() {
         success: function (response) {
             let data = JSON.parse(response);
             let ai_message = data.ai_message
-            new_msg.prop("disabled", false);
-            new_msg.focus();
             let content = $('.message-container');
 
+            new_msg.prop("disabled", false);
+            new_msg.focus();
+
             $("div[name='spinner").hide();
+
             let ai_msg = $("p[name='ai_msg']").clone();
             ai_msg.text(ai_message);
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
+
+            let action = data.ai_action;
+            if (action == '1') {
+                let action_msg = $("a[name='ai_action']").clone();
+                content.append(action_msg.get(0));
+            }
+
             $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
         },
     })
@@ -82,7 +91,7 @@ function home_chat_init() {
         close_chat();
     });
 
-    
+
 
     $('.send-button').click(function () {
         async_call();
