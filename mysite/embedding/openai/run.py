@@ -14,9 +14,6 @@ def run_it_translate(original_text, model):
         max_tokens=1000,
         messages=messages,
     )
-
-    print(original_text)
-    print(response)
     return response
 
 
@@ -41,7 +38,6 @@ def run_it_grammar(original_text, model):
         max_tokens=1000,
         messages=messages,
     )
-    print(response)
     return response
 
 
@@ -58,7 +54,6 @@ def run_it_summary(original_text, model):
         max_tokens=1000,
         messages=messages,
     )
-    print(response)
     return response
 
 
@@ -70,7 +65,6 @@ def run_it_7(prompt, model):
         max_tokens=1000,
         stop=["###"]
     )
-    print(response)
     return response
 
 
@@ -80,7 +74,6 @@ def run_it_8(prompt):
         n=1,
         size="512x512"
     )
-    print(response)
     return response
 
 
@@ -91,5 +84,4 @@ def run_it_9(messages, model):
         max_tokens=1000,
         messages=messages,
     )
-    print(response)
     return response

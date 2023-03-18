@@ -24,7 +24,6 @@ def run_it_3(my_text, qs):
         print('originalllllll', my_df, q)
         ans.append(tmp)
 
-    print(ans)
     return ans
 
 
@@ -50,7 +49,6 @@ def run_it_3_action(question, model):
         max_tokens=1000,
         messages=messages,
     )
-    print('run_it_3_action ', response)
     return response
 
 
