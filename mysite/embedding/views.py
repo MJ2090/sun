@@ -275,8 +275,7 @@ def contact(request):
             print(form.cleaned_data, 88888)
             # ...
             # redirect to a new URL:
-            # return render(request, 'embedding/contact.html', {'name': name})
-            return HttpResponseRedirect('/')
+            return render(request, 'embedding/thanks.html', {})
 
     # if a GET (or any other method) we'll create a blank form
     else:

@@ -1,0 +1,20 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/thanks.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+{% load static %}
+<script src="{% static 'embedding/js/thanks.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div name="contact_thank_you" class="thank-you-outer">
+  <div>
+    <h1>Thank you</h1>
+    <p>Jumping back to Home in <span name="tick">5</span> second(s)</p>
+  </div>
+</div>
+{% endblock %}
