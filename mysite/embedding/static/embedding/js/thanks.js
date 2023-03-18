@@ -5,7 +5,9 @@ function init() {
         if (total == 0) {
             window.location.replace('/');
         }
-        $("span[name='tick']").text(total);
+        if (total > 0) {
+            $("span[name='tick']").text(total);
+        }
     }, 1000);
 }
 
