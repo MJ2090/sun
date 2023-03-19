@@ -169,6 +169,7 @@ def sendchat_async(request):
     new_message = request.POST['message']
     character = request.POST['character']
     enable_speech = request.POST.get('enable_speech', '')
+    dialogue_id = request.POST.get('dialogue_id', '')
 
     my_m = PromptModel.objects.get(name=character)
     messages = json.loads(my_m.history)
@@ -184,8 +185,9 @@ def sendchat_async(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    record_dialogue(request, 'User', new_message)
-    record_dialogue(request, 'AI', ai_message)
+    record_dialogue(request, 'User', new_message, dialogue_id)
+    record_dialogue(request, 'AI', ai_message, dialogue_id)
+    
     if character == '3-year-old guy':
         speaker = 'Ivy'
     elif character == 'Therapist':
@@ -228,6 +230,7 @@ def chat(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
+    form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
 
 
@@ -455,9 +458,8 @@ def do_register(cd):
     return userProfile
 
 
-def record_dialogue(request, role, message):
-    id = load_random_string(10)
-    dialogue = Dialogue.objects.create(role=role, message=message, dialogue_id=id)
+def record_dialogue(request, role, message, dialogue_id):
+    dialogue = Dialogue.objects.create(role=role, message=message, dialogue_id=dialogue_id)
     dialogue.save()
     
 

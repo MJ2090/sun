@@ -53,6 +53,7 @@ function async_call() {
             csrfmiddlewaretoken: csrf.val(),
             model: model.val(),
             enable_speech: enable_speech[0].checked,
+            dialogue_id: $("input[name='dialogue_id']").val(),
         },
         success: function (response) {
             let data = JSON.parse(response);

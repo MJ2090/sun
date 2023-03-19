@@ -20,3 +20,4 @@ class ChatForm(forms.Form):
         attrs={'class': 'character form-select', }))
     enable_speech = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input', }))
+    dialogue_id = forms.CharField(required=True, max_length=21, widget=forms.TextInput())
