@@ -82,4 +82,4 @@ class Dialogue(models.Model):
     dialogue_id = models.CharField(max_length=10, default='')
 
     def __str__(self):
-        return self.message
+        return self.dialogue_id + " " + self.message
