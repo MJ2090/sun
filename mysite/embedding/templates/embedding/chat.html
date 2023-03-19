@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-12">
-          <label for="character" class="form-label">Choose a character</label>
+          <label for="character" class="form-label">Choose an character</label>
           {{ form.character }}
           <div class="invalid-feedback">
             :D
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-7 col-lg-9">
+    <div class="col-md-7 col-lg-8">
       <div class="chat-prompt">Conversation starts here.</div>
       <div class="row g-3">
         <div class="hidden">
@@ -65,7 +65,7 @@
             <div class="bounce3"></div>
           </div>
         </div>
-        {% include "audio_comp.html" %}
+        {% include "comp/audio_comp.html" %}
         <div class="input-group">
           {{ form.message }}
           <button type="button" class="btn btn-primary send-button">Go</button>

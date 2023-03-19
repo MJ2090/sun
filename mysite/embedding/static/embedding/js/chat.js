@@ -86,10 +86,7 @@ function init() {
             let audio = $("audio[name='audio'");
             audio[0].pause();
         }
-    });
-
-    $("input[name='show_controls']").click(function () {
-        let audio = $("audio[name='audio'").toggle(this.checked);
+        $("audio[name='audio'").toggle(this.checked);
     });
 
     $("audio[name='audio'").on('canplaythrough', function () {
