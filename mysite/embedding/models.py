@@ -46,7 +46,7 @@ class TokenConsumption(models.Model):
 
     def __unicode__(self):
         return u'%s %s %s %s' % (self.user.username, self.token_amount, self.model_type, self.secret)
-    
+
 
 class PromptModel(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
@@ -55,7 +55,7 @@ class PromptModel(models.Model):
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.history)
-    
+
 
 class EmbeddingModel(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
@@ -65,11 +65,21 @@ class EmbeddingModel(models.Model):
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
-    
-    
-class Contact(models.Model):        
+
+
+class Contact(models.Model):
     username = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=100, default='')
     message = models.CharField(max_length=100, default='')
+
     def __str__(self):
         return self.username
+
+
+class Dialogue(models.Model):
+    role = models.CharField(max_length=20, default='')
+    message = models.EmailField(max_length=5000, default='')
+    dialogue_id = models.CharField(max_length=10, default='')
+
+    def __str__(self):
+        return self.message

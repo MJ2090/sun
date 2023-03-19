@@ -21,7 +21,7 @@ from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string, get_basic_data, enable_new_home
 from embedding.models import UserProfile
-from embedding.models import Contact
+from embedding.models import Contact, Dialogue
 import embedding.static_values as sc
 import json
 
@@ -184,12 +184,15 @@ def sendchat_async(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
+    record_dialogue(request, 'User', new_message)
+    record_dialogue(request, 'AI', ai_message)
     if character == '3-year-old guy':
         speaker = 'Ivy'
     elif character == 'Therapist':
         speaker = 'Salli'
     else:
         speaker = 'Zhiyu'
+
     if enable_speech == 'true':
         audio_address = generate_audio(ai_message, speaker)
     else:
@@ -451,6 +454,12 @@ def do_register(cd):
         userProfile.save()
     return userProfile
 
+
+def record_dialogue(request, role, message):
+    id = load_random_string(10)
+    dialogue = Dialogue.objects.create(role=role, message=message, dialogue_id=id)
+    dialogue.save()
+    
 
 def record_consumption(request, model_type, openai_response, secret=''):
     with transaction.atomic():
