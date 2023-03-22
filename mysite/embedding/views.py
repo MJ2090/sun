@@ -29,7 +29,6 @@ import json
 def home(request):
     ret = get_basic_data(request)
     ret['home_chat_form'] = HomeChatForm()
-    ret['current_page'] = 'lab'
     ret['enable_home_chat'] = True
     return render(request, 'embedding/home.html', ret)
 
