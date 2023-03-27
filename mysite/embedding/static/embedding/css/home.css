@@ -31,7 +31,7 @@ body {
 
 .container-white {
     margin-top: 20px;
-    min-height: calc(100% - 133px);
+    min-height: calc(100vh - 133px);
 }
 
 .container-grey {

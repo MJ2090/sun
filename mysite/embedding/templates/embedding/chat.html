@@ -42,15 +42,14 @@
       </div>
     </div>
     <div class="col-md-7 col-lg-8">
-      <div class="chat-prompt">Conversation starts here.</div>
       <div class="row g-3">
         <div class="hidden">
           {{ form.dialogue_id }}
           <div name="human_title" class="dialogue-title">
-            You
+            😀 You
           </div>
           <div name="ai_title" class="dialogue-title">
-            AI
+            {{ ai_emoji }} AI
           </div>
           <p name="human_msg" class="dialogue-message">
           </p>
@@ -58,6 +57,7 @@
           </p>
         </div>
         <div class="message-outer-container">
+          <div class="pb-2 chat-prompt">Conversation starts here.</div>
           <div class="message-container">
           </div>
           <div class="spinner" name="spinner" style="display: none">

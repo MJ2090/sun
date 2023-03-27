@@ -1,19 +1,7 @@
 .chat-prompt {
   color: #8b8b8b;
-  font-size: 16px;
+  font-size: 12px;
   font-style: italic;
-  padding: 20px 0;
-}
-
-.word-count {
-  color: red;
-}
-
-.chat-word-count {
-  color: #8b8b8b;
-  font-size: 16px;
-  font-style: italic;
-  padding: 10px 0 0 0;
 }
 
 .dialogue-title {
@@ -32,7 +20,7 @@
   height: 300px;
   overflow: scroll;
   background-color: #f8f8f8;
-  padding: 20px 20px 0 20px;
+  padding: 10px 20px 0 20px;
 }
 
 .spinner {

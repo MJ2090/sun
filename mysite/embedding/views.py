@@ -24,7 +24,10 @@ from embedding.models import UserProfile
 from embedding.models import Contact, Dialogue
 import embedding.static_values as sc
 import json
+import random
+from datetime import datetime
 
+random.seed(datetime.now().timestamp())
 
 def home(request):
     ret = get_basic_data(request)
@@ -231,6 +234,7 @@ def chat(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
+    ret['ai_emoji'] = random.choice('🍀🌖 🌗 🌘🔥🐙🐳😈👑❄️🍕🌰🎲🎮✈️🚀🌋🧸🎉🪩🍯')
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
 
