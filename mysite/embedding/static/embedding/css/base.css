@@ -41,9 +41,8 @@
   height: 3rem;
 }
 
-.instruction {
+.instruction p {
     font-style: italic;
-    padding: 30px 10px 0 10px;
 }
 
 .home-username {
