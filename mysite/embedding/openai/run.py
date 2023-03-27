@@ -7,11 +7,10 @@ def run_it_translate(original_text, target, model):
         {"role": "system", "content": f"You are a helpful assistant that translates the original text to {target}."},
         {"role": "user", "content": f"Translate the following text to {target}: {original_text}"},
     ]
-    print(99999, target, original_text, messages)
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
-        max_tokens=1000,
+        max_tokens=4000,
         messages=messages,
     )
     return response
@@ -35,7 +34,7 @@ def run_it_grammar(original_text, model):
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
-        max_tokens=1000,
+        max_tokens=4000,
         messages=messages,
     )
     return response
@@ -51,7 +50,7 @@ def run_it_summary(original_text, model):
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
-        max_tokens=1000,
+        max_tokens=4000,
         messages=messages,
     )
     return response
@@ -62,7 +61,7 @@ def run_it_7(prompt, model):
         model=model,
         prompt=prompt,
         temperature=0,
-        max_tokens=1000,
+        max_tokens=4000,
         stop=["###"]
     )
     return response
@@ -81,7 +80,7 @@ def run_it_9(messages, model):
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
-        max_tokens=1000,
+        max_tokens=4000,
         messages=messages,
     )
     return response
