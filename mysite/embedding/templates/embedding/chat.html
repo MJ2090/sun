@@ -23,27 +23,27 @@
           Show Instructions
         </a>
         <div>
-          <div class="collapse" id="instruction">
+          <div class="row g-3 collapse" id="instruction">
             <div class="instruction">
               <p>1. Choose your character and model</p>
               <p>2. Type something and click GO!</p>
             </div>
-          </div>
-        </div>
 
-        <div class="col-12">
-          <label for="character" class="form-label">Choose an character</label>
-          {{ form.character }}
-          <div class="invalid-feedback">
-            :D
-          </div>
-        </div>
+            <div class="col-12">
+              <label for="character" class="form-label">Choose an character</label>
+              {{ form.character }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
 
-        <div class="col-12">
-          <label for="character" class="form-label">Choose AI model</label>
-          {{ form.training_model }}
-          <div class="invalid-feedback">
-            :D
+            <div class="col-12">
+              <label for="character" class="form-label">Choose AI model</label>
+              {{ form.training_model }}
+              <div class="invalid-feedback">
+                :D
+              </div>
+            </div>
           </div>
         </div>
       </div>
