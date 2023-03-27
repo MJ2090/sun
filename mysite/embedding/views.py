@@ -383,7 +383,8 @@ def image(request):
 
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = run_it_translate(original_text, model='gpt-3.5-turbo')
+    target = request.POST.get('target', '')
+    openai_response = run_it_translate(original_text, target=target, model='gpt-3.5-turbo')
     translated_text = openai_response['choices'][0]['message']['content']
     record_consumption(
         request, sc.MODEL_TYPES_TRANSLATE, openai_response)

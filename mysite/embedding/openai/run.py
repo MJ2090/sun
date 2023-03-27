@@ -2,12 +2,12 @@ import openai
 import embedding.static_values as sc
 
 
-def run_it_translate(original_text, model):
+def run_it_translate(original_text, target, model):
     messages = [
-        {"role": "system", "content": "You are a helpful assistant that translates English to Chinese."},
-        {"role": "user", "content": "Translate the following English text to Chinese: {}".format(
-            original_text)},
+        {"role": "system", "content": f"You are a helpful assistant that translates the original text to {target}."},
+        {"role": "user", "content": f"Translate the following text to {target}: {original_text}"},
     ]
+    print(99999, target, original_text, messages)
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,

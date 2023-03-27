@@ -2,6 +2,7 @@ function async_call() {
     let original_text = $("textarea[name='text']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let translated_text = $("textarea[name='translated_text']");
+    let target = $("select[name='target']");
     translated_text.val('');
     translated_text.hide();
     $("div[name='spinner").show();
@@ -11,6 +12,7 @@ function async_call() {
         data: {
             original_text: original_text.val(),
             csrfmiddlewaretoken: csrf.val(),
+            target: target.val(),
         },
         success: function (response) {
             translated_text.val(response);

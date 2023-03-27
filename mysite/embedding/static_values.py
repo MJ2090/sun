@@ -59,3 +59,28 @@ IMAGE_TYPES =(
     (IMAGE_TYPES_COMICS, 'comics'),
     (IMAGE_TYPES_BLACK_WHITE, 'black and white'),
 )
+
+TRANSLATION_CN = 'Chinese'
+TRANSLATION_EN = 'English'
+TRANSLATION_FR = 'French'
+TRANSLATION_DE = 'German'
+TRANSLATION_JP = 'Japanese'
+TRANSLATION_KR = 'Korean'
+TRANSLATION_SP = 'Spanish'
+TRANSLATION_IT = 'Italien'
+TRANSLATION_RU = 'Russie'
+TRANSLATION_VE = 'Vietnamien'
+TRANSLATION_PO = 'Português'
+TRANSLATION_TYPES =(
+    (TRANSLATION_CN, '中文'),
+    (TRANSLATION_EN, 'English'),
+    (TRANSLATION_FR, 'Français'),
+    (TRANSLATION_DE, 'Deutsch'),
+    (TRANSLATION_JP, 'やまと'),
+    (TRANSLATION_KR, '한국어'),
+    (TRANSLATION_SP, 'Español'),
+    (TRANSLATION_IT, 'italiano'),
+    (TRANSLATION_RU, 'русский язык'),
+    (TRANSLATION_VE, 'Tiếng Việt'),
+    (TRANSLATION_PO, 'Português'),
+)
