@@ -1,5 +1,5 @@
 function welcome() {
-    let labels = ['Enjoy', '欢迎使用', 'Bonne lecture', '楽しむ', '즐기기', '歡迎使用', 'насолоджуватися', 'disfrute de', 'genießen Sie']
+    let labels = ['Enjoy', '欢迎使用', 'Bonne lecture', '楽しむ', 'Welkom', '즐기기', '歡迎使用', 'насолоджуватися', 'disfrute de', 'genießen Sie', 'Selamat datang', 'Hoş geldiniz', 'Bem-vindo', 'ברוך הבא']
     let index = 1;
     let total = labels.length;
 
