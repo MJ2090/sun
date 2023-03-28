@@ -30,7 +30,6 @@ def run_it_grammar(original_text, model):
         {"role": "user", "content": "{}".format(original_text)},
     ]
 
-    print(original_text)
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.2,
@@ -76,10 +75,10 @@ def run_it_image(prompt, count):
     return response
 
 
-def run_it_9(messages, model):
+def run_it_chat(messages, model):
     response = openai.ChatCompletion.create(
         model=model,
-        temperature=0.2,
+        temperature=0.4,
         max_tokens=3000,
         messages=messages,
     )

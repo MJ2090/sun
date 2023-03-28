@@ -14,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_9
+from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -161,7 +161,7 @@ def sendchat_home(request):
 
     print("Msg sent to openai: ", messages)
 
-    openai_response = run_it_9(messages, model='gpt-3.5-turbo')
+    openai_response = run_it_chat(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
@@ -185,7 +185,7 @@ def sendchat_async(request):
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
 
-    openai_response = run_it_9(messages, model=model)
+    openai_response = run_it_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
