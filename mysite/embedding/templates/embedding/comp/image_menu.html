@@ -1,0 +1,31 @@
+<div class="row g-3 pb-3">
+    <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Show Instructions
+    </a>
+    <div>
+        <div class="row g-3 collapse" id="instruction">
+            <div class="instruction">
+                <p>1. Provide some text to describe the image.</p>
+                <p>2. Select a certain style.</p>
+                <p>3. Press OK.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label for="style" class="form-label">How many in a shot</label>
+        {{ form.count }}
+        <div class="invalid-feedback">
+            :D
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label for="style" class="form-label">Choose an style</label>
+        {{ form.style }}
+        <div class="invalid-feedback">
+            :D
+        </div>
+    </div>
+</div>

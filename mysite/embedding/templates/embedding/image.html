@@ -14,38 +14,18 @@
   <h4 class="mb-3">Image generation</h4>
   <form class="row needs-validation" novalidate="" action="/image/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
-    <div class="col-md-3 col-lg-3 col-sm-12">
-      <div class="row g-3 pb-3">
-        <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
-          aria-controls="collapseExample">
-          Show Instructions
-        </a>
-        <div>
-          <div class="row g-3 collapse" id="instruction">
-            <div class="instruction">
-              <p>1. Provide some text to describe the image.</p>
-              <p>2. Select a certain style.</p>
-              <p>3. Press OK.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <label for="style" class="form-label">Choose an style</label>
-          {{ form.style }}
-          <div class="invalid-feedback">
-            :D
-          </div>
-        </div>
-      </div>
+    <div class="col-md-3 col-lg-3 mobile-only">
+      {% include "comp/image_menu.html" %}
     </div>
+
     <div class="col-md-9 col-lg-9 col-sm-12">
       <div class="row g-3">
 
-        <div class="col-lg-8 col-sm-12">
-          <label for="address2" class="form-label">Image Description</label>
+        <div class="input-group col-lg-8 col-sm-12">
           {{ form.text }}
+          <button type="button" class="btn btn-primary send-button">Generate Now</button>
         </div>
+
         <div class="col-lg-4 col-sm-12 col-md-12">
           <label for="address2" class="form-label">Generated Image</label>
           <img height="250" width="250" name='generated_img' scr="">
@@ -57,10 +37,11 @@
         </div>
 
       </div>
+    </div>
 
-      <hr class="my-4">
-
-      <button class="send-button w-100 btn btn-primary btn-md" type="submit">GO</button>
+    <div class="col-md-3 col-lg-3 desktop-only">
+      {% include "comp/image_menu.html" %}
+    </div>
   </form>
 </div>
 </div>

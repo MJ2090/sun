@@ -3,6 +3,7 @@ function async_call() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let generated_img = $("img[name='generated_img']");
     let style = $("select[name='style']");
+    let count = $("select[name='count']");
     generated_img.hide();
     generated_img.attr('src', '');
     $("div[name='spinner").show();
@@ -13,6 +14,7 @@ function async_call() {
             original_text: original_text.val(),
             style: style.val(),
             csrfmiddlewaretoken: csrf.val(),
+            count: count.val(),
         },
         success: function (response) {
             $("div[name='spinner").hide();

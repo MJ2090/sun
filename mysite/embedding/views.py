@@ -14,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_8, run_it_9
+from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_9
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -366,9 +366,14 @@ def signup(request):
 def image_async(request):
     description = request.POST.get('original_text', '')
     style = request.POST.get('style', '')
+    count = request.POST.get('count', '3')
+    count = int(count)
+    print(count)
     if style != '':
         description += '. In ' + style + ' style.'
-    openai_response = run_it_8(description)
+    openai_response = run_it_image(description, count)
+    print(888888888)
+    print(openai_response)
     generated_url = openai_response['data'][0]['url']
     record_consumption(
         request, sc.MODEL_TYPES_IMAGE, openai_response)

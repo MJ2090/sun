@@ -67,11 +67,11 @@ def run_it_7(prompt, model):
     return response
 
 
-def run_it_8(prompt):
+def run_it_image(prompt, count):
     response = openai.Image.create(
         prompt=prompt,
-        n=1,
-        size="512x512"
+        n=count,
+        size="256x256"
     )
     return response
 
