@@ -15,25 +15,8 @@
   <form class="row needs-validation" novalidate="" action="/embedding/" method="post"
     onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
-    <div class="col-md-4 col-lg-3">
-      <div class="row g-3 pb-3">
-        <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
-          aria-controls="collapseExample">
-          Show Instructions
-        </a>
-        <div>
-          <div class="row g-3 collapse" id="instruction">
-            <div class="instruction">
-              <p>Instructions:</p>
-              <p>1. Select your Q&A model.</p>
-              <p>2. Provide a question and press GO.</p>
-            </div>
-          </div>
-        </div>
-        <p>Click the New button to create a new model.</p>
-        <a class="pb-5" href="/embedding_training/"><button class="w-100 btn btn-primary btn-md" type="button">New
-            model</button></a>
-      </div>
+    <div class="col-md-4 col-lg-3 mobile-only">
+      {% include "comp/embedding_question_menu.html" %}
     </div>
 
     {% if error_msg %}
@@ -72,6 +55,10 @@
       <button class="send-button w-100 btn btn-primary btn-md" type="submit">GO</button>
     </div>
     {% endif %}
+    
+    <div class="col-md-4 col-lg-3 desktop-only">
+      {% include "comp/embedding_question_menu.html" %}
+    </div>
   </form>
 </div>
 </div>
