@@ -16,21 +16,8 @@
     onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
 
-    <div class="col-md-4 col-lg-3">
-      <div class="row g-3">
-        <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
-          aria-controls="collapseExample">
-          Show Instructions
-        </a>
-        <div>
-          <div class="row g-3 collapse" id="instruction">
-            <div class="instruction">
-              <p>1. Provide some text to the input panel.</p>
-              <p>2. Press GO.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-md-4 col-lg-3 mobile-only">
+      {% include "comp/summary_menu.html" %}
     </div>
 
     <div class="col-md-7 col-lg-9">
@@ -55,6 +42,11 @@
       <hr class="my-4">
 
       <button class="send-button w-100 btn btn-primary btn-md" type="submit">GO</button>
+    </div>
+
+    <div class="col-md-4 col-lg-3 desktop-only">
+      {% include "comp/summary_menu.html" %}
+    </div>
   </form>
 </div>
 </div>
