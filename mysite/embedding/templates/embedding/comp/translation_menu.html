@@ -1,0 +1,22 @@
+<div class="row g-3 pb-3">
+    <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Show Instructions
+    </a>
+    <div>
+        <div class="row g-3 collapse" id="instruction">
+            <div class="instruction">
+                <p>1. Provide some text to the original text panel.</p>
+                <p>2. Select a target language.</p>
+                <p>3. Press GO.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="target" class="form-label">Translate to</label>
+        {{ form.target }}
+        <div class="invalid-feedback">
+            :D
+        </div>
+    </div>
+</div>
