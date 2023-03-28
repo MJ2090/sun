@@ -368,17 +368,12 @@ def image_async(request):
     style = request.POST.get('style', '')
     count = request.POST.get('count', '3')
     count = int(count)
-    print(count)
     if style != '':
         description += '. In ' + style + ' style.'
     openai_response = run_it_image(description, count)
-    print(888888888)
-    print(openai_response)
-    generated_url = openai_response['data'][0]['url']
     record_consumption(
         request, sc.MODEL_TYPES_IMAGE, openai_response)
-    print(generated_url)
-    return HttpResponse(generated_url.strip())
+    return HttpResponse(json.dumps({'urls': openai_response['data']}))
 
 
 def image(request):

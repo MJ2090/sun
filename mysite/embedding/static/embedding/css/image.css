@@ -51,3 +51,18 @@
         transform: scale(1.0);
     }
 }
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: left;
+}
+
+.image {
+    border-radius: 4px;
+}

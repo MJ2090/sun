@@ -1,12 +1,11 @@
 function async_call() {
-    let original_text = $("textarea[name='text']");
+    let original_text = $("input[name='text']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let generated_img = $("img[name='generated_img']");
     let style = $("select[name='style']");
     let count = $("select[name='count']");
-    generated_img.hide();
-    generated_img.attr('src', '');
-    $("div[name='spinner").show();
+    let image_container = $("div[name='image_container']");
+    $("div[name='spinner']").show();
     $.ajax({
         type: 'POST',
         url: "/image_async/",
@@ -17,17 +16,36 @@ function async_call() {
             count: count.val(),
         },
         success: function (response) {
-            $("div[name='spinner").hide();
-            generated_img.attr('src', response);
-            generated_img.show();
+            $("div[name='spinner']").hide();
+            let data = JSON.parse(response);
+            for (let i = 0; i < data.urls.length; i++) {
+                let cloned = generated_img.clone();
+                cloned.attr('src', data.urls[i].url);
+                cloned.attr('name', 'temp');
+                image_container.prepend(cloned);
+            }
+
+            setTimeout(showImage, 200);
         },
     })
+}
+
+function showImage() {
+    $("img[name='temp']").fadeIn(400);
+    $("img[name='temp']").attr('name', '');
 }
 
 function init() {
     $('.send-button').click(function () {
         async_call();
         return false;
+    });
+
+    $("input[name='text']").keydown(function (e) {
+        if (e.keyCode == 13) {
+            async_call();
+            return false;
+        }
     });
 }
 
