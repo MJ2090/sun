@@ -25,13 +25,15 @@ function async_call() {
                 image_container.prepend(cloned);
             }
 
-            setTimeout(showImage, 400);
+            setTimeout(showImage, 1000);
         },
     })
 }
 
 function showImage() {
-    $("img[name='temp']").fadeIn(400);
+    $("img[name='temp']").animate({
+        opacity: 0.85,
+    }, 400);
     $("img[name='temp']").attr('name', '');
 }
 
