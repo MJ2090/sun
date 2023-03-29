@@ -22,13 +22,14 @@ function async_call() {
     })
 }
 
-function init() {
-    $('.send-button').click(function () {
-        async_call();
-        return false;
+function translation_init() {
+    let timer;
+    $("textarea[name='text']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { async_call(); }, 800);
     });
 }
 
 $(document).ready(function () {
-    init();
+    translation_init();
 })
