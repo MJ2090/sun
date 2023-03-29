@@ -25,7 +25,7 @@ function async_call() {
                 image_container.prepend(cloned);
             }
 
-            setTimeout(showImage, 200);
+            setTimeout(showImage, 400);
         },
     })
 }
