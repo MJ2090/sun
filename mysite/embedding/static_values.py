@@ -71,6 +71,7 @@ TRANSLATION_IT = 'Italien'
 TRANSLATION_RU = 'Russie'
 TRANSLATION_VE = 'Vietnamien'
 TRANSLATION_PO = 'Português'
+TRANSLATION_HE = 'Hebrew'
 TRANSLATION_TYPES =(
     (TRANSLATION_CN, '中文'),
     (TRANSLATION_EN, 'English'),
@@ -83,6 +84,7 @@ TRANSLATION_TYPES =(
     (TRANSLATION_RU, 'русский язык'),
     (TRANSLATION_VE, 'Tiếng Việt'),
     (TRANSLATION_PO, 'Português'),
+    (TRANSLATION_HE, 'עִברִית'),
 )
 
 IMAGE_COUNT_3 = 3
