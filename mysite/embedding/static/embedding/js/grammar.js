@@ -1,4 +1,4 @@
-function async_call() {
+function grammar_async_call() {
     let original_text = $("textarea[name='text']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let fixed_text = $("textarea[name='fixed_text']");
@@ -13,20 +13,22 @@ function async_call() {
             csrfmiddlewaretoken: csrf.val(),
         },
         success: function (response) {
-            fixed_text.val(response);
+            let data = JSON.parse(response);
+            fixed_text.val(data.plain_result);
             $("div[name='spinner").hide();
             fixed_text.show();
         },
     })
 }
 
-function init() {
-    $('.send-button').click(function () {
-        async_call();
-        return false;
+function grammar_init() {
+    let timer;
+    $("textarea[name='text']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { grammar_async_call(); }, 800);
     });
 }
 
 $(document).ready(function () {
-    init();
+    grammar_init();
 })

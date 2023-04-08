@@ -19,7 +19,7 @@ from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_t
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
-from .utils import load_random_string, get_basic_data, enable_new_home
+from .utils import load_random_string, get_basic_data, enable_new_home, parse_diff
 from embedding.models import UserProfile
 from embedding.models import Contact, Dialogue
 import embedding.static_values as sc
@@ -406,7 +406,7 @@ def grammar_async(request):
     record_consumption(
         request, sc.MODEL_TYPES_GRAMMAR, openai_response)
     print(fixed_text)
-    return HttpResponse(fixed_text.strip())
+    return HttpResponse(json.dumps({'plain_result': fixed_text.strip(), 'dict': parse_diff(original_text, fixed_text.strip())}))
 
 
 def grammar(request):
