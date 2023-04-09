@@ -60,3 +60,7 @@
     display: none;
   }
 }
+
+.form-control:disabled {
+  background-color: #f8f8f8;
+}
