@@ -1,4 +1,4 @@
-function async_call() {
+function translation_async_call() {
     let original_text = $("textarea[name='text']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let translated_text = $("textarea[name='translated_text']");
@@ -26,7 +26,11 @@ function translation_init() {
     let timer;
     $("textarea[name='text']").keyup(function () {
         clearTimeout(timer);
-        timer = setTimeout(() => { async_call(); }, 800);
+        timer = setTimeout(() => { translation_async_call(); }, 800);
+    });
+    $("select[name='target']").change(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { translation_async_call(); }, 800);
     });
 }
 
