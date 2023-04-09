@@ -17,7 +17,7 @@
 }
 
 .message-outer-container {
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 340px);
   height: 320px;
   overflow: scroll;
   background-color: #f8f8f8;
