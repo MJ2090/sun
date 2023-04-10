@@ -1,4 +1,4 @@
-function async_call() {
+function summary_async_call() {
     let original_text = $("textarea[name='text']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let summary_text = $("textarea[name='summary_text']");
@@ -20,13 +20,14 @@ function async_call() {
     })
 }
 
-function init() {
-    $('.send-button').click(function () {
-        async_call();
-        return false;
+function summary_init() {
+    let timer;
+    $("textarea[name='text']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { summary_async_call(); }, 800);
     });
 }
 
 $(document).ready(function () {
-    init();
+    summary_init();
 })

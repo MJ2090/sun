@@ -1,5 +1,8 @@
 function translation_async_call() {
     let original_text = $("textarea[name='text']");
+    if (original_text.val().trim() == "") {
+        return;
+    }
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let translated_text = $("textarea[name='translated_text']");
     let target = $("select[name='target']");
