@@ -170,7 +170,6 @@ def sendchat_home(request):
 
 def sendchat_async(request):
     model = request.POST.get('model', '')
-    model = "davinci:ft-done-global-2023-03-06-09-41-04"
     new_message = request.POST['message']
     character = request.POST['character']
     enable_speech = request.POST.get('enable_speech', '')
