@@ -2,17 +2,12 @@
 <div class="row g-3 pb-3">
     <a class="collapsed" data-bs-toggle="collapse" href="#instruction" role="button" aria-expanded="false"
         aria-controls="collapseExample">
-        Show Instructions
+        More settings
     </a>
     <div>
         <div class="row g-3 collapse" id="instruction">
-            <div class="instruction">
-                <p>1. Choose your character and model</p>
-                <p>2. Type something and click GO!</p>
-            </div>
-
             <div class="col-12">
-                <label for="character" class="form-label">Choose an character</label>
+                <label for="character" class="form-label">Choose a character</label>
                 {{ form.character }}
                 <div class="invalid-feedback">
                     :D
@@ -20,7 +15,7 @@
             </div>
 
             <div class="col-12">
-                <label for="character" class="form-label">Choose AI model</label>
+                <label for="character" class="form-label">Choose a model</label>
                 {{ form.training_model }}
                 <div class="invalid-feedback">
                     :D

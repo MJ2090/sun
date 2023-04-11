@@ -16,12 +16,24 @@
   display: none;
 }
 
-.message-outer-container {
-  min-height: calc(100vh - 340px);
-  height: 320px;
-  overflow: scroll;
-  background-color: #f8f8f8;
-  padding: 10px 20px 0 20px;
+@media (min-width:576px) {
+  .message-outer-container {
+    min-height: calc(100vh - 260px);
+    height: 320px;
+    overflow: scroll;
+    background-color: #f8f8f8;
+    padding: 10px 20px 0 20px;
+  }
+}
+
+@media (max-width:575px) {
+  .message-outer-container {
+    min-height: calc(100vh - 340px);
+    height: 320px;
+    overflow: scroll;
+    background-color: #f8f8f8;
+    padding: 10px 20px 0 20px;
+  }
 }
 
 .spinner {
