@@ -1,4 +1,4 @@
-function async_call() {
+function chat_async_call() {
     let new_msg = $("input[name='message']");
     if (new_msg.val() == "") {
         return;
@@ -80,7 +80,18 @@ function async_call() {
     })
 }
 
-function init() {
+function chat_init() {
+    $('.send-button').click(function () {
+        chat_async_call();
+    });
+
+    $("input[name='message']").keydown(function (e) {
+        if (e.keyCode == 13) {
+            chat_async_call();
+            return false;
+        }
+    });
+
     // Audio play starts
     $("input[name='enable_speech']").click(function () {
         if (!this.checked) {
@@ -94,19 +105,8 @@ function init() {
         this.play();
     });
     // Audio play ends
-
-    $('.send-button').click(function () {
-        async_call();
-    });
-
-    $("input[name='message']").keydown(function (e) {
-        if (e.keyCode == 13) {
-            async_call();
-            return false;
-        }
-    });
 }
 
 $(document).ready(function () {
-    init();
+    chat_init();
 })
