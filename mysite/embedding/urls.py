@@ -38,6 +38,7 @@ urlpatterns = [
     path('summary_async/', views.summary_async, name='summary_async'),
     path('translation_async/', views.translation_async, name='translation_async'),
     path('image_async/', views.image_async, name='image_async'),
+    path('generation/', views.generation, name='generation'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
