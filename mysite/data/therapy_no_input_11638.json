@@ -385,7 +385,7 @@
         "output": "Let's try an exercise. I'll play the role of your partner and you can practice expressing a concern to me. Remember to use \u201cI\u201d statements and to focus on the specific behavior that you find problematic."
     },
     {
-        "instruction": "Okay. (takes a deep breath) I feel upset when you don't follow through on things you say you'll do. It makes me feel like you don't value my time or our commitments.",
+        "instruction": "Okay.  I feel upset when you don't follow through on things you say you'll do. It makes me feel like you don't value my time or our commitments.",
         "input": "",
         "output": "Great job! That was a really clear and concise way to express your feelings without blaming or attacking. How did that feel for you?"
     },
@@ -745,7 +745,7 @@
         "output": "Okay, let's start with some deep breathing exercises. I want you to take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Let's do that a few times together."
     },
     {
-        "instruction": "(takes a few deep breaths) That actually feels pretty good.",
+        "instruction": " That actually feels pretty good.",
         "input": "",
         "output": "Great. We can work on incorporating more relaxation techniques into your daily routine. It's important to take care of yourself both physically and mentally during retirement."
     },
@@ -1080,7 +1080,7 @@
         "output": "Okay, let's try it now. Take a deep breath in through your nose, hold it for a few seconds, and then exhale through your mouth. Repeat this a few times and see if you notice any difference in how you feel."
     },
     {
-        "instruction": "(takes a few deep breaths) Actually, that does feel a bit calming. My mind feels a little less cluttered.",
+        "instruction": " Actually, that does feel a bit calming. My mind feels a little less cluttered.",
         "input": "",
         "output": "That's great to hear. You can also try incorporating some other self-care practices into your routine, like taking a relaxing bath or going for a walk in nature. It's important to find what works for you and make it a priority in your life."
     },
@@ -1910,7 +1910,7 @@
         "output": "Great. So, let's begin by taking a deep breath in through your nose for a count of 4. Hold your breath for a count of 7, and then exhale slowly through your mouth for a count of 8. Let's try that again a few times together."
     },
     {
-        "instruction": "(breathing) Wow, that really helped me feel more relaxed.",
+        "instruction": " Wow, that really helped me feel more relaxed.",
         "input": "",
         "output": "I'm glad to hear that. Deep breathing exercises can be done anytime, anywhere and is a great way to manage stress on the go."
     },
@@ -2682,7 +2682,7 @@
     {
         "instruction": "Yeah, all of those things. I feel like I'm constantly on edge, and I can't relax because I always have something on my mind.",
         "input": "",
-        "output": "Okay, let's start by taking some deep breaths together. (Therapist leads the patient through a brief breathing exercise). How does that feel?"
+        "output": "Okay, let's start by taking some deep breaths together. . How does that feel?"
     },
     {
         "instruction": "That actually feels really good. I feel a little more relaxed now.",
@@ -3220,7 +3220,7 @@
         "output": "Great. Let's start with a simple exercise. I want you to sit comfortably with your eyes closed and focus on your breath. Notice the sensation of the air moving in and out of your body. If your mind wanders, gently bring it back to your breath. Let's try this for a few minutes."
     },
     {
-        "instruction": "Okay, I'll give it a try.(After a few minutes)",
+        "instruction": "Okay, I'll give it a try.",
         "input": "",
         "output": "How do you feel?"
     },
@@ -4955,7 +4955,7 @@
         "output": "Great. I'm going to guide you through a simple breathing exercise. Take a deep breath in, and then slowly exhale. As you exhale, imagine that you're releasing any tension or stress that you're holding onto. Take another deep breath in, and then slowly exhale. Notice the sensation of your breath as it moves in and out of your body. If your mind starts to wander, that's okay. Just gently bring your attention back to your breath. Let's do a few more breaths together."
     },
     {
-        "instruction": "(takes a deep breath) That feels nice. I feel a little more relaxed already.",
+        "instruction": " That feels nice. I feel a little more relaxed already.",
         "input": "",
         "output": "That's great to hear. Remember, you can do this exercise anytime you're feeling overwhelmed or stressed. It's a simple way to bring your focus back to the present moment."
     },
@@ -8912,7 +8912,7 @@
     {
         "instruction": "No, I haven't. What is it?",
         "input": "",
-        "output": "Interpersonal Therapy (IPT) is a type of therapy that focuses on improving your relationships with others. We'll work together to identify any problems you may be having in your relationships and learn new communication and coping skills to help you better navigate those relationships."
+        "output": "Interpersonal Therapy  is a type of therapy that focuses on improving your relationships with others. We'll work together to identify any problems you may be having in your relationships and learn new communication and coping skills to help you better navigate those relationships."
     },
     {
         "instruction": "That sounds like it could be really helpful. How long does it usually take before you start seeing results?",
@@ -9142,7 +9142,7 @@
     {
         "instruction": "Sure, I'll try anything.",
         "input": "",
-        "output": "Great. Let's start by taking a few deep breaths. (Pause) Now, I want you to close your eyes and focus on your breath. Notice the sensation of the air coming in and out of your nostrils. (Pause) If your mind starts to wander, that's okay. Just gently bring your attention back to your breath. (Pause) How are you feeling?"
+        "output": "Great. Let's start by taking a few deep breaths.  How are you feeling?"
     },
     {
         "instruction": "I actually feel a little more relaxed.",
@@ -9205,7 +9205,7 @@
         "output": "Hi, how are you feeling today?"
     },
     {
-        "instruction": "(sighs) Honestly, I'm feeling pretty overwhelmed. I have so much on my plate right now.",
+        "instruction": " Honestly, I'm feeling pretty overwhelmed. I have so much on my plate right now.",
         "input": "",
         "output": "I understand. Can you tell me a little bit more about what's been going on?"
     },
@@ -9295,12 +9295,12 @@
         "output": "Great. Let's start with some deep breathing exercises. Take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Let's do that a few times together."
     },
     {
-        "instruction": "(taking deep breaths) That helps.",
+        "instruction": " That helps.",
         "input": "",
         "output": "Good. Another technique is progressive muscle relaxation. Let's start with your hands. Clench your fists for a few seconds and then release. Let's do that a few times together."
     },
     {
-        "instruction": "(clenching and releasing fists) That feels good.",
+        "instruction": " That feels good.",
         "input": "",
         "output": "Great. Let's continue that technique with your other muscle groups. It's important to take breaks throughout the day to do these exercises and check in with yourself."
     },
@@ -11560,7 +11560,7 @@
         "output": "That's okay. We can work on some techniques together. One thing that can be helpful is deep breathing exercises. Let's try it now. Take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth."
     },
     {
-        "instruction": "(deep breath) Okay, that feels nice.",
+        "instruction": " Okay, that feels nice.",
         "input": "",
         "output": "Great. It's important to take a few minutes each day to focus on your breathing and clear your mind. Another technique is progressive muscle relaxation. Do you know what that is?"
     },
@@ -11575,7 +11575,7 @@
         "output": "Okay, let's start by tensing the muscles in your feet. Hold that tension for a few seconds, and then release. Now let's tense the muscles in your calves. Hold, and release. Keep working your way up your body, tensing and then relaxing each muscle group."
     },
     {
-        "instruction": "(relaxes) That actually feels really good.",
+        "instruction": " That actually feels really good.",
         "input": "",
         "output": "I'm glad to hear that. These techniques can be helpful in managing stress and anxiety. I'm also here to support you and help you work through any challenges you may be facing. Remember that you're not alone, and it's okay to ask for help when you need it."
     },
@@ -12160,7 +12160,7 @@
         "output": "Okay, let's start with a simple exercise. Take a deep breath in for four seconds, hold it for four seconds, then exhale for four seconds. Repeat this for a few minutes until you start to feel more relaxed."
     },
     {
-        "instruction": "(takes a deep breath) I already feel a little better.",
+        "instruction": " I already feel a little better.",
         "input": "",
         "output": "That's great! It's important to take time for yourself to recharge and lower your stress levels. What other hobbies or activities do you enjoy outside of work?"
     },
@@ -12692,7 +12692,7 @@
     {
         "instruction": "Okay, that makes sense. What else can we work on?",
         "input": "",
-        "output": "We can also work on cognitive restructuring, which involves identifying and changing negative thought patterns that contribute to your anxiety. For example, if you tend to think in all-or-nothing terms (like \u201cif I don't do everything perfectly, I'm a failure\u201d), we would work on reframing those thoughts to be more realistic and balanced."
+        "output": "We can also work on cognitive restructuring, which involves identifying and changing negative thought patterns that contribute to your anxiety. For example, if you tend to think in all-or-nothing terms , we would work on reframing those thoughts to be more realistic and balanced."
     },
     {
         "instruction": "I definitely struggle with negative thoughts. It would be great to learn how to change them.",
@@ -12985,12 +12985,12 @@
         "output": "Okay, let's start by writing down what you want to say. Then, we can role-play the conversation."
     },
     {
-        "instruction": "(writes down what they want to say)",
+        "instruction": "",
         "input": "",
         "output": "Okay, now let's pretend I'm your mom. Take a deep breath and try to speak calmly."
     },
     {
-        "instruction": "(practices the conversation)",
+        "instruction": "",
         "input": "",
         "output": "Great job! How did that feel?"
     },
@@ -14815,12 +14815,12 @@
         "output": "Great. Let's start by taking a deep breath in and exhaling slowly. Focus on your breath and let go of any tension in your body."
     },
     {
-        "instruction": "(deep breath) I feel a little more relaxed already.",
+        "instruction": " I feel a little more relaxed already.",
         "input": "",
         "output": "That's good. Let's try another one. Inhale deeply and exhale slowly. Visualize a peaceful scene in your mind, like a beach or a forest."
     },
     {
-        "instruction": "(deep breath and exhale) That was nice. I feel more calm now.",
+        "instruction": " That was nice. I feel more calm now.",
         "input": "",
         "output": "That's the idea. These techniques can help you manage your stress and feel better overall. It's important to take breaks and do things you enjoy to prevent burnout."
     },
@@ -15085,7 +15085,7 @@
         "output": "Great. Let's start by taking a few deep breaths together. Inhale deeply through your nose, and exhale slowly through your mouth. Repeat that a few times, and try to focus on the sensation of your breath moving in and out of your body. "
     },
     {
-        "instruction": "(takes a few deep breaths) That does feel calming.",
+        "instruction": " That does feel calming.",
         "input": "",
         "output": "Excellent. Mindfulness can help you stay grounded in the present moment, rather than getting lost in worries about the past or future. Another strategy you might try is keeping a journal. Writing down your thoughts and feelings can help you process them and gain a new perspective."
     },
@@ -16065,12 +16065,12 @@
         "output": "Great. Let's start by taking a few deep breaths together. Inhale through your nose, filling your lungs with air, and exhale through your mouth slowly. Let's do this three times."
     },
     {
-        "instruction": "(takes three deep breaths) That does feel pretty calming.",
+        "instruction": " That does feel pretty calming.",
         "input": "",
         "output": "Good. Now let's try a mindfulness exercise. Close your eyes and focus on the sensations in your body. Notice any tension, any tightness, any soreness. Just observe these sensations without judgment. Can you do this for a few minutes?"
     },
     {
-        "instruction": "(closes eyes and takes a few minutes to focus on body sensations) Okay, I think I can do that.",
+        "instruction": " Okay, I think I can do that.",
         "input": "",
         "output": "Great job, you're doing really well. Now, let's talk a bit more about the stressors in your life. What are some of the biggest sources of stress for you right now?"
     },
@@ -17895,7 +17895,7 @@
         "output": "Great, let's start with some mindful breathing exercises. Take a deep breath in and hold it for a few seconds, then slowly exhale. Focus on your breath and nothing else. Let any thoughts that come up just pass by without judgment."
     },
     {
-        "instruction": "(takes a deep breath) Okay, I feel a little calmer already.",
+        "instruction": " Okay, I feel a little calmer already.",
         "input": "",
         "output": "That's great. Mindfulness exercises can be very helpful for reducing anxiety and stress. Now, let's talk about the flashbacks and nightmares. Have you tried any grounding techniques when they happen?"
     },
@@ -18830,7 +18830,7 @@
         "output": "Great. Let's start with some deep breathing exercises to help you relax and focus on the present moment. Close your eyes and take a deep breath in, hold it for a few seconds, and then slowly exhale. Let's do that a few more times."
     },
     {
-        "instruction": "(deep breaths)",
+        "instruction": "",
         "input": "",
         "output": "How do you feel?"
     },
@@ -18975,7 +18975,7 @@
         "output": "I'm sure that's not true. Let's try an exercise. I want you to think of one thing that you like about yourself. It can be anything, big or small."
     },
     {
-        "instruction": "(pauses for a moment) Well, I do like my sense of humor. I've been told that I'm pretty funny.",
+        "instruction": " Well, I do like my sense of humor. I've been told that I'm pretty funny.",
         "input": "",
         "output": "That's great! See, you do have positive qualities. And I bet there are many more that you haven't even thought of yet."
     },
@@ -20442,7 +20442,7 @@
     {
         "instruction": "That sounds good. I would like that.",
         "input": "",
-        "output": "Great. Let's start by taking a few deep breaths together. (The therapist guides the patient through a brief breathing exercise.) How does that feel?"
+        "output": "Great. Let's start by taking a few deep breaths together.  How does that feel?"
     },
     {
         "instruction": "That feels nice. It's calming.",
@@ -20920,12 +20920,12 @@
         "output": "Sure, let's start with deep breathing. I want you to take a deep breath in through your nose and hold it for a few seconds, and then exhale slowly through your mouth. Let's do that a few times."
     },
     {
-        "instruction": "(takes a deep breath) Okay, that feels nice.",
+        "instruction": " Okay, that feels nice.",
         "input": "",
         "output": "Good. Now, I want you to think about something that makes you feel calm and relaxed. It could be a place, a person, or an activity. Picture that in your mind as you continue to breathe deeply."
     },
     {
-        "instruction": "(closes eyes and takes a deep breath) I'm picturing myself on a beach, listening to the waves.",
+        "instruction": " I'm picturing myself on a beach, listening to the waves.",
         "input": "",
         "output": "Great. Keep focusing on that image and continue to breathe deeply. How do you feel?"
     },
@@ -21500,7 +21500,7 @@
         "output": "Okay, let's start by taking a few slow, deep breaths. Inhale deeply through your nose, and exhale slowly through your mouth. Focus on the sensation of your breath moving in and out of your body. Now, bring your attention to your thoughts and feelings. Notice any thoughts that come up, and let them pass by without judgment. Remember, just observe them. You can imagine them like clouds moving across the sky. Now, notice any physical sensations in your body. Tension, warmth, tingling, or anything else. Again, just observe them without judgment. Finally, bring your attention back to your breath. Focus on the sensation of your breath moving in and out of your body. When your mind wanders, gently bring it back to your breath. We'll do this for a few more minutes."
     },
     {
-        "instruction": "(after a few minutes) That felt really calming. I didn't realize how tense I was until I started doing that.",
+        "instruction": " That felt really calming. I didn't realize how tense I was until I started doing that.",
         "input": "",
         "output": "That's great. Mindfulness is a great tool for managing stress and anxiety. Would you be interested in learning more about that?"
     },
@@ -21715,7 +21715,7 @@
         "output": "Great. Let's start with some deep breathing exercises. Take a deep breath in through your nose, hold it for a few seconds, and then slowly exhale through your mouth. Let's do that a few more times together."
     },
     {
-        "instruction": "(deep breathing) Wow, that actually feels really good.",
+        "instruction": " Wow, that actually feels really good.",
         "input": "",
         "output": "I'm glad to hear that. Deep breathing exercises can be a really effective way to manage stress and anxiety. We can work on incorporating this into your daily routine."
     },
@@ -22165,7 +22165,7 @@
         "output": "Deep breathing can be a great way to calm your mind and reduce stress. Let's try a few deep breaths together right now. Inhale deeply through your nose, hold for a few seconds, and exhale slowly through your mouth."
     },
     {
-        "instruction": "(deep breath) Okay, I feel a little calmer now.",
+        "instruction": " Okay, I feel a little calmer now.",
         "input": "",
         "output": "Great. You can also try meditating for a few minutes each day. There are some great apps and resources available to help you get started."
     },
@@ -23615,17 +23615,17 @@
         "output": "Sure. Let's start with some deep breathing. Close your eyes and take a deep breath in, hold it for a few seconds, and then slowly exhale. Let's repeat that a few times."
     },
     {
-        "instruction": "(takes a few deep breaths) I feel a little calmer already.",
+        "instruction": " I feel a little calmer already.",
         "input": "",
         "output": "That's great. Now let's try a mindfulness exercise. Focus on the sensations in your body. Notice any tension or discomfort and just observe it without judgment."
     },
     {
-        "instruction": "Okay. (pauses) I feel a tightness in my chest.",
+        "instruction": "Okay.  I feel a tightness in my chest.",
         "input": "",
         "output": "That's okay. Just keep observing it and breathing deeply."
     },
     {
-        "instruction": "(breathes deeply) It feels a little better now.",
+        "instruction": " It feels a little better now.",
         "input": "",
         "output": "Great job. These techniques can be really helpful when you're feeling overwhelmed. Remember to take deep breaths and focus on the present moment."
     },
@@ -24730,17 +24730,17 @@
         "output": "Great. Let's start with some deep breathing exercises. Take a deep breath in through your nose and exhale slowly through your mouth."
     },
     {
-        "instruction": "(breathes deeply) Okay, that feels nice.",
+        "instruction": " Okay, that feels nice.",
         "input": "",
         "output": "Good! Now, let's try some progressive muscle relaxation. Tense up the muscles in your feet and hold for a few seconds, then release."
     },
     {
-        "instruction": "(tenses and releases muscles in feet) That actually feels really good.",
+        "instruction": " That actually feels really good.",
         "input": "",
         "output": "It's amazing how much tension we hold in our bodies without realizing it. Now, let's try another one. Tense up the muscles in your hands and hold, then release."
     },
     {
-        "instruction": "(tenses and releases muscles in hands) Wow, that really does help.",
+        "instruction": " Wow, that really does help.",
         "input": "",
         "output": "Great! You can do this anytime you're feeling tense or stressed. It only takes a few minutes and it can make a big difference."
     },
@@ -24885,12 +24885,12 @@
         "output": "Okay, let's start with some deep breathing. Close your eyes and take a deep breath in through your nose, counting to four. Hold your breath for a count of four, then slowly exhale through your mouth for a count of four. Let's do that a few more times."
     },
     {
-        "instruction": "(breathes deeply)",
+        "instruction": "",
         "input": "",
         "output": "Great job. Now, let's move on to some progressive muscle relaxation. Tighten the muscles in your toes and hold for a count of five, then relax. Now, tighten the muscles in your calves and hold for a count of five, then relax. Keep going, tensing and relaxing each muscle group in your body until you reach your forehead."
     },
     {
-        "instruction": "(follows therapist's guidance)",
+        "instruction": "",
         "input": "",
         "output": "How do you feel now?"
     },
@@ -25740,7 +25740,7 @@
         "output": "Okay, let's start by sitting or lying down in a comfortable position. Close your eyes and take a few deep breaths. Now, focus on your feet and curl your toes as tightly as you can. Hold for a few seconds, and then release. Feel the tension leaving your toes as you relax them completely. Let's move on to your calf muscles. Tighten them as much as you can, hold for a few seconds, and then release. Feel the tension leaving your calf muscles as you relax them completely. Continue doing this with each muscle group in your body, moving up from your thighs to your stomach, chest, arms, and finally your face."
     },
     {
-        "instruction": "(after completing the exercise) Wow, that was really helpful. I feel a lot more relaxed now.",
+        "instruction": " Wow, that was really helpful. I feel a lot more relaxed now.",
         "input": "",
         "output": "I'm glad to hear that. Remember, you can do this exercise anytime you're feeling stressed or tense. It's a great way to relax your body and calm your mind."
     },
@@ -27690,7 +27690,7 @@
         "output": "That's okay. I can teach you some simple techniques that you can practice on your own. Let's start with deep breathing. Close your eyes and take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Let's try it together."
     },
     {
-        "instruction": "(takes a deep breath with the therapist)",
+        "instruction": "",
         "input": "",
         "output": "Great job! You can practice this technique whenever you're feeling stressed or overwhelmed. It can help to calm your mind and body."
     },
@@ -27705,7 +27705,7 @@
         "output": "Okay, find a comfortable position and close your eyes. Take a few deep breaths and then bring your attention to the present moment. Notice any sensations in your body, like the feeling of your feet on the ground or the movement of your breath. If any thoughts or feelings come up, just acknowledge them without judgment and then refocus your attention on the present moment. Let's try it for a minute."
     },
     {
-        "instruction": "(tries the exercise for a minute)",
+        "instruction": "",
         "input": "",
         "output": "That was great! Mindfulness can be a powerful tool for reducing stress and anxiety. You can practice this technique for a few minutes each day to help increase your awareness and focus."
     },
@@ -27870,7 +27870,7 @@
         "output": "Great. Let's start by writing down all the tasks you need to complete in the next week. Then, we can break them down into smaller steps."
     },
     {
-        "instruction": "Okay, let me get a pen and paper.(Several minutes pass as the patient writes down their tasks)",
+        "instruction": "Okay, let me get a pen and paper.",
         "input": "",
         "output": "Okay, now let's take a look at these. Which ones do you think will take the longest to complete?"
     },
@@ -28340,7 +28340,7 @@
         "output": "Great. Let's start with some deep breathing exercises today. I'll walk you through it. Take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Let's do that a few times."
     },
     {
-        "instruction": "(deep breath) Okay, I can already feel myself starting to calm down a bit.",
+        "instruction": " Okay, I can already feel myself starting to calm down a bit.",
         "input": "",
         "output": "That's great. It's amazing how just a few deep breaths can make a difference. How else have you been coping with everything that's been going on?"
     },
@@ -28795,17 +28795,17 @@
         "output": "Okay, let's start by finding a comfortable position. You can sit or lie down, whatever feels best for you. Close your eyes and take a deep breath in through your nose, filling your lungs with air. And then exhale slowly through your mouth, releasing any tension in your body."
     },
     {
-        "instruction": "(takes a deep breath) Okay.",
+        "instruction": " Okay.",
         "input": "",
         "output": "Now, just focus on your breath. Inhale deeply and exhale slowly. And as you breathe, imagine yourself in a peaceful, calming place. Maybe it's a beach or a forest, somewhere you feel relaxed and happy."
     },
     {
-        "instruction": "(breathes deeply) I'm picturing a beach.",
+        "instruction": " I'm picturing a beach.",
         "input": "",
         "output": "Great. Just allow yourself to sink into that image, and let all your worries and stress melt away. Keep breathing deeply and slowly, and just let yourself be in this moment."
     },
     {
-        "instruction": "(breathes deeply) I feel a little better already.",
+        "instruction": " I feel a little better already.",
         "input": "",
         "output": "That's great. Keep practicing this meditation whenever you feel stressed or anxious. It can help you to relax and focus your mind."
     },
@@ -30250,7 +30250,7 @@
         "output": "Okay, close your eyes and take a deep breath in. Hold it for a few seconds, and then slowly exhale. Now, focus your attention on your breath. Notice the sensation of the air filling your lungs, and then leaving your body. If your mind starts to wander, gently bring it back to your breath. Let's do this for a few minutes."
     },
     {
-        "instruction": "(after a few minutes) That actually helped a little bit. I feel a little calmer.",
+        "instruction": " That actually helped a little bit. I feel a little calmer.",
         "input": "",
         "output": "That's great! Mindfulness can be a really helpful tool for managing anxiety. Would you like to try some other techniques in our next session?"
     },
@@ -30417,7 +30417,7 @@
     {
         "instruction": "Honestly, I don't know. I've tried taking breaks, but then I get anxious about not doing enough work. And sometimes I try to prioritize, but then I feel like everything is equally important.",
         "input": "",
-        "output": "It sounds like you might be struggling with some anxiety around productivity. Have you ever heard of cognitive behavioral therapy (CBT)?"
+        "output": "It sounds like you might be struggling with some anxiety around productivity. Have you ever heard of cognitive behavioral therapy ?"
     },
     {
         "instruction": "No, I haven't.",
@@ -30560,7 +30560,7 @@
         "output": "So, I want you to take a deep breath in through your nose, hold it for a few seconds, and then slowly exhale through your mouth. Let's do that a few times together."
     },
     {
-        "instruction": "(breathes in and out)",
+        "instruction": "",
         "input": "",
         "output": "Great job. How do you feel?"
     },
@@ -31310,22 +31310,22 @@
         "output": "First, let's try some deep breathing exercises. Take a deep breath in through your nose, hold it for a few seconds, and then slowly release it through your mouth. Let's do that a few more times."
     },
     {
-        "instruction": "(takes deep breaths) That does feel a bit better.",
+        "instruction": " That does feel a bit better.",
         "input": "",
         "output": "Great. Now let's try some progressive muscle relaxation. Tense your muscles for a few seconds and then release them. Let's start with your hands. Tense them for a few seconds and then release."
     },
     {
-        "instruction": "(tenses and releases muscles) That's actually kind of relaxing.",
+        "instruction": " That's actually kind of relaxing.",
         "input": "",
         "output": "Now let's try it with your arms. Tense them for a few seconds and then release."
     },
     {
-        "instruction": "(tenses and releases muscles) That feels good.",
+        "instruction": " That feels good.",
         "input": "",
         "output": "Continue to tense and release your muscles, working your way up your body. This can be a great way to release tension and calm your mind."
     },
     {
-        "instruction": "(continues with exercise) That's actually really helpful. Thank you.",
+        "instruction": " That's actually really helpful. Thank you.",
         "input": "",
         "output": "You're welcome. Remember, it's important to take care of yourself during times of transition. Finding new activities and hobbies can take time, but it's worth the effort to find something that feels fulfilling. And don't forget to take time for relaxation and self-care."
     },
@@ -31570,12 +31570,12 @@
         "output": "It's okay if it takes some practice to get the hang of these techniques. Let's try something together right now. Take a deep breath in through your nose and slowly exhale through your mouth. Let your shoulders relax and feel the tension release from your body."
     },
     {
-        "instruction": "(deep breath) Okay, that actually feels kind of nice.",
+        "instruction": " Okay, that actually feels kind of nice.",
         "input": "",
         "output": "Good, let's try a few more deep breaths like that. As you exhale, imagine all your worries and stress leaving your body."
     },
     {
-        "instruction": "(takes a few more deep breaths)",
+        "instruction": "",
         "input": "",
         "output": "How does that feel?"
     },
@@ -37732,7 +37732,7 @@
     {
         "instruction": "I'm not exactly sure, but I just want to feel better. I want to be able to manage my stress and improve my relationship with my partner.",
         "input": "",
-        "output": "Okay, those are great goals. Have you ever heard of Interpersonal Therapy (IPT)?"
+        "output": "Okay, those are great goals. Have you ever heard of Interpersonal Therapy ?"
     },
     {
         "instruction": "No, I haven't.",
@@ -38170,7 +38170,7 @@
         "output": "Okay, let's start by tensing your toes for a few seconds, then release. Now tense your calves, then release. Keep going up your body until you reach your forehead."
     },
     {
-        "instruction": "(after a few minutes) Wow, that actually helped me feel more relaxed.",
+        "instruction": " Wow, that actually helped me feel more relaxed.",
         "input": "",
         "output": "I'm glad to hear that. It's a simple technique that can be done anywhere, anytime. Do you think you'll try it again before bed?"
     },
@@ -40945,7 +40945,7 @@
         "output": "That's okay. We can work on it together. Let's start with deep breathing. Take a deep breath in, and hold it for a few seconds. Then slowly exhale. Repeat that a few times."
     },
     {
-        "instruction": "(deep breath in, holds, exhales) Okay, that actually feels pretty good.",
+        "instruction": " Okay, that actually feels pretty good.",
         "input": "",
         "output": "Great! Another thing we can work on is reframing your thoughts. When you're feeling overwhelmed, try to focus on the things you can control. For example, if you're feeling behind on a project, focus on the progress you've made so far."
     },
@@ -41520,7 +41520,7 @@
         "output": "Good. Let's continue to work on challenging those negative thoughts and finding ways to build a more positive self-image. Remember, it takes time and effort, but it's possible."
     },
     {
-        "instruction": "(sighs) I don't know what's wrong with me. I feel like I'm on top of the world one minute and then I'm at rock bottom the next.",
+        "instruction": " I don't know what's wrong with me. I feel like I'm on top of the world one minute and then I'm at rock bottom the next.",
         "input": "",
         "output": "It sounds like you might be experiencing symptoms of bipolar disorder. Have you ever been diagnosed with it before?"
     },
@@ -43040,7 +43040,7 @@
         "output": "Okay, I want you to start by tensing the muscles in your feet and holding for a few seconds, then release and feel the tension leave your body. Then move up to your calves and do the same thing. Keep going until you've tensed and released every muscle group in your body."
     },
     {
-        "instruction": "(after a few minutes) Wow, that actually feels really good. I'm starting to feel more relaxed already.",
+        "instruction": " Wow, that actually feels really good. I'm starting to feel more relaxed already.",
         "input": "",
         "output": "Good, I'm glad it's helping. Remember, you can use this technique whenever you're feeling anxious or having trouble sleeping."
     },
@@ -43837,7 +43837,7 @@
     {
         "instruction": "I've been trying to avoid triggers as much as possible, but it doesn't seem to be working.",
         "input": "",
-        "output": "Avoidance may provide temporary relief, but it can also reinforce the belief that the situation is dangerous. Have you considered trying Cognitive Behavioral Therapy (CBT)?"
+        "output": "Avoidance may provide temporary relief, but it can also reinforce the belief that the situation is dangerous. Have you considered trying Cognitive Behavioral Therapy ?"
     },
     {
         "instruction": "I've heard of it, but I'm not sure how it works.",
@@ -45445,17 +45445,17 @@
         "output": "Great. Let's start with some deep breathing exercises. I want you to take a few deep breaths in through your nose and out through your mouth."
     },
     {
-        "instruction": "(breathing deeply)",
+        "instruction": "",
         "input": "",
         "output": "Good. Now, I want you to visualize a place that makes you feel calm and relaxed. Maybe it's a beach or a forest or somewhere you've been before that made you feel peaceful."
     },
     {
-        "instruction": "(quietly) I'm picturing a beach.",
+        "instruction": " I'm picturing a beach.",
         "input": "",
         "output": "Great. Now, imagine yourself walking along the beach, feeling the sand between your toes and the sun on your face. Take a few deep breaths and let yourself fully imagine being in that peaceful place."
     },
     {
-        "instruction": "(silence)",
+        "instruction": "",
         "input": "",
         "output": "How do you feel?"
     },
@@ -46170,12 +46170,12 @@
         "output": "Let's try some deep breathing exercises. Inhale slowly, counting to four, and then exhale slowly, counting to eight."
     },
     {
-        "instruction": "(deep breath) Okay, I'll give it a try.",
+        "instruction": " Okay, I'll give it a try.",
         "input": "",
-        "output": "(breathes with the patient) Good job, keep going. You're doing great."
+        "output": " Good job, keep going. You're doing great."
     },
     {
-        "instruction": "(breathing slower) This is actually helping me calm down.",
+        "instruction": " This is actually helping me calm down.",
         "input": "",
         "output": "That's great to hear. Now, let's start talking about what's been bothering you."
     },
@@ -46775,7 +46775,7 @@
         "output": "That's a good start. Let's try a progressive muscle relaxation exercise next. I'm going to guide you through tensing and relaxing different muscle groups in your body. Are you ready?"
     },
     {
-        "instruction": "Yeah, I'm ready.(Therapist leads the patient through the muscle relaxation exercise)",
+        "instruction": "Yeah, I'm ready.",
         "input": "",
         "output": "How do you feel now?"
     },
@@ -48490,12 +48490,12 @@
         "output": "Great. Let's start by closing your eyes and focusing on your breath. Take a deep inhale through your nose and exhale through your mouth. Repeat this a few times and try to focus solely on your breath."
     },
     {
-        "instruction": "(takes a few deep breaths)",
+        "instruction": "",
         "input": "",
         "output": "Now, as thoughts come into your mind, simply acknowledge them but try not to dwell on them. Imagine them as leaves floating by in a stream, just passing by and not taking up too much space."
     },
     {
-        "instruction": "(takes a few more breaths and seems to relax)",
+        "instruction": "",
         "input": "",
         "output": "Great job. How do you feel?"
     },
@@ -48520,7 +48520,7 @@
         "output": "Visualization can be a helpful tool to prepare for events and reduce anxiety. Let's try it now. Can you close your eyes and imagine yourself at the event, feeling confident and comfortable in the situation?"
     },
     {
-        "instruction": "(closes eyes and takes a few deep breaths)",
+        "instruction": "",
         "input": "",
         "output": "Can you describe what you're visualizing?"
     },
@@ -48575,7 +48575,7 @@
         "output": "Great. Let's start with some deep breathing. Take a deep breath in through your nose and hold it for a few seconds, then slowly exhale through your mouth. Let's do that a few times together."
     },
     {
-        "instruction": "(takes a deep breath) Okay, I think I can do that.",
+        "instruction": " Okay, I think I can do that.",
         "input": "",
         "output": "Good job. How do you feel after doing that?"
     },
@@ -48595,17 +48595,17 @@
         "output": "Great. Let's start by writing down the three most important things you need to do today."
     },
     {
-        "instruction": "(writes down three tasks)",
+        "instruction": "",
         "input": "",
         "output": "Now, let's break each of those tasks down into smaller steps. For example, if one of the tasks is to finish a report for work, break it down into smaller steps like gathering information, outlining the report, and writing the first draft."
     },
     {
-        "instruction": "(writes down smaller steps for each task)",
+        "instruction": "",
         "input": "",
         "output": "Good job. Now, prioritize each of these smaller tasks and decide which ones are most important. This will help you focus on the most urgent tasks first."
     },
     {
-        "instruction": "(prioritizes tasks)",
+        "instruction": "",
         "input": "",
         "output": "Great, now you have a more manageable list of tasks to work on. Remember to take breaks and make time for yourself throughout the day."
     },
@@ -49305,7 +49305,7 @@
         "output": "Okay, let's start by taking a deep breath in through your nose and exhaling slowly through your mouth. Now, just focus your attention on your breath. Notice the sensation of the air moving in and out of your nose or mouth. If your mind starts to wander, gently bring your attention back to your breath. Let's do this for a minute or two."
     },
     {
-        "instruction": "(after a few minutes) Wow, that was really relaxing. I feel more centered already.",
+        "instruction": " Wow, that was really relaxing. I feel more centered already.",
         "input": "",
         "output": "That's great to hear. Mindfulness can be a really useful tool for managing anxiety. It's something you can practice anytime, anywhere."
     },
@@ -49720,12 +49720,12 @@
         "output": "Okay, let's start with a deep breathing exercise. Take a deep breath in through your nose, hold it for a few seconds, and then slowly exhale through your mouth. Good. Let's do that a few more times."
     },
     {
-        "instruction": "(Deep breathing)",
+        "instruction": "",
         "input": "",
         "output": "Now, I'm going to guide you through a body scan exercise. Close your eyes and focus on your breathing. As you inhale, imagine that you're breathing in calm, positive energy. And as you exhale, imagine that you're releasing any tension or negativity from your body. Now, starting at the top of your head, imagine a warm, relaxing sensation spreading down your body. Focus on each part of your body in turn, feeling the warmth and relaxation spreading through your muscles. Let's start with your head and neck. Focus on the muscles in your scalp, forehead, and jaw. Allow them to relax and release any tension. Good. Now move down to your shoulders and arms. Let your muscles go limp and feel the warmth spreading down to your fingertips. Keep breathing deeply and focusing on the relaxation spreading throughout your body."
     },
     {
-        "instruction": "(Softly) This is really helping. I feel more relaxed already.",
+        "instruction": " This is really helping. I feel more relaxed already.",
         "input": "",
         "output": "Great, I'm glad to hear that. We can continue with these exercises in our future sessions, and I can also give you some resources to practice on your own. But for now, how are you feeling overall?"
     },
@@ -50410,7 +50410,7 @@
         "output": "Great. Start by sitting or lying down in a comfortable position. Close your eyes and take a deep breath in through your nose, and exhale through your mouth. Now, start by tightening the muscles in your feet and toes. Hold for a few seconds, and then release. Now, tighten the muscles in your calves and hold, and release. Continue this process, moving up through your body, tensing and relaxing each muscle group."
     },
     {
-        "instruction": "(after the exercise) Wow, that actually helped a lot. I feel much more relaxed now.",
+        "instruction": " Wow, that actually helped a lot. I feel much more relaxed now.",
         "input": "",
         "output": "I'm glad to hear that. Remember, there are many different techniques and therapies that can help with anxiety. We can work together to find what works best for you."
     },
@@ -52300,7 +52300,7 @@
         "output": "Sure. Let's start by taking a deep breath in through your nose, and then slowly exhaling through your mouth. Do this a few times and try to focus on your breath as you inhale and exhale."
     },
     {
-        "instruction": "(takes a deep breath) Okay, I think I can do this.",
+        "instruction": " Okay, I think I can do this.",
         "input": "",
         "output": "Great. Now, let's try doing this for a few minutes each day. You can do it whenever you feel stressed or overwhelmed, and it should help to calm your mind and reduce your anxiety."
     },
@@ -52995,7 +52995,7 @@
         "output": "That's great. Let's start by trying some deep breathing exercises right now. Take a deep breath in through your nose, hold it for a few seconds, and then slowly exhale through your mouth. Let's do that a few more times."
     },
     {
-        "instruction": "(deeply inhales and exhales)",
+        "instruction": "",
         "input": "",
         "output": "How does that feel?"
     },
@@ -54780,7 +54780,7 @@
         "output": "It's worth a try. Mindfulness exercises can help you focus on the present moment and reduce feelings of anxiety and stress. Let's try a quick exercise now. Close your eyes and take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Repeat this a few times while focusing on the sensation of your breath."
     },
     {
-        "instruction": "(After a few moments) That actually does help a little bit. I feel a bit more relaxed.",
+        "instruction": " That actually does help a little bit. I feel a bit more relaxed.",
         "input": "",
         "output": "Great! Now let's talk more about your relationships. It sounds like you're having some difficulties with your partner. What specifically has been causing the most conflict?"
     },
@@ -56330,7 +56330,7 @@
         "output": "Okay, let's start by sitting comfortably and taking a deep breath in through your nose. Hold it for a few seconds, then slowly exhale through your mouth. Let's do that a few more times."
     },
     {
-        "instruction": "(deep breathing)",
+        "instruction": "",
         "input": "",
         "output": "How do you feel after doing that?"
     },
@@ -57840,7 +57840,7 @@
         "output": "Alright, let's start by taking a deep breath. Inhale deeply, and then exhale slowly. Focus on the sensation of your breath as it enters and leaves your body. If your mind starts to wander, gently bring it back to your breath. Let's continue for a few more minutes."
     },
     {
-        "instruction": "(after a few minutes) That was nice. I feel more relaxed now.",
+        "instruction": " That was nice. I feel more relaxed now.",
         "input": "",
         "output": "Good. Remember, you can use this technique whenever you feel the urge to use. It can help you stay present and manage your emotions."
     },
