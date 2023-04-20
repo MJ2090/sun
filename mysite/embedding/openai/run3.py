@@ -40,7 +40,7 @@ def run_it_3_action(question, model):
     msg = """
     A and B are talking with each other, if A says "{}", is it logically correct for B to reply as 
     "You can take the self assessment on our website"?
-    Please only give a score between 1 and 10 and don't explain, where 1 means totally not possible, and 10 means very probably.
+    Please only give a score between 1 and 100 and don't explain, where 1 means totally not possible, and 100 means very probably.
     """.format(question)
     messages = [
         {"role": "user", "content": msg},
