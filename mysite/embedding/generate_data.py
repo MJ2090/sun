@@ -1,4 +1,7 @@
 import openai
+import json
+import re
+from multiprocessing import Pool, freeze_support
 
 
 patients = ['lost his job recently, which was not due to his fault.',
@@ -97,7 +100,7 @@ therapists = ['is familiar with Psychodynamic Therapy and provides mental suppor
                 'is able to build a trusting and supportive relationship with their clients, especially with retired people.']
 
 
-def run_it_chat(messages, model):
+def call_openai(messages, model):
     response = openai.ChatCompletion.create(
         model=model,
         temperature=0.8,
@@ -108,7 +111,7 @@ def run_it_chat(messages, model):
 
 
 def run_it(messages, count):
-    openai_response = run_it_chat(messages, model='gpt-3.5-turbo')
+    openai_response = call_openai(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     file_name = f'data/therapy_{count}.txt'
     f = open(file_name, "w")
@@ -117,20 +120,60 @@ def run_it(messages, count):
     print(f'{count} generated...' )
 
 
-def generation():
+def generation_dialogue():
+    # print(len(patients), len(therapists))
+    # return
+    freeze_support()
     count = 1
+    my_args = []
     for p in patients:
         for t in therapists:
-            if count <= 350:
+            if count <= 240:
                 count += 1
                 continue
+            if count > 320:
+                return
             messages=[
-                {"role": "system", "content": f"Generate a long dialogue with more than 580 words between a patient and a therapist. The patient {p}. The therapist {t}"},
+                {"role": "system", "content": f"Generate a long dialogue with more than 600 words between a patient and a therapist. The patient {p}. The therapist {t}"},
             ]
-            run_it(messages, count)
+            my_args.append((messages, count))
+            if len(my_args) == 8:
+                with Pool(8) as p:
+                    print(p.starmap(run_it, my_args))
+                my_args = []
             count += 1
 
 
-print('started...')
-generation()
-print('ended...')
+def generate_json():
+    total = 1035
+    instructions = []
+    for i in range(1, total+1):
+        file_name = f'data/therapy_{i}.txt'
+        f = open(file_name, "r")
+        raw = f.read().replace('\n\n', '')
+        sections = raw.split("Patient: ")
+        for section in sections:
+            if section == '':
+                continue
+            pair = section.split("Therapist: ")
+            if len(pair) != 2:
+                continue
+            s0 = re.sub(r'\(.*\)', '', pair[0])
+            s1 = re.sub(r'\(.*\)', '', pair[1])
+            if s0 == '' or s1 == '':
+                continue
+            instructions.append({'instruction': s0, 'input': '', 'output': s1})
+
+    my_len = len(instructions)
+    print(my_len)
+    f = open(f'data/therapy_no_input_{my_len}.json', "w")
+    f.write(json.dumps(instructions, indent=4))
+    f.close()
+
+
+if __name__=="__main__":
+    freeze_support()
+    print('started...')
+    # generation_dialogue()
+    generate_json()
+    print('ended...')
