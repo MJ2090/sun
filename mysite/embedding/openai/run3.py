@@ -52,7 +52,6 @@ def run_it_3_action(question, model):
         messages=messages,
     )
 
-    print('hehehehehe, ', question, response)
     return response
 
 

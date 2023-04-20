@@ -140,7 +140,7 @@ def sendchat_home(request):
         action_score = openai_response["choices"][0]["message"]["content"]
         action_score = action_score.replace('.', '').replace('\n', '').replace(' ', '')
         print('action_score= ', action_score, action_score.isnumeric())
-        if action_score.isnumeric() and int(action_score) >= 8:
+        if action_score.isnumeric() and int(action_score) >= 80:
             print('inside')
             answer = "You can do a free self assessment by clicking the link below."
             return_dict['action_message'] = answer
