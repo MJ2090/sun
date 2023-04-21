@@ -1,7 +1,3 @@
-################################################################################
-# Step 1
-################################################################################
-
 import os
 import pandas as pd
 import tiktoken
@@ -9,15 +5,9 @@ import openai
 import numpy as np
 import embedding.openai.crawl as crawl
 
-# Define root domain to crawl
 domain = "www.donefirst.com"
-full_url = "https://www.donefirst.com/company/our-mission"
 max_tokens = 500
 
-
-################################################################################
-# Step 5
-################################################################################
 
 def remove_newlines(serie):
     serie = serie.str.replace('\n', ' ', regex=False)
@@ -25,10 +15,6 @@ def remove_newlines(serie):
     serie = serie.str.replace('  ', ' ', regex=False)
     serie = serie.str.replace('  ', ' ', regex=False)
     return serie
-
-################################################################################
-# Step 6
-################################################################################
 
 
 def generate_scraped_csv(my_texts=None):
@@ -55,12 +41,7 @@ def generate_scraped_csv(my_texts=None):
     df.head()
 
 
-################################################################################
-# Step 8
-################################################################################
-
-
-# Function to split the text into chunks of a maximum number of tokens
+# Splits the text into chunks of a maximum number of tokens
 def split_into_many(text, tokenizer, max_tokens=max_tokens):
     # Split the text into sentences
     sentences = text.split('. ')
@@ -97,10 +78,6 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
 
 def generate_embedding_csv():
-    ################################################################################
-    # Step 7
-    ################################################################################
-
     def myf(x):
         if pd.isna(x):
             return 0
@@ -137,17 +114,9 @@ def generate_embedding_csv():
         else:
             shortened.append(row[1]['text'])
 
-    ################################################################################
-    # Step 9
-    ################################################################################
-
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)
     df.n_tokens.hist()
-
-    ################################################################################
-    # Step 10
-    ################################################################################
 
     # Note that you may run into rate limit issues depending on how many files you try to embed
     # Please check out our rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits
@@ -156,19 +125,12 @@ def generate_embedding_csv():
         lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
     df.to_csv('processed/embeddings.csv')
     df.head()
-
-    ################################################################################
-    # Step 11
-    ################################################################################
-
     df = pd.read_csv('processed/embeddings.csv', index_col=0)
-
     df.head()
 
     return df
 
 
 def get_df(my_texts=None):
-    # crawl.crawl(full_url)
     generate_scraped_csv(my_texts)
     return generate_embedding_csv()

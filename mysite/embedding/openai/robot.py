@@ -1,9 +1,6 @@
 import openai
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
-################################################################################
-### Step 12
-################################################################################
 
 def create_context(question, df, max_len=1800):
     """
@@ -34,6 +31,7 @@ def create_context(question, df, max_len=1800):
 
     # Return the context
     return "\n\n###\n\n".join(returns)
+
 
 def answer_question(
         df,

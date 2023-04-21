@@ -10,9 +10,6 @@ import openai
 relative_path = '/var/www/asuperdomain.com/static/embedding/data/'
 
 
-################################################################################
-# Step 13
-################################################################################
 def run_it_3(my_text, qs):
     my_texts = [("embedding", my_text)]
     my_df = df.get_df(my_texts)
@@ -21,7 +18,6 @@ def run_it_3(my_text, qs):
     for q in qs:
         tmp = {"Question": q, "Answer": robot.answer_question(
             my_df, question=q)}
-        print('originalllllll', my_df, q)
         ans.append(tmp)
 
     return ans
@@ -35,6 +31,7 @@ def run_it_3_question(question, random_str):
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     ans = robot.answer_question(my_df, question=question)
     return ans
+
 
 def run_it_3_action(question, model):
     msg = """
