@@ -155,6 +155,7 @@ def sendchat_home(request):
     my_m = PromptModel.objects.get(name='Done FAQ')
     messages = json.loads(my_m.history)
     history = request.POST.get('history')
+    print("history: ", history)
     my_json = json.loads(history)
     messages.extend(my_json)
     messages.append({"role": "user", "content": new_message})
