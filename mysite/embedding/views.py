@@ -391,7 +391,7 @@ def translation_async(request):
     record_consumption(
         request, sc.MODEL_TYPES_TRANSLATE, openai_response)
     print(translated_text)
-    return HttpResponse(translated_text.strip())
+    return HttpResponse(json.dumps({'result': translated_text.strip()}))
 
 
 def translation(request):
@@ -423,7 +423,7 @@ def summary_async(request):
     record_consumption(
         request, sc.MODEL_TYPES_SUMMARY, openai_response)
     print(summary_text)
-    return HttpResponse(summary_text.strip())
+    return HttpResponse(json.dumps({'result': summary_text.strip()}))
 
 
 def summary(request):

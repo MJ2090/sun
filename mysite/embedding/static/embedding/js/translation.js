@@ -9,20 +9,19 @@ function translation_async_call() {
     translated_text.val('');
     translated_text.hide();
     $("div[name='spinner").show();
-    $.ajax({
-        type: 'POST',
-        url: "/translation_async/",
-        data: {
-            original_text: original_text.val(),
-            csrfmiddlewaretoken: csrf.val(),
-            target: target.val(),
-        },
-        success: function (response) {
-            translated_text.val(response);
-            $("div[name='spinner").hide();
-            translated_text.show();
-        },
-    })
+
+    const request_data = new FormData();
+    request_data.append('original_text', original_text.val());
+    request_data.append('target', target.val());
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/translation_async/", {
+        method: "POST",
+        body: request_data,
+    }).then(response => response.json()).then((response) => {
+        translated_text.val(response.result);
+        $("div[name='spinner").hide();
+        translated_text.show();
+    });
 }
 
 function translation_init() {

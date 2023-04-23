@@ -5,19 +5,18 @@ function summary_async_call() {
     summary_text.val('');
     summary_text.hide();
     $("div[name='spinner").show();
-    $.ajax({
-        type: 'POST',
-        url: "/summary_async/",
-        data: {
-            original_text: original_text.val(),
-            csrfmiddlewaretoken: csrf.val(),
-        },
-        success: function (response) {
-            summary_text.val(response);
-            $("div[name='spinner").hide();
-            summary_text.show();
-        },
-    })
+
+    const request_data = new FormData();
+    request_data.append('original_text', original_text.val());
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/summary_async/", {
+        method: "POST",
+        body: request_data,
+    }).then(response => response.json()).then((response) => {
+        summary_text.val(response.result);
+        $("div[name='spinner").hide();
+        summary_text.show();
+    });
 }
 
 function summary_init() {

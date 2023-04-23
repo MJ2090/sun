@@ -38,16 +38,16 @@ function init() {
   // Audio play starts
   $("input[name='enable_speech']").click(function () {
     if (!this.checked) {
-      let audio = $("audio[name='audio'");
+      let audio = $("audio[name='audio']");
       audio[0].pause();
     }
   });
 
   $("input[name='show_controls']").click(function () {
-    let audio = $("audio[name='audio'").toggle(this.checked);
+    let audio = $("audio[name='audio']").toggle(this.checked);
   });
 
-  $("audio[name='audio'").on('canplaythrough', function () {
+  $("audio[name='audio']").on('canplaythrough', function () {
     this.play();
   });
   // Audio play ends

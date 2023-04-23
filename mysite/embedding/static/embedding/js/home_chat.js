@@ -1,4 +1,4 @@
-function async_call() {
+async function home_chat_fetch() {
     let new_msg = $("input[name='message']");
     if (new_msg.val() == "") {
         return;
@@ -37,45 +37,44 @@ function async_call() {
     $("div[name='spinner").show();
     $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
-    $.ajax({
-        type: 'POST',
-        url: "/sendchat_home/",
-        data: {
-            message: new_msg_text,
-            history: history,
-            csrfmiddlewaretoken: csrf.val(),
-        },
-        success: function (response) {
-            let data = JSON.parse(response);
-            let ai_message = data.ai_message
-            let action_message = data.action_message
-            let content = $('.message-container');
+    const request_data = new FormData();
+    request_data.append('message', new_msg_text);
+    request_data.append('history', history);
+    request_data.append('csrfmiddlewaretoken', csrf.val());
 
-            new_msg.prop("disabled", false);
-            new_msg.focus();
+    fetch("/sendchat_home/", {
+      method: "POST",
+      body: request_data,
+    }).then(response => response.json()).then((response) => {
+        let data = response;
+        let ai_message = data.ai_message
+        let action_message = data.action_message
+        let content = $('.message-container');
 
-            $("div[name='spinner").hide();
+        new_msg.prop("disabled", false);
+        new_msg.focus();
 
-            if (ai_message) {
-                let ai_msg = $("p[name='ai_msg']").clone();
-                ai_msg.text(ai_message);
-                ai_msg.addClass("dialogue");
-                content.append(ai_msg.get(0));
-            }
+        $("div[name='spinner").hide();
 
-            let action = data.ai_action;
-            if (action == '1') {
-                ai_msg = $("p[name='ai_msg']").clone();
-                ai_msg.text(action_message);
-                content.append(ai_msg.get(0));
+        if (ai_message) {
+            let ai_msg = $("p[name='ai_msg']").clone();
+            ai_msg.text(ai_message);
+            ai_msg.addClass("dialogue");
+            content.append(ai_msg.get(0));
+        }
 
-                let action_msg = $("a[name='ai_action']").clone();
-                content.append(action_msg.get(0));
-            }
+        let action = data.ai_action;
+        if (action == '1') {
+            ai_msg = $("p[name='ai_msg']").clone();
+            ai_msg.text(action_message);
+            content.append(ai_msg.get(0));
 
-            $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
-        },
-    })
+            let action_msg = $("a[name='ai_action']").clone();
+            content.append(action_msg.get(0));
+        }
+
+        $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+    },);
 }
 
 function open_chat() {
@@ -98,15 +97,13 @@ function home_chat_init() {
         close_chat();
     });
 
-
-
     $('.send-button').click(function () {
-        async_call();
+        home_chat_fetch();
     });
 
     $("input[name='message']").keydown(function (e) {
         if (e.keyCode == 13) {
-            async_call();
+            home_chat_fetch();
             return false;
         }
     });

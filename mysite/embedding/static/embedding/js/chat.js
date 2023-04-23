@@ -43,41 +43,39 @@ function chat_async_call() {
     $("div[name='spinner").show();
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
-    $.ajax({
-        type: 'POST',
-        url: "/sendchat/",
-        data: {
-            message: new_msg_text,
-            character: character.val(),
-            history: history,
-            csrfmiddlewaretoken: csrf.val(),
-            model: model.val(),
-            enable_speech: enable_speech[0].checked,
-            dialogue_id: $("input[name='dialogue_id']").val(),
-        },
-        success: function (response) {
-            let data = JSON.parse(response);
-            let ai_message = data.ai_message
-            let audio_address = data.audio_address
-            new_msg.prop("disabled", false);
-            new_msg.focus();
-            let content = $('.message-container');
+    const request_data = new FormData();
+    request_data.append('message', new_msg_text);
+    request_data.append('character', character.val());
+    request_data.append('history', history);
+    request_data.append('model', model.val());
+    request_data.append('enable_speech', enable_speech[0].checked);
+    request_data.append('dialogue_id', $("input[name='dialogue_id']").val());
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/sendchat/", {
+        method: "POST",
+        body: request_data,
+    }).then(response => response.json()).then((response) => {
+        let data = response;
+        let ai_message = data.ai_message
+        let audio_address = data.audio_address
+        new_msg.prop("disabled", false);
+        new_msg.focus();
+        let content = $('.message-container');
 
-            $("div[name='spinner").hide();
-            let ai_msg = $("p[name='ai_msg']").clone();
-            ai_msg.text(ai_message);
-            ai_msg.addClass("dialogue");
-            content.append(ai_msg.get(0));
-            $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+        $("div[name='spinner").hide();
+        let ai_msg = $("p[name='ai_msg']").clone();
+        ai_msg.text(ai_message);
+        ai_msg.addClass("dialogue");
+        content.append(ai_msg.get(0));
+        $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
-            if (enable_speech[0].checked && audio_address != '') {
-                let source = $("source[name='source']");
-                source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
-                let audio = $("audio[name='audio']");
-                audio[0].load();
-            }
-        },
-    })
+        if (enable_speech[0].checked && audio_address != '') {
+            let source = $("source[name='source']");
+            source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
+            let audio = $("audio[name='audio']");
+            audio[0].load();
+        }
+    });
 }
 
 function chat_init() {
@@ -95,13 +93,13 @@ function chat_init() {
     // Audio play starts
     $("input[name='enable_speech']").click(function () {
         if (!this.checked) {
-            let audio = $("audio[name='audio'");
+            let audio = $("audio[name='audio']");
             audio[0].pause();
         }
-        $("audio[name='audio'").toggle(this.checked);
+        $("audio[name='audio']").toggle(this.checked);
     });
 
-    $("audio[name='audio'").on('canplaythrough', function () {
+    $("audio[name='audio']").on('canplaythrough', function () {
         this.play();
     });
     // Audio play ends

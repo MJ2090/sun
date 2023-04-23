@@ -6,28 +6,27 @@ function async_call() {
     let count = $("select[name='count']");
     let image_container = $("div[name='image_container']");
     $("div[name='spinner']").show();
-    $.ajax({
-        type: 'POST',
-        url: "/image_async/",
-        data: {
-            original_text: original_text.val(),
-            style: style.val(),
-            csrfmiddlewaretoken: csrf.val(),
-            count: count.val(),
-        },
-        success: function (response) {
-            $("div[name='spinner']").hide();
-            let data = JSON.parse(response);
-            for (let i = 0; i < data.urls.length; i++) {
-                let cloned = generated_img.clone();
-                cloned.attr('src', data.urls[i].url);
-                cloned.attr('name', 'temp');
-                image_container.prepend(cloned);
-            }
 
-            setTimeout(showImage, 1000);
-        },
-    })
+    const request_data = new FormData();
+    request_data.append('original_text', original_text.val());
+    request_data.append('style', style.val());
+    request_data.append('count', count.val());
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/image_async/", {
+        method: "POST",
+        body: request_data,
+    }).then(response => response.json()).then((response) => {
+        $("div[name='spinner']").hide();
+        let data = response;
+        for (let i = 0; i < data.urls.length; i++) {
+            let cloned = generated_img.clone();
+            cloned.attr('src', data.urls[i].url);
+            cloned.attr('name', 'temp');
+            image_container.prepend(cloned);
+        }
+
+        setTimeout(showImage, 1000);
+    });
 }
 
 function showImage() {
