@@ -6,20 +6,19 @@ function async_call() {
   answer.val('');
   answer.hide();
   $("div[name='spinner").show();
-  $.ajax({
-    type: 'POST',
-    url: "/embedding_training_async/",
-    data: {
-      text: text.val(),
-      name: name.val(),
-      csrfmiddlewaretoken: csrf.val(),
-    },
-    success: function (response) {
-      answer.text(response);
-      $("div[name='spinner").hide();
-      answer.show();
-    },
-  })
+
+  const request_data = new FormData();
+  request_data.append('text', text.val());
+  request_data.append('name', name.val());
+  request_data.append('csrfmiddlewaretoken', csrf.val());
+  fetch("/embedding_training_async/", {
+    method: "POST",
+    body: request_data,
+  }).then(response => response.json()).then((response) => {
+    answer.text(response);
+    $("div[name='spinner").hide();
+    answer.show();
+  });
 }
 
 function init() {
