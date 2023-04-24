@@ -54,7 +54,10 @@ function chat_async_call() {
     fetch("/sendchat/", {
         method: "POST",
         body: request_data,
-    }).then(response => response.json()).then((response) => {
+    })
+    .then(
+        response => response.json())
+    .then((response) => {
         let data = response;
         let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
         let audio_address = data.audio_address;
