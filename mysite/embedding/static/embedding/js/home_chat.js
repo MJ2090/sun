@@ -47,7 +47,7 @@ async function home_chat_fetch() {
       body: request_data,
     }).then(response => response.json()).then((response) => {
         let data = response;
-        let ai_message = data.ai_message
+        let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
         let action_message = data.action_message
         let content = $('.message-container');
 
@@ -58,7 +58,7 @@ async function home_chat_fetch() {
 
         if (ai_message) {
             let ai_msg = $("p[name='ai_msg']").clone();
-            ai_msg.text(ai_message);
+            ai_msg.get(0).innerHTML = ai_message
             ai_msg.addClass("dialogue");
             content.append(ai_msg.get(0));
         }

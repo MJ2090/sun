@@ -56,15 +56,15 @@ function chat_async_call() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         let data = response;
-        let ai_message = data.ai_message
-        let audio_address = data.audio_address
+        let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
+        let audio_address = data.audio_address;
         new_msg.prop("disabled", false);
         new_msg.focus();
         let content = $('.message-container');
 
         $("div[name='spinner").hide();
         let ai_msg = $("p[name='ai_msg']").clone();
-        ai_msg.text(ai_message);
+        ai_msg.get(0).innerHTML = ai_message
         ai_msg.addClass("dialogue");
         content.append(ai_msg.get(0));
         $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");

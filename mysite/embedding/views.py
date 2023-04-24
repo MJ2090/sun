@@ -164,6 +164,7 @@ def sendchat_home(request):
 
     openai_response = run_it_chat(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
+    print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
     return HttpResponse(json.dumps({'ai_message': ai_message}))
@@ -188,6 +189,7 @@ def sendchat_async(request):
 
     openai_response = run_it_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
+    print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
     record_dialogue(request, 'User', new_message, dialogue_id)
