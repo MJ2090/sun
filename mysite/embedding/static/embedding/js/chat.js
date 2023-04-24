@@ -59,7 +59,16 @@ function chat_async_call() {
         response => response.json())
     .then((response) => {
         let data = response;
-        let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
+        // let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
+        let ai_message = data.ai_message;
+        while (true) {
+            my_ind = ai_message.indexOf('```');
+            if (my_ind == -1) {
+                break;
+            }
+            ai_message = ai_message.replace('```', '<pre><code>');
+            ai_message = ai_message.replace('```', '</pre></code>');
+        }
         let audio_address = data.audio_address;
         new_msg.prop("disabled", false);
         new_msg.focus();
@@ -70,6 +79,7 @@ function chat_async_call() {
         ai_msg.get(0).innerHTML = ai_message
         ai_msg.addClass("dialogue");
         content.append(ai_msg.get(0));
+        hljs.highlightAll();
         $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
         if (enable_speech[0].checked && audio_address != '') {

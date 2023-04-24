@@ -2,11 +2,14 @@
 
 {% block privatecss %}
 {% load static %}
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
 <link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
 {% endblock %}
 
 {% block privatejs %}
 {% load static %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <script src="{% static 'embedding/js/chat.js' %}"></script>
 {% endblock %}
 

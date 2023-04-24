@@ -89,3 +89,8 @@
     transform: scale(1.0);
   }
 }
+
+/* For code formatter. */
+.hljs {
+  background-color: #f8f8f8;
+}
