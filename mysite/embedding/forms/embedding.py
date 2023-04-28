@@ -5,8 +5,8 @@ from embedding.models import EmbeddingModel
 class TrainingForm(forms.Form):
     name = forms.CharField(required=True, max_length=100, widget=forms.TextInput(
         attrs={'class': 'embedding-name form-control', 'placeholder': "Limit 100 chars"}))
-    text = forms.CharField(max_length=100000, widget=forms.Textarea(
-        attrs={'class': 'training-text form-control', 'placeholder': "Limit 100,000 chars"}))
+    text = forms.CharField(max_length=200000, widget=forms.Textarea(
+        attrs={'class': 'training-text form-control', 'placeholder': "Limit 200,000 chars"}))
 
 
 class QuestionForm(forms.Form):
