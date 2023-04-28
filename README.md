@@ -1,6 +1,8 @@
 # about nginx
 config file: 
+
 /etc/nginx/sites-available/mysite
+
 cmd:
 sudo systemctl start nginx
 sudo systemctl stop nginx
