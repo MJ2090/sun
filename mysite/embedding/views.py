@@ -212,7 +212,7 @@ def sendchat_async(request):
 
 def sendchat(request):
     model = request.POST.get('model', '')
-    if model == "gpt-3.5-turbo":
+    if model in ["gpt-3.5-turbo", "gpt-4"]:
         return sendchat_async(request)
     message = request.POST['message']
     character = request.POST['character']
