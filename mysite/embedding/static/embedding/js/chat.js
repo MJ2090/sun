@@ -59,13 +59,13 @@ function chat_async_call() {
         response => response.json())
     .then((response) => {
         let data = response;
-        // let ai_message = data.ai_message.replace(/(?:\r\n|\r|\n)/g, "<br>");
         let ai_message = data.ai_message;
         while (true) {
             my_ind = ai_message.indexOf('```');
             if (my_ind == -1) {
                 break;
             }
+
             ai_message = ai_message.replace('```', '<pre><code>');
             ai_message = ai_message.replace('```', '</pre></code>');
         }
