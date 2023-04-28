@@ -66,8 +66,8 @@ function chat_async_call() {
                 break;
             }
 
-            ai_message = ai_message.replace('```', '<pre><code>');
-            ai_message = ai_message.replace('```', '</pre></code>');
+            ai_message = ai_message.replace(/\n*```\n*/, '<pre><code>');
+            ai_message = ai_message.replace(/\n*```\n*/, '</pre></code>');
         }
         let audio_address = data.audio_address;
         new_msg.prop("disabled", false);
