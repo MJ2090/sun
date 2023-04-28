@@ -11,7 +11,7 @@ function embedding_question_fetch() {
   const request_data = new FormData();
   request_data.append('question', question.val());
   request_data.append('character', character.val());
-  request_data.append('enable_speech', enable_speech[0].checked);
+  request_data.append('enable_speech', '');
   request_data.append('csrfmiddlewaretoken', csrf.val());
   fetch("/embedding_question_async/", {
     method: "POST",
