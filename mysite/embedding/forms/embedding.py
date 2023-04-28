@@ -12,8 +12,8 @@ class TrainingForm(forms.Form):
 class QuestionForm(forms.Form):
     character = forms.ChoiceField(required=True, choices=(), widget=forms.Select(
         attrs={'class': 'character form-select', }))
-    question = forms.CharField(required=True, max_length=200, widget=forms.Textarea(
-        attrs={'class': 'embedding-question form-control', 'placeholder': "Limit 200 chars"}))
+    question = forms.CharField(required=True, max_length=500, widget=forms.Textarea(
+        attrs={'class': 'embedding-question form-control', 'placeholder': "Limit 500 chars"}))
     answer = forms.CharField(required=True, max_length=2000, widget=forms.Textarea(
         attrs={'disabled': 'true', 'class': 'embedding-answer form-control', 'placeholder': "..."}))
     enable_speech = forms.BooleanField(
