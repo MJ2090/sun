@@ -15,7 +15,7 @@ function async_call() {
     method: "POST",
     body: request_data,
   }).then(response => response.json()).then((response) => {
-    answer.text(response);
+    answer.text(response.result);
     $("div[name='spinner").hide();
     answer.show();
   });
