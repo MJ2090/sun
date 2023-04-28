@@ -76,10 +76,14 @@ def run_it_image(prompt, count):
 
 
 def run_it_chat(messages, model):
-    response = openai.ChatCompletion.create(
-        model=model,
-        temperature=0.4,
-        max_tokens=3000,
-        messages=messages,
-    )
-    return response
+    try:
+        response = openai.ChatCompletion.create(
+            model=model,
+            temperature=0.4,
+            max_tokens=3300,
+            messages=messages,
+        )
+        return response
+    except openai.error.Timeout as e:
+        print(f"OpenAI API request timed out: {e} with message {messages}")
+        return "Sorry it was time out :D"
