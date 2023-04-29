@@ -1,6 +1,7 @@
 function chat_async_call() {
     let new_msg = $("input[name='message']");
-    if (new_msg.val() == "") {
+    let button = $("button[name='send_button']");
+    if (new_msg.val() == "" || button.prop("disabled")) {
         return;
     }
     let character = $("select[name='character']");
@@ -21,7 +22,7 @@ function chat_async_call() {
         }
     }
     let history = JSON.stringify(history_msg)
-    new_msg.prop("disabled", true);
+    button.prop("disabled", true);
     character.prop("disabled", true);
     model_selector.prop("disabled", true);
     let new_msg_text = new_msg.val();
@@ -70,7 +71,7 @@ function chat_async_call() {
             ai_message = ai_message.replace(/\n*```\n*/, '</pre></code>');
         }
         let audio_address = data.audio_address;
-        new_msg.prop("disabled", false);
+        button.prop("disabled", false);
         new_msg.focus();
         let content = $('.message-container');
 

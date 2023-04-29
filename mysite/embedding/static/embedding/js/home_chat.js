@@ -1,6 +1,7 @@
 async function home_chat_fetch() {
     let new_msg = $("input[name='message']");
-    if (new_msg.val() == "") {
+    let button = $("button[name='send_button']");
+    if (new_msg.val() == "" || button.prop("disabled")) {
         return;
     }
     let csrf = $("input[name='csrfmiddlewaretoken']");
@@ -17,7 +18,7 @@ async function home_chat_fetch() {
         }
     }
     let history = JSON.stringify(history_msg)
-    new_msg.prop("disabled", true);
+    button.prop("disabled", true);
     let new_msg_text = new_msg.val();
     new_msg.val('');
 
@@ -51,7 +52,7 @@ async function home_chat_fetch() {
         let action_message = data.action_message
         let content = $('.message-container');
 
-        new_msg.prop("disabled", false);
+        button.prop("disabled", false);
         new_msg.focus();
 
         $("div[name='spinner").hide();
