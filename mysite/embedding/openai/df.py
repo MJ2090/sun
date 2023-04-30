@@ -133,7 +133,7 @@ def generate_embedding_csv():
 def apply(x):
     print('ssssssss')
     print("x is ", x, type(x), np.isnan(x))
-    if np.isnan(x):
+    if isinstance(x, float) and np.isnan(x):
         return ''
     return openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding']
 
