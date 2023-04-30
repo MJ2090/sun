@@ -131,7 +131,7 @@ def generate_embedding_csv():
 
 
 def apply(x):
-    print("x is ", x, x is None, x is ' nan', type(x), float(x))
+    print("x is ", x, type(x), float(x))
     if x is None:
         return ''
     return openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding']
