@@ -122,13 +122,18 @@ def generate_embedding_csv():
     # Please check out our rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits
 
     df['embeddings'] = df.text.apply(
-        lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
+        apply)
     df.to_csv('processed/embeddings.csv')
     df.head()
     df = pd.read_csv('processed/embeddings.csv', index_col=0)
     df.head()
 
     return df
+
+
+def apply(x):
+    print("x is ", x)
+    return openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding']
 
 
 def get_df(my_texts=None):
