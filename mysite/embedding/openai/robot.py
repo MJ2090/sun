@@ -21,6 +21,7 @@ def create_context(question, df, max_len=1800):
 
         # Add the length of the text to the current length
         cur_len += row['n_tokens'] + 4
+        print('cur_len= ', cur_len, row['n_tokens'])
 
         # If the context is too long, break
         if cur_len > max_len:
