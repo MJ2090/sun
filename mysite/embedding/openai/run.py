@@ -76,6 +76,7 @@ def run_it_image(prompt, count):
 
 
 def run_it_chat(messages, model):
+    print(f"run_it_chat with model {model}")
     try:
         response = openai.ChatCompletion.create(
             model=model,
