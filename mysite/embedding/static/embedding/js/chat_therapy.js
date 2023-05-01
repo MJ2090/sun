@@ -122,6 +122,14 @@ function chat_init() {
         this.play();
     });
     // Audio play ends
+
+    setTimeout(() => {
+        const words = ["Hello, how are you today?", "Hi, how's everything going?", "Hey, how are you?", "Hello, are you doing well today?",];
+        const w_indix = Math.floor(Math.random() * words.length);
+        $('.first-msg-2').text(words[w_indix]);
+        $('.first-msg-1').fadeIn();
+        $('.first-msg-2').fadeIn();
+     }, 1000);
 }
 
 $(document).ready(function () {
