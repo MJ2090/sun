@@ -94,7 +94,7 @@ def generate_embedding_csv():
     # Loop through the dataframe
     for row in df.iterrows():
 
-        print("inside, ", row)
+        print("inside, ", row[0], 'sssssss', row[1], 'ssssss', max_tokens)
         # If the text is None, go to the next row
         if row[1]['text'] is None:
             continue
