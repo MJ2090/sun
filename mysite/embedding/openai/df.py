@@ -88,7 +88,7 @@ def generate_embedding_csv():
     df['n_tokens'] = df.text.apply(myf)
 
     # Visualize the distribution of the number of tokens per row using a histogram
-    df.n_tokens.hist()
+    print('df.n_tokens ', df.n_tokens)
     shortened = []
 
     # Loop through the dataframe
