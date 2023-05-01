@@ -29,6 +29,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('sendchat/', views.sendchat, name='sendchat'),
+    path('sendchat_therapy_async/', views.sendchat_therapy_async, name='sendchat_therapy_async'),
     path('chat_therapy/', views.chat_therapy, name='chat_therapy'),
     path('pricing/', views.pricing, name='pricing'),
     path('sendchat_home/', views.sendchat_home, name='sendchat_home'),

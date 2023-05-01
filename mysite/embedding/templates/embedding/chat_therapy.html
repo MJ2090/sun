@@ -15,7 +15,7 @@
 
 {% block main %}
 <div class="container px-4 py-5">
-  <h4 class="mb-3">Enjoy a chat with AI</h4>
+  <h4 class="mb-3">Enjoy a chat with Therapy AI</h4>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
 
@@ -30,7 +30,7 @@
             😀 You
           </div>
           <div name="ai_title" class="dialogue-title">
-            {{ ai_emoji }} AI
+            {{ ai_emoji }} Therapy AI
           </div>
           <p name="human_msg" class="dialogue-message">
           </p>
