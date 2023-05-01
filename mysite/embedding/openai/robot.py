@@ -4,7 +4,7 @@ from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
 
 def get_n_token(x):
-    tokenizer = tiktoken.get_encoding("cl100k_base")
+    tokenizer = tiktoken.encoding_for_model("gpt-3.5-turbo")
     return len(tokenizer.encode(x))
 
 def create_context(question, df, max_len=1800):
