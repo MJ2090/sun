@@ -31,6 +31,7 @@ def generate_scraped_csv(my_texts=None):
 
 # Splits the text into chunks of a maximum number of tokens
 def split_into_many(text, tokenizer, max_tokens=max_tokens):
+    print(split_into_many, text)
     # Split the text into sentences
     sentences = text.split('. ')
 
