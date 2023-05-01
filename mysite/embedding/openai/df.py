@@ -107,6 +107,9 @@ def generate_embedding_csv():
         else:
             shortened.append(row[1]['text'])
 
+
+    print('shortened: ', len(shortened), shortened)
+
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)
     df.n_tokens.hist()
