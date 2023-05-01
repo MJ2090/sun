@@ -1,3 +1,5 @@
+let timer;
+
 function chat_async_call() {
     let new_msg = $("input[name='message']");
     let button = $("button[name='send_button']");
@@ -37,6 +39,7 @@ function chat_async_call() {
     content.append(ai_title.get(0));
 
     $("div[name='spinner").show();
+    timer = setTimeout(() => { display_still_thinking(); }, 5000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     const request_data = new FormData();
@@ -69,6 +72,8 @@ function chat_async_call() {
         let content = $('.message-container');
 
         $("div[name='spinner").hide();
+        $(".still-thinking").hide();
+        clearTimeout(timer);
         let ai_msg = $("p[name='ai_msg']").clone();
         ai_msg.get(0).innerHTML = ai_message
         ai_msg.addClass("dialogue");
@@ -83,6 +88,13 @@ function chat_async_call() {
             audio[0].load();
         }
     });
+}
+
+function display_still_thinking() {
+    const words = ["still thinking ..", "one moment ..", "needs more time ..", "thanks for waiting ..",];
+    const w_indix = Math.floor(Math.random() * words.length);
+    $('.still-thinking').text(words[w_indix]);
+    $('.still-thinking').show();
 }
 
 function chat_init() {
