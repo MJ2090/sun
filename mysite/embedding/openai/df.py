@@ -32,7 +32,6 @@ def generate_scraped_csv(my_texts=None):
 
 # Splits the text into chunks of a maximum number of tokens
 def split_into_many(text, tokenizer, max_tokens=max_tokens):
-    print(split_into_many, text)
     # Split the text into sentences
     sentences = text.split('. ')
 
@@ -73,7 +72,6 @@ def generate_embedding_csv():
             return 0
 
         my_len = len(tokenizer.encode(x))
-        print('in myf, ', x, my_len)
         return my_len
 
     # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
@@ -84,19 +82,15 @@ def generate_embedding_csv():
     df.dropna()
     df.columns = ['title', 'text']
 
-    print('ssssss ', len(df.index), df.shape[0], len(df.text), df.text)
 
     # Tokenize the text and save the number of tokens to a new column
     df['n_tokens'] = df.text.apply(myf)
 
     # Visualize the distribution of the number of tokens per row using a histogram
-    print('df.n_tokens ', df.n_tokens)
     shortened = []
 
     # Loop through the dataframe
     for row in df.iterrows():
-
-        print("inside, ", row[0], 'sssssss', row[1], 'ssssss', max_tokens)
         # If the text is None, go to the next row
         if row[1]['text'] is None:
             continue
@@ -108,9 +102,6 @@ def generate_embedding_csv():
         # Otherwise, add the text to the list of shortened texts
         else:
             shortened.append(row[1]['text'])
-
-
-    print('shortened: ', len(shortened), shortened)
 
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)

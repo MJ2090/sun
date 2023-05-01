@@ -3,11 +3,6 @@ import tiktoken
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
 
-def get_n_token(x):
-    tokenizer = tiktoken.encoding_for_model("gpt-3.5-turbo")
-    print("okokok")
-    return len(tokenizer.encode(x))
-
 def create_context(question, df, max_len=1800):
     """
     Create a context for a question by finding the most similar context from the dataframe
@@ -27,7 +22,6 @@ def create_context(question, df, max_len=1800):
 
         # Add the length of the text to the current length
         cur_len += row['n_tokens'] + 4
-        print('cur_len= ', cur_len, row['n_tokens'], row["text"], get_n_token(row["text"]))
 
         # If the context is too long, break
         if cur_len > max_len:
@@ -37,7 +31,6 @@ def create_context(question, df, max_len=1800):
         returns.append(row["text"])
 
     # Return the context
-    print('returns= ', max_len, len(returns), returns)
     return "\n\n###\n\n".join(returns)
 
 
@@ -73,7 +66,6 @@ def answer_question(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ]
-        print('hahahahaah ', messages)
         response = openai.ChatCompletion.create(
             model=model,
             messages=messages,
