@@ -30,6 +30,7 @@ def create_context(question, df, max_len=1800):
         returns.append(row["text"])
 
     # Return the context
+    print('returns= ', max_len, len(returns), returns)
     return "\n\n###\n\n".join(returns)
 
 
