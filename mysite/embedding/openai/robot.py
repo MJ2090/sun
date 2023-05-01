@@ -57,8 +57,6 @@ def answer_question(
         print("\n\n")
 
     try:
-        # Create a completions using the questin and context
-        # my_prompt = f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:"
         system_prompt = f"Answer the question based on the context below, and if it can't be answered based on the context, say \"I don't know\""
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
         
@@ -71,17 +69,6 @@ def answer_question(
             messages=messages,
             temperature=0
         )
-        # response = openai.Completion.create(
-        #     prompt=my_prompt,
-        #     temperature=0,
-        #     max_tokens=max_tokens,
-        #     top_p=1,
-        #     frequency_penalty=0,
-        #     presence_penalty=0,
-        #     stop=stop_sequence,
-        #     model=model,
-        # )
-        # return response["choices"][0]["text"].strip()
         return response["choices"][0]["message"]["content"]
     except Exception as e:
         print(e)
