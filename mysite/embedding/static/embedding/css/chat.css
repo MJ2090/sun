@@ -47,3 +47,8 @@
 .hljs {
   background-color: #f8f8f8;
 }
+
+.still-thinking {
+  display: inline;
+  margin-left: 10px;
+}
