@@ -71,7 +71,8 @@ def generate_embedding_csv():
         if pd.isna(x):
             return 0
 
-        return len(tokenizer.encode(x))
+        my_len = len(tokenizer.encode(x))
+        return my_len
 
     # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
     tokenizer = tiktoken.get_encoding("cl100k_base")
