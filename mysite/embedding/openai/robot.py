@@ -64,8 +64,10 @@ def answer_question(
 
     try:
         # Create a completions using the questin and context
+        my_prompt = f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:"
+        print('hahahahaah ', get_n_token(my_prompt))
         response = openai.Completion.create(
-            prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
+            prompt=my_prompt,
             temperature=0,
             max_tokens=max_tokens,
             top_p=1,
