@@ -29,6 +29,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('sendchat/', views.sendchat, name='sendchat'),
+    path('done_therapy/', views.done_therapy, name='done_therapy'),
     path('pricing/', views.pricing, name='pricing'),
     path('sendchat_home/', views.sendchat_home, name='sendchat_home'),
     path('image/', views.image, name='image'),
