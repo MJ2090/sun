@@ -68,11 +68,12 @@ def answer_question(
         # my_prompt = f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:"
         system_prompt = f"Answer the question based on the context below, and if it can't be answered based on the context, say \"I don't know\""
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
-        # print('hahahahaah ', get_n_token(my_prompt))
+        
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ]
+        print('hahahahaah ', messages)
         response = openai.ChatCompletion.create(
             model=model,
             messages=messages,
