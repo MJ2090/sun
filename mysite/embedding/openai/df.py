@@ -67,6 +67,7 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
 def generate_embedding_csv():
     def myf(x):
+        print('in myf, ', x)
         if pd.isna(x):
             return 0
 
