@@ -80,7 +80,7 @@ def generate_embedding_csv():
     df.dropna()
     df.columns = ['title', 'text']
 
-    print('ssssss ', len(df.index), df.shape[0])
+    print('ssssss ', len(df.index), df.shape[0], df.text)
 
     # Tokenize the text and save the number of tokens to a new column
     df['n_tokens'] = df.text.apply(myf)
