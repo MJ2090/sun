@@ -1,0 +1,59 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
+<link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+{% load static %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="{% static 'embedding/js/chat_therapy.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">Enjoy a chat with AI</h4>
+  <form class="row needs-validation" novalidate="" action="/chat/" method="post">
+    {% csrf_token %}
+
+    <div class="col-md-4 col-lg-3 mobile-only">
+      {% include "comp/chat_menu.html" %}
+    </div>
+    <div class="col-12">
+      <div class="row g-3">
+        <div class="hidden">
+          {{ form.dialogue_id }}
+          <div name="human_title" class="dialogue-title">
+            😀 You
+          </div>
+          <div name="ai_title" class="dialogue-title">
+            {{ ai_emoji }} AI
+          </div>
+          <p name="human_msg" class="dialogue-message">
+          </p>
+          <p name="ai_msg" class="dialogue-message">
+          </p>
+        </div>
+        <div class="message-outer-container">
+          <div class="message-container">
+          </div>
+          <div class="spinner" name="spinner" style="display: none">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </div>
+        <div class="px-0 input-group">
+          {{ form.message }}
+          <button type="button" name="send_button" class="btn btn-primary send-button">Go</button>
+        </div>
+        {% include "comp/audio_comp.html" %}
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}
