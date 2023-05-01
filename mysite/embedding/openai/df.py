@@ -67,11 +67,11 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
 def generate_embedding_csv():
     def myf(x):
-        print('in myf, ', x)
         if pd.isna(x):
             return 0
 
         my_len = len(tokenizer.encode(x))
+        print('in myf, ', x, my_len)
         return my_len
 
     # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
