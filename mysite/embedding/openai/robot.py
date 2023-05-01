@@ -1,6 +1,11 @@
 import openai
+import tiktoken
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
+
+def get_n_token(x):
+    tokenizer = tiktoken.get_encoding("cl100k_base")
+    return len(tokenizer.encode(x))
 
 def create_context(question, df, max_len=1800):
     """
@@ -21,7 +26,7 @@ def create_context(question, df, max_len=1800):
 
         # Add the length of the text to the current length
         cur_len += row['n_tokens'] + 4
-        print('cur_len= ', cur_len, row['n_tokens'], row["text"])
+        print('cur_len= ', cur_len, row['n_tokens'], row["text"], get_n_token(row["text"]))
 
         # If the context is too long, break
         if cur_len > max_len:
