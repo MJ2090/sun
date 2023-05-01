@@ -13,7 +13,7 @@ from mysite.settings_base import *
 
 print('In prod............')
 
-DEBUG = True
+DEBUG = False
 
 # Note: Replace 'supersecure.codes' with your domain
 STATIC_ROOT = "/var/www/asuperdomain.com/static"
