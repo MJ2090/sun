@@ -57,7 +57,7 @@ def answer_question(
         print("\n\n")
 
     try:
-        system_prompt = f"Answer the question based on the context below, and if it can't be answered based on the context, say \"I don't know\". Try best to write the answer in the correct language."
+        system_prompt = f"Answer the question based on the context below, and if it can't be answered based on the context, say \"I don't know\". Write the answer in the same language as the question."
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
         
         messages = [
