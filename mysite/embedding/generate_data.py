@@ -86,18 +86,18 @@ patients = ['lost his job recently, which was not due to his fault.',
             'has been struggling with substance abuse and is having trouble managing her addiction as a single mother.',
             ]
 therapists = ['is familiar with Psychodynamic Therapy and provides mental support to the patient.',
-                'is familiar with Cognitive therapy and provides mental support to the patient.',
-                'is familiar with Behavior therapy and provides mental support to the patient.',
-                'is familiar with Humanistic therapy and provides mental support to the patient.',
-                'asks questions and listen patitenly to their patients.',
-                'cares about their patients very much.',
-                'always comes up with good ideas to solve the problems of their patients.',
-                'is professional at handling teenage problems.',
-                'guides their patients to find solutions by asking them questions.',
-                'never judges their patients.',
-                'is familiar with Family Therapy and provides mental support to the patient.',
-                'is familiar with Interpersonal Therapy and provides mental support to the patient.',
-                'is able to build a trusting and supportive relationship with their clients, especially with retired people.']
+              'is familiar with Cognitive therapy and provides mental support to the patient.',
+              'is familiar with Behavior therapy and provides mental support to the patient.',
+              'is familiar with Humanistic therapy and provides mental support to the patient.',
+              'asks questions and listen patitenly to their patients.',
+              'cares about their patients very much.',
+              'always comes up with good ideas to solve the problems of their patients.',
+              'is professional at handling teenage problems.',
+              'guides their patients to find solutions by asking them questions.',
+              'never judges their patients.',
+              'is familiar with Family Therapy and provides mental support to the patient.',
+              'is familiar with Interpersonal Therapy and provides mental support to the patient.',
+              'is able to build a trusting and supportive relationship with their clients, especially with retired people.']
 
 
 def call_openai(messages, model):
@@ -117,7 +117,7 @@ def run_it(messages, count):
     f = open(file_name, "w")
     f.write(ai_message)
     f.close()
-    print(f'{count} generated...' )
+    print(f'{count} generated...')
 
 
 def generation_dialogue():
@@ -133,7 +133,7 @@ def generation_dialogue():
                 continue
             if count > 320:
                 return
-            messages=[
+            messages = [
                 {"role": "system", "content": f"Generate a long dialogue with more than 600 words between a patient and a therapist. The patient {p}. The therapist {t}"},
             ]
             my_args.append((messages, count))
@@ -171,7 +171,7 @@ def generate_json():
     f.close()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     freeze_support()
     print('started...')
     # generation_dialogue()

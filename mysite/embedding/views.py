@@ -29,6 +29,7 @@ from datetime import datetime
 
 random.seed(datetime.now().timestamp())
 
+
 def home(request):
     ret = get_basic_data(request)
     ret['home_chat_form'] = HomeChatForm()
@@ -138,17 +139,18 @@ def sendchat_home(request):
     if use_action:
         openai_response = run_it_3_action(new_message, model='gpt-3.5-turbo')
         action_score = openai_response["choices"][0]["message"]["content"]
-        action_score = action_score.replace('.', '').replace('\n', '').replace(' ', '')
+        action_score = action_score.replace(
+            '.', '').replace('\n', '').replace(' ', '')
         print('action_score= ', action_score, action_score.isnumeric())
         if action_score.isnumeric() and int(action_score) >= 80:
             print('inside')
             answer = "You can do a free self assessment by clicking the link below."
             return_dict['action_message'] = answer
             return_dict['ai_action'] = 1
-        
+
     if len(return_dict) > 0:
         return HttpResponse(json.dumps(return_dict))
-    
+
     if not use_gpt:
         return HttpResponse(json.dumps({'ai_message': 'Sorry, but I cannot help you with that.'}))
 
@@ -194,7 +196,7 @@ def sendchat_async(request):
 
     record_dialogue(request, 'User', new_message, dialogue_id)
     record_dialogue(request, 'AI', ai_message, dialogue_id)
-    
+
     if character == '3-year-old guy':
         speaker = 'Ivy'
     elif character == 'Therapist':
@@ -255,9 +257,9 @@ def sendchat_therapy_async(request):
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    record_dialogue(request, 'User', new_message, dialogue_id)
-    record_dialogue(request, 'AI', ai_message, dialogue_id)
-    
+    record_dialogue(request, 'User', new_message, dialogue_id, 'therapy')
+    record_dialogue(request, 'AI', ai_message, dialogue_id, 'therapy')
+
     speaker = 'Salli'
     if enable_speech == 'true':
         audio_address = generate_audio(ai_message, speaker)
@@ -271,7 +273,8 @@ def chat_therapy(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
-    ret['ai_emoji'] = random.choice(['🍀','🌖','🌗','🌘','🔥','❄️','🍕','🧸','🍯','👩🏽‍⚕️','🌱','🌿','☘️','🌲'])
+    ret['ai_emoji'] = random.choice(
+        ['🍀', '🌖', '🌗', '🌘', '🔥', '❄️', '🍕', '🧸', '🍯', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_therapy.html', ret)
 
@@ -280,7 +283,8 @@ def chat(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
-    ret['ai_emoji'] = random.choice(['🍀','🌖','🌗','🌘','🔥','🐙','🐳','😈','👑','❄️','🍕','🌰','🎲','🎮','✈️','🚀','🌋','🧸','🎉','🪩','🍯'])
+    ret['ai_emoji'] = random.choice(['🍀', '🌖', '🌗', '🌘', '🔥', '🐙', '🐳', '😈',
+                                    '👑', '❄️', '🍕', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🧸', '🎉', '🪩', '🍯'])
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
 
@@ -431,7 +435,8 @@ def image(request):
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
     target = request.POST.get('target', '')
-    openai_response = run_it_translate(original_text, target=target, model='gpt-3.5-turbo')
+    openai_response = run_it_translate(
+        original_text, target=target, model='gpt-3.5-turbo')
     translated_text = openai_response['choices'][0]['message']['content']
     record_consumption(
         request, sc.MODEL_TYPES_TRANSLATE, openai_response)
@@ -511,10 +516,11 @@ def do_register(cd):
     return userProfile
 
 
-def record_dialogue(request, role, message, dialogue_id):
-    dialogue = Dialogue.objects.create(role=role, message=message, dialogue_id=dialogue_id)
+def record_dialogue(request, role, message, dialogue_id, source='chat'):
+    dialogue = Dialogue.objects.create(
+        role=role, message=message, dialogue_id=dialogue_id, source=source)
     dialogue.save()
-    
+
 
 def record_consumption(request, model_type, openai_response, secret=''):
     with transaction.atomic():
