@@ -44,7 +44,7 @@ function chat_async_call() {
     content.append(ai_title.get(0));
 
     $("div[name='spinner").show();
-    timer = setTimeout(() => { display_still_thinking(); }, 5000);
+    timer = setTimeout(() => { display_still_thinking(); }, 10000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     const request_data = new FormData();
