@@ -80,6 +80,7 @@ class Dialogue(models.Model):
     role = models.CharField(max_length=20, default='')
     message = models.EmailField(max_length=5000, default='')
     dialogue_id = models.CharField(max_length=10, default='')
+    source = models.CharField(max_length=20, default='chat')
 
     def __str__(self):
         return self.dialogue_id + " " + self.message
