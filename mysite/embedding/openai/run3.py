@@ -10,19 +10,6 @@ import openai
 relative_path = '/var/www/asuperdomain.com/static/embedding/data/'
 
 
-def run_it_3(my_text, qs):
-    my_texts = [("embedding", my_text)]
-    my_df = df.get_df(my_texts)
-    my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
-    ans = []
-    for q in qs:
-        tmp = {"Question": q, "Answer": robot.answer_question(
-            my_df, question=q)}
-        ans.append(tmp)
-
-    return ans
-
-
 def run_it_3_question(question, random_str):
     file_path = relative_path + random_str + '.csv'
     if not os.path.exists(file_path):
