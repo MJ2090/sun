@@ -112,7 +112,9 @@ function display_msg_piece(final_list, current_index) {
     ai_msg.addClass("dialogue");
     content.append(ai_msg.get(0));
     hljs.highlightAll();
-    // $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+    if (current_index==0) {
+        $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);
+    }
 
     if (current_index >= final_list.length - 1) {
         post_process();
