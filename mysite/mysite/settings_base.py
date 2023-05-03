@@ -37,7 +37,6 @@ ALLOWED_HOSTS = ["52.10.1.27",
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
     'polls.apps.PollsConfig',
     'embedding.apps.EmbeddingConfig',
     'django.contrib.admin',
