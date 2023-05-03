@@ -108,9 +108,11 @@ function display_msg_piece(final_list, current_index) {
         content.append(ai_title.get(0));
     }
     let ai_msg = $("p[name='ai_msg']").clone();
+    ai_msg.css('display', 'none');
     ai_msg.get(0).innerHTML = final_list[current_index];
     ai_msg.addClass("dialogue");
     content.append(ai_msg.get(0));
+    ai_msg.fadeIn();
     hljs.highlightAll();
     if (current_index==0) {
         $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);
