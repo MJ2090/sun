@@ -81,7 +81,6 @@ function chat_async_call() {
         });
 }
 
-
 function display_msg(ai_message) {
     msg_len = ai_message.length;
     final_list = [];
