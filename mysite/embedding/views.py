@@ -184,7 +184,8 @@ def sendchat_async(request):
     history = request.POST.get('history')
     my_json = json.loads(history)
     messages.extend(my_json)
-    messages.append({"role": "user", "content": new_message})
+    if new_message.strip() != '':
+        messages.append({"role": "user", "content": new_message})
 
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
