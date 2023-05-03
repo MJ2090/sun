@@ -183,7 +183,10 @@ def sendchat_async(request):
     messages = json.loads(my_m.history)
     history = request.POST.get('history')
     my_json = json.loads(history)
-    messages.extend(my_json)
+    for item in my_json:
+        if item['content'].strip() != '':
+            messages.append(item)
+    # messages.extend(my_json)
     if new_message.strip() != '':
         messages.append({"role": "user", "content": new_message})
 

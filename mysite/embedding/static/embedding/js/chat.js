@@ -59,42 +59,88 @@ function chat_async_call() {
         method: "POST",
         body: request_data,
     })
-    .then(
-        response => response.json())
-    .then((response) => {
-        let data = response;
-        let ai_message = data.ai_message;
-        while (true) {
-            my_ind = ai_message.indexOf('```');
-            if (my_ind == -1) {
-                break;
+        .then(
+            response => response.json())
+        .then((response) => {
+            let ai_message = response.ai_message;
+            while (true) {
+                my_ind = ai_message.indexOf('```');
+                if (my_ind == -1) {
+                    break;
+                }
+
+                ai_message = ai_message.replace(/\n*```\n*/, '<pre><code>');
+                ai_message = ai_message.replace(/\n*```\n*/, '</pre></code>');
             }
 
-            ai_message = ai_message.replace(/\n*```\n*/, '<pre><code>');
-            ai_message = ai_message.replace(/\n*```\n*/, '</pre></code>');
-        }
-        let audio_address = data.audio_address;
-        button.prop("disabled", false);
-        new_msg.focus();
-        let content = $('.message-container');
+            pre_process();
+            display_msg(ai_message);
+            post_process();
 
-        $("div[name='spinner").hide();
-        $(".still-thinking").hide();
-        clearTimeout(timer);
-        let ai_msg = $("p[name='ai_msg']").clone();
-        ai_msg.get(0).innerHTML = ai_message
-        ai_msg.addClass("dialogue");
-        content.append(ai_msg.get(0));
-        hljs.highlightAll();
-        $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+            audio_process(response.audio_address, enable_speech[0].checked);
+        });
+}
 
-        if (enable_speech[0].checked && audio_address != '') {
-            let source = $("source[name='source']");
-            source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
-            let audio = $("audio[name='audio']");
-            audio[0].load();
+
+function display_msg(ai_message) {
+    msg_len = ai_message.length;
+    final_list = [];
+    current_message = '';
+    message_list = ai_message.split('\n\n');
+    for (let i = 0; i < message_list.length; i++) {
+        if (current_message != '') {
+            current_message += '\n\n';
         }
-    });
+        current_message += message_list[i];
+        if (current_message.length > 400 || i == message_list.length - 1) {
+            final_list.push(current_message);
+            current_message = '';
+        }
+    }
+
+    display_msg_piece(final_list, 0);
+}
+
+function display_msg_piece(final_list, current_index) {
+    let content = $('.message-container');
+    if (current_index > 0) {
+        let ai_title = $("div[name='ai_title']").clone();
+        content.append(ai_title.get(0));
+    }
+    let ai_msg = $("p[name='ai_msg']").clone();
+    ai_msg.get(0).innerHTML = final_list[current_index];
+    ai_msg.addClass("dialogue");
+    content.append(ai_msg.get(0));
+    hljs.highlightAll();
+    // $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+
+    if (current_index >= final_list.length - 1) {
+        post_process();
+    } else {
+        setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 3000);
+    }
+}
+
+function audio_process(audio_address, enabled) {
+    if (enabled && audio_address != '') {
+        let source = $("source[name='source']");
+        source.attr('src', '/static/embedding/media/' + audio_address + '.mp3');
+        let audio = $("audio[name='audio']");
+        audio[0].load();
+    }
+}
+
+function pre_process() {
+    $("div[name='spinner").hide();
+    $(".still-thinking").hide();
+    clearTimeout(timer);
+}
+
+function post_process() {
+    let new_msg = $("input[name='message']");
+    let button = $("button[name='send_button']");
+    button.prop("disabled", false);
+    new_msg.focus();
 }
 
 function display_still_thinking() {
