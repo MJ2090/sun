@@ -70,7 +70,7 @@ class EmbeddingModel(models.Model):
 class Contact(models.Model):
     username = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=100, default='')
-    message = models.CharField(max_length=2000, default='')
+    message = models.CharField(max_length=100, default='')
 
     def __str__(self):
         return self.username
