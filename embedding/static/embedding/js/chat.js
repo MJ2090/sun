@@ -15,7 +15,7 @@ function chat_async_call() {
     let history_msg = [];
     let role = "user";
     for (let i = 0; i < old_msg.length; i++) {
-        if (old_msg.get(i).attr('name') == 'ai_msg') {
+        if (old_msg.get(i).getAttribute('name') == 'ai_msg') {
             role = 'assistant'
         } else {
             role = 'user'
