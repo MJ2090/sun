@@ -242,18 +242,13 @@ def sendchat_therapy_async_llama(request):
     print("in llama")
     model = 'llama'
     new_message = request.POST['message']
-    character = 'Therapy 1'
     enable_speech = request.POST.get('enable_speech', '')
     dialogue_id = request.POST.get('dialogue_id', '')
 
-    my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history)
     history = request.POST.get('history')
-    my_json = json.loads(history)
-    messages.extend(my_json)
+    messages = json.loads(history)
     messages.append({"role": "user", "content": new_message})
 
-    print("Character: ", character)
     print("Msg sent to llama: ", messages)
 
     llamaai_response = run_it_chat_llama(messages, model=model)
