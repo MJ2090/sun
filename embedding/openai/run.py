@@ -1,5 +1,6 @@
 import openai
 import embedding.static_values as sc
+from embedding.llm import llama
 
 
 def run_it_translate(original_text, target, model):
@@ -73,6 +74,10 @@ def run_it_image(prompt, count):
         size="256x256"
     )
     return response
+
+
+def run_it_chat_llama(messages, model):
+    return llama.create(messages)
 
 
 def run_it_chat(messages, model):

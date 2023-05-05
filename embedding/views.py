@@ -1,5 +1,4 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from embedding.forms.embedding import TrainingForm, QuestionForm
@@ -14,7 +13,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat
+from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -239,7 +238,44 @@ def sendchat(request):
     return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
 
+def sendchat_therapy_async_llama(request):
+    print("in llama")
+    model = 'llama'
+    new_message = request.POST['message']
+    character = 'Therapy 1'
+    enable_speech = request.POST.get('enable_speech', '')
+    dialogue_id = request.POST.get('dialogue_id', '')
+
+    my_m = PromptModel.objects.get(name=character)
+    messages = json.loads(my_m.history)
+    history = request.POST.get('history')
+    my_json = json.loads(history)
+    messages.extend(my_json)
+    messages.append({"role": "user", "content": new_message})
+
+    print("Character: ", character)
+    print("Msg sent to openai: ", messages)
+
+    llamaai_response = run_it_chat_llama(messages, model=model)
+    print('llamaai_response = ', llamaai_response)
+    ai_message = llamaai_response['ai_message']
+    print("\nMsg returned from llama: ", ai_message)
+
+    record_dialogue(request, 'User', new_message, dialogue_id, 'therapy')
+    record_dialogue(request, 'AI', ai_message, dialogue_id, 'therapy')
+
+    speaker = 'Salli'
+    if enable_speech == 'true':
+        audio_address = generate_audio(ai_message, speaker)
+    else:
+        audio_address = ''
+
+    return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
+
+
+
 def sendchat_therapy_async(request):
+    return sendchat_therapy_async_llama(request)
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'Therapy 1'
