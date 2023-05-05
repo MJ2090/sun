@@ -274,6 +274,8 @@ def sendchat_therapy_async_llama(request):
 
 
 def sendchat_therapy_async(request):
+    if request.user.is_authenticated and request.user.username == 'z':
+        return sendchat_therapy_async_llama(request)
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'T3'
