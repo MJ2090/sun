@@ -16,8 +16,6 @@ def get_basic_data(request):
     ret = {}
     if request.user.is_authenticated:
         ret['user'] = request.user
-        if request.user.username == 'z':
-            ret['use_new_header'] = True
     ret['current_page'] = 'home'
     return ret
 

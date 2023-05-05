@@ -273,7 +273,6 @@ def sendchat_therapy_async_llama(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-
 def sendchat_therapy_async(request):
     model = 'gpt-4'
     new_message = request.POST['message']
