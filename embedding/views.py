@@ -277,7 +277,7 @@ def sendchat_therapy_async_llama(request):
 def sendchat_therapy_async(request):
     model = 'gpt-4'
     new_message = request.POST['message']
-    character = 'Therapy 1'
+    character = 'T3'
     enable_speech = request.POST.get('enable_speech', '')
     dialogue_id = request.POST.get('dialogue_id', '')
 
