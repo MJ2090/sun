@@ -15,13 +15,13 @@ function chat_async_call() {
     let history_msg = [];
     let role = "user";
     for (let i = 0; i < old_msg.length; i++) {
+        if (old_msg.attr('name') == 'ai_msg') {
+            role = 'assistant'
+        } else {
+            role = 'user'
+        }
         let dic = { "role": role, "content": old_msg.get(i).innerText }
         history_msg.push(dic);
-        if (role == "user") {
-            role = "assistant";
-        } else {
-            role = "user";
-        }
     }
     let history = JSON.stringify(history_msg)
     button.prop("disabled", true);
