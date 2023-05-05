@@ -254,7 +254,7 @@ def sendchat_therapy_async_llama(request):
     messages.append({"role": "user", "content": new_message})
 
     print("Character: ", character)
-    print("Msg sent to openai: ", messages)
+    print("Msg sent to llama: ", messages)
 
     llamaai_response = run_it_chat_llama(messages, model=model)
     print('llamaai_response = ', llamaai_response)
@@ -275,7 +275,6 @@ def sendchat_therapy_async_llama(request):
 
 
 def sendchat_therapy_async(request):
-    return sendchat_therapy_async_llama(request)
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'Therapy 1'
