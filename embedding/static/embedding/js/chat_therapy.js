@@ -42,12 +42,15 @@ function chat_async_call() {
     timer = setTimeout(() => { display_still_thinking(); }, 10000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
+    let source_id = $("input[name='source_id']").val();
+
     const request_data = new FormData();
     request_data.append('message', new_msg_text);
     request_data.append('history', history);
     request_data.append('enable_speech', enable_speech[0].checked);
     request_data.append('dialogue_id', $("input[name='dialogue_id']").val());
     request_data.append('csrfmiddlewaretoken', csrf.val());
+    request_data.append('source_id', source_id);
     fetch("/sendchat_therapy_async/", {
         method: "POST",
         body: request_data,

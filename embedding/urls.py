@@ -31,6 +31,7 @@ urlpatterns = [
     path('sendchat/', views.sendchat, name='sendchat'),
     path('sendchat_therapy_async/', views.sendchat_therapy_async, name='sendchat_therapy_async'),
     path('chat_therapy/', views.chat_therapy, name='chat_therapy'),
+    path('chat_therapy_llama/', views.chat_therapy_llama, name='chat_therapy_llama'),
     path('pricing/', views.pricing, name='pricing'),
     path('sendchat_home/', views.sendchat_home, name='sendchat_home'),
     path('image/', views.image, name='image'),

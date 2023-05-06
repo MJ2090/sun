@@ -21,3 +21,4 @@ class ChatForm(forms.Form):
     enable_speech = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input', }))
     dialogue_id = forms.CharField(required=True, max_length=21, widget=forms.TextInput())
+    source_id = forms.CharField(required=True, max_length=21, widget=forms.TextInput(), initial='openai')
