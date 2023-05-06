@@ -313,6 +313,7 @@ def chat_therapy(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
+    ret['welcome_word'] = 'Chat with AI Therapist'
     ret['ai_emoji'] = random.choice(
         ['🍀', '🌖', '🌗', '🌘', '🔥', '❄️', '🍕', '🧸', '🍯', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
     form.fields['dialogue_id'].initial = load_random_string(10)
@@ -323,6 +324,7 @@ def chat_therapy_llama(request):
     ret = get_basic_data(request)
     form = ChatForm(initial={'source_id': 'llama'})
     ret['form'] = form
+    ret['welcome_word'] = 'Chat with Llama Therapist'
     ret['ai_emoji'] = random.choice(
         ['🍀', '🌖', '🌗', '🌘', '🔥', '❄️', '🍕', '🧸', '🍯', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
     form.fields['dialogue_id'].initial = load_random_string(10)

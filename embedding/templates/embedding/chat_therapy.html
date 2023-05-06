@@ -14,7 +14,7 @@
 
 {% block main %}
 <div class="container px-4 py-5">
-  <h4 class="mb-3">Enjoy a chat with Therapy AI</h4>
+  <h4 class="mb-3">{{ welcome_word }}</h4>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
 
