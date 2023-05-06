@@ -251,7 +251,7 @@ def sendchat_therapy_async_llama(request):
 
     print("Msg sent to llama: ", messages)
 
-    llamaai_response = run_it_chat_llama(messages, model=model)
+    llamaai_response = run_it_chat_llama(request, messages, model=model)
     print('llamaai_response = ', llamaai_response)
     ai_message = llamaai_response['ai_message']
     print("\nMsg returned from llama: ", ai_message)

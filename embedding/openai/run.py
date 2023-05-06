@@ -76,8 +76,8 @@ def run_it_image(prompt, count):
     return response
 
 
-def run_it_chat_llama(messages, model):
-    return llama.create(messages)
+def run_it_chat_llama(request, messages, model):
+    return llama.create(request, messages)
 
 
 def run_it_chat(messages, model):
