@@ -1,0 +1,38 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/summary.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/play.js' %}"></script>
+<script src="{% static 'embedding/js/play_2.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div id="container">
+
+  <h1>LOLO !
+  </h1>
+
+  <video playsinline autoplay></video>
+  <button class="screenshot-button">Take snapshot</button>
+  <canvas></canvas>
+
+  <form class="row needs-validation" novalidate="" action="/play/" method="post">
+    {% csrf_token %}
+
+    <div class="col-md-12 col-lg-12">
+      <div class="row g-3">
+        <div class="col-lg-6 col-mj-12">
+          <label for="image_f" class="form-label"> Image</label>
+          {{ form.image_f }}
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+{% endblock %}

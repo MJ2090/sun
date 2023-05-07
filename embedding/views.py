@@ -6,6 +6,7 @@ from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
 from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.summary import SummaryForm
+from embedding.forms.play import PlayForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
@@ -22,9 +23,13 @@ from .utils import load_random_string, get_basic_data, enable_new_home, parse_di
 from embedding.models import UserProfile
 from embedding.models import Contact, Dialogue
 import embedding.static_values as sc
+import os
 import json
 import random
+import base64
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings as conf_settings
 
 random.seed(datetime.now().timestamp())
 
@@ -531,6 +536,30 @@ def summary(request):
     ret = get_basic_data(request)
     ret['form'] = SummaryForm()
     return render(request, 'embedding/summary.html', ret)
+
+
+@csrf_exempt
+def play(request):
+    if request.method == 'POST':
+        image_data = request.POST.get('image').strip()
+        _, image_str = image_data.split(';base64,')
+        decoded_image = base64.b64decode(image_str)
+        image_filename = os.path.join(conf_settings.UPLOAD_PATH, "ddd.png")
+        save_to_local(image_filename, decoded_image)
+        return HttpResponse(json.dumps({'result': 'image is saved'}))
+    else:
+        ret = get_basic_data(request)
+        ret['form'] = PlayForm()
+        return render(request, 'embedding/play.html', ret)
+
+
+def save_to_local(image_filename, decoded_image):
+    if not os.path.isdir(conf_settings.UPLOAD_PATH):
+        print("make dirrrrrrrrrr ", conf_settings.UPLOAD_PATH)
+        os.mkdir(conf_settings.UPLOAD_PATH)
+    with open(image_filename, "wb+") as f:
+            f.write(decoded_image)
+            f.close()
 
 
 @login_required
