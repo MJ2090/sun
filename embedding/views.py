@@ -22,7 +22,7 @@ from django.db import transaction
 from .utils import load_random_string, get_basic_data, enable_new_home, parse_diff
 from embedding.models import UserProfile
 from embedding.models import Contact, Dialogue
-from embedding.ocr import read_image
+# from embedding.ocr import read_image
 import embedding.static_values as sc
 import os
 import json
@@ -547,7 +547,7 @@ def play(request):
         decoded_image = base64.b64decode(image_str)
         image_filename = os.path.join(conf_settings.UPLOAD_PATH, "ddd.png")
         save_to_local(image_filename, decoded_image)
-        ocr_result = read_image(image_filename)
+        # ocr_result = read_image(image_filename)
         return HttpResponse(json.dumps({'result': ocr_result}))
     else:
         ret = get_basic_data(request)
