@@ -1,6 +1,10 @@
 import easyocr
 import os
 
-reader = easyocr.Reader(['ch_sim','en'], gpu=False) # this needs to run only once to load the model into memory
-result = reader.readtext('/Users/minjunzhu/Desktop/dddddd.png')
-print(result)
+
+def read_image(file_name):
+    reader = easyocr.Reader(['en'], gpu=False) # this needs to run only once to load the model into memory
+    result = reader.readtext(file_name)
+    for item in result:
+        print(item[1])
+    return result
