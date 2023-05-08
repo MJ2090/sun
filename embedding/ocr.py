@@ -1,4 +1,4 @@
-import easyocr
+# import easyocr
 import os
 
 
