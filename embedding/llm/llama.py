@@ -3,7 +3,7 @@ import json
 
 
 def create(request, messages):
-    url = 'https://llm.asuperdomain.com/test_async/'
+    url = 'https://llm.asuperdomain.com/llama_async/'
     print("create: ", messages)
     post_response = requests.Session().post(url, data={
         'messages': json.dumps(messages)}, headers=dict(Referer=url))
