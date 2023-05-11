@@ -14,7 +14,7 @@ def read_image(file_name, source='tesseract'):
 
 def ocr_tesseract(file_name):
     img = Image.open(file_name)
-    text = pytesseract.image_to_string(img)
+    text = pytesseract.image_to_string(img, lang="chi_sim")
     return text
 
 
