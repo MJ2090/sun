@@ -1,11 +1,22 @@
 # import easyocr
 import os
+import requests
 
+def read_image(file_name, source='osr_space'):
+    if source=='osr_space':
+        return ocr_space(file_name)
+    return "Nothing"
 
-def read_image(file_name):
-    result = "s"
-    # reader = easyocr.Reader(['en'], gpu=False) # this needs to run only once to load the model into memory
-    # result = reader.readtext(file_name)
-    # for item in result:
-    #     print(item[1])
-    return result
+def ocr_space(file_name):
+    api_key = "K82589884488957"
+    language = "eng"
+    payload = {'isOverlayRequired': False,
+               'apikey': api_key,
+               'language': language,
+               }
+    with open(file_name, 'rb') as f:
+        r = requests.post('https://api.ocr.space/parse/image',
+                          files={file_name: f},
+                          data=payload,
+                          )
+    return r.content.decode()

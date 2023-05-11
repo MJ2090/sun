@@ -542,12 +542,14 @@ def summary(request):
 @csrf_exempt
 def play(request):
     if request.method == 'POST':
+        print("hererheeeee")
         image_data = request.POST.get('image').strip()
         _, image_str = image_data.split(';base64,')
         decoded_image = base64.b64decode(image_str)
         image_filename = os.path.join(conf_settings.UPLOAD_PATH, "ddd.png")
         save_to_local(image_filename, decoded_image)
         ocr_result = read_image(image_filename)
+        print("ocr_result: ", ocr_result)
         return HttpResponse(json.dumps({'result': ocr_result}))
     else:
         ret = get_basic_data(request)
