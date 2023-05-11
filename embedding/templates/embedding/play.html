@@ -13,8 +13,7 @@
 
 <div class="container px-4 py-5">
   <h4 class="mb-3">Quiz Terminator</h4>
-  <form class="row needs-validation" novalidate="" action="/play/" method="post"
-    onsubmit="return confirmSubmit(this)">
+  <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
 
     <div class="col-md-12 col-lg-12">
@@ -23,17 +22,17 @@
         <div class="col-lg-6 col-mj-12">
           <label for="address2" class="form-label">Quiz Text</label>
           {{ form.image_f }}
+          <button class="send-button w-100 btn btn-primary btn-md" type="button">GO</button>
         </div>
         <div class="col-lg-6 col-mj-12">
           <label for="address2" class="form-label">Answer</label>
-          <textarea class="form-control" rows="10" name="response_question"></textarea>
-          <textarea class="form-control" rows="10" name="response_answer"></textarea>
+          <textarea class="form-control mb-2" rows="10" name="response_question"></textarea>
+          <textarea class="form-control mb-2" rows="10" name="response_answer"></textarea>
         </div>
-        <button class="send-button w-100 btn btn-primary btn-md" type="button">GO</button>
       </div>
 
     </div>
-    
+
   </form>
 </div>
 {% endblock %}
