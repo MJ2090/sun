@@ -13,7 +13,7 @@ function play_fetch() {
         question = document.querySelector("textarea[name='response_question']")
         answer = document.querySelector("textarea[name='response_answer']")
         question.value = data.question;
-        answer.value = data.question;
+        answer.value = data.answer;
         question;
     });
 }

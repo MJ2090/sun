@@ -99,7 +99,7 @@ def run_it_quiz(context, model="gpt-4"):
     print(f"run_it_quiz with model {model}")
     messages = [
         {"role": "system", "content": "Answer the question in the context. Note that the context is the result of OCT from an image, it may contain some noise text which is irrelevant to the question."},
-        {f"role": "user", "content": "Context: {context}"},
+        {"role": "user", "content": f"Context: {context}"},
     ]
     print(f'promot: {messages}')
     try:
