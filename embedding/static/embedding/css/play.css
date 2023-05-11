@@ -1,3 +1,12 @@
 .center-spinner {
     text-align: center;
 }
+
+.image-container {
+    display: none;
+    text-align: center;
+}
+
+.image-container img {
+    width: 80%;
+}

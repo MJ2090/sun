@@ -20,23 +20,21 @@
       <div class="row g-3">
 
         <div class="col-lg-6 col-mj-12">
-          <label for="address2" class="form-label">Quiz Text</label>
+          <label for="address2" class="form-label">Upload Question</label>
           {{ form.image_f }}
+          <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
           <div class="center-spinner mt-3" name="spinner" style="display: none">
             <div class="loading">
               <span></span>
               <span></span>
               <span></span>
               <span></span>
-              <div name="still_thinking" class="still-thinking" style="display: none;">
-                Still thinking ...
-              </div>
             </div>
           </div>
           <button class="send-button w-100 btn btn-primary btn-md mt-3" type="button">GO</button>
         </div>
         <div class="col-lg-6 col-mj-12">
-          <label for="address2" class="form-label">Answer</label>
+          <label for="address2" class="form-label">Parsed Question & Answer</label>
           <textarea class="form-control mb-3" disabled rows="10" name="response_question"></textarea>
           <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
         </div>

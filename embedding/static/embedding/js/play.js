@@ -25,6 +25,18 @@ function play_init() {
     document.querySelector(".send-button").addEventListener('click', function () {
         play_fetch();
     });
+
+    document.querySelector("input[name='image_f']").addEventListener("change", function(e) {
+        let reader = new FileReader();
+        document.querySelector(".image-container").style.display = 'block';
+      
+        reader.onload = function(event) {
+          document.getElementById("imagePreview").src = event.target.result;
+        }
+        
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+      });
 }
 
 $(document).ready(function () {
