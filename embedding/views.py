@@ -549,8 +549,9 @@ def play_async(request):
     ocr_result = ocr_result.replace('\n', ' ')
     print("ocr_result: ", ocr_result)
     openai_response = run_it_quiz(ocr_result)
+    ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
-    return HttpResponse(json.dumps({'question': ocr_result, 'answer': openai_response}))
+    return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
 @csrf_exempt
