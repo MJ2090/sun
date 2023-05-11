@@ -5,6 +5,9 @@ function play_fetch() {
     const request_data = new FormData();
     request_data.append('original_iamge', original_iamge.files[0]);
     request_data.append('csrfmiddlewaretoken', csrf.value);
+
+    spinner = document.querySelector("div[name='spinner']");
+    spinner.style.display = 'block';
     fetch("/play_async/", {
         method: "POST",
         body: request_data,
@@ -14,12 +17,11 @@ function play_fetch() {
         answer = document.querySelector("textarea[name='response_answer']")
         question.value = data.question;
         answer.value = data.answer;
-        question;
+        spinner.style.display = 'none';
     });
 }
 
 function play_init() {
-    // $(".send-button")
     document.querySelector(".send-button").addEventListener('click', function () {
         play_fetch();
     });
