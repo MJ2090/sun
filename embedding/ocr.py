@@ -20,7 +20,7 @@ def ocr_tesseract(file_name):
 
 def ocr_space(file_name):
     api_key = "K82589884488957"
-    language = "eng"
+    language = "chs"
     payload = {'isOverlayRequired': False,
                'apikey': api_key,
                'language': language,
