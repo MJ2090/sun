@@ -14,7 +14,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
+from embedding.openai.run import run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -548,7 +548,8 @@ def play_async(request):
     ocr_result = read_image(file_name)
     ocr_result = ocr_result.replace('\n', ' ')
     print("ocr_result: ", ocr_result)
-    return HttpResponse(json.dumps({'question': ocr_result}))
+    openai_response = run_it_quiz(ocr_result)
+    return HttpResponse(json.dumps({'question': ocr_result, 'answer': openai_response}))
 
 
 @csrf_exempt

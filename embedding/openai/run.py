@@ -93,3 +93,23 @@ def run_it_chat(messages, model):
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D"
+    
+
+def run_it_quiz(context, model="gpt-4"):
+    print(f"run_it_quiz with model {model}")
+    messages = [
+        {"role": "system", "content": "Answer the question in the context. Note that the context is the result of OCT from an image, it may contain some noise text which is irrelevant to the question."},
+        {f"role": "user", "content": "Context: {context}"},
+    ]
+    print(f'promot: {messages}')
+    try:
+        response = openai.ChatCompletion.create(
+            model=model,
+            temperature=0.5,
+            max_tokens=3300,
+            messages=messages,
+        )
+        return response
+    except openai.error.Timeout as e:
+        print(f"OpenAI API request timed out: {e} with message {messages}")
+        return "Sorry it was time out :D"
