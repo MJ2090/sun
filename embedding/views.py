@@ -546,7 +546,7 @@ def play_async(request):
     print(original_iamge)
     file_name = default_storage.save(original_iamge.name, original_iamge)
     ocr_result = read_image(file_name)
-    ocr_result = ocr_result.replace('\n\n', '\n')
+    ocr_result = ocr_result.replace('\n', ' ')
     print("ocr_result: ", ocr_result)
     return HttpResponse(json.dumps({'question': ocr_result}))
 
