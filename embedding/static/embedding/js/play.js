@@ -10,8 +10,8 @@ function play_fetch() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         let data = response;
-        question = document.querySelector("input[name='response_question']")
-        answer = document.querySelector("input[name='response_answer']")
+        question = document.querySelector("textarea[name='response_question']")
+        answer = document.querySelector("textarea[name='response_answer']")
         question.value = data.question;
         answer.value = data.question;
         question;
