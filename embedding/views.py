@@ -31,6 +31,7 @@ import base64
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings as conf_settings
+from django.core.files.storage import default_storage
 
 random.seed(datetime.now().timestamp())
 
@@ -540,9 +541,18 @@ def summary(request):
 
 
 @csrf_exempt
+def play_async(request):
+    original_iamge = request.FILES.get('original_iamge')    
+    print(original_iamge)
+    file_name = default_storage.save(original_iamge.name, original_iamge)
+    ocr_result = read_image(file_name)
+    print("ocr_result: ", ocr_result)
+    return HttpResponse(json.dumps({'result': ocr_result}))
+
+
+@csrf_exempt
 def play(request):
     if request.method == 'POST':
-        print("hererheeeee")
         image_data = request.POST.get('image').strip()
         _, image_str = image_data.split(';base64,')
         decoded_image = base64.b64decode(image_str)

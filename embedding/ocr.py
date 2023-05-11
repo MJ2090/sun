@@ -1,11 +1,22 @@
 # import easyocr
 import os
 import requests
+from PIL import Image
+import pytesseract
 
-def read_image(file_name, source='osr_space'):
+def read_image(file_name, source='tesseract'):
     if source=='osr_space':
         return ocr_space(file_name)
-    return "Nothing"
+    if source=='tesseract':
+        return ocr_tesseract(file_name)
+    return "Nothing, no source found"
+
+
+def ocr_tesseract(file_name):
+    img = Image.open(file_name)
+    text = pytesseract.image_to_string(img)
+    return text
+
 
 def ocr_space(file_name):
     api_key = "K82589884488957"
