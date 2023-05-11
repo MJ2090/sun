@@ -10,9 +10,11 @@ function play_fetch() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         let data = response;
-        fixed_text.val(data.plain_result);
-        $("div[name='spinner").hide();
-        fixed_text.show();
+        question = document.querySelector("input[name='response_question']")
+        answer = document.querySelector("input[name='response_answer']")
+        question.value = data.question;
+        answer.value = data.question;
+        question;
     });
 }
 
