@@ -9,3 +9,6 @@ mysite/db.sqlite3
 
 # all the generated mp3 from aws polly
 *.mp3
+
+# uploaded files
+uploads/*

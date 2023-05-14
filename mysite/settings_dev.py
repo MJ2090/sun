@@ -24,4 +24,3 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-UPLOAD_PATH = os.path.expanduser('~/Uploads/')

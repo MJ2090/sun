@@ -34,5 +34,3 @@ DATABASES = {
         'PORT': '',
     }
 }
-
-UPLOAD_PATH = '/var/www/asuperdomain.com/static/embedding/uploads/'

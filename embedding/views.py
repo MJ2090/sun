@@ -22,7 +22,7 @@ from django.db import transaction
 from .utils import load_random_string, get_basic_data, enable_new_home, parse_diff
 from embedding.models import UserProfile
 from embedding.models import Contact, Dialogue
-from embedding.ocr import read_image
+from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import os
 import json
@@ -280,7 +280,7 @@ def sendchat_therapy_async(request):
         return sendchat_therapy_async_llama(request)
     else:
         return sendchat_therapy_async_openai(request)
-    
+
 
 def sendchat_therapy_async_openai(request):
     model = 'gpt-4'
@@ -336,6 +336,7 @@ def chat_therapy_llama(request):
         ['🍀', '🌖', '🌗', '🌘', '🔥', '❄️', '🍕', '🧸', '🍯', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_therapy.html', ret)
+
 
 def chat(request):
     ret = get_basic_data(request)
@@ -542,11 +543,10 @@ def summary(request):
 
 @csrf_exempt
 def play_async(request):
-    original_iamge = request.FILES.get('original_iamge')    
-    print(original_iamge)
-    file_name = default_storage.save(original_iamge.name, original_iamge)
-    ocr_result = read_image(file_name)
-    ocr_result = ocr_result.replace('\n\n', '\n')
+    original_iamge = request.FILES.get('original_iamge')
+    saved_file_name = save_to_local(original_iamge)
+    ocr_result = recognize_image(saved_file_name)
+    ocr_result = ocr_result.replace(r'\n+', '\n')
     llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
     openai_response = run_it_quiz(ocr_result, model=llm_model)
@@ -562,13 +562,12 @@ def play(request):
     return render(request, 'embedding/play.html', ret)
 
 
-def save_to_local(image_filename, decoded_image):
-    if not os.path.isdir(conf_settings.UPLOAD_PATH):
-        print("make dirrrrrrrrrr ", conf_settings.UPLOAD_PATH)
-        os.mkdir(conf_settings.UPLOAD_PATH)
-    with open(image_filename, "wb+") as f:
-            f.write(decoded_image)
-            f.close()
+def save_to_local(original_iamge):
+    random_prefix = load_random_string(15) + "_"
+    if not os.path.isdir(conf_settings.UPLOADS_PATH):
+        print("mkdir in save_to_local.. ", conf_settings.UPLOADS_PATH)
+        os.mkdir(conf_settings.UPLOADS_PATH)
+    return default_storage.save(os.path.join(conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
 
 
 @login_required
