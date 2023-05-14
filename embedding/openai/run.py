@@ -98,7 +98,7 @@ def run_it_chat(messages, model):
 def run_it_quiz(context, model="gpt-4"):
     print(f"run_it_quiz with model {model}")
     messages = [
-        {"role": "system", "content": "下文是一段从图像中提取的文字 其中包含一个问题 请识别并给出这个问题的答案"},
+        {"role": "system", "content": "下文是一段从图像中提取的文字 其中包含一个或多个问题 请识别出问题并给出这些问题的答案"},
         {"role": "user", "content": f"提取的文字: {context}"},
     ]
     print(f'promot: {messages}')
