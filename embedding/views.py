@@ -32,6 +32,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings as conf_settings
 from django.core.files.storage import default_storage
+from PIL import Image
 
 random.seed(datetime.now().timestamp())
 
@@ -567,7 +568,14 @@ def save_to_local(original_iamge):
     if not os.path.isdir(conf_settings.UPLOADS_PATH):
         print("mkdir in save_to_local.. ", conf_settings.UPLOADS_PATH)
         os.mkdir(conf_settings.UPLOADS_PATH)
-    return default_storage.save(os.path.join(conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
+    file_name = default_storage.save(os.path.join(
+        conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
+    if original_iamge.size > 4*1000*1000:
+        tmp = Image.open(file_name)
+        tmp.save(file_name, optimize=True, quality=90)
+        print("size recuded: ", original_iamge.size,
+              ' ', os.path.getsize(file_name))
+    return file_name
 
 
 @login_required
