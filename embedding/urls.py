@@ -7,6 +7,7 @@ urlpatterns = [
     # ex: /summary/
     path('', views.home, name='index'),
     path('summary/', views.summary, name='summary'),
+    path('demo/', views.demo, name='demo'),
     path('grammar/', views.grammar, name='grammar'),
     path('translation/', views.translation, name='translation'),
     path('embedding_question/', views.embedding_question,
@@ -39,6 +40,7 @@ urlpatterns = [
     path('super/', views.add_prompt_model, name='add_prompt_model'),
     path('grammar_async/', views.grammar_async, name='grammar_async'),
     path('summary_async/', views.summary_async, name='summary_async'),
+    path('demo_async/', views.demo_async, name='demo_async'),
     path('translation_async/', views.translation_async, name='translation_async'),
     path('image_async/', views.image_async, name='image_async'),
     path('play/', views.play, name='play'),

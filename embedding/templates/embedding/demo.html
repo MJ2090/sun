@@ -1,0 +1,47 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/demo.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/demo.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">Private LLM Demo</h4>
+  <form class="row needs-validation" novalidate="" action="/demo/" method="post"
+    onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
+
+    <div class="col-md-4 col-lg-3 mobile-only">
+      {% include "comp/summary_menu.html" %}
+    </div>
+
+    <div class="col-md-12 col-lg-12">
+      <div class="row g-3">
+
+        <div class="col-lg-6 col-mj-12">
+          <label for="text" class="form-label">Original Prompt</label>
+          {{ form.prompt }}
+          <label for="text" class="form-label">Original Text</label>
+          {{ form.text }}
+        </div>
+        <div class="col-lg-6 col-mj-12">
+          <label for="summary_text" class="form-label">Result Text</label>
+          {{ form.result_text }}
+          <div class="spinner" name="spinner" style="display: none">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

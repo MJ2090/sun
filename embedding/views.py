@@ -6,6 +6,7 @@ from embedding.forms.translation import TranslationForm
 from embedding.forms.grammar import GrammarForm
 from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.summary import SummaryForm
+from embedding.forms.demo import DemoForm
 from embedding.forms.play import PlayForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
@@ -14,7 +15,7 @@ from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
+from embedding.openai.run import run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
@@ -540,6 +541,20 @@ def summary(request):
     ret = get_basic_data(request)
     ret['form'] = SummaryForm()
     return render(request, 'embedding/summary.html', ret)
+
+
+def demo_async(request):
+    original_text = request.POST.get('original_text', '')
+    prompt = request.POST.get('prompt', '')
+    gml_response = run_it_glm(request, original_text, prompt)
+    print(gml_response)
+    return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
+
+
+def demo(request):
+    ret = get_basic_data(request)
+    ret['form'] = DemoForm()
+    return render(request, 'embedding/demo.html', ret)
 
 
 @csrf_exempt
