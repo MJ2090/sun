@@ -565,7 +565,6 @@ def play(request):
 
 def save_to_local(original_iamge):
     random_prefix = load_random_string(15) + "_"
-    print("original_iamge.size, ", original_iamge.size)
     if not os.path.isdir(conf_settings.UPLOADS_PATH):
         print("mkdir in save_to_local.. ", conf_settings.UPLOADS_PATH)
         os.mkdir(conf_settings.UPLOADS_PATH)
