@@ -1,4 +1,4 @@
-function play_fetch() {
+function play_fetch_image() {
     let original_iamge = document.querySelector("input[name='image_f']");
     let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
     let llm_model = document.querySelector("select[name='llm_model']");
@@ -31,8 +31,12 @@ function play_fetch() {
 }
 
 function play_init() {
-    document.querySelector(".send-button").addEventListener('click', function () {
-        play_fetch();
+    document.querySelector(".send-button-image").addEventListener('click', function () {
+        play_fetch_image();
+    });
+
+    document.querySelector(".send-button-question").addEventListener('click', function () {
+        play_fetch_question();
     });
 
     document.querySelector("input[name='image_f']").addEventListener("change", function(e) {
