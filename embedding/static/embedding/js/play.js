@@ -30,6 +30,35 @@ function play_fetch_image() {
     });
 }
 
+function play_fetch_question() {
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
+    let llm_model = document.querySelector("select[name='llm_model']");
+    let question = document.querySelector("textarea[name='response_question']")
+    let answer = document.querySelector("textarea[name='response_answer']")
+
+    if (question.value=='') {
+        return;
+    }
+
+    answer.value = '';
+
+    const request_data = new FormData();
+    request_data.append('original_question', question.value);
+    request_data.append('csrfmiddlewaretoken', csrf.value);
+    request_data.append('llm_model', llm_model.value);
+
+    spinner = document.querySelector("div[name='spinner_question']");
+    spinner.style.display = 'block';
+    fetch("/play_question_async/", {
+        method: "POST",
+        body: request_data,
+    }).then(response => response.json()).then((response) => {
+        let data = response;
+        answer.value = data.answer;
+        spinner.style.display = 'none';
+    });
+}
+
 function play_init() {
     document.querySelector(".send-button-image").addEventListener('click', function () {
         play_fetch_image();

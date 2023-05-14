@@ -572,6 +572,16 @@ def play_async(request):
 
 
 @csrf_exempt
+def play_question_async(request):
+    llm_model = request.POST.get('llm_model')
+    original_question = request.POST.get('original_question')
+    openai_response = run_it_quiz(original_question, model=llm_model)
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    print("openai_response: ", openai_response)
+    return HttpResponse(json.dumps({'answer': ai_message}))
+
+
+@csrf_exempt
 def play(request):
     ret = get_basic_data(request)
     ret['form'] = PlayForm()
