@@ -547,8 +547,9 @@ def play_async(request):
     file_name = default_storage.save(original_iamge.name, original_iamge)
     ocr_result = read_image(file_name)
     ocr_result = ocr_result.replace('\n\n', '\n')
+    llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
-    openai_response = run_it_quiz(ocr_result)
+    openai_response = run_it_quiz(ocr_result, model=llm_model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))

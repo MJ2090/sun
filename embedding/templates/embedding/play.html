@@ -19,10 +19,19 @@
     <div class="col-md-12 col-lg-12">
       <div class="row g-3">
 
-        <div class="col-lg-6 col-mj-12">
-          <label for="address2" class="form-label">Upload Question</label>
-          {{ form.image_f }}
-          <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
+        <div class="row g-3  col-lg-6 col-mj-12">
+          <div class="col-12">
+            <label for="address2" class="form-label">Upload Question</label>
+            {{ form.image_f }}
+            <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
+          </div>
+          <div class="col-12">
+            <label for="character" class="form-label">Choose a model</label>
+            {{ form.llm_model }}
+            <div class="invalid-feedback">
+              :D
+            </div>
+          </div>
           <div class="center-spinner mt-3" name="spinner" style="display: none">
             <div class="loading">
               <span></span>

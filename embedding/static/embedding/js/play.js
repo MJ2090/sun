@@ -1,10 +1,12 @@
 function play_fetch() {
     let original_iamge = document.querySelector("input[name='image_f']");
     let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
+    let llm_model = document.querySelector("select[name='llm_model']");
 
     const request_data = new FormData();
     request_data.append('original_iamge', original_iamge.files[0]);
     request_data.append('csrfmiddlewaretoken', csrf.value);
+    request_data.append('llm_model', llm_model.value);
 
     spinner = document.querySelector("div[name='spinner']");
     spinner.style.display = 'block';
