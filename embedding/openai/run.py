@@ -105,8 +105,8 @@ def run_it_quiz(context, model="gpt-4"):
     try:
         response = openai.ChatCompletion.create(
             model=model,
-            temperature=0.5,
-            max_tokens=3300,
+            temperature=0.9,
+            max_tokens=1500,
             messages=messages,
         )
         return response
