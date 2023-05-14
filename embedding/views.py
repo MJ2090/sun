@@ -571,7 +571,7 @@ def save_to_local(original_iamge):
         os.mkdir(conf_settings.UPLOADS_PATH)
     file_name = default_storage.save(os.path.join(
         conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
-    if original_iamge.size > 4*1000*1000:
+    if original_iamge.size > 3*1000*1000:
         tmp = Image.open(file_name)
         tmp.save(file_name, optimize=True, quality=90)
         print("size recuded: ", original_iamge.size,
