@@ -81,6 +81,39 @@ function play_init() {
       });
 }
 
+function initResizeElement() {
+    var cover = document.querySelector(".cover");
+    var element = null;
+    var startY, startHeight;
+    var bottom = document.createElement("div");
+    bottom.className = "resizer-bottom";
+    cover.appendChild(bottom);
+    bottom.addEventListener("mousedown", initDrag, false);
+    bottom.parentPopup = cover;
+    
+    function initDrag(e) {
+      element = this.parentPopup;
+      startY = e.clientY;
+      startHeight = parseInt(
+        document.defaultView.getComputedStyle(element).height,
+        10
+      );
+      document.documentElement.addEventListener("mousemove", doDrag, false);
+      document.documentElement.addEventListener("mouseup", stopDrag, false);
+    }
+  
+    function doDrag(e) {
+      element.style.height = startHeight + e.clientY - startY + "px";
+    }
+  
+    function stopDrag() {
+      document.documentElement.removeEventListener("mousemove", doDrag, false);
+      document.documentElement.removeEventListener("mouseup", stopDrag, false);
+    }
+  }
+  
+
 $(document).ready(function () {
     play_init();
+    //initResizeElement();
 })
