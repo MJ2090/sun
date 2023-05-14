@@ -1,4 +1,4 @@
-function summary_async_call() {
+function demo_async_call() {
     let original_text = $("textarea[name='text']");
     let prompt = $("textarea[name='prompt']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
@@ -21,14 +21,18 @@ function summary_async_call() {
     });
 }
 
-function summary_init() {
+function demo_init() {
     let timer;
     $("textarea[name='text']").keyup(function () {
         clearTimeout(timer);
-        timer = setTimeout(() => { summary_async_call(); }, 800);
+        timer = setTimeout(() => { demo_async_call(); }, 800);
+    });
+    $("textarea[name='prompt']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { demo_async_call(); }, 800);
     });
 }
 
 $(document).ready(function () {
-    summary_init();
+    demo_init();
 })
