@@ -597,7 +597,9 @@ def save_to_local(original_iamge):
         conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
     if original_iamge.size > 3*1000*1000:
         tmp = Image.open(file_name)
-        tmp.save(file_name, optimize=True, quality=80)
+        max_size = (1024, 1024)
+        tmp.thumbnail(max_size, Image.ANTIALIAS)
+        tmp.save(file_name, optimize=True, quality=85)
         print("size recuded: ", original_iamge.size,
               ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
