@@ -599,7 +599,7 @@ def save_to_local(original_iamge):
         tmp = Image.open(file_name)
         tmp.save(file_name, optimize=True, quality=80)
         print("size recuded: ", original_iamge.size,
-              ' ', os.path.getsize(file_name))
+              ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
 
 
