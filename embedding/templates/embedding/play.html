@@ -56,8 +56,14 @@
               <span></span>
             </div>
           </div>
-          <button class="send-button-question w-100 btn btn-primary btn-md mt-3 mb-3" type="button">Ask Question</button>
-          <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
+          <button class="send-button-question w-100 btn btn-primary btn-md mt-3 mb-3" type="button">Ask
+            Question</button>
+          <div style="position: relative">
+            <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
+            <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy to clipboard">
+              <i width="1em" height="1em" class="bi-clipboard"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -33,4 +33,11 @@
     right: 0;
     bottom: 0;
     cursor: n-resize;
-  }
+}
+
+.text-clipboard-icon {
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
