@@ -86,12 +86,16 @@ function display_msg(ai_message) {
     final_list = [];
     current_message = '';
     message_list = ai_message.split('\n\n');
+    single_section_limit = 400;
+    if (ai_message.indexOf('```') != -1) {
+        single_section_limit = 100000;
+    }
     for (let i = 0; i < message_list.length; i++) {
         if (current_message != '') {
             current_message += '\n\n';
         }
         current_message += message_list[i];
-        if (current_message.length > 400 || i == message_list.length - 1) {
+        if (current_message.length > single_section_limit || i == message_list.length - 1) {
             final_list.push(current_message);
             current_message = '';
         }
