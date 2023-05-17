@@ -63,6 +63,7 @@ function chat_async_call() {
             response => response.json())
         .then((response) => {
             let ai_message = response.ai_message;
+            let is_code = ai_message.indexOf('```') != -1;
             while (true) {
                 my_ind = ai_message.indexOf('```');
                 if (my_ind == -1) {
@@ -74,20 +75,20 @@ function chat_async_call() {
             }
 
             pre_process();
-            display_msg(ai_message);
+            display_msg(ai_message, is_code);
             post_process();
 
             audio_process(response.audio_address, enable_speech[0].checked);
         });
 }
 
-function display_msg(ai_message) {
+function display_msg(ai_message, is_code) {
     msg_len = ai_message.length;
     final_list = [];
     current_message = '';
     message_list = ai_message.split('\n\n');
     single_section_limit = 400;
-    if (ai_message.indexOf('```') != -1) {
+    if (is_code) {
         single_section_limit = 100000;
     }
     for (let i = 0; i < message_list.length; i++) {
