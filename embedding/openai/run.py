@@ -89,8 +89,8 @@ def run_it_chat(messages, model):
     try:
         response = openai.ChatCompletion.create(
             model=model,
-            temperature=0.5,
-            max_tokens=3300,
+            temperature=0.6,
+            max_tokens=2000,
             messages=messages,
         )
         return response
