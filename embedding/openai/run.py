@@ -82,9 +82,9 @@ def run_it_chat_llama(request, messages, model):
     return llama.create(request, messages), request_time
 
 
-def run_it_glm(request, messages, prompt):
+def run_it_glm(request, messages, prompt, temperature):
     request_time = time.time()
-    return glm.create(request, messages, prompt), request_time
+    return glm.create(request, messages, prompt, temperature), request_time
 
 
 def run_it_chat(messages, model):

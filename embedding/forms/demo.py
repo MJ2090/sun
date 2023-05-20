@@ -8,3 +8,5 @@ class DemoForm(forms.Form):
         attrs={'class': 'prompt form-control', 'placeholder': "Limit 10,00 chars. "}))
     result_text = forms.CharField(required=True, max_length=10000, widget=forms.Textarea(
         attrs={'disabled': 'true', 'class': 'summary form-control', 'placeholder': "... "}))
+    temperature = forms.FloatField(required=True, widget=forms.NumberInput(
+        attrs={'class': 'form-control', 'placeholder': "0.9"}))

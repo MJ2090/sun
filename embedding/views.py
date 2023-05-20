@@ -551,8 +551,9 @@ def summary(request):
 
 def demo_async(request):
     original_text = request.POST.get('original_text', '')
+    temperature = request.POST.get('temperature', '0.9')
     prompt = request.POST.get('prompt', '')
-    gml_response, _ = run_it_glm(request, original_text, prompt)
+    gml_response, _ = run_it_glm(request, original_text, prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
