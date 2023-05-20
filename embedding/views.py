@@ -28,7 +28,7 @@ import embedding.static_values as sc
 import os
 import json
 import random
-import base64
+import time
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings as conf_settings
@@ -203,11 +203,14 @@ def sendchat_async(request):
 
     openai_response = run_it_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
+    response_time = openai_response['created']
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    record_dialogue(request, 'User', new_message, dialogue_id)
-    record_dialogue(request, 'AI', ai_message, dialogue_id)
+    record_dialogue(request, 'User', new_message,
+                    dialogue_id, response_time=response_time)
+    record_dialogue(request, 'AI', ai_message, dialogue_id,
+                    response_time=response_time)
 
     if character == '3-year-old guy':
         speaker = 'Ivy'
@@ -260,13 +263,15 @@ def sendchat_therapy_async_llama(request):
 
     print("Msg sent to llama: ", messages)
 
-    llamaai_response = run_it_chat_llama(request, messages, model=model)
-    print('llamaai_response = ', llamaai_response)
-    ai_message = llamaai_response['ai_message']
+    llama_response = run_it_chat_llama(request, messages, model=model)
+    print('llama_response = ', llama_response)
+    ai_message = llama_response['ai_message']
     print("\nMsg returned from llama: ", ai_message)
 
-    record_dialogue(request, 'User', new_message, dialogue_id, 'therapy')
-    record_dialogue(request, 'AI', ai_message, dialogue_id, 'therapy')
+    record_dialogue(request, 'User', new_message,
+                    dialogue_id, 'therapy', response_time=0)
+    record_dialogue(request, 'AI', ai_message, dialogue_id,
+                    'therapy', response_time=0)
 
     speaker = 'Salli'
     if enable_speech == 'true':
@@ -306,8 +311,10 @@ def sendchat_therapy_async_openai(request):
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
-    record_dialogue(request, 'User', new_message, dialogue_id, 'therapy')
-    record_dialogue(request, 'AI', ai_message, dialogue_id, 'therapy')
+    record_dialogue(request, 'User', new_message,
+                    dialogue_id, 'therapy', response_time=0)
+    record_dialogue(request, 'AI', ai_message, dialogue_id,
+                    'therapy', response_time=0)
 
     speaker = 'Salli'
     if enable_speech == 'true':
@@ -639,9 +646,9 @@ def do_register(cd):
     return userProfile
 
 
-def record_dialogue(request, role, message, dialogue_id, source='chat'):
+def record_dialogue(request, role, message, dialogue_id, source='chat', response_time=0):
     dialogue = Dialogue.objects.create(
-        role=role, message=message, dialogue_id=dialogue_id, source=source)
+        role=role, message=message, dialogue_id=dialogue_id, source=source, response_time=response_time)
     dialogue.save()
 
 

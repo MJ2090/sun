@@ -82,6 +82,7 @@ class Dialogue(models.Model):
     dialogue_id = models.CharField(max_length=10, default='')
     source = models.CharField(max_length=20, default='chat')
     response_time = models.IntegerField(default=0)
+    request_time = models.IntegerField(default=0)
     prompt_tokens = models.IntegerField(default=0)
     completion_tokens = models.IntegerField(default=0)
     total_tokens = models.IntegerField(default=0)
