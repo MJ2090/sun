@@ -3,7 +3,7 @@ function demo_async_call() {
     let prompt = $("textarea[name='prompt']");
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let result_text = $("textarea[name='result_text']");
-    let temperature = $("input[name='temperature']");
+    let temperature = document.querySelector("input[name='temperature']");
     result_text.val('');
     result_text.hide();
     $("div[name='spinner").show();
@@ -11,7 +11,7 @@ function demo_async_call() {
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
     request_data.append('prompt', prompt.val());
-    request_data.append('temperature', temperature.val());
+    request_data.append('temperature', temperature.value);
     request_data.append('csrfmiddlewaretoken', csrf.val());
     fetch("/demo_async/", {
         method: "POST",
