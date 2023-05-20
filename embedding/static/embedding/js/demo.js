@@ -4,6 +4,11 @@ function demo_async_call() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     let result_text = $("textarea[name='result_text']");
     let temperature = document.querySelector("input[name='temperature']");
+
+    if (original_text.val() == '') {
+        return;
+    }
+    
     result_text.val('');
     result_text.hide();
     $("div[name='spinner").show();
@@ -30,6 +35,10 @@ function demo_init() {
         timer = setTimeout(() => { demo_async_call(); }, 800);
     });
     $("textarea[name='prompt']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { demo_async_call(); }, 800);
+    });
+    $("input[name='temperature']").change(function () {
         clearTimeout(timer);
         timer = setTimeout(() => { demo_async_call(); }, 800);
     });
