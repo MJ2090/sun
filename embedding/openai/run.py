@@ -1,4 +1,5 @@
 import openai
+import time
 import embedding.static_values as sc
 from embedding.llm import llama, glm
 
@@ -77,15 +78,18 @@ def run_it_image(prompt, count):
 
 
 def run_it_chat_llama(request, messages, model):
-    return llama.create(request, messages)
+    request_time = time.time()
+    return llama.create(request, messages), request_time
 
 
 def run_it_glm(request, messages, prompt):
-    return glm.create(request, messages, prompt)
+    request_time = time.time()
+    return glm.create(request, messages, prompt), request_time
 
 
 def run_it_chat(messages, model):
     print(f"run_it_chat with model {model}")
+    request_time = time.time()
     try:
         response = openai.ChatCompletion.create(
             model=model,
@@ -93,10 +97,10 @@ def run_it_chat(messages, model):
             max_tokens=2000,
             messages=messages,
         )
-        return response
+        return response, request_time
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
-        return "Sorry it was time out :D"
+        return "Sorry it was time out :D", request_time
     
 
 def run_it_quiz(context, model="gpt-4"):

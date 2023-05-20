@@ -172,10 +172,10 @@ def sendchat_home(request):
 
     print("Msg sent to openai: ", messages)
 
-    openai_response = run_it_chat(messages, model='gpt-3.5-turbo')
+    openai_response, request_time = run_it_chat(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, request_time=request_time)
 
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
@@ -201,16 +201,15 @@ def sendchat_async(request):
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
 
-    openai_response = run_it_chat(messages, model=model)
+    openai_response, request_time = run_it_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
-    response_time = openai_response['created']
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
     record_dialogue(request, 'User', new_message,
-                    dialogue_id, response_time=response_time)
+                    dialogue_id, request_time=request_time)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    response_time=response_time)
+                    request_time=request_time)
 
     if character == '3-year-old guy':
         speaker = 'Ivy'
@@ -263,15 +262,15 @@ def sendchat_therapy_async_llama(request):
 
     print("Msg sent to llama: ", messages)
 
-    llama_response = run_it_chat_llama(request, messages, model=model)
+    llama_response, request_time = run_it_chat_llama(request, messages, model=model)
     print('llama_response = ', llama_response)
     ai_message = llama_response['ai_message']
     print("\nMsg returned from llama: ", ai_message)
 
     record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', response_time=0)
+                    dialogue_id, 'therapy', request_time=request_time)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', response_time=0)
+                    'therapy', request_time=request_time)
 
     speaker = 'Salli'
     if enable_speech == 'true':
@@ -306,15 +305,15 @@ def sendchat_therapy_async_openai(request):
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
 
-    openai_response = run_it_chat(messages, model=model)
+    openai_response, request_time = run_it_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
     record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', response_time=0)
+                    dialogue_id, 'therapy', request_time=request_time)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', response_time=0)
+                    'therapy', request_time=request_time)
 
     speaker = 'Salli'
     if enable_speech == 'true':
@@ -553,7 +552,7 @@ def summary(request):
 def demo_async(request):
     original_text = request.POST.get('original_text', '')
     prompt = request.POST.get('prompt', '')
-    gml_response = run_it_glm(request, original_text, prompt)
+    gml_response, _ = run_it_glm(request, original_text, prompt)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
@@ -646,9 +645,10 @@ def do_register(cd):
     return userProfile
 
 
-def record_dialogue(request, role, message, dialogue_id, source='chat', response_time=0):
+def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
+    response_time = time.time()
     dialogue = Dialogue.objects.create(
-        role=role, message=message, dialogue_id=dialogue_id, source=source, response_time=response_time)
+        role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
     dialogue.save()
 
 
