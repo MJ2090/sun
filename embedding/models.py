@@ -88,4 +88,4 @@ class Dialogue(models.Model):
     total_tokens = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.dialogue_id + " " + self.message + " " + str(self.response_time-self.request_time)
+        return self.dialogue_id + " " + str(self.response_time-self.request_time) + "\n" + self.message;
