@@ -80,16 +80,16 @@
       <div class="navbar-collapse collapse" id="navbarsExample04">
         <ul class="navbar-nav me-auto nav col-10 col-lg-auto me-lg-auto justify-content-center mb-md-0">
           <li class="nav-item"><a href="/"
-              class="nav-link px-2 {% if current_page == 'home' %} link-dark {% else %} link-secondary{% endif %}">Home</a>
+              class="nav-link px-2 {% if current_page == 'home' %} link-dark {% else %} link-secondary{% endif %}">{% translate "Home" %}</a>
           </li>
           <li class="nav-item"><a href="/about/"
-              class="nav-link px-2 {% if current_page == 'about' %} link-dark {% else %} link-secondary{% endif %}">About</a>
+              class="nav-link px-2 {% if current_page == 'about' %} link-dark {% else %} link-secondary{% endif %}">{% translate "About" %}</a>
           </li>
           <li class="nav-item"><a href="/contact/"
-              class="nav-link px-2 {% if current_page == 'contact' %} link-dark {% else %} link-secondary{% endif %}">Contact</a>
+              class="nav-link px-2 {% if current_page == 'contact' %} link-dark {% else %} link-secondary{% endif %}">{% translate "Contact" %}</a>
           </li>
           <li><a href="/pricing/"
-              class="nav-link px-2 {% if current_page == 'pricing' %} link-dark {% else %} link-secondary{% endif %}">Pricing</a>
+              class="nav-link px-2 {% if current_page == 'pricing' %} link-dark {% else %} link-secondary{% endif %}">{% translate "Pricing" %}</a>
           </li>
           {% if user.is_superuser %}
           {% endif %}
@@ -104,20 +104,20 @@
             Hi, {{ user.username }}
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="/collection/">My collection</a></li>
-            <li><a class="dropdown-item" href="/settings/">Settings</a></li>
-            <li><a class="dropdown-item" href="/payments/">Payments</a></li>
+            <li><a class="dropdown-item" href="/collection/">{% translate "My collection" %}</a></li>
+            <li><a class="dropdown-item" href="/settings/">{% translate "Settings" %}</a></li>
+            <li><a class="dropdown-item" href="/payments/">{% translate "Payments" %}</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="/signout/">Sign out</a></li>
+            <li><a class="dropdown-item" href="/signout/">{% translate "Sign out" %}</a></li>
           </ul>
         </div>
         <!-- END User signed in -->
         {% else %}
         <!-- User account -->
         <div class="text-end desktop-only">
-          <a href="/signin/"><button type="button" class="btn btn-primary">Login</button></a>
+          <a href="/signin/"><button type="button" class="btn btn-primary">{% translate "Login" %}</button></a>
         </div>
         {% endif %}
         <!-- END User account -->
