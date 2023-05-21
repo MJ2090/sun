@@ -25,7 +25,7 @@ msgstr "登录"
 
 #: embedding/templates/embedding/base.html:83
 msgid "Home"
-msgstr "首页"
+msgstr "首页哈"
 
 #: embedding/templates/embedding/base.html:86
 msgid "About"
