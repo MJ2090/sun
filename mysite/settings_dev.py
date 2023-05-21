@@ -24,9 +24,3 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-import os
-
-LOCALE_PATHS = (
-    os.path.join(os.path.dirname(__file__), "locale"),
-)

@@ -591,7 +591,7 @@ def play_question_async(request):
 
 @csrf_exempt
 def play(request):
-    user_language = "zh-hans"
+    user_language = "zh_hans"
     activate(user_language)
     ret = get_basic_data(request)
     ret['form'] = PlayForm()

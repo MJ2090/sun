@@ -1,4 +1,5 @@
 {% extends "embedding/base.html" %}
+{% load i18n %}
 
 {% block privatecss %}
 {% load static %}
@@ -12,20 +13,20 @@
 {% block main %}
 
 <div class="container px-4 py-5">
-  <h4 class="mb-3">Quiz Terminator</h4>
+  <h4 class="mb-3">{% translate "Quiz Terminator" %}</h4>
   <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
     <div class="col-lg-6 col-md-12">
       <div class="row g-3">
         <div class="col-12">
-          <label for="character" class="form-label">Choose a model</label>
+          <label for="character" class="form-label">{% translate "Choose a model" %}</label>
           {{ form.llm_model }}
           <div class="invalid-feedback">
             :D
           </div>
         </div>
         <div class="col-12">
-          <label for="address2" class="form-label">Upload Question</label>
+          <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
           {{ form.image_f }}
           <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
           <!-- <div class="cover"></div> -->
@@ -39,14 +40,14 @@
           </div>
         </div>
         <div class="col-12">
-          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">Read Image</button>
+          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">{% translate "Read Image" %}</button>
         </div>
       </div>
     </div>
     <div class="col-lg-6 col-md-12">
       <div class="row g-3">
         <div class="col-12">
-          <label for="address2" class="form-label">Parsed Question & Answer</label>
+          <label for="address2" class="form-label">{% translate "Parsed Question & Answer" %}</label>
           <textarea class="form-control mb-3" rows="10" name="response_question"></textarea>
           <div class="center-spinner mt-3" name="spinner_question" style="display: none">
             <div class="loading">
@@ -56,8 +57,8 @@
               <span></span>
             </div>
           </div>
-          <button class="send-button-question w-100 btn btn-primary btn-md mt-3 mb-3" type="button">Ask
-            Question</button>
+          <button class="send-button-question w-100 btn btn-primary btn-md mt-3 mb-3" type="button">
+            {% translate "Ask Question" %}</button>
           <div style="position: relative">
             <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
             <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy to clipboard">
