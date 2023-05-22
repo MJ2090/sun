@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 23:41-0700\n"
+"POT-Creation-Date: 2023-05-22 11:30-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,37 +60,49 @@ msgid "Pricing"
 msgstr "定价"
 
 #: embedding/templates/embedding/play.html:16
+#: embedding/templates/embedding/quiz.html:16
 msgid "Quiz Terminator"
-msgstr "及格就行"
+msgstr "解题助手"
 
 #: embedding/templates/embedding/play.html:22
+#: embedding/templates/embedding/quiz.html:22
 msgid "Choose your assistant"
 msgstr "选择助手"
 
 #: embedding/templates/embedding/play.html:29
+#: embedding/templates/embedding/quiz.html:29
 msgid "Upload Question"
 msgstr "上传题目"
 
 #: embedding/templates/embedding/play.html:32
+#: embedding/templates/embedding/quiz.html:32
 msgid "Choose Image"
 msgstr "选择截图"
 
 #: embedding/templates/embedding/play.html:33
+#: embedding/templates/embedding/quiz.html:33
 msgid "No image chosen"
 msgstr "图片未上传"
 
 #: embedding/templates/embedding/play.html:47
+#: embedding/templates/embedding/quiz.html:48
 msgid "Read Image"
 msgstr "读取截图"
 
 #: embedding/templates/embedding/play.html:54
+#: embedding/templates/embedding/quiz.html:56
 msgid "Parsed Question"
 msgstr "我的题目"
 
 #: embedding/templates/embedding/play.html:65
+#: embedding/templates/embedding/quiz.html:67
 msgid "Ask Question"
 msgstr "问一个"
 
 #: embedding/templates/embedding/play.html:66
 msgid "Answer from AI"
 msgstr "参考答案"
+
+#: embedding/templates/embedding/quiz.html:75
+msgid "My Answer"
+msgstr "我的答案"
