@@ -176,7 +176,7 @@ def sendchat_home(request):
     openai_response, request_time = run_it_chat(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response, request_time=request_time)
+    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
@@ -591,7 +591,7 @@ def play_question_async(request):
     llm_model = request.POST.get('llm_model')
     original_question = request.POST.get('original_question')
     openai_response, request_time = run_it_quiz(original_question, model=llm_model)
-    record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response, request_time=request_time)
+    record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'answer': ai_message}))
