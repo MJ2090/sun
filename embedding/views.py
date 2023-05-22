@@ -394,7 +394,6 @@ def contact(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = ContactForm(request.POST)
-        print(8888888, form)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -402,7 +401,6 @@ def contact(request):
             data = Contact(
                 username=form.cleaned_data["username"], email=form.cleaned_data["email"], message=form.cleaned_data["message"])
             data.save()
-            print(form.cleaned_data, 88888)
             # ...
             # redirect to a new URL:
             return render(request, 'embedding/thanks.html', {})
@@ -431,9 +429,7 @@ def signin(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             if do_login(request, username, password):
-                print(881)
                 # Redirect to a success page.
-                print(form.cleaned_data, 4444, request.GET, request.POST)
                 next_url = form.cleaned_data.get('next', '/')
                 if (not next_url) or next_url.strip() == '':
                     next_url = '/'
@@ -447,7 +443,6 @@ def signin(request):
     else:
         form = SigninForm()
         form.fields['next'].initial = request.GET.get('next', None)
-        print(884)
 
     ret['form'] = form
     return render(request, 'embedding/signin.html', ret)
