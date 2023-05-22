@@ -103,7 +103,7 @@ def run_it_chat(messages, model):
         return "Sorry it was time out :D", request_time
     
 
-def run_it_quiz(context, model="gpt-4"):
+def run_it_quiz(context, model="gpt-4", temperature=0.1):
     print(f"run_it_quiz with model {model}")
     base_prompt="有一段OCT识别产生的文字在「」内,可能包含一道或多道题目,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答,格式为'第几题: 答案\n第几题: 答案.'."
     messages = [
@@ -115,7 +115,7 @@ def run_it_quiz(context, model="gpt-4"):
     try:
         response = openai.ChatCompletion.create(
             model=model,
-            temperature=0.9,
+            temperature=temperature,
             max_tokens=1500,
             messages=messages,
         )
