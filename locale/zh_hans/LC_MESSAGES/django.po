@@ -87,7 +87,7 @@ msgstr "图片未上传"
 #: embedding/templates/embedding/play.html:47
 #: embedding/templates/embedding/quiz.html:48
 msgid "Read Image"
-msgstr "读取截图"
+msgstr "从图片提取题目"
 
 #: embedding/templates/embedding/play.html:54
 #: embedding/templates/embedding/quiz.html:56
