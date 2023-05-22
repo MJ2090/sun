@@ -44,7 +44,9 @@
           </div>
         </div>
         <div class="col-12">
-          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">{% translate "Read Image" %}</button>
+          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">
+            {% translate "Read Image" %}
+          </button>
         </div>
       </div>
     </div>
@@ -70,10 +72,11 @@
     <div class="col-lg-4 col-md-12">
       <div class="row g-3">
         <div class="col-12">
-            <label for="address2" class="form-label">{% translate "Answer from AI" %}</label>
+          <label for="address2" class="form-label">{% translate "Answer from AI" %}</label>
           <div style="position: relative">
             <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
-            <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy to clipboard">
+            <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip"
+              data-bs-placement="left" title="Copy to clipboard">
               <i width="1em" height="1em" class="bi-clipboard"></i>
             </button>
           </div>
