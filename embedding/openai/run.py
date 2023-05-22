@@ -105,10 +105,10 @@ def run_it_chat(messages, model):
 
 def run_it_quiz(context, model="gpt-4"):
     print(f"run_it_quiz with model {model}")
-    base_prompt="给你这样一段文字放在「」内,这段文字是通过ocr从照片或者截屏中获取的,这段文字包含一道或多道题目,你需要通过以下步骤来处理这段文字:第一步,把不属于题目内容的多余文字去掉.第二步:把缺失内容较多,导致无法作答的题目去掉.第三步:整理剩下的题目,补上缺失的文字,校正ocr识别出错的文字.第四步:给出答案,答案格式为'第几题: 答案\n第几题: 答案.'."
+    base_prompt="有一段OCT识别产生的文字在「」内,可能包含一道或多道题目,按以下步骤处理:1,去掉不属于题目内容的多余文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,给出答案,格式为'第几题: 答案\n第几题: 答案.'."
     messages = [
         {"role": "system", "content": base_prompt},
-        {"role": "user", "content": f"需要你处理的文字为「{context}」"},
+        {"role": "user", "content": f"需处理的文字:「{context}」"},
     ]
     print(f'promot: {messages}')
     request_time = time.time()
