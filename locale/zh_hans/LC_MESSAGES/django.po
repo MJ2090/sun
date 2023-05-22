@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 23:29-0700\n"
+"POT-Creation-Date: 2023-05-21 23:41-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,8 +64,8 @@ msgid "Quiz Terminator"
 msgstr "及格就行"
 
 #: embedding/templates/embedding/play.html:22
-msgid "Choose a model"
-msgstr "选择模型"
+msgid "Choose your assistant"
+msgstr "选择助手"
 
 #: embedding/templates/embedding/play.html:29
 msgid "Upload Question"
