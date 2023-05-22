@@ -589,13 +589,20 @@ def play_question_async(request):
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
-@csrf_exempt
 def play(request):
     user_language = "zh_hans"
     activate(user_language)
     ret = get_basic_data(request)
     ret['form'] = PlayForm()
     return render(request, 'embedding/play.html', ret)
+
+
+def quiz(request):
+    user_language = "zh_hans"
+    activate(user_language)
+    ret = get_basic_data(request)
+    ret['form'] = PlayForm()
+    return render(request, 'embedding/quiz.html', ret)
 
 
 def save_to_local(original_iamge):

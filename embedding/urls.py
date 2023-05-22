@@ -43,6 +43,7 @@ urlpatterns = [
     path('demo_async/', views.demo_async, name='demo_async'),
     path('translation_async/', views.translation_async, name='translation_async'),
     path('image_async/', views.image_async, name='image_async'),
+    path('quiz/', views.quiz, name='quiz'),
     path('play/', views.play, name='play'),
     path('play_async/', views.play_async, name='play_async'),
     path('play_question_async/', views.play_question_async, name='play_question_async'),
