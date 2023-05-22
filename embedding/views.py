@@ -565,7 +565,6 @@ def demo(request):
     return render(request, 'embedding/demo.html', ret)
 
 
-@csrf_exempt
 def play_async(request):
     original_iamge = request.FILES.get('original_iamge')
     saved_file_name = save_to_local(original_iamge)
@@ -579,7 +578,19 @@ def play_async(request):
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
-@csrf_exempt
+def play_async(request):
+    original_iamge = request.FILES.get('original_iamge')
+    saved_file_name = save_to_local(original_iamge)
+    ocr_result = recognize_image(saved_file_name)
+    ocr_result = ocr_result.replace(r'\n+', '\n')
+    llm_model = request.POST.get('llm_model')
+    print("ocr_result: ", ocr_result)
+    openai_response = run_it_quiz(ocr_result, model=llm_model)
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    print("openai_response: ", openai_response)
+    return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
+
+
 def play_question_async(request):
     llm_model = request.POST.get('llm_model')
     original_question = request.POST.get('original_question')
