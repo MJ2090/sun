@@ -578,7 +578,7 @@ def play_async(request):
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
-def play_async(request):
+def play_image_async(request):
     original_iamge = request.FILES.get('original_iamge')
     saved_file_name = save_to_local(original_iamge)
     ocr_result = recognize_image(saved_file_name)
