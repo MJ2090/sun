@@ -1,14 +1,9 @@
 # import easyocr
-import os
 import requests
 from PIL import Image
-import pytesseract
-from datetime import datetime
 from wsgiref.handlers import format_date_time
 from time import mktime
-import hashlib
 import base64
-import hmac
 from urllib.parse import urlencode
 import json
 
