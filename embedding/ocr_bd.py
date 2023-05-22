@@ -36,7 +36,7 @@ def ocr_baidu(file_name, enable_bw = True):
         old_img = Image.open(file_name)
         l_img = old_img.convert('L')
         l_img.save(file_name)
-        threshold = 200
+        threshold = 120
         table = []
         for i in range(256):
             if i<threshold:
@@ -45,6 +45,7 @@ def ocr_baidu(file_name, enable_bw = True):
                 table.append(1)
         new_img = l_img.point(table, '1')
         new_img.save(file_name)
+        print(f"black and white finished.., {file_name}")
 
     request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/doc_analysis"
     # 二进制方式打开图片文件
