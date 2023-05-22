@@ -68,9 +68,15 @@ function play_init() {
     play_fetch_question();
   });
 
+  document.querySelector(".play-choose-button").addEventListener('click', function () {
+    document.querySelector("input[name='image_f']").click();
+  });
+
   document.querySelector("input[name='image_f']").addEventListener("change", function (e) {
     let reader = new FileReader();
     document.querySelector(".image-container").style.display = 'block';
+    var fileName = document.querySelector("input[name='image_f']").value.split('/').pop().split('\\').pop();
+    document.querySelector("#play-choose-text").value = fileName;
 
     reader.onload = function (event) {
       document.getElementById("imagePreview").src = event.target.result;

@@ -29,8 +29,8 @@
           <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
           {{ form.image_f }}
           <div class="input-group">
-            <span class="input-group-text">{% translate "Choose Image" %}</span>
-            <input value='{% translate "No image chosen" %}' type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text play-choose-button">{% translate "Choose Image" %}</span>
+            <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
           </div>
           <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
           <!-- <div class="cover"></div> -->
@@ -51,7 +51,7 @@
     <div class="col-lg-6 col-md-12">
       <div class="row g-3">
         <div class="col-12">
-          <label for="address2" class="form-label">{% translate "Parsed Question & Answer" %}</label>
+          <label for="address2" class="form-label">{% translate "Parsed Question" %}</label>
           <textarea class="form-control mb-3" rows="10" name="response_question"></textarea>
           <div class="center-spinner mt-3" name="spinner_question" style="display: none">
             <div class="loading">
@@ -63,6 +63,7 @@
           </div>
           <button class="send-button-question w-100 btn btn-primary btn-md mt-3 mb-3" type="button">
             {% translate "Ask Question" %}</button>
+            <label for="address2" class="form-label">{% translate "Answer from AI" %}</label>
           <div style="position: relative">
             <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
             <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy to clipboard">

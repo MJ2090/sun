@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 18:28-0700\n"
+"POT-Creation-Date: 2023-05-21 23:29-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,9 +84,13 @@ msgid "Read Image"
 msgstr "读取截图"
 
 #: embedding/templates/embedding/play.html:54
-msgid "Parsed Question & Answer"
-msgstr "显示答案"
+msgid "Parsed Question"
+msgstr "我的题目"
 
 #: embedding/templates/embedding/play.html:65
 msgid "Ask Question"
 msgstr "问一个"
+
+#: embedding/templates/embedding/play.html:66
+msgid "Answer from AI"
+msgstr "参考答案"
