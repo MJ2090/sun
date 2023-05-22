@@ -572,7 +572,7 @@ def play_async(request):
     ocr_result = ocr_result.replace(r'\n+', '\n')
     llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
-    openai_response = run_it_quiz(ocr_result, model=llm_model)
+    openai_response, request_time = run_it_quiz(ocr_result, model=llm_model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
@@ -590,7 +590,8 @@ def play_image_async(request):
 def play_question_async(request):
     llm_model = request.POST.get('llm_model')
     original_question = request.POST.get('original_question')
-    openai_response = run_it_quiz(original_question, model=llm_model)
+    openai_response, request_time = run_it_quiz(original_question, model=llm_model)
+    record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response, request_time=request_time)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'answer': ai_message}))

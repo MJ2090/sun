@@ -111,6 +111,7 @@ def run_it_quiz(context, model="gpt-4"):
         {"role": "user", "content": f"需要你处理的文字为「{context}」"},
     ]
     print(f'promot: {messages}')
+    request_time = time.time()
     try:
         response = openai.ChatCompletion.create(
             model=model,
@@ -118,7 +119,7 @@ def run_it_quiz(context, model="gpt-4"):
             max_tokens=1500,
             messages=messages,
         )
-        return response
+        return response, request_time
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
-        return "Sorry it was time out :D"
+        return "Sorry it was time out :D", request_time
