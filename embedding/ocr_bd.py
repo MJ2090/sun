@@ -31,7 +31,21 @@ def get_token():
     return res
 
 
-def ocr_baidu(file_name):
+def ocr_baidu(file_name, enable_bw = True):
+    if enable_bw:
+        old_img = Image.open(file_name)
+        l_img = old_img.convert('L')
+        l_img.save(file_name)
+        threshold = 200
+        table = []
+        for i in range(256):
+            if i<threshold:
+                table.append(0)
+            else:
+                table.append(1)
+        new_img = l_img.point(table, '1')
+        new_img.save(file_name)
+
     request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/doc_analysis"
     # 二进制方式打开图片文件
     f = open(file_name, 'rb')
