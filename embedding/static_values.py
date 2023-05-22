@@ -43,6 +43,13 @@ TRAINING_MODELS = (
     # (TRAINING_MODELS_C1, 'OpenAI fine tuning text model C1'),
 )
 
+QUIZ_MODELS_T = 'gpt-3.5-turbo'
+QUIZ_MODELS_F = 'gpt-4'
+QUIZ_MODELS = (
+    (QUIZ_MODELS_T, 'GPT 3.5 我比较快'),
+    (QUIZ_MODELS_F, 'GPT 4.0 我比较准'),
+)
+
 IMAGE_TYPES_DEFAULT = ''
 IMAGE_TYPES_PICASSO = 'Picasso'
 IMAGE_TYPES_MONET = 'Monet'
