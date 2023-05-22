@@ -48,8 +48,8 @@ TRAINING_MODELS = (
 QUIZ_MODELS_T = 'gpt-3.5-turbo'
 QUIZ_MODELS_F = 'gpt-4'
 QUIZ_MODELS = (
-    (QUIZ_MODELS_T, 'GPT 3.5 我比较快'),
-    (QUIZ_MODELS_F, 'GPT 4.0 我比较准'),
+    (QUIZ_MODELS_T, '东邪 - 我比较快'),
+    (QUIZ_MODELS_F, '西毒 - 我比较准'),
 )
 
 IMAGE_TYPES_DEFAULT = ''
