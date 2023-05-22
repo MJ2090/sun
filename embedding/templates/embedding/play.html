@@ -28,6 +28,10 @@
         <div class="col-12">
           <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
           {{ form.image_f }}
+          <div class="input-group">
+            <span class="input-group-text">{% translate "Choose Image" %}</span>
+            <input value='{% translate "No image chosen" %}' type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
           <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
           <!-- <div class="cover"></div> -->
         </div>
