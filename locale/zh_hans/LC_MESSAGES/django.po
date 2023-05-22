@@ -62,7 +62,7 @@ msgstr "定价"
 #: embedding/templates/embedding/play.html:16
 #: embedding/templates/embedding/quiz.html:16
 msgid "Quiz Terminator"
-msgstr "解题助手"
+msgstr "答题助手"
 
 #: embedding/templates/embedding/play.html:22
 #: embedding/templates/embedding/quiz.html:22
