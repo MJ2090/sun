@@ -26,7 +26,7 @@ def get_token():
     return res
 
 
-def ocr_baidu(file_name, enable_bw = True):
+def ocr_baidu(file_name, enable_bw = False):
     if enable_bw:
         old_img = Image.open(file_name)
         l_img = old_img.convert('L')
