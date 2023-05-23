@@ -59,6 +59,11 @@ function play_fetch_question() {
 }
 
 function quiz_init() {
+  document.querySelectorAll("input[type='radio']").forEach(item => {
+    item.classList.add('form-check-input','me-2');
+  });
+
+  document.querySelector("input[type='radio']").setAttribute('checked', true);
   document.querySelector(".send-button-image").addEventListener('click', function () {
     play_fetch_image();
   });
