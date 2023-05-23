@@ -1,7 +1,7 @@
 function play_fetch_image() {
   let original_iamge = document.querySelector("input[name='image_f']");
   let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
-  let llm_model = document.querySelector("select[name='llm_model']");
+  let llm_model_value = get_llm_model();
   let question = document.querySelector("textarea[name='response_question']")
   let answer = document.querySelector("textarea[name='response_answer']")
 
@@ -15,7 +15,7 @@ function play_fetch_image() {
   const request_data = new FormData();
   request_data.append('original_iamge', original_iamge.files[0]);
   request_data.append('csrfmiddlewaretoken', csrf.value);
-  request_data.append('llm_model', llm_model.value);
+  request_data.append('llm_model', llm_model_value);
 
   spinner = document.querySelector("div[name='spinner']");
   spinner.style.display = 'block';
@@ -31,7 +31,7 @@ function play_fetch_image() {
 
 function play_fetch_question() {
   let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
-  let llm_model = document.querySelector("select[name='llm_model']");
+  let llm_model_value = get_llm_model();
   let question = document.querySelector("textarea[name='response_question']")
   let answer = document.querySelector("textarea[name='response_answer']")
 
@@ -44,7 +44,7 @@ function play_fetch_question() {
   const request_data = new FormData();
   request_data.append('original_question', question.value);
   request_data.append('csrfmiddlewaretoken', csrf.value);
-  request_data.append('llm_model', llm_model.value);
+  request_data.append('llm_model', llm_model_value);
 
   spinner = document.querySelector("div[name='spinner_question']");
   spinner.style.display = 'block';
@@ -56,6 +56,15 @@ function play_fetch_question() {
     answer.value = data.answer;
     spinner.style.display = 'none';
   });
+}
+
+function get_llm_model() {
+  document.querySelectorAll("input[type='radio']").forEach(item => {
+    if (item.getAttribute('checked') == true) {
+      return item.value;
+    }
+  });
+  return 'kuai';
 }
 
 function quiz_init() {
