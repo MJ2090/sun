@@ -45,3 +45,7 @@
 .play-choose-button {
     cursor: pointer;
 }
+
+.terms {
+    font-size: 12px;
+}
