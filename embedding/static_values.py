@@ -45,8 +45,8 @@ TRAINING_MODELS = (
     # (TRAINING_MODELS_C1, 'OpenAI fine tuning text model C1'),
 )
 
-QUIZ_MODELS_T = 'gpt-3.5-turbo'
-QUIZ_MODELS_F = 'gpt-4'
+QUIZ_MODELS_T = 'kuai'
+QUIZ_MODELS_F = 'zhun'
 QUIZ_MODELS = (
     (QUIZ_MODELS_T, '👩🏻‍🏫 陈老师 - 反应快 擅长判断题 写作题'),
     (QUIZ_MODELS_F, '👨🏻‍💻 贾老师 - 谨慎 处理选择题正确率高'),

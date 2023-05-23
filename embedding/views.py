@@ -583,7 +583,8 @@ def play_image_async(request):
 
 
 def play_question_async(request):
-    llm_model = request.POST.get('llm_model')
+    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4'}
+    llm_model = llm_model_dic.get(request.POST.get('llm_model'))
     original_question = request.POST.get('original_question')
     openai_response, request_time = run_it_quiz(original_question, model=llm_model)
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
