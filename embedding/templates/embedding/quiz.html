@@ -28,6 +28,7 @@
         <div class="col-12">
           <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
           {{ form.image_f }}
+          <input type="file" accept="image/*" name="file-upload">
           <div class="input-group">
             <span class="input-group-text play-choose-button">{% translate "Choose Image" %}</span>
             <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
