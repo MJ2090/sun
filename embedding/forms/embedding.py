@@ -7,6 +7,8 @@ class TrainingForm(forms.Form):
         attrs={'class': 'embedding-name form-control', 'placeholder': "Limit 100 chars"}))
     text = forms.CharField(max_length=200000, widget=forms.Textarea(
         attrs={'class': 'training-text form-control', 'placeholder': "Limit 200,000 chars"}))
+    file_f = forms.FileField(required=False, widget=forms.FileInput(
+        attrs={'class': 'form-control'}))
 
 
 class QuestionForm(forms.Form):

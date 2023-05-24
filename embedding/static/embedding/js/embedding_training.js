@@ -22,6 +22,7 @@ function async_call() {
 }
 
 function init() {
+  document.querySelector("input[name='file_f']").setAttribute('accept', 'application/pdf');
   $('.send-button').click(function () {
     async_call();
     return false;
