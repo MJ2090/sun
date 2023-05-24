@@ -57,6 +57,9 @@ def embedding_training(request):
 def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
+    original_pdf = request.POST.get('original_pdf', '')
+    if original_pdf is not None:
+        save_to_local(original_pdf)
     print('embedding_training_async', text, name)
     openai_response = run_it_3_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
@@ -609,19 +612,20 @@ def quiz(request):
     return render(request, 'embedding/quiz.html', ret)
 
 
-def save_to_local(original_image):
+def save_to_local(original_file, sub_dir=''):
     random_prefix = load_random_string(15) + "_"
-    if not os.path.isdir(conf_settings.UPLOADS_PATH):
-        print("mkdir in save_to_local.. ", conf_settings.UPLOADS_PATH)
-        os.mkdir(conf_settings.UPLOADS_PATH)
+    file_dir = conf_settings.UPLOADS_PATH + '/' + sub_dir
+    if not os.path.isdir(file_dir):
+        print("mkdir in save_to_local.. ", file_dir)
+        os.mkdir(file_dir)
     file_name = default_storage.save(os.path.join(
-        conf_settings.UPLOADS_PATH, random_prefix+original_image.name), original_image)
-    if original_image.size > 3*1000*1000:
+        file_dir, random_prefix+original_file.name), original_file)
+    if sub_dir=='' and original_file.size > 3*1000*1000:
         tmp = Image.open(file_name)
         max_size = (1024, 1024)
         tmp.thumbnail(max_size, Image.ANTIALIAS)
         tmp.save(file_name, optimize=True, quality=85)
-        print("size recuded: ", original_image.size,
+        print("size recuded: ", original_file.size,
               ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
 
