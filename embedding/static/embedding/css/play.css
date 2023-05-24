@@ -49,3 +49,10 @@
 .terms {
     font-size: 10px;
 }
+
+input[type=radio] {
+    height: 1em;
+    margin-right: 0.5rem!important;
+    vertical-align: top;
+    width: 1em;
+}
