@@ -14,7 +14,7 @@ import json
 from embedding.ocr_bd import ocr_baidu
 
 
-def recognize_image(file_name, source='baidu'):
+def recognize_image(file_name, source='xunfei'):
     if source=='tesseract':
         return ocr_tesseract(file_name)
     if source=='xunfei':
@@ -69,15 +69,15 @@ def ocr_xunfei(file_name):
     headers = {'content-type': "application/json", 'host': 'api.xf-yun.com', 'app_id': APPId}
     print(request_url)
     response = requests.post(request_url, data=json.dumps(body), headers=headers)
-    # print(response)
+    print(response)
     # print(response.content)
 
-    # print("resp=>" + response.content.decode())
+    print("resp=>" + response.content.decode())
     tempResult = json.loads(response.content.decode())
 
     finalResult = base64.b64decode(tempResult['payload']['result']['text']).decode()
     finalResult = finalResult.replace(" ", "").replace("\n", "").replace("\t", "").strip()
-    # print("text字段Base64解码后=>" + finalResult)
+    print("text字段Base64解码后=>" + finalResult)
     finalResult_json = json.loads(finalResult)
     context = ""
     for page in finalResult_json['pages']:
