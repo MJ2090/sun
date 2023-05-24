@@ -1,11 +1,11 @@
 function play_fetch_image() {
-  let original_iamge = document.querySelector("input[name='image_f']");
+  let original_image = document.querySelector("input[name='image_f']");
   let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
   let llm_model_value = get_llm_model();
   let question = document.querySelector("textarea[name='response_question']")
   let answer = document.querySelector("textarea[name='response_answer']")
 
-  if (original_iamge.files.length == 0) {
+  if (original_image.files.length == 0) {
     return;
   }
 
@@ -13,7 +13,7 @@ function play_fetch_image() {
   answer.value = '';
 
   const request_data = new FormData();
-  request_data.append('original_iamge', original_iamge.files[0]);
+  request_data.append('original_image', original_image.files[0]);
   request_data.append('csrfmiddlewaretoken', csrf.value);
   request_data.append('llm_model', llm_model_value);
 

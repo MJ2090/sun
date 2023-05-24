@@ -561,8 +561,8 @@ def demo(request):
 
 
 def play_async(request):
-    original_iamge = request.FILES.get('original_iamge')
-    saved_file_name = save_to_local(original_iamge)
+    original_image = request.FILES.get('original_image')
+    saved_file_name = save_to_local(original_image)
     ocr_result = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     llm_model = request.POST.get('llm_model')
@@ -574,8 +574,8 @@ def play_async(request):
 
 
 def play_image_async(request):
-    original_iamge = request.FILES.get('original_iamge')
-    saved_file_name = save_to_local(original_iamge)
+    original_image = request.FILES.get('original_image')
+    saved_file_name = save_to_local(original_image)
     ocr_result = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     print("ocr_result: ", ocr_result)
@@ -609,19 +609,19 @@ def quiz(request):
     return render(request, 'embedding/quiz.html', ret)
 
 
-def save_to_local(original_iamge):
+def save_to_local(original_image):
     random_prefix = load_random_string(15) + "_"
     if not os.path.isdir(conf_settings.UPLOADS_PATH):
         print("mkdir in save_to_local.. ", conf_settings.UPLOADS_PATH)
         os.mkdir(conf_settings.UPLOADS_PATH)
     file_name = default_storage.save(os.path.join(
-        conf_settings.UPLOADS_PATH, random_prefix+original_iamge.name), original_iamge)
-    if original_iamge.size > 3*1000*1000:
+        conf_settings.UPLOADS_PATH, random_prefix+original_image.name), original_image)
+    if original_image.size > 3*1000*1000:
         tmp = Image.open(file_name)
         max_size = (1024, 1024)
         tmp.thumbnail(max_size, Image.ANTIALIAS)
         tmp.save(file_name, optimize=True, quality=85)
-        print("size recuded: ", original_iamge.size,
+        print("size recuded: ", original_image.size,
               ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
 

@@ -13,7 +13,7 @@ function play_fetch_image() {
   answer.value = '';
 
   const request_data = new FormData();
-  request_data.append('original_iamge', original_image.files[0]);
+  request_data.append('original_image', original_image.files[0]);
   request_data.append('csrfmiddlewaretoken', csrf.value);
   request_data.append('llm_model', llm_model.value);
 
