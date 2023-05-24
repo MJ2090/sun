@@ -14,7 +14,7 @@ import json
 from embedding.ocr_bd import ocr_baidu
 
 
-def recognize_image(file_name, source='baidu'):
+def recognize_image(file_name, source='xunfei'):
     if source=='tesseract':
         return ocr_tesseract(file_name)
     if source=='xunfei':
@@ -38,7 +38,7 @@ def ocr_xunfei(file_name):
     with open(file_name, "rb") as f:
         imageBytes = f.read()
     url = 'https://api.xf-yun.com/v1/private/sf8e6aca1'
-    url = 'https://cn-east-1.api.xf-yun.com/v1/ocr'
+    #url = 'https://cn-east-1.api.xf-yun.com/v1/ocr'
 
     body = {
         "header": {
