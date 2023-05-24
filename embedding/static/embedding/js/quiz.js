@@ -59,11 +59,10 @@ function play_fetch_question() {
 }
 
 function get_llm_model() {
-  document.querySelectorAll("input[type='radio']").forEach(item => {
-    if (item.getAttribute('checked') == true) {
-      return item.value;
-    }
-  });
+  let c = document.querySelectorAll("input[type='radio']:checked");
+  if (c.length>0) {
+    return c[0].value;
+  }
   return 'kuai';
 }
 
