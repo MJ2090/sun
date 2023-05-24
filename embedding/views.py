@@ -65,7 +65,7 @@ def embedding_training_async(request):
         pdf_pages = load_pdf(pdf_file_name)
         print(pdf_pages[0].page_content)
         text = pdf_pages[0].page_content
-    print('embedding_training_async', text, name)
+    print('embedding_training_async', name)
     openai_response = run_it_3_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
