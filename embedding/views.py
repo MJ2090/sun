@@ -15,6 +15,7 @@ from embedding.forms.contact import ContactForm
 from embedding.forms.signup import SignupForm
 from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
+from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
@@ -57,9 +58,13 @@ def embedding_training(request):
 def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
-    original_pdf = request.POST.get('original_pdf', '')
+    original_pdf = request.FILES.get('original_pdf', '')
+    print("ahahhaaha", original_pdf)
     if original_pdf is not None:
-        save_to_local(original_pdf)
+        pdf_file_name = save_to_local(original_pdf, 'pdf')
+        pdf_pages = load_pdf(pdf_file_name)
+        print(pdf_pages[0].page_content)
+        text = pdf_pages[0].page_content
     print('embedding_training_async', text, name)
     openai_response = run_it_3_training(text)
     new_model = EmbeddingModel.objects.get_or_create(

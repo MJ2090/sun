@@ -105,7 +105,7 @@ def generate_embedding_csv():
 
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)
-    df.n_tokens.hist()
+    #df.n_tokens.hist()
 
     # Note that you may run into rate limit issues depending on how many files you try to embed
     # Please check out our rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits

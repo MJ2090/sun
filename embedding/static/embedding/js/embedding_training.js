@@ -1,5 +1,5 @@
 function async_call() {
-  let original_pdf = document.querySelector("input[name='image_f']");
+  let original_pdf = document.querySelector("input[name='file_f']");
   let text = $("textarea[name='text']");
   let name = $("input[name='name']");
   let csrf = $("input[name='csrfmiddlewaretoken']");
