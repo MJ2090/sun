@@ -14,7 +14,7 @@ import json
 from embedding.ocr_bd import ocr_baidu
 
 
-def recognize_image(file_name, source='baidu'):
+def recognize_image(file_name, source='xunfei'):
     if source=='tesseract':
         return ocr_tesseract(file_name)
     if source=='xunfei':
