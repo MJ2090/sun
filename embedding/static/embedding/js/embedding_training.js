@@ -1,4 +1,5 @@
 function async_call() {
+  let original_pdf = document.querySelector("input[name='image_f']");
   let text = $("textarea[name='text']");
   let name = $("input[name='name']");
   let csrf = $("input[name='csrfmiddlewaretoken']");
@@ -11,6 +12,9 @@ function async_call() {
   request_data.append('text', text.val());
   request_data.append('name', name.val());
   request_data.append('csrfmiddlewaretoken', csrf.val());
+  if (original_pdf.files.length > 0) {
+    request_data.append('original_pdf', original_pdf.files[0]);
+  }
   fetch("/embedding_training_async/", {
     method: "POST",
     body: request_data,
