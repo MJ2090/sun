@@ -34,7 +34,7 @@ def create_context(question, df, max_len=1800):
     return "\n\n###\n\n".join(returns)
 
 
-def answer_question(
+def answer_question_openai(
         df,
         model="gpt-3.5-turbo",
         question="Am I allowed to publish model outputs to Twitter, without a human review?",
@@ -73,3 +73,26 @@ def answer_question(
     except Exception as e:
         print(e)
         return ""
+    
+
+def get_glm_embedding_prompt(
+        df,
+        question="Am I allowed to publish model outputs to Twitter, without a human review?",
+        max_len=3600,
+        debug=False
+):
+    """
+    Answer a question based on the most similar context from the dataframe texts
+    """
+    context = create_context(
+        question,
+        df,
+        max_len=max_len,
+    )
+    # If debug, print the raw model response
+    if debug:
+        print("Context:\n" + context)
+        print("\n\n")
+
+    system_prompt = f"根据下文提供的内容回答问题. 如果无法从下文中得到答案, 回答 我不知.\n\n内容: {context}\n\n问题: {question}"
+    return system_prompt

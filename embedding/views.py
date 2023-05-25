@@ -18,7 +18,7 @@ from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.run import run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
-from embedding.openai.run3 import run_it_3_action, run_it_3_question, run_it_3_training
+from embedding.openai.run3 import get_embedding_prompt, run_it_3_action, run_it_3_question, run_it_3_training
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -560,7 +560,13 @@ def summary(request):
 def demo_async(request):
     original_text = request.POST.get('original_text', '')
     temperature = request.POST.get('temperature', '0.9')
-    prompt = request.POST.get('prompt', '')
+    question = request.POST.get('question', '')
+    character = request.POST.get('character', '')
+    if question == '':
+        prompt = get_embedding_prompt(question, character, model='glm')
+    else:
+        prompt = request.POST.get('prompt', '')
+    print(prompt)
     gml_response, _ = run_it_glm(request, original_text, prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
@@ -569,6 +575,7 @@ def demo_async(request):
 def demo(request):
     ret = get_basic_data(request)
     ret['form'] = DemoForm()
+    load_embedding_models(request, ret)
     return render(request, 'embedding/demo.html', ret)
 
 
