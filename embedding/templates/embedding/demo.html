@@ -15,10 +15,6 @@
   <form class="row needs-validation" novalidate="" action="/demo/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
 
-    <div class="col-md-4 col-lg-3 mobile-only">
-      {% include "comp/summary_menu.html" %}
-    </div>
-
     <div class="col-md-12 col-lg-12">
       <div class="row g-3">
 
