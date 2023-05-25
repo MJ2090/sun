@@ -7,7 +7,7 @@ def create_context(question, df, max_len=1800):
     Create a context for a question by finding the most similar context from the dataframe
     """
 
-    print("88888 111", q_embeddings)
+    print("88888 111", question)
 
     # Get the embeddings for the question
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
