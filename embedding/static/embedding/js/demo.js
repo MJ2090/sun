@@ -46,6 +46,10 @@ function demo_init() {
         clearTimeout(timer);
         timer = setTimeout(() => { demo_async_call(); }, 800);
     });
+    $("textarea[name='question']").keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => { demo_async_call(); }, 800);
+    });
 }
 
 $(document).ready(function () {
