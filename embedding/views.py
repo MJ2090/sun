@@ -578,9 +578,11 @@ def play_image_async(request):
 
 
 def ocr_record(request, image_path, ocr_result):
+    response_time = time.time()
     record = OcrRecord.objects.create(user=get_user(request),
                                       image_path = image_path,
-                                      question = ocr_result)
+                                      question = ocr_result,
+                                      response_time = response_time)
     record.save()
 
 
@@ -593,13 +595,16 @@ def play_question_async(request):
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
+    quiz_record(request, original_question, ai_message)
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
 def quiz_record(request, question, answer):
+    response_time = time.time()
     record = QuizRecord.objects.create(user=get_user(request),
                                       answer = answer,
-                                      question = question)
+                                      question = question,
+                                      response_time = response_time)
     record.save()
 
 
