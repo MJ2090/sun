@@ -39,9 +39,7 @@ def answer_question_openai(
         model="gpt-3.5-turbo",
         question="Am I allowed to publish model outputs to Twitter, without a human review?",
         max_len=3600,
-        debug=False,
-        max_tokens=150,
-        stop_sequence=None
+        debug=False
 ):
     """
     Answer a question based on the most similar context from the dataframe texts
