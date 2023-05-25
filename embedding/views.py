@@ -73,9 +73,7 @@ def embedding_training_async(request):
     return HttpResponse(json.dumps({'result': 'new model ' + name + ' has finished training.'}))
 
 
-def embedding_question(request):
-    ret = get_basic_data(request)
-    ret['form'] = QuestionForm()
+def load_embedding_models(request, ret):
     owned_models = []
     public_models = []
     if not request.user.is_authenticated:
@@ -93,6 +91,12 @@ def embedding_question(request):
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
 
+
+def embedding_question(request):
+    ret = get_basic_data(request)
+    ret['form'] = QuestionForm()
+
+    load_embedding_models(request, ret)
     if len(ret['form'].fields['character'].choices) == 0:
         ret['error_msg'] = 'No Q&A bot found, please create new models.'
         return render(request, 'embedding/embedding_question.html', ret)
