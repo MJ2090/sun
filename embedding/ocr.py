@@ -67,24 +67,24 @@ def ocr_xunfei(file_name):
     request_url = assemble_ws_auth_url(url, "POST", APIKey, APISecret)
 
     headers = {'content-type': "application/json", 'host': 'api.xf-yun.com', 'app_id': APPId}
-    print(request_url)
+    # print(request_url)
     response = requests.post(request_url, data=json.dumps(body), headers=headers)
-    print(response)
+    # print(response)
     # print(response.content)
 
-    print("resp=>" + response.content.decode())
+    # print("resp=>" + response.content.decode())
     tempResult = json.loads(response.content.decode())
 
     finalResult = base64.b64decode(tempResult['payload']['result']['text']).decode()
     finalResult = finalResult.replace(" ", "").replace("\n", "").replace("\t", "").strip()
-    print("text字段Base64解码后=>" + finalResult)
+    # print("text字段Base64解码后=>" + finalResult)
     finalResult_json = json.loads(finalResult)
     context = ""
     for page in finalResult_json['pages']:
         for line in page['lines']:
             tmp = ' '.join([word['content']for word in line['words'] if word['conf']>0.95])
             context += tmp
-    print(context)
+    # print(context)
     return context
 
 """Private functions ..."""
