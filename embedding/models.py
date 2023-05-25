@@ -101,7 +101,7 @@ class QuizRecord(models.Model):
 
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
-        return username + " " + self.question + " " + str(self.response_time - self.request_time + " " + self.llm_model)
+        return username + " " + self.question + " " + str(self.response_time - self.request_time) + " " + self.llm_model
     
 
 class OcrRecord(models.Model):
