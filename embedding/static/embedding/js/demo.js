@@ -7,7 +7,7 @@ function demo_async_call() {
     let question = $("textarea[name='question']");
     let character = $("select[name='character']");
 
-    if (original_text.val() == '') {
+    if (original_text.val() == '' && question.val()=='') {
         return;
     }
 
