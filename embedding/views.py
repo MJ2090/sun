@@ -17,7 +17,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import get_embedding_prompt, run_it_training, run_it_action, run_it_question, run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_image, run_it_chat, run_it_chat_llama
+from embedding.openai.run import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -64,7 +64,7 @@ def embedding_training_async(request):
         print(pdf_pages[0].page_content)
         text = pdf_pages[0].page_content
     print('embedding_training_async', name)
-    openai_response = run_it_training(text)
+    openai_response = feature_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
     print(openai_response)
@@ -106,7 +106,7 @@ def embedding_question_async(request):
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
     enable_speech = request.POST.get('enable_speech', '')
-    answer = run_it_question(question, character)
+    answer = feature_question(question, character)
     print(answer)
 
     if enable_speech == 'true':
@@ -151,12 +151,12 @@ def sendchat_home(request):
     return_dict = {}
 
     if use_embedding:
-        answer = run_it_question(new_message, 'NX32LBMJ3E')
+        answer = feature_question(new_message, 'NX32LBMJ3E')
         if not answer == "I don't know.":
             return_dict['ai_message'] = answer
             # return HttpResponse(json.dumps({'ai_message': answer}))
     if use_action:
-        openai_response = run_it_action(new_message, model='gpt-3.5-turbo')
+        openai_response = feature_action(new_message, model='gpt-3.5-turbo')
         action_score = openai_response["choices"][0]["message"]["content"]
         action_score = action_score.replace(
             '.', '').replace('\n', '').replace(' ', '')
@@ -183,7 +183,7 @@ def sendchat_home(request):
 
     print("Msg sent to openai: ", messages)
 
-    openai_response, request_time = run_it_chat(messages, model='gpt-3.5-turbo')
+    openai_response, request_time = feature_chat(messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
@@ -212,7 +212,7 @@ def sendchat_async(request):
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
 
-    openai_response, request_time = run_it_chat(messages, model=model)
+    openai_response, request_time = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
@@ -250,7 +250,7 @@ def sendchat_therapy_async_llama(request):
 
     print("Msg sent to llama: ", messages)
 
-    llama_response, request_time = run_it_chat_llama(request, messages, model=model)
+    llama_response, request_time = feature_chat_llama(request, messages, model=model)
     print('llama_response = ', llama_response)
     ai_message = llama_response['ai_message']
     print("\nMsg returned from llama: ", ai_message)
@@ -293,7 +293,7 @@ def sendchat_therapy_async_openai(request):
     print("Character: ", character)
     print("Msg sent to openai: ", messages)
 
-    openai_response, request_time = run_it_chat(messages, model=model)
+    openai_response, request_time = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
@@ -470,7 +470,7 @@ def image_async(request):
     count = int(count)
     if style != '':
         description += '. In ' + style + ' style.'
-    openai_response = run_it_image(description, count)
+    openai_response = feature_image(description, count)
     record_consumption(
         request, sc.MODEL_TYPES_IMAGE, openai_response)
     return HttpResponse(json.dumps({'urls': openai_response['data']}))
@@ -485,7 +485,7 @@ def image(request):
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
     target = request.POST.get('target', '')
-    openai_response = run_it_translate(
+    openai_response = feature_translate(
         original_text, target=target, model='gpt-3.5-turbo')
     translated_text = openai_response['choices'][0]['message']['content']
     record_consumption(
@@ -502,7 +502,7 @@ def translation(request):
 
 def grammar_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = run_it_grammar(original_text, model='gpt-3.5-turbo')
+    openai_response = feature_grammar(original_text, model='gpt-3.5-turbo')
     fixed_text = openai_response["choices"][0]["message"]["content"]
     record_consumption(
         request, sc.MODEL_TYPES_GRAMMAR, openai_response)
@@ -518,7 +518,7 @@ def grammar(request):
 
 def summary_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = run_it_summary(original_text, model='gpt-3.5-turbo')
+    openai_response = feature_summary(original_text, model='gpt-3.5-turbo')
     summary_text = openai_response["choices"][0]["message"]["content"]
     record_consumption(
         request, sc.MODEL_TYPES_SUMMARY, openai_response)
@@ -542,7 +542,7 @@ def demo_async(request):
     else:
         prompt = request.POST.get('prompt', '')
     print(prompt)
-    gml_response, _ = run_it_glm(request, original_text, prompt, temperature)
+    gml_response, _ = feature_glm(request, original_text, prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
@@ -561,7 +561,7 @@ def play_async(request):
     ocr_result = ocr_result.replace(r'\n+', '\n')
     llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
-    openai_response, request_time = run_it_quiz(ocr_result, model=llm_model)
+    openai_response, request_time = feature_quiz(ocr_result, model=llm_model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
@@ -580,7 +580,7 @@ def play_question_async(request):
     llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4'}
     llm_model = llm_model_dic.get(request.POST.get('llm_model'))
     original_question = request.POST.get('original_question')
-    openai_response, request_time = run_it_quiz(original_question, model=llm_model)
+    openai_response, request_time = feature_quiz(original_question, model=llm_model)
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)

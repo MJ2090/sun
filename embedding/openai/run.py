@@ -23,7 +23,7 @@ def get_embedding_prompt(question, random_str, model='gpt-3.5-turbo'):
     return robot.get_glm_embedding_prompt(my_df, question=question)
 
 
-def run_it_question(question, random_str, model='gpt-3.5-turbo'):
+def feature_question(question, random_str, model='gpt-3.5-turbo'):
     file_path = relative_path + random_str + '.csv'
     if not os.path.exists(file_path):
         return "I don't know."
@@ -36,7 +36,7 @@ def run_it_question(question, random_str, model='gpt-3.5-turbo'):
     return ans
 
 
-def run_it_action(question, model):
+def feature_action(question, model):
     msg = """
     A and B are talking with each other, if A says "{}", is it logically correct for B to reply as 
     "You can take the self assessment on our website"?
@@ -55,7 +55,7 @@ def run_it_action(question, model):
     return response
 
 
-def run_it_training(text):
+def feature_training(text):
     my_texts = [("embedding", text)]
     my_df = df.get_df(my_texts)
     my_df.head()
@@ -72,7 +72,7 @@ def run_it_training(text):
     return random_str
 
 
-def run_it_translate(original_text, target, model):
+def feature_translate(original_text, target, model):
     messages = [
         {"role": "system", "content": f"You are a helpful assistant that translates the original text to {target}."},
         {"role": "user", "content": f"Translate the following text to {target}: {original_text}"},
@@ -86,7 +86,7 @@ def run_it_translate(original_text, target, model):
     return response
 
 
-def run_it_grammar(original_text, model):
+def feature_grammar(original_text, model):
     messages = [
         {"role": "system", "content": "You correct the input text to standard English, fix all the misspelled words, grammatical and syntax errors."},
         {"role": "user", "content": "How old is you?"},
@@ -109,7 +109,7 @@ def run_it_grammar(original_text, model):
     return response
 
 
-def run_it_summary(original_text, model):
+def feature_summary(original_text, model):
     messages = [
         {"role": "system", "content": "Generate the tl;dr for the input text."},
         {"role": "user",
@@ -126,7 +126,7 @@ def run_it_summary(original_text, model):
     return response
 
 
-def run_it_image(prompt, count):
+def feature_image(prompt, count):
     response = openai.Image.create(
         prompt=prompt,
         n=count,
@@ -135,18 +135,18 @@ def run_it_image(prompt, count):
     return response
 
 
-def run_it_chat_llama(request, messages, model):
+def feature_chat_llama(request, messages, model):
     request_time = time.time()
     return llama.create(request, messages), request_time
 
 
-def run_it_glm(request, messages, prompt, temperature):
+def feature_glm(request, messages, prompt, temperature):
     request_time = time.time()
     return glm.create(request, messages, prompt, temperature), request_time
 
 
-def run_it_chat(messages, model):
-    print(f"run_it_chat with model {model}")
+def feature_chat(messages, model):
+    print(f"feature_chat with model {model}")
     request_time = time.time()
     try:
         response = openai.ChatCompletion.create(
@@ -161,8 +161,8 @@ def run_it_chat(messages, model):
         return "Sorry it was time out :D", request_time
 
 
-def run_it_quiz(context, model="gpt-4", temperature=0.5):
-    print(f"run_it_quiz with model {model}")
+def feature_quiz(context, model="gpt-4", temperature=0.5):
+    print(f"feature_quiz with model {model}")
     base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道题目,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'."
     messages = [
         {"role": "system", "content": base_prompt},
