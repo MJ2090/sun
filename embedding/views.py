@@ -562,7 +562,7 @@ def demo_async(request):
     temperature = request.POST.get('temperature', '0.9')
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
-    if question == '':
+    if question != '':
         prompt = get_embedding_prompt(question, character, model='glm')
     else:
         prompt = request.POST.get('prompt', '')
