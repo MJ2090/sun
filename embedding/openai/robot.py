@@ -12,7 +12,7 @@ def create_context(question, df, max_len=1800):
     # Get the embeddings for the question
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
-    print("88888 12", q_embeddings, df['embeddings'].values)
+    print("88888 12", q_embeddings)
     # Get the distances from the embeddings
     df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values, distance_metric='cosine')
 
