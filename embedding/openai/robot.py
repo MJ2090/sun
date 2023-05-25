@@ -1,5 +1,5 @@
 import openai
-from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
+from openai.embeddings_utils import distances_from_embeddings
 
 
 def create_context(question, df, max_len=1800):
