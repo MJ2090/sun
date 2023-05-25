@@ -17,7 +17,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
+from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
