@@ -88,4 +88,22 @@ class Dialogue(models.Model):
     total_tokens = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.dialogue_id + " " + str(self.response_time-self.request_time) + "\n" + self.message;
+        return self.dialogue_id + " " + str(self.response_time-self.request_time) + "\n" + self.message
+
+
+class QuizRecord(models.Model):
+    username = models.CharField(max_length=100, default='')
+    question = models.EmailField(max_length=1500, default='')
+    answer = models.CharField(max_length=2500, default='')
+
+    def __str__(self):
+        return self.username
+    
+
+class OcrRecord(models.Model):
+    username = models.CharField(max_length=100, default='')
+    image_path = models.EmailField(max_length=200, default='')
+    question = models.CharField(max_length=1500, default='')
+
+    def __str__(self):
+        return self.username
