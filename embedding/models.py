@@ -95,6 +95,7 @@ class QuizRecord(models.Model):
     username = models.CharField(max_length=100, default='')
     question = models.EmailField(max_length=1500, default='')
     answer = models.CharField(max_length=2500, default='')
+    response_time = models.IntegerField(default=0)
 
     def __str__(self):
         return self.username
@@ -104,6 +105,7 @@ class OcrRecord(models.Model):
     username = models.CharField(max_length=100, default='')
     image_path = models.EmailField(max_length=200, default='')
     question = models.CharField(max_length=1500, default='')
+    response_time = models.IntegerField(default=0)
 
     def __str__(self):
         return self.username

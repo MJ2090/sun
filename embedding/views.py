@@ -18,12 +18,10 @@ from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
-from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
+from embedding.models import TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Contact, Dialogue
 from django.shortcuts import render
 from django.db import transaction
 from .utils import load_random_string, get_basic_data, enable_new_home, parse_diff
-from embedding.models import UserProfile
-from embedding.models import Contact, Dialogue
 from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import os
@@ -183,7 +181,8 @@ def sendchat_home(request):
 
     print("Msg sent to openai: ", messages)
 
-    openai_response, request_time = feature_chat(messages, model='gpt-3.5-turbo')
+    openai_response, request_time = feature_chat(
+        messages, model='gpt-3.5-turbo')
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
@@ -250,7 +249,8 @@ def sendchat_therapy_async_llama(request):
 
     print("Msg sent to llama: ", messages)
 
-    llama_response, request_time = feature_chat_llama(request, messages, model=model)
+    llama_response, request_time = feature_chat_llama(
+        request, messages, model=model)
     print('llama_response = ', llama_response)
     ai_message = llama_response['ai_message']
     print("\nMsg returned from llama: ", ai_message)
@@ -573,18 +573,34 @@ def play_image_async(request):
     ocr_result = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     print("ocr_result: ", ocr_result)
+    ocr_record(request, saved_file_name, ocr_result)
     return HttpResponse(json.dumps({'question': ocr_result}))
+
+
+def ocr_record(request, image_path, ocr_result):
+    record = OcrRecord.objects.create(user=get_user(request),
+                                      image_path = image_path,
+                                      question = ocr_result)
+    record.save()
 
 
 def play_question_async(request):
     llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4'}
     llm_model = llm_model_dic.get(request.POST.get('llm_model'))
     original_question = request.POST.get('original_question')
-    openai_response, request_time = feature_quiz(original_question, model=llm_model)
+    openai_response, request_time = feature_quiz(
+        original_question, model=llm_model)
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'answer': ai_message}))
+
+
+def quiz_record(request, question, answer):
+    record = QuizRecord.objects.create(user=get_user(request),
+                                      answer = answer,
+                                      question = question)
+    record.save()
 
 
 def play(request):
@@ -611,7 +627,7 @@ def save_to_local(original_file, sub_dir=''):
         os.mkdir(file_dir)
     file_name = default_storage.save(os.path.join(
         file_dir, random_prefix+original_file.name), original_file)
-    if sub_dir=='' and original_file.size > 3*1000*1000:
+    if sub_dir == '' and original_file.size > 3*1000*1000:
         tmp = Image.open(file_name)
         max_size = (1024, 1024)
         tmp.thumbnail(max_size, Image.ANTIALIAS)
