@@ -58,8 +58,7 @@ def embedding_training_async(request):
     text = request.POST.get('text', '')
     name = request.POST.get('name', '')
     original_pdf = request.FILES.get('original_pdf', '')
-    print("ahahhaaha", original_pdf)
-    if original_pdf is not None:
+    if original_pdf != '':
         pdf_file_name = save_to_local(original_pdf, 'pdf')
         pdf_pages = load_pdf(pdf_file_name)
         print(pdf_pages[0].page_content)
