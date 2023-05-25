@@ -84,11 +84,13 @@ def get_glm_embedding_prompt(
     """
     Answer a question based on the most similar context from the dataframe texts
     """
+    print("get_glm_embedding_prompt, start", question)
     context = create_context(
         question,
         df,
         max_len=max_len,
     )
+    print("get_glm_embedding_prompt, end")
     # If debug, print the raw model response
     if debug:
         print("Context:\n" + context)

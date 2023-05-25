@@ -16,7 +16,7 @@ def get_embedding_prompt(question, random_str, model='gpt-3.5-turbo'):
     if not os.path.exists(file_path):
         return "I don't know."
     my_df = pd.read_csv(file_path, index_col=0)
-    print("get_embedding_prompt, geo df")
+    print("get_embedding_prompt, got df")
     return robot.get_glm_embedding_prompt(my_df, question=question)
 
 
