@@ -99,7 +99,8 @@ class QuizRecord(models.Model):
     request_time = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user.username + " " + self.question + " " + str(self.response_time - self.request_time)
+        username = self.user.username if self.user is not None else 'None'
+        return username + " " + self.question + " " + str(self.response_time - self.request_time)
     
 
 class OcrRecord(models.Model):
@@ -110,4 +111,5 @@ class OcrRecord(models.Model):
     request_time = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user.username + " " + self.question + " " + str(self.response_time - self.request_time)
+        username = self.user.username if self.user is not None else 'None'
+        return username + " " + self.question + " " + str(self.response_time - self.request_time)

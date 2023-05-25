@@ -573,7 +573,7 @@ def play_image_async(request):
     ocr_result, request_time = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     print("ocr_result: ", ocr_result)
-    ocr_record(request, saved_file_name, ocr_result)
+    ocr_record(request, saved_file_name, ocr_result, request_time)
     return HttpResponse(json.dumps({'question': ocr_result}))
 
 
