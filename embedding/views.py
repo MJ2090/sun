@@ -17,8 +17,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
-from embedding.openai.run3 import get_embedding_prompt, run_it_3_action, run_it_3_question, run_it_3_training
+from embedding.openai.run import get_embedding_prompt, run_it_training, run_it_action, run_it_question, run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -66,7 +65,7 @@ def embedding_training_async(request):
         print(pdf_pages[0].page_content)
         text = pdf_pages[0].page_content
     print('embedding_training_async', name)
-    openai_response = run_it_3_training(text)
+    openai_response = run_it_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response)
     print(openai_response)
@@ -108,7 +107,7 @@ def embedding_question_async(request):
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
     enable_speech = request.POST.get('enable_speech', '')
-    answer = run_it_3_question(question, character)
+    answer = run_it_question(question, character)
     print(answer)
 
     if enable_speech == 'true':
@@ -153,12 +152,12 @@ def sendchat_home(request):
     return_dict = {}
 
     if use_embedding:
-        answer = run_it_3_question(new_message, 'NX32LBMJ3E')
+        answer = run_it_question(new_message, 'NX32LBMJ3E')
         if not answer == "I don't know.":
             return_dict['ai_message'] = answer
             # return HttpResponse(json.dumps({'ai_message': answer}))
     if use_action:
-        openai_response = run_it_3_action(new_message, model='gpt-3.5-turbo')
+        openai_response = run_it_action(new_message, model='gpt-3.5-turbo')
         action_score = openai_response["choices"][0]["message"]["content"]
         action_score = action_score.replace(
             '.', '').replace('\n', '').replace(' ', '')
