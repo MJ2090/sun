@@ -1,5 +1,4 @@
 import openai
-import tiktoken
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
 
