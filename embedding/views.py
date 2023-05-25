@@ -596,7 +596,7 @@ def play_question_async(request):
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
-    quiz_record(request, original_question, ai_message, request_time)
+    quiz_record(request, original_question, ai_message, llm_model, request_time)
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
@@ -606,6 +606,7 @@ def quiz_record(request, question, answer, request_time):
                                       answer = answer,
                                       question = question,
                                       response_time = response_time,
+                                      llm_model = llm_model,
                                       request_time = request_time)
     record.save()
 
