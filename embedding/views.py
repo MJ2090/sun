@@ -17,7 +17,7 @@ from embedding.forms.signin import SigninForm
 from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.run import get_embedding_prompt, run_it_training, run_it_action, run_it_question, run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_7, run_it_image, run_it_chat, run_it_chat_llama
+from embedding.openai.run import get_embedding_prompt, run_it_training, run_it_action, run_it_question, run_it_glm, run_it_quiz, run_it_translate, run_it_grammar, run_it_summary, run_it_image, run_it_chat, run_it_chat_llama
 from embedding.models import TokenConsumption, PromptModel, EmbeddingModel
 from django.shortcuts import render
 from django.db import transaction
@@ -235,29 +235,6 @@ def sendchat_async(request):
         audio_address = ''
 
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
-
-
-def sendchat(request):
-    model = request.POST.get('model', '')
-    if model in ["gpt-3.5-turbo", "gpt-4"]:
-        return sendchat_async(request)
-    message = request.POST['message']
-    character = request.POST['character']
-    history = request.POST.get('history')
-    print('model is ', model, history)
-
-    pre_text_dict = {
-        "Common AI": "",
-        "Assistant": "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n",
-        "Mr. President": "In this conversation, AI acts as the President Biden of USA. He serves his contry.\n",
-        "Therapist": "In this conversation, AI acts as a top ranked Therapist. He always speaks a lot, providing advices to his patients. He is always nice, friendly and very helpful to his patients.\n",
-    }
-    pre_text = pre_text_dict.get(character, "")
-    post_text = "\nAI: "
-    openai_response = run_it_7(pre_text + message + post_text, model=model)
-    ai_message = openai_response["choices"][0]["text"]
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
-    return HttpResponse(message + post_text + ai_message + "\nHuman: ")
 
 
 def sendchat_therapy_async_llama(request):

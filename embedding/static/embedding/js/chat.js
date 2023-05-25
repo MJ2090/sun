@@ -55,7 +55,7 @@ function chat_async_call() {
     request_data.append('enable_speech', enable_speech[0].checked);
     request_data.append('dialogue_id', $("input[name='dialogue_id']").val());
     request_data.append('csrfmiddlewaretoken', csrf.val());
-    fetch("/sendchat/", {
+    fetch("/sendchat_async/", {
         method: "POST",
         body: request_data,
     })

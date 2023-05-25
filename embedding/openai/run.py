@@ -126,17 +126,6 @@ def run_it_summary(original_text, model):
     return response
 
 
-def run_it_7(prompt, model):
-    response = openai.Completion.create(
-        model=model,
-        prompt=prompt,
-        temperature=0,
-        max_tokens=3000,
-        stop=["###"]
-    )
-    return response
-
-
 def run_it_image(prompt, count):
     response = openai.Image.create(
         prompt=prompt,
