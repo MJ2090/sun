@@ -600,7 +600,7 @@ def play_question_async(request):
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
-def quiz_record(request, question, answer, request_time):
+def quiz_record(request, question, answer, llm_model, request_time):
     response_time = time.time()
     record = QuizRecord.objects.create(user=get_user(request),
                                       answer = answer,
