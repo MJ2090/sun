@@ -557,7 +557,7 @@ def demo(request):
 def play_async(request):
     original_image = request.FILES.get('original_image')
     saved_file_name = save_to_local(original_image)
-    ocr_result = recognize_image(saved_file_name)
+    ocr_result, request_time = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
@@ -570,19 +570,20 @@ def play_async(request):
 def play_image_async(request):
     original_image = request.FILES.get('original_image')
     saved_file_name = save_to_local(original_image)
-    ocr_result = recognize_image(saved_file_name)
+    ocr_result, request_time = recognize_image(saved_file_name)
     ocr_result = ocr_result.replace(r'\n+', '\n')
     print("ocr_result: ", ocr_result)
     ocr_record(request, saved_file_name, ocr_result)
     return HttpResponse(json.dumps({'question': ocr_result}))
 
 
-def ocr_record(request, image_path, ocr_result):
+def ocr_record(request, image_path, ocr_result, request_time):
     response_time = time.time()
     record = OcrRecord.objects.create(user=get_user(request),
                                       image_path = image_path,
                                       question = ocr_result,
-                                      response_time = response_time)
+                                      response_time = response_time,
+                                      request_time = request_time)
     record.save()
 
 
@@ -595,16 +596,17 @@ def play_question_async(request):
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("openai_response: ", openai_response)
-    quiz_record(request, original_question, ai_message)
+    quiz_record(request, original_question, ai_message, request_time)
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
-def quiz_record(request, question, answer):
+def quiz_record(request, question, answer, request_time):
     response_time = time.time()
     record = QuizRecord.objects.create(user=get_user(request),
                                       answer = answer,
                                       question = question,
-                                      response_time = response_time)
+                                      response_time = response_time,
+                                      request_time = request_time)
     record.save()
 
 

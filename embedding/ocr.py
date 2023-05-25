@@ -11,17 +11,20 @@ import base64
 import hmac
 from urllib.parse import urlencode
 import json
+import time
 from embedding.ocr_bd import ocr_baidu
 
 
 def recognize_image(file_name, source='xunfei'):
+    request_time = time.time()
+    result = "Nothing, no source found"
     if source=='tesseract':
-        return ocr_tesseract(file_name)
+        result = ocr_tesseract(file_name)
     if source=='xunfei':
-        return ocr_xunfei(file_name)
+        result = ocr_xunfei(file_name)
     if source=='baidu':
-        return ocr_baidu(file_name)
-    return "Nothing, no source found"
+        result = ocr_baidu(file_name)
+    return result, request_time
 
 
 def ocr_tesseract(file_name):

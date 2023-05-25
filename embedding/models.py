@@ -92,20 +92,22 @@ class Dialogue(models.Model):
 
 
 class QuizRecord(models.Model):
-    username = models.CharField(max_length=100, default='')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,blank=True, null=True)
     question = models.EmailField(max_length=1500, default='')
     answer = models.CharField(max_length=2500, default='')
     response_time = models.IntegerField(default=0)
+    request_time = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.username
+        return self.user.username + " " + self.question + " " + str(self.response_time - self.request_time)
     
 
 class OcrRecord(models.Model):
-    username = models.CharField(max_length=100, default='')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,blank=True, null=True)
     image_path = models.EmailField(max_length=200, default='')
     question = models.CharField(max_length=1500, default='')
     response_time = models.IntegerField(default=0)
+    request_time = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.username
+        return self.user.username + " " + self.question + " " + str(self.response_time - self.request_time)
