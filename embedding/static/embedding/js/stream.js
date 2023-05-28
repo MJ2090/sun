@@ -26,8 +26,12 @@ async function stream_async_call() {
         .getReader();
     while (true) {
         var { value, done } = await reader.read();
+        console.log(value);
         $("div[name='spinner").hide();
         translated_text.show();
+        if (!value) {
+            break;
+        }
         translated_text.val(translated_text.val() + value);
     }
 }
