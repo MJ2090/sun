@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import StreamingHttpResponse, HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
@@ -498,6 +498,30 @@ def translation(request):
     ret = get_basic_data(request)
     ret['form'] = TranslationForm()
     return render(request, 'embedding/translation.html', ret)
+
+
+def stream_async(request):
+    import openai
+    original_text = request.POST.get('original_text', '')
+    target = request.POST.get('target', '')
+    def event_stream():
+        openai_response = feature_translate(
+            original_text, target=target, model='gpt-3.5-turbo', stream=True)
+        for line in openai_response:
+            finished = line['choices'][0].get('finish_reason') == 'stop'
+            if finished:
+                yield '\n'
+                break
+            chunk = line['choices'][0].get('delta', {}).get('content', '')
+            if chunk:
+              yield chunk
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+
+def stream(request):
+    ret = get_basic_data(request)
+    ret['form'] = TranslationForm()
+    return render(request, 'embedding/stream.html', ret)
 
 
 def grammar_async(request):

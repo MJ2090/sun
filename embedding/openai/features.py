@@ -73,7 +73,7 @@ def feature_training(text):
     return random_str
 
 
-def feature_translate(original_text, target, model):
+def feature_translate(original_text, target, model, stream=False):
     messages = [
         {"role": "system", "content": f"You are a helpful assistant that translates the original text to {target}."},
         {"role": "user", "content": f"Translate the following text to {target}: {original_text}"},
@@ -83,6 +83,7 @@ def feature_translate(original_text, target, model):
         temperature=0.2,
         max_tokens=2000,
         messages=messages,
+        stream=stream,
     )
     return response
 
