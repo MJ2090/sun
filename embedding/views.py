@@ -524,7 +524,7 @@ def stream_async(request):
     def event_stream():
         completion = openai.ChatCompletion.create(
             model='gpt-3.5-turbo', 
-            messages=[{"role": "user", "content": "Hello world"}],
+            messages=[{"role": "user", "content": "tell me a long story"}],
             stream=True)
         for line in completion:
             print(line)
