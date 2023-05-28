@@ -527,6 +527,7 @@ def stream_async(request):
             messages=[{"role": "user", "content": "Hello world"}],
             stream=True)
         for line in completion:
+            print(line)
             chunk = line['choices'][0].get('delta', {}).get('content', '')
             if chunk:
               yield 'data: %s\n\n' % chunk
