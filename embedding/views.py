@@ -531,7 +531,10 @@ def stream_async(request):
             chunk = line['choices'][0].get('delta', {}).get('content', '')
             if chunk:
               yield 'data: %s\n\n' % chunk
-    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    ret = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    ret['X-Accel-Buffering'] = 'no'
+    ret['Cache-Control'] = 'no-cache'
+    return ret
 
 
 def stream(request):
