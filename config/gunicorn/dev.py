@@ -19,4 +19,4 @@ pidfile = "/var/run/gunicorn/dev.pid"
 # Daemonize the Gunicorn process (detach & enter background)
 daemon = True
 # Timeout in seconds
-timeout = 120
+timeout = 600
