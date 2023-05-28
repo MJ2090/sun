@@ -500,7 +500,7 @@ def translation(request):
     return render(request, 'embedding/translation.html', ret)
 
 
-def stream_async(request):
+def stream_async_2(request):
     import openai
     original_text = request.POST.get('original_text', '')
     target = request.POST.get('target', '')
@@ -516,6 +516,20 @@ def stream_async(request):
             chunk = line['choices'][0].get('delta', {}).get('content', '')
             if chunk:
               yield chunk
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+
+def stream_async(request):
+    import openai
+    def event_stream():
+        completion = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo', 
+            messages=[{"role": "user", "content": "Hello world"}],
+            stream=True)
+        for line in completion:
+            chunk = line['choices'][0].get('delta', {}).get('content', '')
+            if chunk:
+              yield 'data: %s\n\n' % chunk
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
 
 

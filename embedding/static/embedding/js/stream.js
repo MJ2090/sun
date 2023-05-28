@@ -15,25 +15,36 @@ async function stream_async_call() {
     request_data.append('target', target.val());
     request_data.append('csrfmiddlewaretoken', csrf.val());
 
-    const response = await fetch("/stream_async/", {
-        method: "POST",
-        body: request_data,
-    });
+    // const response = await fetch("/stream_async/", {
+    //     method: "POST",
+    //     body: request_data,
+    // });
 
-    if (!response.body) return;
-    const reader = response.body
-        .pipeThrough(new TextDecoderStream())
-        .getReader();
-    while (true) {
-        var { value, done } = await reader.read();
-        console.log(value);
-        $("div[name='spinner").hide();
+    // if (!response.body) return;
+    // const reader = response.body
+    //     .pipeThrough(new TextDecoderStream())
+    //     .getReader();
+    // while (true) {
+    //     var { value, done } = await reader.read();
+    //     $("div[name='spinner").hide();
+    //     translated_text.show();
+    //     if (!value){
+    //         break;
+    //     }        
+    //     translated_text.val(translated_text.val() + value);
+    // }
+
+    var source = new EventSource("/stream_async");
+    source.onmessage = function (event) {
         translated_text.show();
-        if (!value) {
-            break;
+        $("div[name='spinner").hide();
+        console.log(event.data);
+        if (event.data == 'DONE') {
+            source.close();
+        } else {
+            translated_text.val(translated_text.val() + event.data);
         }
-        translated_text.val(translated_text.val() + value);
-    }
+    };
 }
 
 function stream_init() {
