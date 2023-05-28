@@ -501,7 +501,6 @@ def translation(request):
 
 
 def stream_async(request):
-    import openai
     original_text = request.POST.get('original_text', '')
     target = request.POST.get('target', '')
     def event_stream():
@@ -509,7 +508,6 @@ def stream_async(request):
             original_text, target=target, model='gpt-3.5-turbo', stream=True)
         for line in openai_response:
             finished = line['choices'][0].get('finish_reason') == 'stop'
-            print(line)
             if finished:
                 yield '\n'
                 break
