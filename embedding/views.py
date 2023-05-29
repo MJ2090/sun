@@ -380,7 +380,7 @@ def chat_olivia(request):
     ret['ai_emoji'] = random.choice(
         ['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'])
     form.fields['dialogue_id'].initial = load_random_string(10)
-    return render(request, 'embedding/chat_therapy.html', ret)
+    return render(request, 'embedding/chat_olivia.html', ret)
 
 
 def chat(request):
