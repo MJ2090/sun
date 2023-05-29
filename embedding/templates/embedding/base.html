@@ -38,6 +38,7 @@
 </head>
 
 <body>
+  {% if not hide_nav %}
   <nav class="navbar navbar-expand-sm">
     <div class="container-fluid container">
       <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
@@ -126,6 +127,7 @@
       </div>
     </div>
   </nav>
+  {% endif %}
 
   {% block main %}
   {% endblock %}

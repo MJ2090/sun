@@ -12,10 +12,12 @@ def load_random_string(num, seed=None):
     return randStr
 
 
-def get_basic_data(request):
+def get_basic_data(request, params={}):
     ret = {}
     if request.user.is_authenticated:
         ret['user'] = request.user
+    if params.get('hide_nav'):
+        ret['hide_nav'] = True
     ret['current_page'] = 'home'
     return ret
 

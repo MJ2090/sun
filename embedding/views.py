@@ -373,7 +373,7 @@ def chat_therapy_llama(request):
 
 
 def chat_olivia(request):
-    ret = get_basic_data(request)
+    ret = get_basic_data(request, {'hide_nav': True})
     form = ChatForm(initial={'source_id': 'stateful'})
     ret['form'] = form
     ret['welcome_word'] = 'Chat with Olivia'
