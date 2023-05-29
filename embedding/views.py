@@ -372,7 +372,7 @@ def chat_therapy_llama(request):
     return render(request, 'embedding/chat_therapy.html', ret)
 
 
-def chat_therapy_stateful(request):
+def chat_olivia(request):
     ret = get_basic_data(request)
     form = ChatForm(initial={'source_id': 'stateful'})
     ret['form'] = form
