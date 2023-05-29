@@ -8,7 +8,7 @@ from embedding.forms.grammar import GrammarForm
 from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.summary import SummaryForm
 from embedding.forms.demo import DemoForm
-from embedding.forms.play import PlayForm
+from embedding.forms.quiz import QuizForm
 from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
 from embedding.forms.contact import ContactForm
@@ -598,7 +598,7 @@ def demo(request):
     return render(request, 'embedding/demo.html', ret)
 
 
-def play_async(request):
+def quiz_async(request):
     original_image = request.FILES.get('original_image')
     saved_file_name = save_to_local(original_image)
     ocr_result, request_time = recognize_image(saved_file_name)
@@ -611,7 +611,7 @@ def play_async(request):
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
-def play_image_async(request):
+def quiz_image_async(request):
     original_image = request.FILES.get('original_image')
     saved_file_name = save_to_local(original_image)
     ocr_result, request_time = recognize_image(saved_file_name)
@@ -631,7 +631,7 @@ def ocr_record(request, image_path, ocr_result, request_time):
     record.save()
 
 
-def play_question_async(request):
+def quiz_question_async(request):
     llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4'}
     llm_model = llm_model_dic.get(request.POST.get('llm_model'))
     original_question = request.POST.get('original_question')
@@ -659,7 +659,7 @@ def play(request):
     user_language = "zh_hans"
     activate(user_language)
     ret = get_basic_data(request)
-    ret['form'] = PlayForm()
+    ret['form'] = QuizForm()
     return render(request, 'embedding/play.html', ret)
 
 
@@ -667,7 +667,7 @@ def quiz(request):
     user_language = "zh_hans"
     activate(user_language)
     ret = get_basic_data(request)
-    ret['form'] = PlayForm()
+    ret['form'] = QuizForm()
     return render(request, 'embedding/quiz.html', ret)
 
 

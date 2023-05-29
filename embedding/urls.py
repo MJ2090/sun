@@ -45,9 +45,9 @@ urlpatterns = [
     path('image_async/', views.image_async, name='image_async'),
     path('quiz/', views.quiz, name='quiz'),
     path('play/', views.play, name='play'),
-    path('play_async/', views.play_async, name='play_async'),
-    path('play_question_async/', views.play_question_async, name='play_question_async'),
-    path('play_image_async/', views.play_image_async, name='play_image_async'),
+    path('quiz_async/', views.quiz_async, name='quiz_async'),
+    path('quiz_question_async/', views.quiz_question_async, name='quiz_question_async'),
+    path('quiz_image_async/', views.quiz_image_async, name='quiz_image_async'),
     path('stream/', views.stream, name='stream'),
     path('stream_async/', views.stream_async, name='stream_async'),
 ]

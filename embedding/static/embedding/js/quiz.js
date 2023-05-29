@@ -19,7 +19,7 @@ function play_fetch_image() {
 
   spinner = document.querySelector("div[name='spinner']");
   spinner.style.display = 'block';
-  fetch("/play_image_async/", {
+  fetch("/quiz_image_async/", {
     method: "POST",
     body: request_data,
   }).then(response => response.json()).then((response) => {
@@ -48,7 +48,7 @@ function play_fetch_question() {
 
   spinner = document.querySelector("div[name='spinner_question']");
   spinner.style.display = 'block';
-  fetch("/play_question_async/", {
+  fetch("/quiz_question_async/", {
     method: "POST",
     body: request_data,
   }).then(response => response.json()).then((response) => {
