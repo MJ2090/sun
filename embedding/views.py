@@ -655,14 +655,6 @@ def quiz_record(request, question, answer, llm_model, request_time):
     record.save()
 
 
-def play(request):
-    user_language = "zh_hans"
-    activate(user_language)
-    ret = get_basic_data(request)
-    ret['form'] = QuizForm()
-    return render(request, 'embedding/play.html', ret)
-
-
 def quiz(request):
     user_language = "zh_hans"
     activate(user_language)

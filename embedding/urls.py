@@ -44,7 +44,6 @@ urlpatterns = [
     path('translation_async/', views.translation_async, name='translation_async'),
     path('image_async/', views.image_async, name='image_async'),
     path('quiz/', views.quiz, name='quiz'),
-    path('play/', views.play, name='play'),
     path('quiz_async/', views.quiz_async, name='quiz_async'),
     path('quiz_question_async/', views.quiz_question_async, name='quiz_question_async'),
     path('quiz_image_async/', views.quiz_image_async, name='quiz_image_async'),
