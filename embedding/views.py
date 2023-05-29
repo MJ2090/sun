@@ -281,12 +281,12 @@ def sendchat_therapy_async(request):
 def sendchat_therapy_async_stateful(request):
     model = 'gpt-4'
     new_message = request.POST['message']
-    character = 'TT_2'
+    character = 'TT_3'
     enable_speech = request.POST.get('enable_speech', '')
     dialogue_id = request.POST.get('dialogue_id', '')
 
     my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history)
+    messages = json.loads(my_m.history.replace('###QUESTION###', 'did you travel to a park last week?'))
     history = request.POST.get('history')
     my_json = json.loads(history)
     messages.extend(my_json)
