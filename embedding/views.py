@@ -275,10 +275,10 @@ def sendchat_therapy_async(request):
     elif request.POST.get('source_id') == 'openai':
         return sendchat_therapy_async_openai(request)
     else:
-        return sendchat_therapy_async_stateful(request)
+        return sendchat_therapy_async_olivia(request)
     
 
-def sendchat_therapy_async_stateful(request):
+def sendchat_therapy_async_olivia(request):
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'TT_3'
