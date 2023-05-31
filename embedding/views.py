@@ -625,16 +625,12 @@ def summary(request):
 
 
 def demo_pdf_async(request):
-    original_text = request.POST.get('original_text', '')
     temperature = request.POST.get('temperature', '0.9')
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
-    if question != '':
-        prompt = get_embedding_prompt(question, character, model='glm')
-    else:
-        prompt = request.POST.get('prompt', '')
+    prompt = get_embedding_prompt(question, character, model='glm')
     print(prompt)
-    gml_response, _ = feature_glm(request, original_text, prompt, temperature)
+    gml_response, _ = feature_glm(request, '', prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
@@ -642,12 +638,7 @@ def demo_pdf_async(request):
 def demo_summary_async(request):
     original_text = request.POST.get('original_text', '')
     temperature = request.POST.get('temperature', '0.9')
-    question = request.POST.get('question', '')
-    character = request.POST.get('character', '')
-    if question != '':
-        prompt = get_embedding_prompt(question, character, model='glm')
-    else:
-        prompt = request.POST.get('prompt', '')
+    prompt = request.POST.get('prompt', '')
     print(prompt)
     gml_response, _ = feature_glm(request, original_text, prompt, temperature)
     print(gml_response)
