@@ -22,7 +22,7 @@ function demo_async_call() {
     request_data.append('csrfmiddlewaretoken', csrf.val());
     request_data.append('question', question.val());
     request_data.append('character', character.val());
-    fetch("/demo_async/", {
+    fetch("/demo_summary_async/", {
         method: "POST",
         body: request_data,
     }).then(response => response.json()).then((response) => {
