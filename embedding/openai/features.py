@@ -25,16 +25,16 @@ def get_embedding_prompt(question, random_str, model='gpt-3.5-turbo'):
     return robot.get_glm_embedding_prompt(my_df, question=question)
 
 
-def feature_question(question, random_str, model='gpt-3.5-turbo'):
-    file_path = relative_path + random_str + '.csv'
+def feature_question(question, embedding_model, model='gpt-3.5-turbo'):
+    file_path = relative_path + embedding_model.uuid + '.csv'
     if not os.path.exists(file_path):
-        return "I don't know."
+        return embedding_model.reject_message
     my_df = pd.read_csv(file_path, index_col=0)
     my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
     if model == 'glm':
         ans = robot.answer_question_glm(my_df, question=question)
     else:
-        ans = robot.answer_question_openai(my_df, question=question)
+        ans = robot.answer_question_openai(my_df, question=question, reject_message=embedding_model.reject_message)
     return ans
 
 

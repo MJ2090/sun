@@ -104,7 +104,8 @@ def embedding_question_async(request):
     question = request.POST.get('question', '')
     character = request.POST.get('character', '')
     enable_speech = request.POST.get('enable_speech', '')
-    answer = feature_question(question, character)
+    embedding_model = EmbeddingModel.objects.get(uuid=character)
+    answer = feature_question(question, embedding_model)
     print(answer)
 
     if enable_speech == 'true':
@@ -149,7 +150,8 @@ def sendchat_home(request):
     return_dict = {}
 
     if use_embedding:
-        answer = feature_question(new_message, 'NX32LBMJ3E')
+        embedding_model = EmbeddingModel.objects.get(uuid='NX32LBMJ3E')
+        answer = feature_question(new_message, embedding_model)
         if not answer == "I don't know.":
             return_dict['ai_message'] = answer
             # return HttpResponse(json.dumps({'ai_message': answer}))

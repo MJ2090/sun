@@ -43,7 +43,8 @@ def answer_question_openai(
         model="gpt-3.5-turbo",
         question="Am I allowed to publish model outputs to Twitter, without a human review?",
         max_len=3600,
-        debug=False
+        debug=False,
+        reject_message="No Answer"
 ):
     """
     Answer a question based on the most similar context from the dataframe texts
@@ -59,7 +60,7 @@ def answer_question_openai(
         print("\n\n")
 
     try:
-        system_prompt = f"Answer the question based on the context below, and if it can't be answered based on the context, say \"I don't know\". Write the answer in the same language as the question."
+        system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
         
         messages = [
