@@ -65,7 +65,7 @@ def feature_training(text):
 
     file_path = relative_path + random_str + '.csv'
     if not os.path.exists(relative_path):
-        os.mkdir(relative_path)
+        os.makedirs(relative_path)
 
     my_df.to_csv(file_path)
 
