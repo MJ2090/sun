@@ -7,23 +7,17 @@ def create_context(question, df, max_len=1800):
     Create a context for a question by finding the most similar context from the dataframe
     """
 
-    print("88888 111", question)
-
     # Get the embeddings for the question
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
-    print("88888 1222", q_embeddings)
     # Get the distances from the embeddings
     df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values, distance_metric='cosine')
 
-    print("88888 13")
     returns = []
     cur_len = 0
 
     # Sort by distance and add the text to the context until the context is too long
     for i, row in df.sort_values('distances', ascending=True).iterrows():
-
-        print("88888 14")
         # Add the length of the text to the current length
         cur_len += row['n_tokens'] + 4
 
