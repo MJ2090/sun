@@ -1,4 +1,5 @@
 {% extends "embedding/base.html" %}
+{% load i18n %}
 
 {% block privatecss %}
 {% load static %}
@@ -29,7 +30,7 @@
     <div class="col-md-7 col-lg-9">
       <div class="row g-3">
         <div class="col-12">
-          <label for="character" class="form-label">Choose Q&A model</label>
+          <label for="character" class="form-label">{% translate "Choose Q&A model" %}</label>
           {{ form.character }}
           <div class="invalid-feedback">
             :D
@@ -37,11 +38,11 @@
         </div>
 
         <div class="col-12">
-          <label for="question" class="form-label">Question</label>
+          <label for="question" class="form-label">{% translate "Question" %}</label>
           {{ form.question }}
         </div>
         <div class="col-12">
-          <label for="answer" class="form-label">Answer</label>
+          <label for="answer" class="form-label">{% translate "Answer"% }</label>
           {{ form.answer }}
           <div class="spinner" name="spinner" style="display: none">
             <div class="bounce1"></div>

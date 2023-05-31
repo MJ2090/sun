@@ -89,6 +89,8 @@ def load_embedding_models(request, ret):
 
 
 def embedding_wuxi(request):
+    user_language = "zh_hans"
+    activate(user_language)
     ret = get_basic_data(request, {'hide_nav': True})
     ret['form'] = QuestionForm()
 
