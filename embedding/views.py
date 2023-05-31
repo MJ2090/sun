@@ -88,6 +88,14 @@ def load_embedding_models(request, ret):
             (my_model.uuid, my_model.name))
 
 
+def embedding_wuxi(request):
+    ret = get_basic_data(request, {'hide_nav': True})
+    ret['form'] = QuestionForm()
+
+    load_embedding_models(request, ret)
+    return render(request, 'embedding/wuxi.html', ret)
+
+
 def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()
