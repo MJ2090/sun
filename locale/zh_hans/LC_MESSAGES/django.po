@@ -127,7 +127,7 @@ msgstr "我的答案"
 
 #: embedding/templates/embedding/wuxi.html:15
 msgid "Build Q&A bot"
-msgstr "创建智能问答机器人"
+msgstr "智能问答机器人"
 
 #: embedding/templates/embedding/wuxi.html:45
 msgid "Answer"
