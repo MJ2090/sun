@@ -13,7 +13,9 @@ function async_call() {
   request_data.append('name', name.val());
   request_data.append('csrfmiddlewaretoken', csrf.val());
   if (original_pdf.files.length > 0) {
-    request_data.append('original_pdf', original_pdf.files[0]);
+    for (let index = 0; index < original_pdf.files.length; index++) {
+      request_data.append('original_pdf_'+index, original_pdf.files[index]);
+    }
   }
   fetch("/embedding_training_async/", {
     method: "POST",
