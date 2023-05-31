@@ -5,7 +5,7 @@ import openai
 import numpy as np
 
 domain = "www.donefirst.com"
-max_tokens = 500
+max_tokens = 2500
 
 
 def remove_newlines(serie):
@@ -60,6 +60,7 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
         # Otherwise, add the sentence to the chunk and add the number of tokens to the total
         chunk.append(sentence)
+        # print("appended, ", sentence)
         tokens_so_far += token + 1
 
     return chunks
@@ -101,6 +102,7 @@ def generate_embedding_csv():
         # Otherwise, add the text to the list of shortened texts
         else:
             shortened.append(row[1]['text'])
+    print("shortened: ", shortened)
 
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)

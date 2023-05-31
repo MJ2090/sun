@@ -59,7 +59,7 @@ def embedding_training_async(request):
         pdf_file_name = save_to_local(original_pdf, 'pdf')
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
-        print('current text length: ', len(text), f'current file name: {pdf_file_name}')
+        print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
     print(f'embedding_training_async started, embedding name {name}')
     openai_response = feature_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
