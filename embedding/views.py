@@ -52,7 +52,7 @@ def embedding_training(request):
 
 @login_required
 def embedding_training_async(request):
-    text = request.POST.get('text', '')
+    text = request.POST.get('text', '') + '\n\n'
     name = request.POST.get('name', '')
     print("original_pdf ", request.FILES, type(request.FILES))
     for _, original_pdf in request.FILES.items():
