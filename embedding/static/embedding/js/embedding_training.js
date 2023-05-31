@@ -2,6 +2,7 @@ function async_call() {
   let original_pdf = document.querySelector("input[name='file_f']");
   let text = $("textarea[name='text']");
   let name = $("input[name='name']");
+  let reject_message = $("input[name='reject_message']");
   let csrf = $("input[name='csrfmiddlewaretoken']");
   let answer = $("p[name='response']");
   answer.val('');
@@ -11,6 +12,7 @@ function async_call() {
   const request_data = new FormData();
   request_data.append('text', text.val());
   request_data.append('name', name.val());
+  request_data.append('reject_message', reject_message.val());
   request_data.append('csrfmiddlewaretoken', csrf.val());
   if (original_pdf.files.length > 0) {
     for (let index = 0; index < original_pdf.files.length; index++) {

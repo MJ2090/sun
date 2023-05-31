@@ -62,6 +62,7 @@ class EmbeddingModel(models.Model):
     name = models.CharField(max_length=20, default='')
     uuid = models.CharField(max_length=10, default='')
     is_public = models.BooleanField(default=False)
+    reject_message = models.CharField(max_length=500, default='')
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)

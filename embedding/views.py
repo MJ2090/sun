@@ -54,6 +54,7 @@ def embedding_training(request):
 def embedding_training_async(request):
     text = request.POST.get('text', '') + '\n\n'
     name = request.POST.get('name', '')
+    reject_message = request.POST.get('reject_message', '')
     print("original_pdf ", request.FILES, type(request.FILES))
     for _, original_pdf in request.FILES.items():
         pdf_file_name = save_to_local(original_pdf, 'pdf')
@@ -63,7 +64,7 @@ def embedding_training_async(request):
     print(f'embedding_training_async started, embedding name {name}')
     openai_response = feature_training(text)
     new_model = EmbeddingModel.objects.get_or_create(
-        name=name, owner=request.user, uuid=openai_response)
+        name=name, owner=request.user, uuid=openai_response, reject_message=reject_message)
     print(openai_response)
     return HttpResponse(json.dumps({'result': f'new model {name} has finished training.'}))
 

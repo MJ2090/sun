@@ -11,6 +11,10 @@
     height: 500px;
 }
 
+.reject-text {
+    height: 200px;
+}
+
 .submit {
     padding-top: 30px;
 }
