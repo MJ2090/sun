@@ -639,11 +639,18 @@ def demo_async(request):
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
 
-def demo(request):
+def demo_pdf(request):
     ret = get_basic_data(request)
     ret['form'] = DemoForm()
     load_embedding_models(request, ret)
-    return render(request, 'embedding/demo.html', ret)
+    return render(request, 'embedding/demo_pdf.html', ret)
+
+
+def demo_summary(request):
+    ret = get_basic_data(request)
+    ret['form'] = DemoForm()
+    load_embedding_models(request, ret)
+    return render(request, 'embedding/demo_summary.html', ret)
 
 
 def quiz_async(request):

@@ -17,7 +17,7 @@
 
     <div class="col-md-12 col-lg-12">
       <div class="row g-3">
-        <div class="col-lg-4 col-md-12">
+        <div class="col-lg-6 col-md-12">
           <label for="text" class="form-label">Original Prompt</label>
           {{ form.prompt }}
           <label for="text" class="form-label">Temperature</label>
@@ -25,13 +25,7 @@
           <label for="text" class="form-label">Original Text</label>
           {{ form.text }}
         </div>
-        <div class="col-lg-4 col-md-12">
-          <label for="text" class="form-label">Select Embedding File</label>
-          {{ form.character }}
-          <label for="text" class="form-label">Embedding Question</label>
-          {{ form.question }}
-        </div>
-        <div class="col-lg-4 col-md-12">
+        <div class="col-lg-6 col-md-12">
           <label for="summary_text" class="form-label">Result Text</label>
           {{ form.result_text }}
           <div class="spinner" name="spinner" style="display: none">
