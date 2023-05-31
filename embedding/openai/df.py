@@ -5,11 +5,12 @@ import openai
 import numpy as np
 
 domain = "www.donefirst.com"
-max_tokens = 2500
+max_tokens = 3000
 
 
 def remove_newlines(serie):
     serie = serie.str.replace('。', '.', regex=False)
+    serie = serie.str.replace('，', ',', regex=False)
     serie = serie.str.replace('\n', ' ', regex=False)
     serie = serie.str.replace('\r', ' ', regex=False)
     serie = serie.str.replace('\\n', ' ', regex=False)
