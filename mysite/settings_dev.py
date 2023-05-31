@@ -24,3 +24,5 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+EMBEDDING_DIR = 'uploads/embedding/'

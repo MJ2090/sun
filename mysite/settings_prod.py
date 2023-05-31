@@ -34,3 +34,4 @@ DATABASES = {
         'PORT': '',
     }
 }
+EMBEDDING_DIR = '/var/www/asuperdomain.com/static/embedding/data/'

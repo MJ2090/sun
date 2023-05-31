@@ -9,8 +9,9 @@ import string
 import pandas as pd
 import os
 import numpy as np
+from django.conf import settings as conf_settings
 
-relative_path = '/var/www/asuperdomain.com/static/embedding/data/'
+relative_path = conf_settings.EMBEDDING_DIR
 
 
 def get_embedding_prompt(question, random_str, model='gpt-3.5-turbo'):
