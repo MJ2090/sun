@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 15:47-0700\n"
+"POT-Creation-Date: 2023-05-31 15:54-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,10 +80,12 @@ msgid "New model"
 msgstr "创建新模型"
 
 #: embedding/templates/embedding/embedding_question.html:33
+#: embedding/templates/embedding/wuxi.html:33
 msgid "Choose Q&A model"
 msgstr "选择问答模型"
 
 #: embedding/templates/embedding/embedding_question.html:41
+#: embedding/templates/embedding/wuxi.html:41
 msgid "Question"
 msgstr "我的问题"
 
@@ -122,6 +124,18 @@ msgstr "问一个"
 #: embedding/templates/embedding/quiz.html:75
 msgid "My Answer"
 msgstr "我的答案"
+
+#: embedding/templates/embedding/wuxi.html:15
+msgid "Build Q&A bot"
+msgstr "创建智能问答机器人"
+
+#: embedding/templates/embedding/wuxi.html:45
+msgid "Answer"
+msgstr "我的答案"
+
+#: embedding/templates/embedding/wuxi.html:56
+msgid "GO"
+msgstr "开始"
 
 #~ msgid "Answer from AI"
 #~ msgstr "参考答案"
