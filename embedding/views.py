@@ -29,7 +29,6 @@ import json
 import random
 import time
 from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings as conf_settings
 from django.core.files.storage import default_storage
 from PIL import Image
