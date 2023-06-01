@@ -4,14 +4,10 @@ from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_action, feature_question, feature_chat, feature_chat_llama
 from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, Dialogue
 from django.shortcuts import render
-from embedding.utils import load_random_string, get_basic_data, record_consumption
+from embedding.utils import load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
 import json
-import random
 import time
-from datetime import datetime
-
-random.seed(datetime.now().timestamp())
 
 
 def sendchat_home(request):
@@ -229,8 +225,7 @@ def chat_therapy(request):
     form = ChatForm()
     ret['form'] = form
     ret['welcome_word'] = 'Chat with AI Therapist'
-    ret['ai_emoji'] = random.choice(
-        ['🍀', '🍏', '🌗', '🌘', '🐳', '❄️', '🌵', '🪴', '🌳', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
+    ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_therapy.html', ret)
 
@@ -240,8 +235,7 @@ def chat_therapy_llama(request):
     form = ChatForm(initial={'source_id': 'llama'})
     ret['form'] = form
     ret['welcome_word'] = 'Chat with Llama Therapist'
-    ret['ai_emoji'] = random.choice(
-        ['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'])
+    ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_therapy.html', ret)
 
@@ -251,8 +245,7 @@ def chat_olivia(request):
     form = ChatForm(initial={'source_id': 'stateful'})
     ret['form'] = form
     ret['welcome_word'] = 'Chat with Olivia'
-    ret['ai_emoji'] = random.choice(
-        ['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'])
+    ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_olivia.html', ret)
 
@@ -261,8 +254,7 @@ def chat(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
-    ret['ai_emoji'] = random.choice(['🍀', '🐳', '🌗', '🌘', '🌵', '🐙', '🐳', '😈',
-                                    '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖'])
+    ret['ai_emoji'] = load_random_emoji(list_id=1)
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
 

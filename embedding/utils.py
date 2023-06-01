@@ -8,6 +8,9 @@ import embedding.static_values as sc
 from django.conf import settings as conf_settings
 from django.core.files.storage import default_storage
 from PIL import Image
+from datetime import datetime
+
+random.seed(datetime.now().timestamp())
 
 
 def load_random_string(num, seed=None):
@@ -108,3 +111,9 @@ def load_embedding_models(request, ret):
     for my_model in public_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
+        
+
+def load_random_emoji(list_id = 0):
+    emojis = [['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'],
+              ['🍀', '🐳', '🌗', '🌘', '🌵', '🐙', '🐳', '😈', '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖']]
+    random.choice(emojis[list_id % len(emojis)])
