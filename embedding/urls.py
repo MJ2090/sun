@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
+from .views import views_embedding, views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -17,14 +17,14 @@ urlpatterns = [
     path('summary/', views_summary.summary, name='summary'),
     path('grammar/', views_grammar.grammar, name='grammar'),
     path('translation/', views_translation.translation, name='translation'),
-    path('wuxi/', views_feature.embedding_wuxi, name='embedding_wuxi'),
-    path('embedding_question/', views_feature.embedding_question,
+    path('wuxi/', views_embedding.embedding_wuxi, name='embedding_wuxi'),
+    path('embedding_question/', views_embedding.embedding_question,
          name='embedding_question'),
-    path('embedding_question_async/', views_feature.embedding_question_async,
+    path('embedding_question_async/', views_embedding.embedding_question_async,
          name='embedding_question_async'),
-    path('embedding_training/', views_feature.embedding_training,
+    path('embedding_training/', views_embedding.embedding_training,
          name='embedding_training'),
-    path('embedding_training_async/', views_feature.embedding_training_async,
+    path('embedding_training_async/', views_embedding.embedding_training_async,
          name='embedding_training_async'),
     path('signin/', views_sign.signin, name='signin'),
     path('signup/', views_sign.signup, name='signup'),
