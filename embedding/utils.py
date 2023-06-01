@@ -1,9 +1,13 @@
 import random
 import string
 import difflib
+import os
 from django.db import transaction
 from embedding.models import TokenConsumption, UserProfile
 import embedding.static_values as sc
+from django.conf import settings as conf_settings
+from django.core.files.storage import default_storage
+from PIL import Image
 
 
 def load_random_string(num, seed=None):
@@ -67,3 +71,21 @@ def get_user(request):
     if request.user.is_authenticated:
         return request.user
     return UserProfile.objects.get(username="default_user")
+
+
+def save_to_local(original_file, sub_dir=''):
+    random_prefix = load_random_string(15) + "_"
+    file_dir = conf_settings.UPLOADS_PATH + sub_dir
+    if not os.path.isdir(file_dir):
+        print("mkdir in save_to_local.. ", file_dir)
+        os.makedirs(file_dir)
+    file_name = default_storage.save(os.path.join(
+        file_dir, random_prefix+original_file.name), original_file)
+    if sub_dir == '' and original_file.size > 3*1000*1000:
+        tmp = Image.open(file_name)
+        max_size = (1024, 1024)
+        tmp.thumbnail(max_size, Image.ANTIALIAS)
+        tmp.save(file_name, optimize=True, quality=85)
+        print("size recuded: ", original_file.size,
+              ' to ', os.path.getsize(file_name), tmp.size)
+    return file_name

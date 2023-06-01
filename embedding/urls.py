@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
+from .views import views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -50,11 +50,11 @@ urlpatterns = [
          name='demo_summary_async'),
     path('translation_async/', views_translation.translation_async, name='translation_async'),
     path('image_async/', views_image.image_async, name='image_async'),
-    path('quiz/', views_feature.quiz, name='quiz'),
-    path('quiz_async/', views_feature.quiz_async, name='quiz_async'),
-    path('quiz_question_async/', views_feature.quiz_question_async,
+    path('quiz/', views_quiz.quiz, name='quiz'),
+    path('quiz_async/', views_quiz.quiz_async, name='quiz_async'),
+    path('quiz_question_async/', views_quiz.quiz_question_async,
          name='quiz_question_async'),
-    path('quiz_image_async/', views_feature.quiz_image_async, name='quiz_image_async'),
+    path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
     path('stream/', views_translation.stream, name='stream'),
     path('stream_async/', views_translation.stream_async, name='stream_async'),
 ]

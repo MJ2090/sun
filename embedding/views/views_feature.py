@@ -4,24 +4,18 @@ from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
 from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.demo import DemoForm
-from embedding.forms.quiz import QuizForm
 from embedding.forms.chat import ChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, Dialogue
+from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_chat, feature_chat_llama
+from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, Dialogue
 from django.shortcuts import render
-from embedding.utils import load_random_string, get_basic_data, get_user, record_consumption
-from embedding.ocr import recognize_image
+from embedding.utils import save_to_local, load_random_string, get_basic_data, get_user, record_consumption
 import embedding.static_values as sc
-import os
 import json
 import random
 import time
 from datetime import datetime
-from django.conf import settings as conf_settings
-from django.core.files.storage import default_storage
-from PIL import Image
 
 random.seed(datetime.now().timestamp())
 
@@ -405,89 +399,6 @@ def demo_summary(request):
     ret['form'] = DemoForm()
     load_embedding_models(request, ret)
     return render(request, 'embedding/demo_summary.html', ret)
-
-
-def quiz_async(request):
-    original_image = request.FILES.get('original_image')
-    saved_file_name = save_to_local(original_image)
-    ocr_result, request_time = recognize_image(saved_file_name)
-    ocr_result = ocr_result.replace(r'\n+', '\n')
-    llm_model = request.POST.get('llm_model')
-    print("ocr_result: ", ocr_result)
-    openai_response, request_time = feature_quiz(ocr_result, model=llm_model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
-    print("openai_response: ", openai_response)
-    return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
-
-
-def quiz_image_async(request):
-    original_image = request.FILES.get('original_image')
-    saved_file_name = save_to_local(original_image)
-    ocr_result, request_time = recognize_image(saved_file_name)
-    ocr_result = ocr_result.replace(r'\n+', '\n')
-    print("ocr_result: ", ocr_result)
-    ocr_record(request, saved_file_name, ocr_result, request_time)
-    return HttpResponse(json.dumps({'question': ocr_result}))
-
-
-def ocr_record(request, image_path, ocr_result, request_time):
-    response_time = time.time()
-    record = OcrRecord.objects.create(user=get_user(request),
-                                      image_path = image_path,
-                                      question = ocr_result,
-                                      response_time = response_time,
-                                      request_time = request_time)
-    record.save()
-
-
-def quiz_question_async(request):
-    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4'}
-    llm_model = llm_model_dic.get(request.POST.get('llm_model'))
-    original_question = request.POST.get('original_question')
-    openai_response, request_time = feature_quiz(
-        original_question, model=llm_model)
-    record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
-    ai_message = openai_response["choices"][0]["message"]["content"]
-    print("openai_response: ", openai_response)
-    quiz_record(request, original_question, ai_message, llm_model, request_time)
-    return HttpResponse(json.dumps({'answer': ai_message}))
-
-
-def quiz_record(request, question, answer, llm_model, request_time):
-    response_time = time.time()
-    record = QuizRecord.objects.create(user=get_user(request),
-                                      answer = answer,
-                                      question = question,
-                                      response_time = response_time,
-                                      llm_model = llm_model,
-                                      request_time = request_time)
-    record.save()
-
-
-def quiz(request):
-    user_language = "zh_hans"
-    activate(user_language)
-    ret = get_basic_data(request)
-    ret['form'] = QuizForm()
-    return render(request, 'embedding/quiz.html', ret)
-
-
-def save_to_local(original_file, sub_dir=''):
-    random_prefix = load_random_string(15) + "_"
-    file_dir = conf_settings.UPLOADS_PATH + sub_dir
-    if not os.path.isdir(file_dir):
-        print("mkdir in save_to_local.. ", file_dir)
-        os.makedirs(file_dir)
-    file_name = default_storage.save(os.path.join(
-        file_dir, random_prefix+original_file.name), original_file)
-    if sub_dir == '' and original_file.size > 3*1000*1000:
-        tmp = Image.open(file_name)
-        max_size = (1024, 1024)
-        tmp.thumbnail(max_size, Image.ANTIALIAS)
-        tmp.save(file_name, optimize=True, quality=85)
-        print("size recuded: ", original_file.size,
-              ' to ', os.path.getsize(file_name), tmp.size)
-    return file_name
 
 
 def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
