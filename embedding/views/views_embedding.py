@@ -2,19 +2,13 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
-from embedding.forms.prompt_model import PromptModelForm
-from embedding.forms.chat import ChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, Dialogue
+from embedding.openai.features import feature_training, feature_question
+from embedding.models import EmbeddingModel
 from django.shortcuts import render
-from embedding.utils import load_embedding_models, save_to_local, load_random_string, get_basic_data, get_user, record_consumption
-import embedding.static_values as sc
+from embedding.utils import load_embedding_models, save_to_local, get_basic_data
 import json
-import random
-import time
-from datetime import datetime
 
 
 @login_required
