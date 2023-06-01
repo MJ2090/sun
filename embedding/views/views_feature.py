@@ -1,4 +1,4 @@
-from django.http import StreamingHttpResponse, HttpResponse, HttpResponseRedirect
+from django.http import StreamingHttpResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
@@ -12,7 +12,7 @@ from embedding.forms.chat import ChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Dialogue
+from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, Dialogue
 from django.shortcuts import render
 from embedding.utils import load_random_string, get_basic_data, parse_diff, get_user, record_consumption
 from embedding.ocr import recognize_image
@@ -369,68 +369,6 @@ def chat(request):
                                     '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖'])
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
-
-
-def translation_async(request):
-    original_text = request.POST.get('original_text', '')
-    target = request.POST.get('target', '')
-    openai_response = feature_translate(
-        original_text, target=target, model='gpt-3.5-turbo')
-    translated_text = openai_response['choices'][0]['message']['content']
-    record_consumption(
-        request, sc.MODEL_TYPES_TRANSLATE, openai_response)
-    print(translated_text)
-    return HttpResponse(json.dumps({'result': translated_text.strip()}))
-
-
-def translation(request):
-    ret = get_basic_data(request)
-    ret['form'] = TranslationForm()
-    return render(request, 'embedding/translation.html', ret)
-
-
-def stream_async(request):
-    original_text = request.POST.get('original_text', '')
-    target = request.POST.get('target', '')
-    def event_stream():
-        openai_response = feature_translate(
-            original_text, target=target, model='gpt-3.5-turbo', stream=True)
-        for line in openai_response:
-            finished = line['choices'][0].get('finish_reason') == 'stop'
-            if finished:
-                yield '\n'
-                break
-            chunk = line['choices'][0].get('delta', {}).get('content', '')
-            if chunk:
-              yield chunk
-    ret = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
-    ret['X-Accel-Buffering'] = 'no'
-    ret['Cache-Control'] = 'no-cache'
-    return ret
-
-
-def stream_async_get(request):
-    import openai
-    def event_stream():
-        completion = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo', 
-            messages=[{"role": "user", "content": "tell me a long story"}],
-            stream=True)
-        for line in completion:
-            print(line)
-            chunk = line['choices'][0].get('delta', {}).get('content', '')
-            if chunk:
-              yield 'data: %s\n\n' % chunk
-    ret = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
-    ret['X-Accel-Buffering'] = 'no'
-    ret['Cache-Control'] = 'no-cache'
-    return ret
-
-
-def stream(request):
-    ret = get_basic_data(request)
-    ret['form'] = TranslationForm()
-    return render(request, 'embedding/stream.html', ret)
 
 
 def grammar_async(request):

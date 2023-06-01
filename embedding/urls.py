@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_tab, views_feature, views_sign, views_image
+from .views import views_tab, views_feature, views_sign, views_image, views_translation
 
 
 urlpatterns = [
@@ -14,7 +14,7 @@ urlpatterns = [
     path('contact/', views_tab.contact, name='contact'),
     path('summary/', views_feature.summary, name='summary'),
     path('grammar/', views_feature.grammar, name='grammar'),
-    path('translation/', views_feature.translation, name='translation'),
+    path('translation/', views_translation.translation, name='translation'),
     path('wuxi/', views_feature.embedding_wuxi, name='embedding_wuxi'),
     path('embedding_question/', views_feature.embedding_question,
          name='embedding_question'),
@@ -48,15 +48,15 @@ urlpatterns = [
     path('demo_pdf_async/', views_feature.demo_pdf_async, name='demo_pdf_async'),
     path('demo_summary_async/', views_feature.demo_summary_async,
          name='demo_summary_async'),
-    path('translation_async/', views_feature.translation_async, name='translation_async'),
+    path('translation_async/', views_translation.translation_async, name='translation_async'),
     path('image_async/', views_image.image_async, name='image_async'),
     path('quiz/', views_feature.quiz, name='quiz'),
     path('quiz_async/', views_feature.quiz_async, name='quiz_async'),
     path('quiz_question_async/', views_feature.quiz_question_async,
          name='quiz_question_async'),
     path('quiz_image_async/', views_feature.quiz_image_async, name='quiz_image_async'),
-    path('stream/', views_feature.stream, name='stream'),
-    path('stream_async/', views_feature.stream_async, name='stream_async'),
+    path('stream/', views_translation.stream, name='stream'),
+    path('stream_async/', views_translation.stream_async, name='stream_async'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
