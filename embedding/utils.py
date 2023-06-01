@@ -3,7 +3,7 @@ import string
 import difflib
 import os
 from django.db import transaction
-from embedding.models import TokenConsumption, UserProfile
+from embedding.models import TokenConsumption, UserProfile, EmbeddingModel
 import embedding.static_values as sc
 from django.conf import settings as conf_settings
 from django.core.files.storage import default_storage
@@ -89,3 +89,22 @@ def save_to_local(original_file, sub_dir=''):
         print("size recuded: ", original_file.size,
               ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
+
+
+def load_embedding_models(request, ret):
+    owned_models = []
+    public_models = []
+    if not request.user.is_authenticated:
+        public_models = EmbeddingModel.objects.filter(is_public=True)
+    else:
+        owned_models = EmbeddingModel.objects.filter(owner=request.user)
+        public_models = EmbeddingModel.objects.filter(
+            is_public=True).exclude(owner=request.user)
+
+    ret['form'].fields['character'].choices = []
+    for my_model in owned_models:
+        ret['form'].fields['character'].choices.append(
+            (my_model.uuid, my_model.name))
+    for my_model in public_models:
+        ret['form'].fields['character'].choices.append(
+            (my_model.uuid, my_model.name))

@@ -3,14 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
 from embedding.forms.prompt_model import PromptModelForm
-from embedding.forms.demo import DemoForm
 from embedding.forms.chat import ChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_chat, feature_chat_llama
+from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_chat, feature_chat_llama
 from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, Dialogue
 from django.shortcuts import render
-from embedding.utils import save_to_local, load_random_string, get_basic_data, get_user, record_consumption
+from embedding.utils import load_embedding_models, save_to_local, load_random_string, get_basic_data, get_user, record_consumption
 import embedding.static_values as sc
 import json
 import random
@@ -362,66 +361,8 @@ def chat(request):
     return render(request, 'embedding/chat.html', ret)
 
 
-def demo_pdf_async(request):
-    temperature = request.POST.get('temperature', '0.9')
-    question = request.POST.get('question', '')
-    character = request.POST.get('character', '')
-    prompt = get_embedding_prompt(question, character, model='glm')
-    print(prompt)
-    gml_response, _ = feature_glm(request, '', prompt, temperature)
-    print(gml_response)
-    return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
-
-
-def demo_summary_async(request):
-    temperature = request.POST.get('temperature', '0.9')
-    original_text = request.POST.get('original_text', '')
-    prompt = get_summary_prompt(request.POST.get('prompt', ''), original_text)
-    print(prompt)
-    gml_response, _ = feature_glm(request, '', prompt, temperature)
-    print(gml_response)
-    return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
-
-
-def get_summary_prompt(prompt, original_text):
-    return prompt + "\n" + original_text
-
-
-def demo_pdf(request):
-    ret = get_basic_data(request)
-    ret['form'] = DemoForm()
-    load_embedding_models(request, ret)
-    return render(request, 'embedding/demo_pdf.html', ret)
-
-
-def demo_summary(request):
-    ret = get_basic_data(request)
-    ret['form'] = DemoForm()
-    load_embedding_models(request, ret)
-    return render(request, 'embedding/demo_summary.html', ret)
-
-
 def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
     response_time = time.time()
     dialogue = Dialogue.objects.create(
         role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
     dialogue.save()
-
-
-def load_embedding_models(request, ret):
-    owned_models = []
-    public_models = []
-    if not request.user.is_authenticated:
-        public_models = EmbeddingModel.objects.filter(is_public=True)
-    else:
-        owned_models = EmbeddingModel.objects.filter(owner=request.user)
-        public_models = EmbeddingModel.objects.filter(
-            is_public=True).exclude(owner=request.user)
-
-    ret['form'].fields['character'].choices = []
-    for my_model in owned_models:
-        ret['form'].fields['character'].choices.append(
-            (my_model.uuid, my_model.name))
-    for my_model in public_models:
-        ret['form'].fields['character'].choices.append(
-            (my_model.uuid, my_model.name))

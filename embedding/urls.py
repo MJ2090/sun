@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
+from .views import views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -43,10 +43,10 @@ urlpatterns = [
     path('super/', views_feature.add_prompt_model, name='add_prompt_model'),
     path('grammar_async/', views_grammar.grammar_async, name='grammar_async'),
     path('summary_async/', views_summary.summary_async, name='summary_async'),
-    path('demo_pdf/', views_feature.demo_pdf, name='demo_pdf'),
-    path('demo_summary/', views_feature.demo_summary, name='demo_summary'),
-    path('demo_pdf_async/', views_feature.demo_pdf_async, name='demo_pdf_async'),
-    path('demo_summary_async/', views_feature.demo_summary_async,
+    path('demo_pdf/', views_demo.demo_pdf, name='demo_pdf'),
+    path('demo_summary/', views_demo.demo_summary, name='demo_summary'),
+    path('demo_pdf_async/', views_demo.demo_pdf_async, name='demo_pdf_async'),
+    path('demo_summary_async/', views_demo.demo_summary_async,
          name='demo_summary_async'),
     path('translation_async/', views_translation.translation_async, name='translation_async'),
     path('image_async/', views_image.image_async, name='image_async'),
