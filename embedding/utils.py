@@ -117,7 +117,7 @@ def load_embedding_models(request, ret):
 def load_random_emoji(list_id = 0):
     emojis = [['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'],
               ['🍀', '🐳', '🌗', '🌘', '🌵', '🐙', '🐳', '😈', '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖']]
-    random.choice(emojis[list_id % len(emojis)])
+    return random.choice(emojis[list_id % len(emojis)])
 
 
 def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
