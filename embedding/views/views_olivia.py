@@ -9,7 +9,7 @@ import embedding.static_values as sc
 import json
 
 
-def chat_async_olivia(request):
+def gchat_async_olivia(request):
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'TT_3'
