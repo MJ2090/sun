@@ -1,59 +1,13 @@
 from django.http import HttpResponse
 from embedding.forms.chat import ChatForm
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import feature_chat, feature_chat_llama
+from embedding.openai.features import feature_chat
 from embedding.models import TherapyProfile, PromptModel
 from django.shortcuts import render
 from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
 import json
-import random
-import time
-from datetime import datetime
 
-random.seed(datetime.now().timestamp())
-
-
-def chat_async_therapy_llama(request):
-    model = 'llama'
-    new_message = request.POST['message']
-    enable_speech = request.POST.get('enable_speech', '')
-    dialogue_id = request.POST.get('dialogue_id', '')
-
-    history = request.POST.get('history')
-    messages = json.loads(history)
-    messages.append({"role": "user", "content": new_message})
-
-    print("Msg sent to llama: ", messages)
-
-    llama_response, request_time = feature_chat_llama(
-        request, messages, model=model)
-    print('llama_response = ', llama_response)
-    ai_message = llama_response['ai_message']
-    print("\nMsg returned from llama: ", ai_message)
-
-    record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', request_time=request_time)
-    record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', request_time=request_time)
-
-    speaker = 'Salli'
-    if enable_speech == 'true':
-        audio_address = generate_audio(ai_message, speaker)
-    else:
-        audio_address = ''
-
-    return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
-
-
-def chat_async_therapy(request):
-    if request.POST.get('source_id') == 'llama':
-        return chat_async_therapy_llama(request)
-    elif request.POST.get('source_id') == 'openai':
-        return chat_async_therapy_openai(request)
-    else:
-        return sendchat_async_olivia(request)
-    
 
 def sendchat_async_olivia(request):
     model = 'gpt-4'
@@ -127,27 +81,6 @@ def chat_async_therapy_openai(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def chat_therapy_gpt(request):
-    ret = get_basic_data(request)
-    form = ChatForm()
-    ret['form'] = form
-    ret['welcome_word'] = 'Chat with AI Therapist'
-    ret['ai_emoji'] = random.choice(
-        ['🍀', '🍏', '🌗', '🌘', '🐳', '❄️', '🌵', '🪴', '🌳', '👩🏽‍⚕️', '🌱', '🌿', '☘️', '🌲'])
-    form.fields['dialogue_id'].initial = load_random_string(10)
-    return render(request, 'embedding/chat_therapy.html', ret)
-
-
-def chat_therapy_llama(request):
-    ret = get_basic_data(request)
-    form = ChatForm(initial={'source_id': 'llama'})
-    ret['form'] = form
-    ret['welcome_word'] = 'Chat with Llama Therapist'
-    ret['ai_emoji'] = load_random_emoji()
-    form.fields['dialogue_id'].initial = load_random_string(10)
-    return render(request, 'embedding/chat_therapy.html', ret)
-
-
 def chat_olivia(request):
     ret = get_basic_data(request, {'hide_nav': True})
     form = ChatForm(initial={'source_id': 'stateful'})
@@ -156,12 +89,3 @@ def chat_olivia(request):
     ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat_olivia.html', ret)
-
-
-def chat(request):
-    ret = get_basic_data(request)
-    form = ChatForm()
-    ret['form'] = form
-    ret['ai_emoji'] = load_random_emoji(list_id=1)
-    form.fields['dialogue_id'].initial = load_random_string(10)
-    return render(request, 'embedding/chat.html', ret)
