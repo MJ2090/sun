@@ -58,13 +58,13 @@ urlpatterns = [
 
     path('chat/', views_chat.chat, name='chat'),
     path('sendchat_async/', views_chat.sendchat_async, name='sendchat_async'),
+    path('sendchat_home/', views_chat.sendchat_home, name='sendchat_home'),
     path('sendchat_therapy_async/', views_chat.sendchat_therapy_async,
          name='sendchat_therapy_async'),
     path('chat_therapy/', views_chat.chat_therapy, name='chat_therapy'),
     path('chat_therapy_llama/', views_chat.chat_therapy_llama,
          name='chat_therapy_llama'),
     path('chat_olivia/', views_chat.chat_olivia, name='chat_olivia'),
-    path('sendchat_home/', views_chat.sendchat_home, name='sendchat_home'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]
