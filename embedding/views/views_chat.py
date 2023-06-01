@@ -60,7 +60,7 @@ def chat_async_customer_service(request):
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
 
-def sendchat_async(request):
+def chat_async(request):
     model = request.POST.get('model', '')
     new_message = request.POST['message']
     character = request.POST['character']
