@@ -14,9 +14,22 @@ urlpatterns = [
     path('contact/', views_tab.contact, name='contact'),
     path('pricing/', views_tab.pricing, name='pricing'),
     path('collection/', views_tab.collection, name='collection'),
+
     path('summary/', views_summary.summary, name='summary'),
+    path('summary_async/', views_summary.summary_async, name='summary_async'),
+
     path('grammar/', views_grammar.grammar, name='grammar'),
+    path('grammar_async/', views_grammar.grammar_async, name='grammar_async'),
+
     path('translation/', views_translation.translation, name='translation'),
+    path('translation_async/', views_translation.translation_async,
+         name='translation_async'),
+    path('stream/', views_translation.stream, name='stream'),
+    path('stream_async/', views_translation.stream_async, name='stream_async'),
+
+    path('image/', views_image.image, name='image'),
+    path('image_async/', views_image.image_async, name='image_async'),
+
     path('wuxi/', views_embedding.embedding_wuxi, name='embedding_wuxi'),
     path('embedding_question/', views_embedding.embedding_question,
          name='embedding_question'),
@@ -26,9 +39,23 @@ urlpatterns = [
          name='embedding_training'),
     path('embedding_training_async/', views_embedding.embedding_training_async,
          name='embedding_training_async'),
+
     path('signin/', views_sign.signin, name='signin'),
     path('signup/', views_sign.signup, name='signup'),
     path('signout/', views_sign.signout, name='signout'),
+
+    path('demo_pdf/', views_demo.demo_pdf, name='demo_pdf'),
+    path('demo_summary/', views_demo.demo_summary, name='demo_summary'),
+    path('demo_pdf_async/', views_demo.demo_pdf_async, name='demo_pdf_async'),
+    path('demo_summary_async/', views_demo.demo_summary_async,
+         name='demo_summary_async'),
+
+    path('quiz/', views_quiz.quiz, name='quiz'),
+    path('quiz_async/', views_quiz.quiz_async, name='quiz_async'),
+    path('quiz_question_async/', views_quiz.quiz_question_async,
+         name='quiz_question_async'),
+    path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
+
     path('chat/', views_feature.chat, name='chat'),
     path('chat2/', views_feature.chat, name='chat2'),
     path('sendchat_async/', views_feature.sendchat_async, name='sendchat_async'),
@@ -39,24 +66,8 @@ urlpatterns = [
          name='chat_therapy_llama'),
     path('chat_olivia/', views_feature.chat_olivia, name='chat_olivia'),
     path('sendchat_home/', views_feature.sendchat_home, name='sendchat_home'),
-    path('image/', views_image.image, name='image'),
+
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
-    path('grammar_async/', views_grammar.grammar_async, name='grammar_async'),
-    path('summary_async/', views_summary.summary_async, name='summary_async'),
-    path('demo_pdf/', views_demo.demo_pdf, name='demo_pdf'),
-    path('demo_summary/', views_demo.demo_summary, name='demo_summary'),
-    path('demo_pdf_async/', views_demo.demo_pdf_async, name='demo_pdf_async'),
-    path('demo_summary_async/', views_demo.demo_summary_async,
-         name='demo_summary_async'),
-    path('translation_async/', views_translation.translation_async, name='translation_async'),
-    path('image_async/', views_image.image_async, name='image_async'),
-    path('quiz/', views_quiz.quiz, name='quiz'),
-    path('quiz_async/', views_quiz.quiz_async, name='quiz_async'),
-    path('quiz_question_async/', views_quiz.quiz_question_async,
-         name='quiz_question_async'),
-    path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
-    path('stream/', views_translation.stream, name='stream'),
-    path('stream_async/', views_translation.stream_async, name='stream_async'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
