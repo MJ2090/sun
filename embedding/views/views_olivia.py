@@ -127,7 +127,7 @@ def sendchat_therapy_async_openai(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def chat_therapy(request):
+def chat_therapy_gpt(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form

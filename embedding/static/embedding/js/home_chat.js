@@ -43,7 +43,7 @@ async function home_chat_fetch() {
     request_data.append('history', history);
     request_data.append('csrfmiddlewaretoken', csrf.val());
 
-    fetch("/sendchat_home/", {
+    fetch("/chat_async_customer_service/", {
       method: "POST",
       body: request_data,
     }).then(response => response.json()).then((response) => {

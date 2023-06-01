@@ -9,7 +9,7 @@ import embedding.static_values as sc
 import json
 
 
-def sendchat_home(request):
+def chat_async_customer_service(request):
     new_message = request.POST['message']
     use_embedding = request.POST.get('use_embedding')
     use_embedding = True
@@ -219,7 +219,7 @@ def sendchat_therapy_async_openai(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def chat_therapy(request):
+def chat_therapy_gpt(request):
     ret = get_basic_data(request)
     form = ChatForm()
     ret['form'] = form
