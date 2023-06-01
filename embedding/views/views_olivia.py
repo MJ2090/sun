@@ -9,6 +9,11 @@ import embedding.static_values as sc
 import json
 
 
+def entrance(request):
+    ret = get_basic_data(request, {'hide_nav': True})
+    return render(request, 'embedding/olivia_entrance.html', ret)
+
+
 def chat_async_olivia(request):
     model = 'gpt-4'
     new_message = request.POST['message']

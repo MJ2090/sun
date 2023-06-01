@@ -1,0 +1,24 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
+<link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+{% load static %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="{% static 'embedding/js/chat_therapy.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">Hi I'm Olivia, your personalized therapist.</h4>
+  <h4 class="mb-3">Who am I talking to?</h4>
+  <form class="row needs-validation" novalidate="" action="/chat/" method="post">
+    {% csrf_token %}
+  </form>
+</div>
+</div>
+{% endblock %}

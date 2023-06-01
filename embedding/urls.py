@@ -68,6 +68,7 @@ urlpatterns = [
          name='chat_async_therapy'),
 
     path('chat_olivia/', views_olivia.chat_olivia, name='chat_olivia'),
+    path('olivia/', views_olivia.entrance, name='entrance'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]
