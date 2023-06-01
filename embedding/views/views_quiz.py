@@ -8,7 +8,7 @@ from embedding.utils import save_to_local, get_basic_data, get_user, record_cons
 from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import json
-import timeit
+import time
 
 
 def quiz_async(request):
