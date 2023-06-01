@@ -45,42 +45,6 @@ def sendchat_async_olivia(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def chat_async_therapy_openai(request):
-    model = 'gpt-4'
-    new_message = request.POST['message']
-    character = 'T3'
-    enable_speech = request.POST.get('enable_speech', '')
-    dialogue_id = request.POST.get('dialogue_id', '')
-
-    my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history)
-    history = request.POST.get('history')
-    my_json = json.loads(history)
-    messages.extend(my_json)
-    messages.append({"role": "user", "content": new_message})
-
-    print("Character: ", character)
-    print("Msg sent to openai: ", messages)
-
-    openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
-    print("\nMsg returned from openai: ", ai_message)
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
-
-    record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', request_time=request_time)
-    record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', request_time=request_time)
-
-    speaker = 'Salli'
-    if enable_speech == 'true':
-        audio_address = generate_audio(ai_message, speaker)
-    else:
-        audio_address = ''
-
-    return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
-
-
 def chat_olivia(request):
     ret = get_basic_data(request, {'hide_nav': True})
     form = ChatForm(initial={'source_id': 'stateful'})
