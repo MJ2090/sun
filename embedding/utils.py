@@ -3,12 +3,13 @@ import string
 import difflib
 import os
 from django.db import transaction
-from embedding.models import TokenConsumption, UserProfile, EmbeddingModel
+from embedding.models import Dialogue, TokenConsumption, UserProfile, EmbeddingModel
 import embedding.static_values as sc
 from django.conf import settings as conf_settings
 from django.core.files.storage import default_storage
 from PIL import Image
 from datetime import datetime
+import time
 
 random.seed(datetime.now().timestamp())
 
@@ -117,3 +118,10 @@ def load_random_emoji(list_id = 0):
     emojis = [['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'],
               ['🍀', '🐳', '🌗', '🌘', '🌵', '🐙', '🐳', '😈', '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖']]
     random.choice(emojis[list_id % len(emojis)])
+
+
+def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
+    response_time = time.time()
+    dialogue = Dialogue.objects.create(
+        role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
+    dialogue.save()

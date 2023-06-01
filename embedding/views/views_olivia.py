@@ -4,7 +4,7 @@ from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_chat, feature_chat_llama
 from embedding.models import TherapyProfile, PromptModel, Dialogue
 from django.shortcuts import render
-from embedding.utils import load_random_emoji, load_random_string, get_basic_data, record_consumption
+from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
 import json
 import random
@@ -165,10 +165,3 @@ def chat(request):
     ret['ai_emoji'] = load_random_emoji(list_id=1)
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
-
-
-def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
-    response_time = time.time()
-    dialogue = Dialogue.objects.create(
-        role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
-    dialogue.save()
