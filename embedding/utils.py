@@ -1,6 +1,9 @@
 import random
 import string
 import difflib
+from django.db import transaction
+from embedding.models import TokenConsumption, UserProfile
+import embedding.static_values as sc
 
 
 def load_random_string(num, seed=None):
@@ -41,3 +44,26 @@ def parse_diff(text1, text2):
         else:
             raise RuntimeError("unexpected opcode")
     return output
+
+
+def record_consumption(request, model_type, openai_response, secret=''):
+    with transaction.atomic():
+        if model_type == sc.MODEL_TYPES_IMAGE:
+            token_amount = 0
+        else:
+            token_amount = openai_response["usage"]["total_tokens"]
+        consumption = TokenConsumption.objects.create(user=get_user(request),
+                                                      model_type=model_type,
+                                                      token_amount=token_amount,
+                                                      secret=secret)
+        consumption.save()
+        if request.user.is_authenticated:
+            request.user.left_token -= token_amount
+            request.user.used_token += token_amount
+            request.user.save()
+
+
+def get_user(request):
+    if request.user.is_authenticated:
+        return request.user
+    return UserProfile.objects.get(username="default_user")

@@ -1,5 +1,4 @@
 from django.http import StreamingHttpResponse, HttpResponse, HttpResponseRedirect
-from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
@@ -9,19 +8,13 @@ from embedding.forms.prompt_model import PromptModelForm
 from embedding.forms.summary import SummaryForm
 from embedding.forms.demo import DemoForm
 from embedding.forms.quiz import QuizForm
-from embedding.forms.image import ImageForm
 from embedding.forms.chat import ChatForm
-from embedding.forms.contact import ContactForm
-from embedding.forms.signup import SignupForm
-from embedding.forms.signin import SigninForm
-from embedding.forms.home_chat import HomeChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Contact, Dialogue
+from embedding.models import TherapyProfile, TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Dialogue
 from django.shortcuts import render
-from django.db import transaction
-from ..utils import load_random_string, get_basic_data, enable_new_home, parse_diff
+from embedding.utils import load_random_string, get_basic_data, parse_diff, get_user, record_consumption
 from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import os
@@ -378,25 +371,6 @@ def chat(request):
     return render(request, 'embedding/chat.html', ret)
 
 
-def image_async(request):
-    description = request.POST.get('original_text', '')
-    style = request.POST.get('style', '')
-    count = request.POST.get('count', '3')
-    count = int(count)
-    if style != '':
-        description += '. In ' + style + ' style.'
-    openai_response = feature_image(description, count)
-    record_consumption(
-        request, sc.MODEL_TYPES_IMAGE, openai_response)
-    return HttpResponse(json.dumps({'urls': openai_response['data']}))
-
-
-def image(request):
-    ret = get_basic_data(request)
-    ret['form'] = ImageForm()
-    return render(request, 'embedding/image.html', ret)
-
-
 def translation_async(request):
     original_text = request.POST.get('original_text', '')
     target = request.POST.get('target', '')
@@ -631,29 +605,6 @@ def record_dialogue(request, role, message, dialogue_id, source='chat', request_
     dialogue = Dialogue.objects.create(
         role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
     dialogue.save()
-
-
-def record_consumption(request, model_type, openai_response, secret=''):
-    with transaction.atomic():
-        if model_type == sc.MODEL_TYPES_IMAGE:
-            token_amount = 0
-        else:
-            token_amount = openai_response["usage"]["total_tokens"]
-        consumption = TokenConsumption.objects.create(user=get_user(request),
-                                                      model_type=model_type,
-                                                      token_amount=token_amount,
-                                                      secret=secret)
-        consumption.save()
-        if request.user.is_authenticated:
-            request.user.left_token -= token_amount
-            request.user.used_token += token_amount
-            request.user.save()
-
-
-def get_user(request):
-    if request.user.is_authenticated:
-        return request.user
-    return UserProfile.objects.get(username="default_user")
 
 
 def load_embedding_models(request, ret):

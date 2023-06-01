@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_tab, views_feature, views_sign
+from .views import views_tab, views_feature, views_sign, views_image
 
 
 urlpatterns = [
@@ -37,7 +37,7 @@ urlpatterns = [
          name='chat_therapy_llama'),
     path('chat_olivia/', views_feature.chat_olivia, name='chat_olivia'),
     path('sendchat_home/', views_feature.sendchat_home, name='sendchat_home'),
-    path('image/', views_feature.image, name='image'),
+    path('image/', views_image.image, name='image'),
     path('collection/', views_feature.collection, name='collection'),
     path('super/', views_feature.add_prompt_model, name='add_prompt_model'),
     path('pricing/', views_feature.pricing, name='pricing'),
@@ -49,7 +49,7 @@ urlpatterns = [
     path('demo_summary_async/', views_feature.demo_summary_async,
          name='demo_summary_async'),
     path('translation_async/', views_feature.translation_async, name='translation_async'),
-    path('image_async/', views_feature.image_async, name='image_async'),
+    path('image_async/', views_image.image_async, name='image_async'),
     path('quiz/', views_feature.quiz, name='quiz'),
     path('quiz_async/', views_feature.quiz_async, name='quiz_async'),
     path('quiz_question_async/', views_feature.quiz_question_async,
