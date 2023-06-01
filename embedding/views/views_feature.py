@@ -371,22 +371,6 @@ def chat(request):
     return render(request, 'embedding/chat.html', ret)
 
 
-def grammar_async(request):
-    original_text = request.POST.get('original_text', '')
-    openai_response = feature_grammar(original_text, model='gpt-3.5-turbo')
-    fixed_text = openai_response["choices"][0]["message"]["content"]
-    record_consumption(
-        request, sc.MODEL_TYPES_GRAMMAR, openai_response)
-    print(fixed_text)
-    return HttpResponse(json.dumps({'plain_result': fixed_text.strip(), 'dict': parse_diff(original_text, fixed_text.strip())}))
-
-
-def grammar(request):
-    ret = get_basic_data(request)
-    ret['form'] = GrammarForm()
-    return render(request, 'embedding/grammar.html', ret)
-
-
 def summary_async(request):
     original_text = request.POST.get('original_text', '')
     openai_response = feature_summary(original_text, model='gpt-3.5-turbo')
