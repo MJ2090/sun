@@ -36,13 +36,6 @@ from PIL import Image
 random.seed(datetime.now().timestamp())
 
 
-def home(request):
-    ret = get_basic_data(request)
-    ret['home_chat_form'] = HomeChatForm()
-    ret['enable_home_chat'] = True
-    return render(request, 'embedding/home.html', ret)
-
-
 @login_required
 def embedding_training(request):
     ret = get_basic_data(request)
@@ -67,25 +60,6 @@ def embedding_training_async(request):
         name=name, owner=request.user, uuid=openai_response, reject_message=reject_message)
     print(openai_response)
     return HttpResponse(json.dumps({'result': f'new model {name} has finished training.'}))
-
-
-def load_embedding_models(request, ret):
-    owned_models = []
-    public_models = []
-    if not request.user.is_authenticated:
-        public_models = EmbeddingModel.objects.filter(is_public=True)
-    else:
-        owned_models = EmbeddingModel.objects.filter(owner=request.user)
-        public_models = EmbeddingModel.objects.filter(
-            is_public=True).exclude(owner=request.user)
-
-    ret['form'].fields['character'].choices = []
-    for my_model in owned_models:
-        ret['form'].fields['character'].choices.append(
-            (my_model.uuid, my_model.name))
-    for my_model in public_models:
-        ret['form'].fields['character'].choices.append(
-            (my_model.uuid, my_model.name))
 
 
 def embedding_wuxi(request):
@@ -249,7 +223,6 @@ def sendchat_async(request):
 
 
 def sendchat_therapy_async_llama(request):
-    print("in llama")
     model = 'llama'
     new_message = request.POST['message']
     enable_speech = request.POST.get('enable_speech', '')
@@ -403,61 +376,6 @@ def chat(request):
                                     '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖'])
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/chat.html', ret)
-
-
-def answer(request):
-    ret = get_basic_data(request)
-    return render(request, 'embedding/answer.html', ret)
-
-
-def about(request):
-    ret = get_basic_data(request)
-    ret['current_page'] = 'about'
-    return render(request, 'embedding/about.html', ret)
-
-
-def payments(request):
-    ret = get_basic_data(request)
-    return render(request, 'embedding/payments.html', ret)
-
-
-def settings(request):
-    ret = get_basic_data(request)
-    return render(request, 'embedding/settings.html', ret)
-
-
-def lab(request):
-    ret = get_basic_data(request)
-    ret['current_page'] = 'lab'
-    ret['enable_home_chat'] = True
-    ret['home_chat_form'] = HomeChatForm()
-    return render(request, 'embedding/home.html', ret)
-
-
-def contact(request):
-    ret = get_basic_data(request)
-    ret['current_page'] = 'contact'
-    # if this is a POST request we need to process the form data
-
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = ContactForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # name = form.cleaned_data["username"]
-            data = Contact(
-                username=form.cleaned_data["username"], email=form.cleaned_data["email"], message=form.cleaned_data["message"])
-            data.save()
-            # ...
-            # redirect to a new URL:
-            return render(request, 'embedding/thanks.html', {})
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = ContactForm()
-    ret['form'] = form
-    return render(request, 'embedding/contact.html', ret)
 
 
 def signout(request):
@@ -821,3 +739,22 @@ def get_user(request):
     if request.user.is_authenticated:
         return request.user
     return UserProfile.objects.get(username="default_user")
+
+
+def load_embedding_models(request, ret):
+    owned_models = []
+    public_models = []
+    if not request.user.is_authenticated:
+        public_models = EmbeddingModel.objects.filter(is_public=True)
+    else:
+        owned_models = EmbeddingModel.objects.filter(owner=request.user)
+        public_models = EmbeddingModel.objects.filter(
+            is_public=True).exclude(owner=request.user)
+
+    ret['form'].fields['character'].choices = []
+    for my_model in owned_models:
+        ret['form'].fields['character'].choices.append(
+            (my_model.uuid, my_model.name))
+    for my_model in public_models:
+        ret['form'].fields['character'].choices.append(
+            (my_model.uuid, my_model.name))

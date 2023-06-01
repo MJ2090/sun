@@ -1,11 +1,16 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from . import views
+from . import views, views_tab
 
 urlpatterns = [
     # ex: /summary/
-    path('', views.home, name='index'),
+    path('', views_tab.home, name='index'),
+    path('answer/', views_tab.answer, name='answer'),
+    path('about/', views_tab.about, name='about'),
+    path('settings/', views_tab.settings, name='settings'),
+    path('payments/', views_tab.payments, name='payments'),
+    path('contact/', views_tab.contact, name='contact'),
     path('summary/', views.summary, name='summary'),
     path('grammar/', views.grammar, name='grammar'),
     path('translation/', views.translation, name='translation'),
@@ -18,12 +23,6 @@ urlpatterns = [
          name='embedding_training'),
     path('embedding_training_async/', views.embedding_training_async,
          name='embedding_training_async'),
-    path('answer/', views.answer, name='answer'),
-    path('about/', views.about, name='about'),
-    path('settings/', views.settings, name='settings'),
-    path('payments/', views.payments, name='payments'),
-    path('contact/', views.contact, name='contact'),
-    path('lab/', views.lab, name='lab'),
     path('signin/', views.signin, name='signin'),
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
