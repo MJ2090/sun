@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_tab, views_feature
+from .views import views_tab, views_feature, views_sign
 
 
 urlpatterns = [
@@ -24,9 +24,9 @@ urlpatterns = [
          name='embedding_training'),
     path('embedding_training_async/', views_feature.embedding_training_async,
          name='embedding_training_async'),
-    path('signin/', views_feature.signin, name='signin'),
-    path('signup/', views_feature.signup, name='signup'),
-    path('signout/', views_feature.signout, name='signout'),
+    path('signin/', views_sign.signin, name='signin'),
+    path('signup/', views_sign.signup, name='signup'),
+    path('signout/', views_sign.signout, name='signout'),
     path('chat/', views_feature.chat, name='chat'),
     path('chat2/', views_feature.chat, name='chat2'),
     path('sendchat_async/', views_feature.sendchat_async, name='sendchat_async'),
