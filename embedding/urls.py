@@ -57,7 +57,6 @@ urlpatterns = [
     path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
 
     path('chat/', views_chat.chat, name='chat'),
-    path('chat2/', views_chat.chat, name='chat2'),
     path('sendchat_async/', views_chat.sendchat_async, name='sendchat_async'),
     path('sendchat_therapy_async/', views_chat.sendchat_therapy_async,
          name='sendchat_therapy_async'),
