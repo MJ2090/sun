@@ -3,6 +3,7 @@ from embedding.forms.home_chat import HomeChatForm
 from embedding.models import Contact
 from django.shortcuts import render
 from embedding.utils import get_basic_data
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -31,6 +32,19 @@ def payments(request):
 def settings(request):
     ret = get_basic_data(request)
     return render(request, 'embedding/settings.html', ret)
+
+
+@login_required
+def collection(request):
+    ret = get_basic_data(request)
+    ret['current_page'] = 'collection'
+    return render(request, 'embedding/collection.html', ret)
+
+
+def pricing(request):
+    ret = get_basic_data(request)
+    ret['current_page'] = 'pricing'
+    return render(request, 'embedding/pricing.html', ret)
 
 
 def contact(request):

@@ -1,20 +1,17 @@
-from django.http import StreamingHttpResponse, HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
-from embedding.forms.translation import TranslationForm
-from embedding.forms.grammar import GrammarForm
 from embedding.forms.prompt_model import PromptModelForm
-from embedding.forms.summary import SummaryForm
 from embedding.forms.demo import DemoForm
 from embedding.forms.quiz import QuizForm
 from embedding.forms.chat import ChatForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
+from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_chat, feature_chat_llama
 from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, Dialogue
 from django.shortcuts import render
-from embedding.utils import load_random_string, get_basic_data, parse_diff, get_user, record_consumption
+from embedding.utils import load_random_string, get_basic_data, get_user, record_consumption
 from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import os
@@ -371,22 +368,6 @@ def chat(request):
     return render(request, 'embedding/chat.html', ret)
 
 
-def summary_async(request):
-    original_text = request.POST.get('original_text', '')
-    openai_response = feature_summary(original_text, model='gpt-3.5-turbo')
-    summary_text = openai_response["choices"][0]["message"]["content"]
-    record_consumption(
-        request, sc.MODEL_TYPES_SUMMARY, openai_response)
-    print(summary_text)
-    return HttpResponse(json.dumps({'result': summary_text.strip()}))
-
-
-def summary(request):
-    ret = get_basic_data(request)
-    ret['form'] = SummaryForm()
-    return render(request, 'embedding/summary.html', ret)
-
-
 def demo_pdf_async(request):
     temperature = request.POST.get('temperature', '0.9')
     question = request.POST.get('question', '')
@@ -507,19 +488,6 @@ def save_to_local(original_file, sub_dir=''):
         print("size recuded: ", original_file.size,
               ' to ', os.path.getsize(file_name), tmp.size)
     return file_name
-
-
-@login_required
-def collection(request):
-    ret = get_basic_data(request)
-    ret['current_page'] = 'collection'
-    return render(request, 'embedding/collection.html', ret)
-
-
-def pricing(request):
-    ret = get_basic_data(request)
-    ret['current_page'] = 'pricing'
-    return render(request, 'embedding/pricing.html', ret)
 
 
 def record_dialogue(request, role, message, dialogue_id, source='chat', request_time=0):
