@@ -4,18 +4,27 @@
 {% load static %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
 <link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
+<link rel="stylesheet" href="{% static 'embedding/css/olivia.css' %}">
 {% endblock %}
 
 {% block privatejs %}
 {% load static %}
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<script src="{% static 'embedding/js/chat_therapy.js' %}"></script>
+<script src="{% static 'embedding/js/olivia.js' %}"></script>
 {% endblock %}
 
 {% block main %}
 <div class="container px-4 py-5">
-  <h4 class="mb-3">Hi I'm Olivia, your personalized therapist.</h4>
-  <h4 class="mb-3">Who am I talking to?</h4>
+  <div class="entrance">
+    <div name="msg_1" class="mb-5">
+      <p>Hi I'm Olivia, your private therapist.</p>
+      <p>I'm here to listen to provide professional mental and emotional supports to my visitors.</p>
+    </div>
+    <div name="msg_1" class="mb-5">
+      <p>Who am I talking to today?</p>
+    </div>
+  </div>
+  <textarea class="entrance-input pt-3"></textarea>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
   </form>

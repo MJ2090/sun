@@ -1,0 +1,11 @@
+.entrance {
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  font-size: 24px;
+}
+
+.entrance-input {
+  border:none;
+  outline: none;
+  resize: none;
+  font-size: 24px;
+}
