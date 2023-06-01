@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_admin, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
+from .views import views_admin, views_chat, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -56,16 +56,16 @@ urlpatterns = [
          name='quiz_question_async'),
     path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
 
-    path('chat/', views_feature.chat, name='chat'),
-    path('chat2/', views_feature.chat, name='chat2'),
-    path('sendchat_async/', views_feature.sendchat_async, name='sendchat_async'),
-    path('sendchat_therapy_async/', views_feature.sendchat_therapy_async,
+    path('chat/', views_chat.chat, name='chat'),
+    path('chat2/', views_chat.chat, name='chat2'),
+    path('sendchat_async/', views_chat.sendchat_async, name='sendchat_async'),
+    path('sendchat_therapy_async/', views_chat.sendchat_therapy_async,
          name='sendchat_therapy_async'),
-    path('chat_therapy/', views_feature.chat_therapy, name='chat_therapy'),
-    path('chat_therapy_llama/', views_feature.chat_therapy_llama,
+    path('chat_therapy/', views_chat.chat_therapy, name='chat_therapy'),
+    path('chat_therapy_llama/', views_chat.chat_therapy_llama,
          name='chat_therapy_llama'),
-    path('chat_olivia/', views_feature.chat_olivia, name='chat_olivia'),
-    path('sendchat_home/', views_feature.sendchat_home, name='sendchat_home'),
+    path('chat_olivia/', views_chat.chat_olivia, name='chat_olivia'),
+    path('sendchat_home/', views_chat.sendchat_home, name='sendchat_home'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]
