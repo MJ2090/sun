@@ -21,7 +21,7 @@ from embedding.openai.features import get_embedding_prompt, feature_training, fe
 from embedding.models import TherapyProfile, TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Contact, Dialogue
 from django.shortcuts import render
 from django.db import transaction
-from .utils import load_random_string, get_basic_data, enable_new_home, parse_diff
+from ..utils import load_random_string, get_basic_data, enable_new_home, parse_diff
 from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import os

@@ -1,9 +1,8 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_tab
+from .views import views_tab, views_feature
 
-from . import views_feature
 
 urlpatterns = [
     # ex: /summary/
