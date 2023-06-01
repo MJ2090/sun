@@ -106,7 +106,7 @@ def chat_async(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def sendchat_therapy_async_llama(request):
+def chat_async_therapy_llama(request):
     model = 'llama'
     new_message = request.POST['message']
     enable_speech = request.POST.get('enable_speech', '')
@@ -138,11 +138,11 @@ def sendchat_therapy_async_llama(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def sendchat_therapy_async(request):
+def chat_async_therapy(request):
     if request.POST.get('source_id') == 'llama':
-        return sendchat_therapy_async_llama(request)
+        return chat_async_therapy_llama(request)
     elif request.POST.get('source_id') == 'openai':
-        return sendchat_therapy_async_openai(request)
+        return chat_async_therapy_openai(request)
     else:
         return sendchat_async_olivia(request)
     
@@ -183,7 +183,7 @@ def sendchat_async_olivia(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def sendchat_therapy_async_openai(request):
+def chat_async_therapy_openai(request):
     model = 'gpt-4'
     new_message = request.POST['message']
     character = 'T3'

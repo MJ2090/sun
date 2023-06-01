@@ -57,13 +57,15 @@ urlpatterns = [
     path('quiz_image_async/', views_quiz.quiz_image_async, name='quiz_image_async'),
 
     path('chat/', views_chat.chat, name='chat'),
-    path('chat_async/', views_chat.chat_async, name='chat_async'),
-    path('chat_async_customer_service/', views_chat.chat_async_customer_service, name='chat_async_customer_service'),
-    path('sendchat_therapy_async/', views_chat.sendchat_therapy_async,
-         name='sendchat_therapy_async'),
     path('chat_therapy_gpt/', views_chat.chat_therapy_gpt, name='chat_therapy_gpt'),
     path('chat_therapy_llama/', views_chat.chat_therapy_llama,
          name='chat_therapy_llama'),
+
+    path('chat_async/', views_chat.chat_async, name='chat_async'),
+    path('chat_async_customer_service/', views_chat.chat_async_customer_service, name='chat_async_customer_service'),
+    path('chat_async_therapy/', views_chat.chat_async_therapy,
+         name='chat_async_therapy'),
+
     path('chat_olivia/', views_chat.chat_olivia, name='chat_olivia'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
