@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_tab, views_feature, views_sign, views_image, views_translation
+from .views import views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -13,7 +13,7 @@ urlpatterns = [
     path('payments/', views_tab.payments, name='payments'),
     path('contact/', views_tab.contact, name='contact'),
     path('summary/', views_feature.summary, name='summary'),
-    path('grammar/', views_feature.grammar, name='grammar'),
+    path('grammar/', views_grammar.grammar, name='grammar'),
     path('translation/', views_translation.translation, name='translation'),
     path('wuxi/', views_feature.embedding_wuxi, name='embedding_wuxi'),
     path('embedding_question/', views_feature.embedding_question,
@@ -41,7 +41,7 @@ urlpatterns = [
     path('collection/', views_feature.collection, name='collection'),
     path('super/', views_feature.add_prompt_model, name='add_prompt_model'),
     path('pricing/', views_feature.pricing, name='pricing'),
-    path('grammar_async/', views_feature.grammar_async, name='grammar_async'),
+    path('grammar_async/', views_grammar.grammar_async, name='grammar_async'),
     path('summary_async/', views_feature.summary_async, name='summary_async'),
     path('demo_pdf/', views_feature.demo_pdf, name='demo_pdf'),
     path('demo_summary/', views_feature.demo_summary, name='demo_summary'),
