@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from embedding.forms.chat import ChatForm
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, PromptModel, Dialogue
+from embedding.models import TherapyProfile, PromptModel
 from django.shortcuts import render
 from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
