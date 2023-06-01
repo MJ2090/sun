@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_embedding, views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
+from .views import views_admin, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_feature, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -40,7 +40,7 @@ urlpatterns = [
     path('chat_olivia/', views_feature.chat_olivia, name='chat_olivia'),
     path('sendchat_home/', views_feature.sendchat_home, name='sendchat_home'),
     path('image/', views_image.image, name='image'),
-    path('super/', views_feature.add_prompt_model, name='add_prompt_model'),
+    path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
     path('grammar_async/', views_grammar.grammar_async, name='grammar_async'),
     path('summary_async/', views_summary.summary_async, name='summary_async'),
     path('demo_pdf/', views_demo.demo_pdf, name='demo_pdf'),
