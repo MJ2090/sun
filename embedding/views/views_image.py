@@ -1,32 +1,10 @@
-from django.http import StreamingHttpResponse, HttpResponse, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
-from django.utils.translation import activate
-from embedding.forms.embedding import TrainingForm, QuestionForm
-from embedding.forms.translation import TranslationForm
-from embedding.forms.grammar import GrammarForm
-from embedding.forms.prompt_model import PromptModelForm
-from embedding.forms.summary import SummaryForm
-from embedding.forms.demo import DemoForm
-from embedding.forms.quiz import QuizForm
+from django.http import HttpResponse
 from embedding.forms.image import ImageForm
-from embedding.forms.chat import ChatForm
-from embedding.vector.file_loader import load_pdf
-from embedding.polly.audio import generate_audio
-from embedding.openai.features import get_embedding_prompt, feature_training, feature_action, feature_question, feature_glm, feature_quiz, feature_translate, feature_grammar, feature_summary, feature_image, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, TokenConsumption, PromptModel, EmbeddingModel, OcrRecord, QuizRecord, UserProfile, Dialogue
+from embedding.openai.features import feature_image
 from django.shortcuts import render
-from django.db import transaction
-from embedding.utils import load_random_string, get_basic_data, parse_diff
-from embedding.ocr import recognize_image
+from embedding.utils import get_basic_data, record_consumption
 import embedding.static_values as sc
-import os
 import json
-import random
-import time
-from datetime import datetime
-from django.conf import settings as conf_settings
-from django.core.files.storage import default_storage
-from PIL import Image
 
 
 def image_async(request):
