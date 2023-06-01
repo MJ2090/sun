@@ -62,7 +62,8 @@ urlpatterns = [
          name='chat_therapy_llama'),
 
     path('chat_async/', views_chat.chat_async, name='chat_async'),
-    path('chat_async_customer_service/', views_chat.chat_async_customer_service, name='chat_async_customer_service'),
+    path('chat_async_customer_service/', views_chat.chat_async_customer_service,
+         name='chat_async_customer_service'),
     path('chat_async_therapy/', views_chat.chat_async_therapy,
          name='chat_async_therapy'),
 
