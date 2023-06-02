@@ -1,10 +1,4 @@
 const BASE_INTERVAL = 100
-let t_name = ''
-let t_age = ''
-let t_gender = ''
-
-function chat_async_call() {
-}
 
 function flow_messages(messages, callback) {
     let index = 0;
@@ -45,7 +39,7 @@ function show(element) {
 }
 
 function isShown(element) {
-    return !element.classList.has('hidden');
+    return !element.classList.contains('hidden');
 }
 
 function olivia_init() {
@@ -70,12 +64,13 @@ function add_event_listener() {
             entrance_finish();
         });
     });
-
 }
 
 function entrance_finish() {
     let d3 = document.querySelector("div[name='entrance_3']");
+    let d4 = document.querySelector("div[name='entrance_4']");
     hide(d3);
+    show(d4);
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
     therapy_init();
 }
@@ -95,7 +90,9 @@ function therapy_init() {
         response => response.json())
     .then((response) => {
         let d4 = document.querySelector("div[name='entrance_4']");
+        let d5 = document.querySelector("div[name='entrance_5']");
         hide(d4);
+        show(d5);
         console.log(response);
     });
 }
@@ -103,12 +100,14 @@ function therapy_init() {
 function next_entrance() {
     let d1 = document.querySelector("div[name='entrance_1']");
     let d2 = document.querySelector("div[name='entrance_2']");
+    let d3 = document.querySelector("div[name='entrance_3']");
     if (isShown(d1)) {
         hide(d1);
         show(d2);
         flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus);
     } else {
         hide(d2);
+        show(d3);
         flow_messages(document.querySelectorAll("[name='msg_3']"), null);
     }
 }
