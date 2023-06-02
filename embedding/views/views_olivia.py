@@ -14,7 +14,8 @@ def olivia_async_init(request):
     t_age = request.POST.get('t_age', '')
     t_gender = request.POST.get('t_gender', '')
     t_age = int(t_age)
-    VisitorProfile.objects.create(username=t_name, age=t_age, gender=t_gender)
+    uuid = load_random_string(10)
+    VisitorProfile.objects.create(uuid=uuid, username=t_name, age=t_age, gender=t_gender)
     base_prompt = ""
     visitor_prompt = ""
     return HttpResponse(json.dumps({'ai_message': 'ai_message'}))

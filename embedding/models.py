@@ -134,10 +134,10 @@ class VisitorProfile(models.Model):
     username = models.CharField(max_length=100, default='')
     age = models.IntegerField(default=30)
     gender = models.CharField(max_length=50, default='')
-    marriage = models.CharField(max_length=50, default='')
+    marriage = models.CharField(max_length=50, default='', blank=True)
     uuid = models.CharField(max_length=20, default='')
-    diagnosis = models.CharField(max_length=50, default='')
-    evidence = models.CharField(max_length=1500, default='')
+    diagnosis = models.CharField(max_length=50, default='', blank=True)
+    evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
         return self.username + self.uuid
