@@ -1,5 +1,3 @@
-let timer;
-
 function chat_async_call() {
 }
 
