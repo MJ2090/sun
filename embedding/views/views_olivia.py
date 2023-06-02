@@ -33,7 +33,7 @@ def olivia_async_init(request):
     t_age = int(t_age)
     uuid = load_random_string(10)
     VisitorProfile.objects.create(uuid=uuid, username=t_name, age=t_age, gender=t_gender)
-    greeting = load_random_greeting()
+    greeting = load_random_greeting(t_name)
     base_prompt = """
     You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules: 
     #1. If visitors want to commit suicide or hurt someone, immediately lead them to hotline 988 or 911. 
