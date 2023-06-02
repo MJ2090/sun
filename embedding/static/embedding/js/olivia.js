@@ -3,7 +3,7 @@ const BASE_INTERVAL = 500
 function chat_async_call() {
 }
 
-function flow_messages(messages) {
+function flow_messages(messages, callback) {
     let index = 0;
     let t = setInterval(show_messages, BASE_INTERVAL);
 
@@ -12,11 +12,15 @@ function flow_messages(messages) {
         index += 1;
         if (index == messages.length) {
             clearInterval(t);
-            let textarea = document.querySelector("textarea");
-            textarea.focus();
-            textarea.click();
+            callback();
         }
     }
+}
+
+function setFocus() {
+    let textarea = document.querySelector("textarea");
+    textarea.focus();
+    textarea.click();
 }
 
 function fadeIn(element) {
@@ -29,7 +33,7 @@ function fadeOut(element) {
 
 function olivia_init() {
     add_event_listener();
-    flow_messages(document.querySelectorAll("[name='msg_1']"));
+    flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus);
 }
 
 function add_event_listener() {
