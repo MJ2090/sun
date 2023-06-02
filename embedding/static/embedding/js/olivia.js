@@ -1,4 +1,7 @@
 const BASE_INTERVAL = 100
+let t_name = ''
+let t_age = ''
+let t_gender = ''
 
 function chat_async_call() {
 }
@@ -62,6 +65,24 @@ function entrance_finish() {
     let d3 = document.querySelector("div[name='entrance_3']");
     d3.remove();
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
+    therapy_init();
+}
+
+function therapy_init() {
+    const request_data = new FormData();
+    request_data.append('t_name', t_name);
+    request_data.append('t_age', t_age);
+    request_data.append('t_gender', t_gender);
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/therapy_init/", {
+        method: "POST",
+        body: request_data,
+    })
+    .then(
+        response => response.json())
+    .then((response) => {
+        console.log(response);
+    });
 }
 
 function next_entrance() {

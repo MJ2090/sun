@@ -9,6 +9,11 @@ import embedding.static_values as sc
 import json
 
 
+def olivia_async_init(request):
+    t_name = request.POST.get('t_name', '')
+    t_age = request.POST.get('t_age', '')
+    t_gender = request.POST.get('t_gender', '')
+
 def entrance(request):
     ret = get_basic_data(request, {'hide_nav': True})
     return render(request, 'embedding/olivia_entrance.html', ret)

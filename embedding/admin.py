@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TherapyProfile, OcrRecord, QuizRecord, UserProfile, TokenConsumption, PromptModel, EmbeddingModel, Contact, Dialogue
+from .models import VisitorProfile, TherapyProfile, OcrRecord, QuizRecord, UserProfile, TokenConsumption, PromptModel, EmbeddingModel, Contact, Dialogue
 
 admin.site.register(UserProfile)
 admin.site.register(TokenConsumption)
@@ -12,3 +12,4 @@ admin.site.register(Dialogue)
 admin.site.register(OcrRecord)
 admin.site.register(QuizRecord)
 admin.site.register(TherapyProfile)
+admin.site.register(VisitorProfile)
