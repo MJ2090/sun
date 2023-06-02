@@ -1,21 +1,21 @@
-const BASE_INTERVAL = 100
+const BASE_INTERVAL = 500
 
 function chat_async_call() {
 }
 
-function flow_messages() {
-    messages = document.querySelectorAll("[name='msg_1']");
+function flow_messages(messages) {
     let index = 0;
     let t = setInterval(show_messages, BASE_INTERVAL);
 
     function show_messages() {
         fadeIn(messages[index]);
-        if (index == messages.length-1) {
-            clearInterval(t);
-            messages[index].focus();
-            messages[index].click();
-        }
         index += 1;
+        if (index == messages.length) {
+            clearInterval(t);
+            let textarea = document.querySelector("textarea");
+            textarea.focus();
+            textarea.click();
+        }
     }
 }
 
@@ -29,7 +29,7 @@ function fadeOut(element) {
 
 function olivia_init() {
     add_event_listener();
-    flow_messages();
+    flow_messages(document.querySelectorAll("[name='msg_1']"));
 }
 
 function add_event_listener() {
