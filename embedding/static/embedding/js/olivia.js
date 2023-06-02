@@ -39,22 +39,28 @@ function olivia_init() {
 }
 
 function add_event_listener() {
-    let textarea = document.querySelector("textarea");
-    textarea.addEventListener("keydown", function (e) {
-        if (e.key === 'Enter') {
-            next_entrance();
-            return false;
-        }
-    });
+    let textareas = document.querySelectorAll("textarea");
+    textareas.forEach(e => {
+        e.addEventListener("keydown", function (e) {
+            if (e.key === 'Enter') {
+                next_entrance();
+                return false;
+            }
+        });
+    })
+
 }
 
 function next_entrance() {
-    d1 = document.querySelector("div[name='entrance_1']");
-    fadeOut(d1);
-    d2 = document.querySelector("div[name='entrance_2']");
-    d2.classList.remove("hidden");
-    fadeIn(d2);
-    flow_messages(document.querySelectorAll("[name='msg_2']"), null);
+    let d1 = document.querySelector("div[name='entrance_1']");
+    let d2 = document.querySelector("div[name='entrance_2']");
+    if (d1 != null) {
+        d1.remove();
+        flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus);
+    } else {
+        d2.remove();
+        flow_messages(document.querySelectorAll("[name='msg_3']"), setFocus);
+    }
 }
 
 $(document).ready(function () {
