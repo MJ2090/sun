@@ -14,6 +14,14 @@ import time
 random.seed(datetime.now().timestamp())
 
 
+def load_random_greeting(t_name):
+    greetings = [f'Hi {t_name}, how are you today?',
+                 f'Hello {t_name}, is everything okay?',
+                 f'Hello {t_name}, how is everything going?',
+                 f'Hi {t_name}, welcome to my therapy session, how are you?']
+    return random.choice(greetings)
+
+
 def load_random_string(num, seed=None):
     randStr = ''
     if not seed:
@@ -38,8 +46,8 @@ def enable_new_home(request):
 
 
 def parse_diff(text1, text2):
-    seqm= difflib.SequenceMatcher(None, text1, text2)
-    output= []
+    seqm = difflib.SequenceMatcher(None, text1, text2)
+    output = []
     for opcode, a0, a1, b0, b1 in seqm.get_opcodes():
         if opcode == 'equal':
             output.append({'original': seqm.a[a0:a1]})
@@ -112,9 +120,9 @@ def load_embedding_models(request, ret):
     for my_model in public_models:
         ret['form'].fields['character'].choices.append(
             (my_model.uuid, my_model.name))
-        
 
-def load_random_emoji(list_id = 0):
+
+def load_random_emoji(list_id=0):
     emojis = [['🍀', '🍃', '🌗', '🌘', '🐳', '❄️', '🍕', '🪴', '🌳', '👩🏽‍⚕️', '🌵', '🌿', '☘️', '🌲'],
               ['🍀', '🐳', '🌗', '🌘', '🌵', '🐙', '🐳', '😈', '🐳', '❄️', '🦖', '🌰', '🎲', '🎮', '✈️', '🚀', '🌋', '🦑', '🎉', '🪩', '🌳', '⚽️', '🏖']]
     return random.choice(emojis[list_id % len(emojis)])
