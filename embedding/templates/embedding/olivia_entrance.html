@@ -15,7 +15,7 @@
 
 {% block main %}
 <div class="container px-4 py-5">
-  <div class="entrance">
+  <div name="entrance_1" class="entrance">
     <div class="mb-5">
       <p name="msg_1" class="opacity-zero">Hi this is Olivia, your private therapist.</p>
       <p name="msg_1" class="opacity-zero">I'm here to listen to you and support you.</p>
@@ -25,6 +25,14 @@
     </div>
     <div class="mb-5">
       <textarea name="msg_1" class="entrance-input mb-5 opacity-zero"></textarea>
+    </div>
+  </div>
+  <div name="entrance_2" class="entrance hidden opacity-zero">
+    <div class="mb-5">
+      <p name="msg_2" class="opacity-zero">What is your age?</p>
+    </div>
+    <div class="mb-5">
+      <textarea name="msg_2" class="entrance-input mb-5 opacity-zero"></textarea>
     </div>
   </div>
 </div>

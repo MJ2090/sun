@@ -1,11 +1,12 @@
+const BASE_INTERVAL = 100
+
 function chat_async_call() {
 }
 
 function flow_messages() {
     messages = document.querySelectorAll("[name='msg_1']");
-    let base_interval = 2000;
     let index = 0;
-    let t = setInterval(show_messages, base_interval);
+    let t = setInterval(show_messages, BASE_INTERVAL);
 
     function show_messages() {
         fadeIn(messages[index]);
@@ -19,12 +20,11 @@ function flow_messages() {
 }
 
 function fadeIn(element) {
-    // ensure the element is initially hidden
     element.classList.add('fade-in');
 }
 
-function removeClass(el) {
-    el.classList.remove('opacity_zero');
+function fadeOut(element) {
+    element.classList.add('fade-out');
 }
 
 function olivia_init() {
@@ -35,11 +35,18 @@ function olivia_init() {
 function add_event_listener() {
     let textarea = document.querySelector("textarea");
     textarea.addEventListener("keydown", function (e) {
-        if (e.keyCode == 13) {
-            chat_async_call();
+        if (e.key === 'Enter') {
+            next_entrance();
             return false;
         }
     });
+}
+
+function next_entrance() {
+    d1 = document.querySelector("div[name='entrance_1']");
+    fadeOut(d1);
+    d2 = document.querySelector("div[name='entrance_2']");
+    fadeIn(d2);
 }
 
 $(document).ready(function () {
