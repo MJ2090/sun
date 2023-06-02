@@ -23,11 +23,10 @@
     <div class="mb-5">
       <p name="msg_1" class="opacity-zero">May I ask who am I talking to?</p>
     </div>
+    <div class="mb-5">
+      <textarea name="msg_1" class="entrance-input mb-5 opacity-zero"></textarea>
+    </div>
   </div>
-  <textarea name="msg_1" class="entrance-input mb-5 opacity-zero"></textarea>
-  <form class="row needs-validation" novalidate="" action="/chat/" method="post">
-    {% csrf_token %}
-  </form>
 </div>
 </div>
 {% endblock %}
