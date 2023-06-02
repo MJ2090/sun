@@ -1,6 +1,6 @@
 const BASE_INTERVAL = 100
 
-function flow_messages(messages, callback) {
+function flow_messages(messages, callback, el) {
     let index = 0;
     let t = setInterval(show_messages, BASE_INTERVAL);
 
@@ -10,16 +10,15 @@ function flow_messages(messages, callback) {
         if (index == messages.length) {
             clearInterval(t);
             if (callback != null) {
-                callback();
+                callback(el);
             }
         }
     }
 }
 
-function setFocus() {
-    let textarea = document.querySelector("textarea");
-    textarea.focus();
-    textarea.click();
+function setFocus(el) {
+    el.focus();
+    el.click();
 }
 
 function fadeIn(element) {
@@ -44,7 +43,8 @@ function isShown(element) {
 
 function olivia_init() {
     add_event_listener();
-    flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus);
+    let t_name = document.querySelector("textarea[name='msg_1']");
+    flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus, t_name);
 }
 
 function add_event_listener() {
@@ -78,6 +78,9 @@ function entrance_finish() {
 function therapy_init() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     const request_data = new FormData();
+    t_name = document.querySelector("textarea[name='msg_1']").value;
+    t_age = document.querySelector("textarea[name='msg_2']").value;
+    t_gender = 'Female';
     request_data.append('t_name', t_name);
     request_data.append('t_age', t_age);
     request_data.append('t_gender', t_gender);
@@ -104,11 +107,12 @@ function next_entrance() {
     if (isShown(d1)) {
         hide(d1);
         show(d2);
-        flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus);
+        let t_age = document.querySelector("textarea[name='msg_2']");
+        flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus, t_age);
     } else {
         hide(d2);
         show(d3);
-        flow_messages(document.querySelectorAll("[name='msg_3']"), null);
+        flow_messages(document.querySelectorAll("[name='msg_3']"), null, null);
     }
 }
 
