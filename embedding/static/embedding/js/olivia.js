@@ -43,13 +43,13 @@ function isShown(element) {
 
 function olivia_init() {
     add_event_listener();
-    let t_name = document.querySelector("textarea[name='msg_1']");
+    let t_name = document.querySelector("input[name='msg_1']");
     flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus, t_name);
 }
 
 function add_event_listener() {
-    let textareas = document.querySelectorAll("textarea");
-    textareas.forEach(e => {
+    let inouts = document.querySelectorAll("input[type='text']");
+    inouts.forEach(e => {
         e.addEventListener("keydown", function (e) {
             if (e.key === 'Enter') {
                 next_entrance();
@@ -78,8 +78,8 @@ function entrance_finish() {
 function therapy_init() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     const request_data = new FormData();
-    t_name = document.querySelector("textarea[name='msg_1']").value;
-    t_age = document.querySelector("textarea[name='msg_2']").value;
+    t_name = document.querySelector("input[name='msg_1']").value;
+    t_age = document.querySelector("input[name='msg_2']").value;
     t_gender = 'Female';
     request_data.append('t_name', t_name);
     request_data.append('t_age', t_age);
@@ -97,6 +97,12 @@ function therapy_init() {
         hide(d4);
         show(d5);
         console.log(response);
+
+        let ai_message = response.ai_message;
+
+        pre_process();
+        display_msg(ai_message);
+        post_process();
     });
 }
 
@@ -107,7 +113,7 @@ function next_entrance() {
     if (isShown(d1)) {
         hide(d1);
         show(d2);
-        let t_age = document.querySelector("textarea[name='msg_2']");
+        let t_age = document.querySelector("input[name='msg_2']");
         flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus, t_age);
     } else {
         hide(d2);
@@ -119,3 +125,40 @@ function next_entrance() {
 $(document).ready(function () {
     olivia_init();
 })
+
+function display_msg(ai_message) {
+    message_list = ai_message.split('\n\n');
+    display_msg_piece(message_list, 0);
+}
+
+function display_msg_piece(final_list, current_index) {
+    let content = $('.message-container');
+    let ai_msg = $("p[name='ai_msg']").clone();
+    ai_msg.css('display', 'none');
+    ai_msg.get(0).innerHTML = final_list[current_index];
+    ai_msg.addClass("dialogue");
+    content.append(ai_msg.get(0));
+    ai_msg.fadeIn();
+    if (current_index==0) {
+        $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);
+    }
+
+    if (current_index >= final_list.length - 1) {
+        post_process();
+    } else {
+        setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 3000);
+    }
+}
+
+function pre_process() {
+    $("div[name='spinner").hide();
+    $(".still-thinking").hide();
+    // clearTimeout(timer);
+}
+
+function post_process() {
+    let new_msg = $("input[name='message']");
+    let button = $("button[name='send_button']");
+    button.prop("disabled", false);
+    new_msg.focus();
+}
