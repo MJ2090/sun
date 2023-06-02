@@ -12,7 +12,9 @@ function flow_messages(messages, callback) {
         index += 1;
         if (index == messages.length) {
             clearInterval(t);
-            callback();
+            if (callback != null) {
+                callback();
+            }
         }
     }
 }
@@ -50,7 +52,9 @@ function next_entrance() {
     d1 = document.querySelector("div[name='entrance_1']");
     fadeOut(d1);
     d2 = document.querySelector("div[name='entrance_2']");
+    d2.classList.remove("hidden");
     fadeIn(d2);
+    flow_messages(document.querySelectorAll("[name='msg_2']"), null);
 }
 
 $(document).ready(function () {
