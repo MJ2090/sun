@@ -9,3 +9,12 @@
   resize: none;
   font-size: 24px;
 }
+
+.opacity-zero {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 2s;
+}

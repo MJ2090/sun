@@ -16,15 +16,15 @@
 {% block main %}
 <div class="container px-4 py-5">
   <div class="entrance">
-    <div name="msg_1" class="mb-5">
-      <p>Hi I'm Olivia, your private therapist.</p>
-      <p>I'm here to listen to provide professional mental and emotional supports to my visitors.</p>
+    <div class="mb-5">
+      <p name="msg_1" class="opacity-zero">Hi I'm Olivia, your private therapist.</p>
+      <p name="msg_1" class="opacity-zero">I'm here to supports you and listen to you.</p>
     </div>
-    <div name="msg_1" class="mb-5">
-      <p>Who am I talking to today?</p>
+    <div class="mb-5">
+      <p name="msg_1" class="opacity-zero">May I ask who am I talking to?</p>
     </div>
   </div>
-  <textarea class="entrance-input pt-3"></textarea>
+  <textarea name="msg_1" class="entrance-input mb-5 opacity-zero"></textarea>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
   </form>
