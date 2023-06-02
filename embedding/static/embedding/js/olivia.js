@@ -1,4 +1,4 @@
-const BASE_INTERVAL = 500
+const BASE_INTERVAL = 100
 
 function chat_async_call() {
 }
@@ -49,6 +49,19 @@ function add_event_listener() {
         });
     })
 
+    let buttons = document.querySelectorAll("label[name='gender']");
+    buttons.forEach(e => {
+        e.addEventListener("click", function (e) {
+            entrance_finish();
+        });
+    });
+
+}
+
+function entrance_finish() {
+    let d3 = document.querySelector("div[name='entrance_3']");
+    d3.remove();
+    flow_messages(document.querySelectorAll("[name='msg_4']"), null);
 }
 
 function next_entrance() {
@@ -59,7 +72,7 @@ function next_entrance() {
         flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus);
     } else {
         d2.remove();
-        flow_messages(document.querySelectorAll("[name='msg_3']"), setFocus);
+        flow_messages(document.querySelectorAll("[name='msg_3']"), null);
     }
 }
 

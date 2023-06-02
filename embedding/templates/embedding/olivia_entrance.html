@@ -3,7 +3,6 @@
 {% block privatecss %}
 {% load static %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
-<link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
 <link rel="stylesheet" href="{% static 'embedding/css/olivia.css' %}">
 {% endblock %}
 
@@ -42,11 +41,16 @@
     <div class="mb-5">
       <div name="msg_3" class="opacity-zero">
         <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
-        <label class="btn btn-secondary" for="option1">He</label>
+        <label name="gender" class="btn btn-secondary btn-lg" for="option1">He</label>
 
         <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-        <label class="btn btn-secondary" for="option2">She</label>
+        <label name="gender" class="btn btn-secondary btn-lg" for="option2">She</label>
       </div>
+    </div>
+  </div>
+  <div name="entrance_4" class="entrance">
+    <div class="mb-5 spinner">
+      <div name="msg_4" class="opacity-zero loader">Loading...</div>
     </div>
   </div>
 </div>
