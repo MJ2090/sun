@@ -89,3 +89,7 @@
   padding-top: 180px;
 }
 /* End Spinner */
+
+.hidden {
+  display: none;
+}

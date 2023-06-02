@@ -36,6 +36,18 @@ function fadeOut(element) {
     element.classList.add('fade-out');
 }
 
+function hide(element) {
+    element.classList.add('hidden');
+}
+
+function show(element) {
+    element.classList.remove('hidden');
+}
+
+function isShown(element) {
+    return !element.classList.has('hidden');
+}
+
 function olivia_init() {
     add_event_listener();
     flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus);
@@ -63,24 +75,27 @@ function add_event_listener() {
 
 function entrance_finish() {
     let d3 = document.querySelector("div[name='entrance_3']");
-    d3.remove();
+    hide(d3);
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
     therapy_init();
 }
 
 function therapy_init() {
+    let csrf = $("input[name='csrfmiddlewaretoken']");
     const request_data = new FormData();
     request_data.append('t_name', t_name);
     request_data.append('t_age', t_age);
     request_data.append('t_gender', t_gender);
     request_data.append('csrfmiddlewaretoken', csrf.val());
-    fetch("/therapy_init/", {
+    fetch("/olivia_async_init/", {
         method: "POST",
         body: request_data,
     })
     .then(
         response => response.json())
     .then((response) => {
+        let d4 = document.querySelector("div[name='entrance_4']");
+        hide(d4);
         console.log(response);
     });
 }
@@ -88,11 +103,12 @@ function therapy_init() {
 function next_entrance() {
     let d1 = document.querySelector("div[name='entrance_1']");
     let d2 = document.querySelector("div[name='entrance_2']");
-    if (d1 != null) {
-        d1.remove();
+    if (isShown(d1)) {
+        hide(d1);
+        show(d2);
         flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus);
     } else {
-        d2.remove();
+        hide(d2);
         flow_messages(document.querySelectorAll("[name='msg_3']"), null);
     }
 }

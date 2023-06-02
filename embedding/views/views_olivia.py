@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from embedding.forms.chat import ChatForm
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_chat
-from embedding.models import PromptModel
+from embedding.models import PromptModel, VisitorProfile
 from django.shortcuts import render
 from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
@@ -13,7 +13,11 @@ def olivia_async_init(request):
     t_name = request.POST.get('t_name', '')
     t_age = request.POST.get('t_age', '')
     t_gender = request.POST.get('t_gender', '')
-    
+    t_age = int(t_age)
+    VisitorProfile.objects.create(username=t_name, age=t_age, gender=t_gender)
+    base_prompt = ""
+    visitor_prompt = ""
+    return HttpResponse(json.dumps({'ai_message': 'ai_message'}))
 
 def entrance(request):
     ret = get_basic_data(request, {'hide_nav': True})

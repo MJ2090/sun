@@ -14,6 +14,7 @@
 
 {% block main %}
 <div class="container px-4 py-5">
+  {% csrf_token %}
   <div name="entrance_1" class="entrance">
     <div class="mb-5">
       <p name="msg_1" class="opacity-zero">Hi this is Olivia, your private therapist.</p>
@@ -26,7 +27,7 @@
       <textarea rows="1" name="msg_1" class="entrance-input opacity-zero"></textarea>
     </div>
   </div>
-  <div name="entrance_2" class="entrance">
+  <div name="entrance_2" class="entrance hidden">
     <div class="mb-5">
       <p name="msg_2" class="opacity-zero">What is your age?</p>
     </div>
@@ -34,7 +35,7 @@
       <textarea rows="1" name="msg_2" class="entrance-input opacity-zero"></textarea>
     </div>
   </div>
-  <div name="entrance_3" class="entrance">
+  <div name="entrance_3" class="entrance hidden">
     <div class="mb-5">
       <p name="msg_3" class="opacity-zero">Last but not least, how do you define yourself?</p>
     </div>
@@ -48,9 +49,14 @@
       </div>
     </div>
   </div>
-  <div name="entrance_4" class="entrance">
+  <div name="entrance_4" class="entrance hidden">
     <div class="mb-5 spinner">
       <div name="msg_4" class="opacity-zero loader">Loading...</div>
+    </div>
+  </div>
+  <div name="entrance_5" class="entrance hidden">
+    <div class="mb-5 spinner">
+      <div name="msg_5" class="opacity-zero loader">姐姐建生</div>
     </div>
   </div>
 </div>
