@@ -48,8 +48,8 @@ function olivia_init() {
 }
 
 function add_event_listener() {
-    let inouts = document.querySelectorAll("input[type='text']");
-    inouts.forEach(e => {
+    let inputs = document.querySelectorAll("input[type='text']");
+    inputs.forEach(e => {
         e.addEventListener("keydown", function (e) {
             if (e.key === 'Enter') {
                 next_entrance();
@@ -64,6 +64,14 @@ function add_event_listener() {
             entrance_finish();
         });
     });
+
+    let textarea = document.querySelector("textarea");
+    textarea.addEventListener("keydown", function (e) {
+        if (e.key === 'Enter') {
+            therapy_chat();
+            return false;
+        }
+    });
 }
 
 function entrance_finish() {
@@ -73,6 +81,37 @@ function entrance_finish() {
     show(d4);
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
     therapy_init();
+}
+
+function therapy_chat() {
+    let csrf = $("input[name='csrfmiddlewaretoken']");
+    const request_data = new FormData();
+    t_name = document.querySelector("input[name='msg_1']").value;
+    t_age = document.querySelector("input[name='msg_2']").value;
+    t_gender = 'Female';
+    request_data.append('t_name', t_name);
+    request_data.append('t_age', t_age);
+    request_data.append('t_gender', t_gender);
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    fetch("/olivia_async_init/", {
+        method: "POST",
+        body: request_data,
+    })
+    .then(
+        response => response.json())
+    .then((response) => {
+        let d4 = document.querySelector("div[name='entrance_4']");
+        let d5 = document.querySelector("div[name='entrance_5']");
+        hide(d4);
+        show(d5);
+        console.log(response);
+
+        let ai_message = response.ai_message;
+
+        pre_process();
+        display_msg(ai_message);
+        post_process();
+    });
 }
 
 function therapy_init() {
@@ -153,7 +192,6 @@ function display_msg_piece(final_list, current_index) {
 function pre_process() {
     $("div[name='spinner").hide();
     $(".still-thinking").hide();
-    // clearTimeout(timer);
 }
 
 function post_process() {
