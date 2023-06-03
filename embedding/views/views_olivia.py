@@ -12,13 +12,23 @@ import json
 def olivia_async_chat(request):
     model = 'gpt-4'
     new_message = request.POST.get('message')
-    dialogue_id = request.POST.get('uuid', '')
-    messages = []
-    history = request.POST.get('history')
-    my_json = json.loads(history)
-    messages.extend(my_json)
+    uuid = request.POST.get('uuid', '')
+    history_json = json.loads(request.POST.get('history', ''))
+
+    base_prompt = """
+    You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules: 
+    #1. If visitors want to commit suicide or hurt someone, immediately lead them to hotline 988 or 911. 
+    #2. Do not answer questions irrelevant to therapy, for example mathematical or political questions. 
+    #3. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
+    """
+    user_prompt = """
+    The visitor's name is Maria, and she is 23 years old."""
+    prompt = base_prompt + user_prompt
+    messages = [{"role": "system", "content": prompt}]
+    messages.extend(history_json)
     messages.append({"role": "user", "content": new_message})
 
+    print("\nMsg sent to openai: ", messages)
     openai_response, _ = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
@@ -32,7 +42,8 @@ def olivia_async_init(request):
     t_gender = request.POST.get('t_gender', '')
     t_age = int(t_age)
     uuid = load_random_string(10)
-    VisitorProfile.objects.create(uuid=uuid, username=t_name, age=t_age, gender=t_gender)
+    VisitorProfile.objects.create(
+        uuid=uuid, username=t_name, age=t_age, gender=t_gender)
     greeting = load_random_greeting(t_name)
     base_prompt = """
     You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules: 
@@ -56,7 +67,8 @@ def chat_async_olivia(request):
     dialogue_id = request.POST.get('dialogue_id', '')
 
     my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history.replace('###QUESTION###', 'did you travel to a park last week?'))
+    messages = json.loads(my_m.history.replace(
+        '###QUESTION###', 'did you travel to a park last week?'))
     history = request.POST.get('history')
     my_json = json.loads(history)
     messages.extend(my_json)
