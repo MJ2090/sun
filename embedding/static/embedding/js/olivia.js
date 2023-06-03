@@ -112,7 +112,7 @@ function therapy_chat() {
     request_data.append('uuid', uuid);
     request_data.append('csrfmiddlewaretoken', csrf);
 
-    // prepare UI before fetch
+    // prepare UI
     let content = $('.message-container');
     let human_msg = $("p[name='human_msg']").clone();
     human_msg.addClass("dialogue");
@@ -128,12 +128,8 @@ function therapy_chat() {
     .then(
         response => response.json())
     .then((response) => {
-        console.log(response);
-
-        let ai_message = response.ai_message;
-
         pre_process();
-        display_msg(ai_message);
+        display_msg(response.ai_message);
         post_process();
     });
 }
