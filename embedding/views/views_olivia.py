@@ -4,7 +4,7 @@ from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_chat
 from embedding.models import PromptModel, VisitorProfile
 from django.shortcuts import render
-from embedding.utils import load_random_greeting, record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
+from embedding.utils import get_int, load_random_greeting, record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
 import json
 
@@ -35,12 +35,6 @@ def olivia_async_chat(request):
 
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
-
-def get_int(t_age):
-    try:
-        return int(t_age)
-    except ValueError:
-        return 20
 
 def olivia_async_init(request):
     t_name = request.POST.get('t_name', '')

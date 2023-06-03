@@ -133,3 +133,10 @@ def record_dialogue(request, role, message, dialogue_id, source='chat', request_
     dialogue = Dialogue.objects.create(
         role=role, message=message, dialogue_id=dialogue_id, source=source, request_time=request_time, response_time=response_time)
     dialogue.save()
+
+
+def get_int(t_age, default_value=20):
+    try:
+        return int(t_age)
+    except ValueError:
+        return default_value
