@@ -1,4 +1,5 @@
 const BASE_INTERVAL = 100
+const TRANSITION_INTERVAL = 100
 
 function flow_messages(messages, callback, el) {
     let index = 0;
@@ -66,9 +67,10 @@ function add_event_listener() {
     });
 
     let textarea = document.querySelector("textarea");
-    textarea.addEventListener("keydown", function (e) {
+    textarea.addEventListener("keypress", function (e) {
         if (e.key === 'Enter') {
             therapy_chat();
+            e.preventDefault();
             return false;
         }
     });
@@ -80,7 +82,7 @@ function entrance_finish() {
     hide(d3);
     show(d4);
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
-    setTimeout(therapy_init, 4000);
+    setTimeout(therapy_init, TRANSITION_INTERVAL);
 }
 
 function get_history_messages() {
@@ -98,6 +100,18 @@ function get_history_messages() {
     }
     let history_str = JSON.stringify(history_msg_dic)
     return history_str;
+}
+
+function scroll_up() {
+    $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
+}
+
+function toggle_spinner(show) {
+    if (show) {
+        document.querySelector("div[name='spinner").classList.remove("invisible");
+    } else {
+        document.querySelector("div[name='spinner").classList.add("invisible");
+    }
 }
 
 function therapy_chat() {
@@ -119,19 +133,22 @@ function therapy_chat() {
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
     document.querySelector("textarea").value = '';
+    toggle_spinner(true);
+    scroll_up();
+
 
     // api fetch
     fetch("/olivia_async_chat/", {
         method: "POST",
         body: request_data,
     })
-    .then(
-        response => response.json())
-    .then((response) => {
-        pre_process();
-        display_msg(response.ai_message);
-        post_process();
-    });
+        .then(
+            response => response.json())
+        .then((response) => {
+            pre_process();
+            display_msg(response.ai_message);
+            post_process();
+        });
 }
 
 function therapy_init() {
@@ -151,16 +168,16 @@ function therapy_init() {
         method: "POST",
         body: request_data,
     })
-    .then(
-        response => response.json())
-    .then((response) => {
-        let d4 = document.querySelector("div[name='entrance_4']");
-        let d5 = document.querySelector("div[name='entrance_5']");
-        hide(d4);
-        show(d5);
-        console.log(response);
-        display_msg(response.ai_message);
-    });
+        .then(
+            response => response.json())
+        .then((response) => {
+            let d4 = document.querySelector("div[name='entrance_4']");
+            let d5 = document.querySelector("div[name='entrance_5']");
+            hide(d4);
+            show(d5);
+            console.log(response);
+            display_msg(response.ai_message);
+        });
 }
 
 function next_entrance() {
@@ -196,8 +213,8 @@ function display_msg_piece(final_list, current_index) {
     ai_msg.addClass("dialogue");
     content.append(ai_msg.get(0));
     ai_msg.fadeIn();
-    if (current_index==0) {
-        $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);
+    if (current_index == 0) {
+        scroll_up();
     }
 
     if (current_index >= final_list.length - 1) {
@@ -208,7 +225,7 @@ function display_msg_piece(final_list, current_index) {
 }
 
 function pre_process() {
-    $("div[name='spinner").hide();
+    toggle_spinner(false);
     $(".still-thinking").hide();
 }
 
