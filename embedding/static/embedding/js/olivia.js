@@ -83,16 +83,44 @@ function entrance_finish() {
     setTimeout(therapy_init, 4000);
 }
 
+function get_history_messages() {
+    let history_elements = $(".dialogue");
+    let history_msg_dic = [];
+    let role = "user";
+    for (let i = 0; i < history_elements.length; i++) {
+        if (history_elements.get(i).getAttribute('name') == 'ai_msg') {
+            role = 'assistant'
+        } else {
+            role = 'user'
+        }
+        let dic = { "role": role, "content": history_elements.get(i).innerText }
+        history_msg_dic.push(dic);
+    }
+    let history_str = JSON.stringify(history_msg_dic)
+    return history_str;
+}
+
 function therapy_chat() {
-    let csrf = $("input[name='csrfmiddlewaretoken']");
+    // prepare data
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+    let history_str = get_history_messages();
+    let new_msg_text = document.querySelector("textarea").value;
+    let uuid = '1234567890'
     const request_data = new FormData();
-    let history_msg = []
-    let history = JSON.stringify(history_msg)
-    let message = 'hi'
-    request_data.append('history', history);
-    request_data.append('message', message);
-    request_data.append('uuid', '1234567890');
-    request_data.append('csrfmiddlewaretoken', csrf.val());
+    request_data.append('history', history_str);
+    request_data.append('message', new_msg_text);
+    request_data.append('uuid', uuid);
+    request_data.append('csrfmiddlewaretoken', csrf);
+
+    // prepare UI before fetch
+    let content = $('.message-container');
+    let human_msg = $("p[name='human_msg']").clone();
+    human_msg.addClass("dialogue");
+    human_msg.text(new_msg_text);
+    content.append(human_msg.get(0));
+    document.querySelector("textarea").value = '';
+
+    // api fetch
     fetch("/olivia_async_chat/", {
         method: "POST",
         body: request_data,
