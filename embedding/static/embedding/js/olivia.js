@@ -135,15 +135,18 @@ function therapy_chat() {
 }
 
 function therapy_init() {
+    // prepare data
     let csrf = $("input[name='csrfmiddlewaretoken']");
-    const request_data = new FormData();
     t_name = document.querySelector("input[name='msg_1']").value;
     t_age = document.querySelector("input[name='msg_2']").value;
     t_gender = 'Female';
+    const request_data = new FormData();
     request_data.append('t_name', t_name);
     request_data.append('t_age', t_age);
     request_data.append('t_gender', t_gender);
     request_data.append('csrfmiddlewaretoken', csrf.val());
+
+    // api fetch
     fetch("/olivia_async_init/", {
         method: "POST",
         body: request_data,
