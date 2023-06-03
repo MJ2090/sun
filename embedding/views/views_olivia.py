@@ -36,11 +36,16 @@ def olivia_async_chat(request):
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
 
+def get_int(t_age):
+    try:
+        return int(t_age)
+    except ValueError:
+        return 20
+
 def olivia_async_init(request):
     t_name = request.POST.get('t_name', '')
-    t_age = request.POST.get('t_age', '')
+    t_age = get_int(request.POST.get('t_age', ''))
     t_gender = request.POST.get('t_gender', '')
-    t_age = int(t_age)
     uuid = load_random_string(10)
     VisitorProfile.objects.create(
         uuid=uuid, username=t_name, age=t_age, gender=t_gender)

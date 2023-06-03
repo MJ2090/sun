@@ -1,6 +1,6 @@
 .entrance {
   font-family: Comic Sans MS, Comic Sans, cursive;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .entrance-input {
@@ -8,7 +8,7 @@
   border-bottom: 1px solid #dadada;
   outline: none;
   resize: none;
-  font-size: 24px;
+  font-size: 22px;
   padding: 0;
 }
 
