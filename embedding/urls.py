@@ -70,6 +70,7 @@ urlpatterns = [
     path('chat_olivia/', views_olivia.chat_olivia, name='chat_olivia'),
     path('olivia/', views_olivia.entrance, name='entrance'),
     path('olivia_async_init/', views_olivia.olivia_async_init, name='olivia_async_init'),
+    path('olivia_async_chat/', views_olivia.olivia_async_chat, name='olivia_async_chat'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]

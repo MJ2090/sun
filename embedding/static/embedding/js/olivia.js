@@ -80,30 +80,26 @@ function entrance_finish() {
     hide(d3);
     show(d4);
     flow_messages(document.querySelectorAll("[name='msg_4']"), null);
-    therapy_init();
+    setTimeout(therapy_init, 4000);
 }
 
 function therapy_chat() {
     let csrf = $("input[name='csrfmiddlewaretoken']");
     const request_data = new FormData();
-    t_name = document.querySelector("input[name='msg_1']").value;
-    t_age = document.querySelector("input[name='msg_2']").value;
-    t_gender = 'Female';
-    request_data.append('t_name', t_name);
-    request_data.append('t_age', t_age);
-    request_data.append('t_gender', t_gender);
+    let history_msg = []
+    let history = JSON.stringify(history_msg)
+    let message = 'hi'
+    request_data.append('history', history);
+    request_data.append('message', message);
+    request_data.append('uuid', '1234567890');
     request_data.append('csrfmiddlewaretoken', csrf.val());
-    fetch("/olivia_async_init/", {
+    fetch("/olivia_async_chat/", {
         method: "POST",
         body: request_data,
     })
     .then(
         response => response.json())
     .then((response) => {
-        let d4 = document.querySelector("div[name='entrance_4']");
-        let d5 = document.querySelector("div[name='entrance_5']");
-        hide(d4);
-        show(d5);
         console.log(response);
 
         let ai_message = response.ai_message;
@@ -136,12 +132,7 @@ function therapy_init() {
         hide(d4);
         show(d5);
         console.log(response);
-
-        let ai_message = response.ai_message;
-
-        pre_process();
-        display_msg(ai_message);
-        post_process();
+        display_msg(response.ai_message);
     });
 }
 

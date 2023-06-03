@@ -93,3 +93,7 @@
 .hidden {
   display: none;
 }
+
+.chat-container {
+  height: 480px;
+}
