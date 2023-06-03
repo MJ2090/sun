@@ -34,21 +34,24 @@ function demo_async_call() {
 
 function demo_init() {
     let timer;
-    $("textarea[name='text']").keyup(function () {
-        clearTimeout(timer);
-        timer = setTimeout(() => { demo_async_call(); }, 800);
-    });
-    $("textarea[name='prompt']").keyup(function () {
-        clearTimeout(timer);
-        timer = setTimeout(() => { demo_async_call(); }, 800);
-    });
-    $("input[name='temperature']").change(function () {
-        clearTimeout(timer);
-        timer = setTimeout(() => { demo_async_call(); }, 800);
-    });
-    $("textarea[name='question']").keyup(function () {
-        clearTimeout(timer);
-        timer = setTimeout(() => { demo_async_call(); }, 800);
+    // $("textarea[name='text']").keyup(function () {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => { demo_async_call(); }, 800);
+    // });
+    // $("textarea[name='prompt']").keyup(function () {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => { demo_async_call(); }, 800);
+    // });
+    // $("input[name='temperature']").change(function () {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => { demo_async_call(); }, 800);
+    // });
+    // $("textarea[name='question']").keyup(function () {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => { demo_async_call(); }, 800);
+    // });
+    $('.send-button').click(function () {
+        demo_async_call();
     });
 }
 
