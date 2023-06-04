@@ -29,15 +29,15 @@ class Command(BaseCommand):
         mm = EmbeddingModel.objects.filter(name = '习近平语录测试')
         print(len(mm))
         names = [m.uuid + ".csv" for m in mm]
-        # print(names)
-        # df = pd.concat(map(pd.read_csv, names), ignore_index=True)
-        # df.to_csv('processed/chen.csv')
-        # print("finished")
-        non_exists = []
-        for name in names:
-            if os.path.exists('/var/www/asuperdomain.com/static/embedding/data/' + name):
-                non_exists.append(name)
-        print(non_exists)
+        print(names)
+        df = pd.concat(map(pd.read_csv, names), ignore_index=True)
+        df.to_csv('processed/chen.csv')
+        print("finished")
+        # non_exists = []
+        # for name in names:
+        #     if os.path.exists('/var/www/asuperdomain.com/static/embedding/data/' + name):
+        #         non_exists.append(name)
+        # print(non_exists)
 
     def init_db(self):
         if not UserProfile.objects.filter(username = 'default_user').exists():
