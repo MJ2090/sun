@@ -3,7 +3,6 @@ let controller = new AbortController();
 
 function chat_async_call() {
     let new_msg = $("input[name='message']");
-    let button = $("button[name='send_button']");
     if (new_msg.val() == "") {
         return;
     }
@@ -40,9 +39,6 @@ function chat_async_call() {
     human_msg.text(new_msg_text);
     content.append(human_msg.get(0));
 
-    let ai_title = $("div[name='ai_title']").clone();
-    content.append(ai_title.get(0));
-
     $("div[name='spinner").show();
     timer = setTimeout(() => { display_still_thinking(); }, 10000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
@@ -67,6 +63,9 @@ function chat_async_call() {
         .then(
             response => response.json())
         .then((response) => {
+            let ai_title = $("div[name='ai_title']").clone();
+            content.append(ai_title.get(0));
+
             let ai_message = response.ai_message;
             let is_code = ai_message.indexOf('```') != -1;
             while (true) {
@@ -144,7 +143,7 @@ function audio_process(audio_address, enabled) {
 }
 
 function pre_process() {
-    $("div[name='spinner")
+    $("div[name='spinner").hide();
     $(".still-thinking").hide();
     clearTimeout(timer);
 }
