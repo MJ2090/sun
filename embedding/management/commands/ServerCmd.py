@@ -35,7 +35,7 @@ class Command(BaseCommand):
         # print("finished")
         non_exists = []
         for name in names:
-            if not os.path.exists('/var/www/asuperdomain.com/static/embedding/data/' + name):
+            if os.path.exists('/var/www/asuperdomain.com/static/embedding/data/' + name):
                 non_exists.append(name)
         print(non_exists)
 
