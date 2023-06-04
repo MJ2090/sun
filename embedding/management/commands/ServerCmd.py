@@ -1,6 +1,6 @@
 # encoding:utf-8
-from embedding.models import PromptModel, UserProfile
-from django.core.management.base import BaseCommand, CommandError, EmbeddingModel
+from embedding.models import PromptModel, UserProfile, EmbeddingModel
+from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 EXE_CMDS = ['INIT', 'MM']
