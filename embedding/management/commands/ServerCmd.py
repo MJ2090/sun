@@ -26,6 +26,8 @@ class Command(BaseCommand):
         print("in merge: ")
         mm = EmbeddingModel.objects.filter(name = '习近平语录测试')
         print(len(mm))
+        for m in mm:
+            print(m.uuid)
 
     def init_db(self):
         if not UserProfile.objects.filter(username = 'default_user').exists():
