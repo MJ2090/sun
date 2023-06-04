@@ -42,8 +42,6 @@
   width: 320px;
 }
 
-.message-container {}
-
 @media (min-width:961px) {
   .message-inner-container {
     overflow: scroll;

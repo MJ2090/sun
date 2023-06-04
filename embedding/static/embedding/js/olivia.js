@@ -1,5 +1,6 @@
 const BASE_INTERVAL = 100
 const TRANSITION_INTERVAL = 100
+let controller = new AbortController();
 
 function flow_messages(messages, callback, el) {
     let index = 0;
@@ -136,11 +137,13 @@ function therapy_chat() {
     toggle_spinner(true);
     scroll_up();
 
-
+    controller.abort();
+    controller = new AbortController();
     // api fetch
     fetch("/olivia_async_chat/", {
         method: "POST",
         body: request_data,
+        signal: controller.signal,
     })
         .then(
             response => response.json())
