@@ -2,6 +2,7 @@
 from embedding.models import PromptModel, UserProfile, EmbeddingModel
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+import pandas as pd
 
 EXE_CMDS = ['INIT', 'MM']
 
@@ -26,8 +27,8 @@ class Command(BaseCommand):
         print("in merge: ")
         mm = EmbeddingModel.objects.filter(name = '习近平语录测试')
         print(len(mm))
-        for m in mm:
-            print(m.uuid)
+        names = [m.uuid + ".csv" for m in mm]
+        print(names)
 
     def init_db(self):
         if not UserProfile.objects.filter(username = 'default_user').exists():
