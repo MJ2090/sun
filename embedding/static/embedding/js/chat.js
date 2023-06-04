@@ -1,9 +1,10 @@
 let timer;
+let controller = new AbortController();
 
 function chat_async_call() {
     let new_msg = $("input[name='message']");
     let button = $("button[name='send_button']");
-    if (new_msg.val() == "" || button.prop("disabled")) {
+    if (new_msg.val() == "") {
         return;
     }
     let character = $("select[name='character']");
@@ -23,8 +24,7 @@ function chat_async_call() {
         let dic = { "role": role, "content": old_msg.get(i).innerText }
         history_msg.push(dic);
     }
-    let history = JSON.stringify(history_msg)
-    button.prop("disabled", true);
+    let history = JSON.stringify(history_msg);
     character.prop("disabled", true);
     model_selector.prop("disabled", true);
     let new_msg_text = new_msg.val();
@@ -47,6 +47,10 @@ function chat_async_call() {
     timer = setTimeout(() => { display_still_thinking(); }, 10000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
+    // abort previous call if any
+    controller.abort();
+    controller = new AbortController();
+
     const request_data = new FormData();
     request_data.append('message', new_msg_text);
     request_data.append('character', character.val());
@@ -58,6 +62,7 @@ function chat_async_call() {
     fetch("/chat_async/", {
         method: "POST",
         body: request_data,
+        signal: controller.signal,
     })
         .then(
             response => response.json())
@@ -118,7 +123,7 @@ function display_msg_piece(final_list, current_index) {
     content.append(ai_msg.get(0));
     ai_msg.fadeIn();
     hljs.highlightAll();
-    if (current_index==0) {
+    if (current_index == 0) {
         $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);
     }
 
@@ -139,15 +144,13 @@ function audio_process(audio_address, enabled) {
 }
 
 function pre_process() {
-    $("div[name='spinner").hide();
+    $("div[name='spinner")
     $(".still-thinking").hide();
     clearTimeout(timer);
 }
 
 function post_process() {
     let new_msg = $("input[name='message']");
-    let button = $("button[name='send_button']");
-    button.prop("disabled", false);
     new_msg.focus();
 }
 

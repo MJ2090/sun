@@ -137,6 +137,7 @@ function therapy_chat() {
     toggle_spinner(true);
     scroll_up();
 
+    // abort previous call if any
     controller.abort();
     controller = new AbortController();
     // api fetch
