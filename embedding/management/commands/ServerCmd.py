@@ -1,9 +1,9 @@
 # encoding:utf-8
 from embedding.models import PromptModel, UserProfile
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand, CommandError, EmbeddingModel
 from django.db import transaction
 
-EXE_CMDS = ['INIT']
+EXE_CMDS = ['INIT', 'MM']
 
 
 class Command(BaseCommand):
@@ -15,9 +15,17 @@ class Command(BaseCommand):
         with transaction.atomic():
             if options['command'] in EXE_CMDS:
                 print(options['command'])
-                self.init_db()
+                if options['command'] == 'INIT':
+                    self.init_db()
+                if options['command'] == 'MM':
+                    self.merge()
             else:
                 raise CommandError("\nAvailable commands:" + '\n'.join(EXE_CMDS))
+
+    def merge(self):
+        print("in merge: ")
+        mm = EmbeddingModel.objects.filter(name = '习近平语录测试')
+        print(len(mm))
 
     def init_db(self):
         if not UserProfile.objects.filter(username = 'default_user').exists():
