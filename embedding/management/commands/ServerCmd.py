@@ -25,10 +25,11 @@ class Command(BaseCommand):
                 raise CommandError("\nAvailable commands:" + '\n'.join(EXE_CMDS))
 
     def merge(self):
+        pref = '/var/www/asuperdomain.com/static/embedding/data/'
         print("in merge: ")
         mm = EmbeddingModel.objects.filter(name = '习近平语录测试')
         print(len(mm))
-        names = [m.uuid + ".csv" for m in mm]
+        names = [pref + m.uuid + ".csv" for m in mm]
         print(names)
         df = pd.concat(map(pd.read_csv, names), ignore_index=True)
         df.to_csv('processed/chen.csv')
