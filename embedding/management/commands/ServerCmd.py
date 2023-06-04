@@ -29,6 +29,9 @@ class Command(BaseCommand):
         print(len(mm))
         names = [m.uuid + ".csv" for m in mm]
         print(names)
+        df = pd.concat(map(pd.read_csv, names), ignore_index=True)
+        df.to_csv('processed/chen.csv')
+        print("finished")
 
     def init_db(self):
         if not UserProfile.objects.filter(username = 'default_user').exists():
