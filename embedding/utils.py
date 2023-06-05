@@ -10,6 +10,7 @@ from django.core.files.storage import default_storage
 from PIL import Image
 from datetime import datetime
 import time
+import shutil
 
 random.seed(datetime.now().timestamp())
 
@@ -140,3 +141,10 @@ def get_int(t_age, default_value=20):
         return int(t_age)
     except ValueError:
         return default_value
+    
+def move_to_static(src, dest):
+    base = '/var/www/asuperdomain.com/static/embedding/'
+    if not os.path.exists(base):
+        print("base not exist in move_to_static")
+        return
+    shutil.copyfile(src, base + dest)

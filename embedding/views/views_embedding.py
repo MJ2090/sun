@@ -7,7 +7,7 @@ from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_training, feature_question
 from embedding.models import EmbeddingDocument, EmbeddingModel
 from django.shortcuts import render
-from embedding.utils import load_embedding_models, save_to_local, get_basic_data
+from embedding.utils import move_to_static, load_embedding_models, save_to_local, get_basic_data
 import json
 
 
@@ -27,6 +27,7 @@ def embedding_training_async(request):
     documents = {}
     for _, original_pdf in request.FILES.items():
         pdf_file_name = save_to_local(original_pdf, 'pdf')
+        move_to_static(pdf_file_name, pdf_file_name)
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
         print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
