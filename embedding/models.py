@@ -55,7 +55,7 @@ class PromptModel(models.Model):
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.history)
-
+    
 
 class EmbeddingModel(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
@@ -68,6 +68,14 @@ class EmbeddingModel(models.Model):
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
 
+
+class EmbeddingDocument(models.Model):
+    model = models.ForeignKey(EmbeddingModel, on_delete=models.CASCADE,)
+    filename = models.CharField(max_length=500, default='')
+
+    def __str__(self):
+        return u'%s' % (self.filename)
+    
 
 class Contact(models.Model):
     username = models.CharField(max_length=100, default='')
