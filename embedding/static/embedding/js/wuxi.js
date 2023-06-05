@@ -10,24 +10,24 @@ function fetch_documents() {
     body: request_data,
   }).then(response => response.json()).then((response) => {
     let data = response.result;
-    let ol = document.querySelector("ol");
+    let ul = document.querySelector("ul");
     let li = document.querySelector("li.hidden");
-    while (ol.firstChild) {
-      ol.removeChild(ol.firstChild);
+    while (ul.firstChild) {
+      ul.removeChild(ul.firstChild);
     }
 
     for (let i = 0; i < data.length; i++) {
       let new_li = li.cloneNode();
       new_li.classList.remove("hidden");
       new_li.innerHTML = data[i].split("/").slice(-1)[0].substring(16);
-      ol.append(new_li);
+      ul.append(new_li);
     }
 
     if (data.length == 0) {
       let li = document.querySelector("li.hidden.none");
       let new_li = li.cloneNode(true);
       new_li.classList.remove("hidden");
-      ol.append(new_li);
+      ul.append(new_li);
     }
   });
 }
