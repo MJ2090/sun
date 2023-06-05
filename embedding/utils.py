@@ -148,9 +148,6 @@ def move_to_static(src, dest):
         print("base not exist in move_to_static")
         return
     sub_dir = os.path.dirname(base_dir + dest)
-    print("sub_dir", sub_dir)
     if not os.path.exists(sub_dir):
         os.makedirs(sub_dir)
-        print("sub_dir22", os.path.exists(sub_dir))
-    print(src, base_dir + dest)
     shutil.copyfile(src, base_dir + dest)
