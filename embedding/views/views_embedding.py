@@ -5,7 +5,7 @@ from embedding.forms.embedding import TrainingForm, QuestionForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_training, feature_question
-from embedding.models import EmbeddingModel
+from embedding.models import EmbeddingDocument, EmbeddingModel
 from django.shortcuts import render
 from embedding.utils import load_embedding_models, save_to_local, get_basic_data
 import json
@@ -24,15 +24,20 @@ def embedding_training_async(request):
     name = request.POST.get('name', '')
     reject_message = request.POST.get('reject_message', '')
     print("original_pdf ", request.FILES, type(request.FILES))
+    documents = {}
     for _, original_pdf in request.FILES.items():
         pdf_file_name = save_to_local(original_pdf, 'pdf')
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
         print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
+        documents[pdf_file_name] = len(pdf_pages)
     print(f'embedding_training_async started, embedding name {name}')
+    print(documents)
     openai_response = feature_training(text)
-    new_model = EmbeddingModel.objects.get_or_create(
+    embedding_model = EmbeddingModel.objects.get_or_create(
         name=name, owner=request.user, uuid=openai_response, reject_message=reject_message)
+    for key, v in documents:
+        EmbeddingDocument.objects.create(model=embedding_model, filename=key, pages=v)
     print(openai_response)
     return HttpResponse(json.dumps({'result': f'new model {name} has finished training.'}))
 
