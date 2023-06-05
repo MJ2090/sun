@@ -143,9 +143,12 @@ def get_int(t_age, default_value=20):
         return default_value
     
 def move_to_static(src, dest):
-    base = '/var/www/asuperdomain.com/static/embedding/'
-    if not os.path.exists(base):
+    base_dir = '/var/www/asuperdomain.com/static/embedding/'
+    if not os.path.exists(base_dir):
         print("base not exist in move_to_static")
         return
-    print(src, base + dest)
-    shutil.copyfile(src, base + dest)
+    sub_dir = os.path.dirname(dest)
+    if not os.path.exists(sub_dir):
+        os.makedirs(sub_dir)
+    print(src, base_dir + dest)
+    shutil.copyfile(src, base_dir + dest)
