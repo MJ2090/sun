@@ -141,7 +141,8 @@ def get_int(t_age, default_value=20):
         return int(t_age)
     except ValueError:
         return default_value
-    
+
+
 def move_to_static(src, dest):
     base_dir = '/var/www/asuperdomain.com/static/embedding/'
     if not os.path.exists(base_dir):
