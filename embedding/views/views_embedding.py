@@ -47,6 +47,11 @@ def embedding_wuxi(request):
     return render(request, 'embedding/wuxi.html', ret)
 
 
+def embedding_fetch_model_async(request):
+    question = request.POST.get('model', '')
+    docs = ""
+
+
 def embedding_question(request):
     ret = get_basic_data(request)
     ret['form'] = QuestionForm()

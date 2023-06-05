@@ -39,6 +39,8 @@ urlpatterns = [
          name='embedding_training'),
     path('embedding_training_async/', views_embedding.embedding_training_async,
          name='embedding_training_async'),
+    path('embedding_fetch_model_async', views_embedding.embedding_fetch_model_async,
+         name='embedding_fetch_model_async'),
 
     path('signin/', views_sign.signin, name='signin'),
     path('signup/', views_sign.signup, name='signup'),
@@ -69,8 +71,10 @@ urlpatterns = [
 
     path('chat_olivia/', views_olivia.chat_olivia, name='chat_olivia'),
     path('olivia/', views_olivia.entrance, name='entrance'),
-    path('olivia_async_init/', views_olivia.olivia_async_init, name='olivia_async_init'),
-    path('olivia_async_chat/', views_olivia.olivia_async_chat, name='olivia_async_chat'),
+    path('olivia_async_init/', views_olivia.olivia_async_init,
+         name='olivia_async_init'),
+    path('olivia_async_chat/', views_olivia.olivia_async_chat,
+         name='olivia_async_chat'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]

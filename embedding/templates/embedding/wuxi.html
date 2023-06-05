@@ -8,6 +8,7 @@
 
 {% block privatejs %}
 <script src="{% static 'embedding/js/embedding_question.js' %}"></script>
+<script src="{% static 'embedding/js/wuxi.js' %}"></script>
 {% endblock %}
 
 {% block main %}
@@ -29,9 +30,13 @@
         <div class="col-12">
           <label for="character" class="form-label">{% translate "Choose Q&A model" %}</label>
           {{ form.character }}
-          <div class="invalid-feedback">
-            :D
-          </div>
+        </div>
+
+        <div class="col-12">
+          <label for="character" class="form-label">{% translate "Documents in this model" %}</label>
+          <ol class="list-group list-group-numbered">
+            <li class="list-group-item">...</li>
+          </ol>
         </div>
 
         <div class="col-12">
