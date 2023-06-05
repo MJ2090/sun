@@ -22,6 +22,13 @@ function fetch_documents() {
       new_li.innerHTML = data[i].split("/").slice(-1)[0].substring(16);
       ol.append(new_li);
     }
+
+    if (data.length == 0) {
+      let li = document.querySelector("li.hidden.none");
+      let new_li = li.cloneNode();
+      new_li.classList.remove("hidden");
+      ol.append(new_li);
+    }
   });
 }
 

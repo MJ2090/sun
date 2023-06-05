@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 09:09-0700\n"
+"POT-Creation-Date: 2023-06-05 09:26-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,12 +85,12 @@ msgid "Choose Q&A model"
 msgstr "选择问答模型"
 
 #: embedding/templates/embedding/embedding_question.html:41
-#: embedding/templates/embedding/wuxi.html:44
+#: embedding/templates/embedding/wuxi.html:45
 msgid "Question"
 msgstr "我的问题"
 
 #: embedding/templates/embedding/embedding_question.html:45
-#: embedding/templates/embedding/wuxi.html:48
+#: embedding/templates/embedding/wuxi.html:49
 msgid "Answer"
 msgstr "我的答案"
 
@@ -138,7 +138,11 @@ msgstr "智能问答机器人"
 msgid "Documents in this model"
 msgstr "模型资料文件"
 
-#: embedding/templates/embedding/wuxi.html:62
+#: embedding/templates/embedding/wuxi.html:38
+msgid "list not available"
+msgstr "无法获取信息"
+
+#: embedding/templates/embedding/wuxi.html:63
 msgid "GO"
 msgstr "开始"
 
