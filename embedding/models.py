@@ -72,6 +72,7 @@ class EmbeddingModel(models.Model):
 class EmbeddingDocument(models.Model):
     model = models.ForeignKey(EmbeddingModel, on_delete=models.CASCADE,)
     filename = models.CharField(max_length=500, default='')
+    pages = models.IntegerField(default=0)
 
     def __str__(self):
         return u'%s' % (self.filename)
