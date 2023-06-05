@@ -18,5 +18,5 @@ function fetch_documents() {
 }
 
 $(document).ready(function () {
-  fetch_documents();
+  //fetch_documents();
 })
