@@ -18,7 +18,7 @@ function fetch_documents() {
 
     for (let i = 0; i < data.length; i++) {
       let a = document.createElement('a');
-      a.href = data[i]
+      a.href = '/static/embedding/' + data[i]
       a.innerHTML = data[i].split("/").slice(-1)[0].substring(16);
       let new_li = li.cloneNode();
       new_li.classList.remove("hidden");
