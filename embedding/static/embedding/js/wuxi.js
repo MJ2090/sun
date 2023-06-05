@@ -22,11 +22,17 @@ function fetch_documents() {
       new_li.innerHTML = data[i].split("/").slice(-1)[0].substring(16);
       ol.append(new_li);
     }
-
-    console.log(data);
   });
 }
 
-$(document).ready(function () {
+function wuxi_init() {
+  let selecor = document.querySelector("select");
+  selecor.addEventListener("change", function (e) {
+    fetch_documents();
+  });
   fetch_documents();
+}
+
+$(document).ready(function () {
+  wuxi_init();
 })
