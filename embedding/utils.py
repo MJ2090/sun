@@ -147,4 +147,5 @@ def move_to_static(src, dest):
     if not os.path.exists(base):
         print("base not exist in move_to_static")
         return
+    print(src, base + dest)
     shutil.copyfile(src, base + dest)
