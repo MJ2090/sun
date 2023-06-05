@@ -63,6 +63,7 @@ class EmbeddingModel(models.Model):
     uuid = models.CharField(max_length=10, default='')
     is_public = models.BooleanField(default=False)
     reject_message = models.CharField(max_length=500, default='')
+    enabled = models.BooleanField(default = True)
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
@@ -140,4 +141,4 @@ class VisitorProfile(models.Model):
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
-        return self.username + self.uuid
+        return self.username + ' ' + str(self.age) + ' ' + self.uuid
