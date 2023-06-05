@@ -52,8 +52,11 @@ def embedding_wuxi(request):
 
 
 def embedding_fetch_model_async(request):
-    question = request.POST.get('model', '')
-    docs = ""
+    uuid = request.POST.get('model', '')
+    model = EmbeddingModel.objects.get(uuid=uuid)
+    docs = EmbeddingDocument.objects.filter(model=model)
+    doc_names = [doc.filename for doc in docs]
+    return HttpResponse(json.dumps({'result': doc_names}))
 
 
 def embedding_question(request):
