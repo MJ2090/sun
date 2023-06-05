@@ -32,11 +32,10 @@ def embedding_training_async(request):
         print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
         documents[pdf_file_name] = len(pdf_pages)
     print(f'embedding_training_async started, embedding name {name}')
-    print(documents)
     openai_response = feature_training(text)
-    embedding_model = EmbeddingModel.objects.get_or_create(
+    embedding_model = EmbeddingModel.objects.create(
         name=name, owner=request.user, uuid=openai_response, reject_message=reject_message)
-    for key, v in documents:
+    for key, v in documents.items():
         EmbeddingDocument.objects.create(model=embedding_model, filename=key, pages=v)
     print(openai_response)
     return HttpResponse(json.dumps({'result': f'new model {name} has finished training.'}))
