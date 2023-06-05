@@ -25,7 +25,7 @@ function fetch_documents() {
 
     if (data.length == 0) {
       let li = document.querySelector("li.hidden.none");
-      let new_li = li.cloneNode();
+      let new_li = li.cloneNode(true);
       new_li.classList.remove("hidden");
       ol.append(new_li);
     }
