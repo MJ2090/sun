@@ -152,7 +152,7 @@ msgstr "提交"
 
 #: embedding/templates/embedding/wuxi.html:43
 msgid "Build Q&A bot"
-msgstr "智能问答机器人"
+msgstr "智能问答"
 
 #: embedding/templates/embedding/wuxi.html:62
 msgid "Add documents"
