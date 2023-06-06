@@ -1,5 +1,5 @@
-const BASE_INTERVAL = 2000
-const TRANSITION_INTERVAL = 4000
+const BASE_INTERVAL = 200
+const TRANSITION_INTERVAL = 400
 let controller = new AbortController();
 
 function flow_messages(messages, callback, el) {

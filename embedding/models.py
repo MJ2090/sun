@@ -151,5 +151,13 @@ class VisitorProfile(models.Model):
     diagnosis = models.CharField(max_length=50, default='', blank=True)
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
+
+class SuicideAssessment(models.Model):
+    visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
+    timestamp = models.IntegerField(default=0)
+    assessment = models.CharField(max_length=20, default='')
+    evidence = models.CharField(max_length=1500, default='', blank=True)
+
+
     def __str__(self):
-        return self.username + ' ' + str(self.age) + ' ' + self.uuid
+        return self.visitor + ' ' + str(self.timestamp) + ' ' + self.assessment
