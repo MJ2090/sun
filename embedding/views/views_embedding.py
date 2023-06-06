@@ -4,11 +4,12 @@ from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
 from embedding.vector.file_loader import load_pdf
 from embedding.polly.audio import generate_audio
-from embedding.openai.features import feature_add_embedding_doc, feature_training, feature_question
+from embedding.openai.features import feature_summary, feature_add_embedding_doc, feature_training, feature_question
 from embedding.models import EmbeddingDocument, EmbeddingModel
 from django.shortcuts import render
 from embedding.utils import move_to_static, load_embedding_models, save_to_local, get_basic_data
 import json
+from threading import Thread
 
 
 @login_required
@@ -29,13 +30,15 @@ def embedding_add_doc_async(request):
         move_to_static(pdf_file_name, pdf_file_name)
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
-        print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
+        print('current text length: ', len(text), text,
+              f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
         documents[pdf_file_name] = len(pdf_pages)
     print(f'embedding_add_doc_async started, embedding uuid {model}')
     openai_response = feature_training(text)
     embedding_model = EmbeddingModel.objects.get(uuid=model)
     for key, v in documents.items():
-        EmbeddingDocument.objects.create(model=embedding_model, filename=key, pages=v)
+        EmbeddingDocument.objects.create(
+            model=embedding_model, filename=key, pages=v)
     feature_add_embedding_doc(embedding_model, openai_response)
     print(openai_response)
     return HttpResponse(json.dumps({'result': 'docs added.'}))
@@ -53,14 +56,16 @@ def embedding_training_async(request):
         move_to_static(pdf_file_name, pdf_file_name)
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
-        print('current text length: ', len(text), text, f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
+        print('current text length: ', len(text), text,
+              f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
         documents[pdf_file_name] = len(pdf_pages)
     print(f'embedding_training_async started, embedding name {name}')
     openai_response = feature_training(text)
     embedding_model = EmbeddingModel.objects.create(
         name=name, owner=request.user, uuid=openai_response, reject_message=reject_message)
     for key, v in documents.items():
-        EmbeddingDocument.objects.create(model=embedding_model, filename=key, pages=v)
+        EmbeddingDocument.objects.create(
+            model=embedding_model, filename=key, pages=v)
     print(openai_response)
     return HttpResponse(json.dumps({'result': f'new model {name} has finished training.'}))
 
@@ -75,12 +80,32 @@ def embedding_wuxi(request):
     return render(request, 'embedding/wuxi.html', ret)
 
 
+def text_summary_async(doc):
+    # Define async function
+    def hello_world():
+        print("Hello")
+        pdf_pages = load_pdf(doc.filename)
+        text = '\n\n'.join([page.page_content for page in pdf_pages])
+        openai_response = feature_summary(
+            text, model='gpt-3.5-turbo', max_words=200, max_tokens=800)
+        summary_text = openai_response["choices"][0]["message"]["content"]
+        doc.summarization = summary_text
+        doc.save()
+        print("World finished")
+    thread = Thread(target=hello_world)
+    thread.start()
+
+
 def embedding_fetch_model_async(request):
     uuid = request.POST.get('model', '')
     model = EmbeddingModel.objects.get(uuid=uuid)
     docs = EmbeddingDocument.objects.filter(model=model)
     res = []
+    print("9999999")
     for doc in docs:
+        print(8888, doc.summarization == 'Processing')
+        if doc.summarization == 'Processing':
+            text_summary_async(doc)
         res.append({'name': doc.filename, 'summarization': doc.summarization})
     return HttpResponse(json.dumps({'result': res}))
 
