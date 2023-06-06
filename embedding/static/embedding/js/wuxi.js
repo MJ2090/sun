@@ -26,6 +26,8 @@ function fetch_documents() {
 
       let doc_p = new_li.querySelector("p");
       doc_p.innerHTML = doc_p.innerHTML + data[i].summarization;
+      doc_p.addEventListener("click", summary_toggle);
+      doc_p.nextElementSibling.addEventListener("click", summary_toggle);
 
       new_li.classList.remove("hidden");
       ul.append(new_li);
@@ -40,6 +42,22 @@ function fetch_documents() {
   });
 }
 
+function summary_toggle(e) {
+  let li = e.target.parentElement;
+  let p = li.querySelector("p");
+  if (p.classList.contains("summary-p")) {
+    p.classList.remove("summary-p");
+  } else {
+    p.classList.add("summary-p");
+  }
+  let div = li.querySelector("div.summary-shadow");
+  if (div.classList.contains("hidden")) {
+    div.classList.remove("hidden");
+  } else {
+    div.classList.add("hidden");
+  }
+}
+
 function add_doc_async() {
   let original_pdf = document.querySelector("input[name='file_f']");
   let model = $("select[name='character']");
@@ -50,7 +68,7 @@ function add_doc_async() {
   request_data.append('csrfmiddlewaretoken', csrf.val());
   if (original_pdf.files.length > 0) {
     for (let index = 0; index < original_pdf.files.length; index++) {
-      request_data.append('original_pdf_'+index, original_pdf.files[index]);
+      request_data.append('original_pdf_' + index, original_pdf.files[index]);
     }
   }
   fetch("/embedding_add_doc_async/", {
