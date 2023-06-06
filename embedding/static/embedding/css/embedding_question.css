@@ -43,3 +43,16 @@
     display: flex;
     justify-content: space-between;
 }
+
+.summary-shadow {
+    height: 60px;
+    position: absolute;
+    background: linear-gradient(1deg, white, #ffffff00);
+    width: 90%;
+    bottom: 20px;
+}
+
+.summary-p {
+    height: 100px;
+    overflow: hidden;
+}

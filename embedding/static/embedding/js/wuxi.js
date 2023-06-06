@@ -11,25 +11,23 @@ function fetch_documents() {
   }).then(response => response.json()).then((response) => {
     let data = response.result;
     let ul = document.querySelector("ul");
-    let li = document.querySelector("li.hidden");
     while (ul.firstChild) {
       ul.removeChild(ul.firstChild);
     }
 
     for (let i = 0; i < data.length; i++) {
-      let a = document.createElement('a');
+      let li = document.querySelector("li.hidden.block");
+      let new_li = li.cloneNode(true);
+
+      let a = new_li.querySelector('a');
       a.href = '/static/embedding/' + data[i].name
       a.target = 'blank'
       a.innerHTML = data[i].name.split("/").slice(-1)[0].substring(16);
 
-      let doc_p = document.querySelector("p.hidden").cloneNode(true);
+      let doc_p = new_li.querySelector("p");
       doc_p.innerHTML = doc_p.innerHTML + data[i].summarization;
-      doc_p.classList.remove("hidden");
 
-      let new_li = li.cloneNode();
       new_li.classList.remove("hidden");
-      new_li.append(a);
-      new_li.append(doc_p);
       ul.append(new_li);
     }
 

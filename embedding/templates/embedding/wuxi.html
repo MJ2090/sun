@@ -13,9 +13,15 @@
 
 {% block main %}
 <div class="hidden">
-  <li class="list-group-item hidden">...</li>
   <li class="list-group-item hidden none">{% translate "list not available" %}</li>
-  <p class="pt-2 hidden" name="doc_p">{% translate "Summarization -- " %}</p>
+  <li class="list-group-item hidden block">
+    <div style="display: flex; justify-content: space-between;">
+      <a target="blank"></a>
+      <!-- <a>Expand</a> -->
+    </div>
+    <p class="pt-2" style="min-height: 100px" name="doc_p">{% translate "Summarization -- " %}</p>
+    <!-- <div class="summary-shadow"></div> -->
+  </li>
 </div>
 
 <div class="modal" tabindex="-1" id="exampleModal">
