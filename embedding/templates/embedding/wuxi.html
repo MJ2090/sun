@@ -44,7 +44,7 @@
       </div>
     </div>
     {% else %}
-    <div class="col-12">
+    <div class="col-4">
       <div class="row g-3">
         <div class="col-12">
           <label for="character" class="form-label">{% translate "Choose Q&A model" %}</label>
@@ -63,7 +63,11 @@
         <a type="button" style="color:#6363ff" data-bs-toggle="modal" data-bs-target="#exampleModal">
           {% translate "Add documents" %}
         </a>
+      </div>
+    </div>
 
+    <div class="col-8">
+      <div class="row g-3">
         <div class="col-12">
           <label for="question" class="form-label">{% translate "Question" %}</label>
           {{ form.question }}
@@ -80,10 +84,11 @@
             </div>
           </div>
         </div>
-
+        <div class="col-12">
+          <p name="response"></p>
+          <button class="send-button w-100 btn btn-primary btn-md" type="submit">{% translate "GO" %}</button>
+        </div>
       </div>
-      <p name="response"></p>
-      <button class="send-button w-100 btn btn-primary btn-md" type="submit">{% translate "GO" %}</button>
     </div>
     {% endif %}
 
