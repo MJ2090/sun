@@ -21,9 +21,15 @@ function fetch_documents() {
       a.href = '/static/embedding/' + data[i]
       a.target = 'blank'
       a.innerHTML = data[i].name.split("/").slice(-1)[0].substring(16);
+
+      let doc_p = document.querySelector("p.hidden").cloneNode(true);
+      doc_p.innerHTML = doc_p.innerHTML + data[i].summarization;
+      doc_p.classList.remove("hidden");
+
       let new_li = li.cloneNode();
       new_li.classList.remove("hidden");
       new_li.append(a);
+      new_li.append(doc_p);
       ul.append(new_li);
     }
 
