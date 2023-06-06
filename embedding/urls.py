@@ -71,7 +71,8 @@ urlpatterns = [
     path('chat_async_therapy/', views_chat.chat_async_therapy,
          name='chat_async_therapy'),
 
-    path('chat_olivia/', views_olivia.chat_olivia, name='chat_olivia'),
+    path('chat_olivia/', views_chat.chat_olivia, name='chat_olivia'),
+
     path('olivia/', views_olivia.entrance, name='entrance'),
     path('olivia_async_init/', views_olivia.olivia_async_init,
          name='olivia_async_init'),
