@@ -25,6 +25,17 @@ def get_embedding_prompt(question, random_str, model='gpt-3.5-turbo'):
     return robot.get_glm_embedding_prompt(my_df, question=question)
 
 
+def feature_add_embedding_doc(embedding_model, openai_response):
+    csv_origin = relative_path + embedding_model.uuid + '.csv'
+    csv_addition = relative_path + openai_response + '.csv'
+    print("feature_add_embedding_doc", openai_response)
+    df = pd.DataFrame()
+    for file in [csv_origin, csv_addition]:
+        data = pd.read_csv(file)
+        df = pd.concat([df, data], axis=0)
+    df.to_csv(csv_origin, index=False)
+
+
 def feature_question(question, embedding_model, model='gpt-3.5-turbo'):
     file_path = relative_path + embedding_model.uuid + '.csv'
     if not os.path.exists(file_path):

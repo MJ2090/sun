@@ -36,11 +36,39 @@ function fetch_documents() {
   });
 }
 
+function add_doc_async() {
+  let original_pdf = document.querySelector("input[name='file_f']");
+  let model = $("select[name='character']");
+  let csrf = $("input[name='csrfmiddlewaretoken']");
+
+  const request_data = new FormData();
+  request_data.append('model', model.val());
+  request_data.append('csrfmiddlewaretoken', csrf.val());
+  if (original_pdf.files.length > 0) {
+    for (let index = 0; index < original_pdf.files.length; index++) {
+      request_data.append('original_pdf_'+index, original_pdf.files[index]);
+    }
+  }
+  fetch("/embedding_add_doc_async/", {
+    method: "POST",
+    body: request_data,
+  }).then(response => response.json()).then((response) => {
+    console.log(response);
+    fetch_documents();
+  });
+}
+
 function wuxi_init() {
+  let add_doc_button = document.querySelector("button[name='modal_button']");
+  add_doc_button.addEventListener("click", function (e) {
+    add_doc_async();
+  });
+
   let selecor = document.querySelector("select");
   selecor.addEventListener("change", function (e) {
     fetch_documents();
   });
+
   fetch_documents();
 }
 

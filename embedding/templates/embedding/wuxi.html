@@ -12,6 +12,25 @@
 {% endblock %}
 
 {% block main %}
+<div class="modal" tabindex="-1" id="exampleModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border:none">
+        <h5 class="modal-title">{% translate "Add Documents" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12">
+          <input type="file" name="file_f" class="form-control" multiple="multiple" id="id_file_f" accept="application/pdf">
+        </div>
+      </div>
+      <div class="modal-footer" style="border:none">
+        <button type="button" name="modal_button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Submit" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container px-4 py-5">
   <h4 class="mb-3">{% translate "Build Q&A bot" %}</h4>
   <form class="row needs-validation" novalidate="" action="/embedding/" method="post"
@@ -40,6 +59,10 @@
             <li class="list-group-item">...</li>
           </ul>
         </div>
+        <!-- Button trigger modal -->
+        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          {% translate "Add documents" %}
+        </a>
 
         <div class="col-12">
           <label for="question" class="form-label">{% translate "Question" %}</label>
@@ -63,7 +86,7 @@
       <button class="send-button w-100 btn btn-primary btn-md" type="submit">{% translate "GO" %}</button>
     </div>
     {% endif %}
-  
+
   </form>
 </div>
 </div>

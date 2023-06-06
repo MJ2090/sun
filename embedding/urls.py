@@ -41,6 +41,8 @@ urlpatterns = [
          name='embedding_training_async'),
     path('embedding_fetch_model_async/', views_embedding.embedding_fetch_model_async,
          name='embedding_fetch_model_async'),
+    path('embedding_add_doc_async/', views_embedding.embedding_add_doc_async,
+         name='embedding_add_doc_async'),
 
     path('signin/', views_sign.signin, name='signin'),
     path('signup/', views_sign.signup, name='signup'),
