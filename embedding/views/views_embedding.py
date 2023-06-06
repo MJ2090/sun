@@ -19,7 +19,6 @@ def embedding_training(request):
     return render(request, 'embedding/embedding_training.html', ret)
 
 
-@login_required
 def embedding_add_doc_async(request):
     model = request.POST.get('model', '')
     print("original_pdf ", request.FILES, type(request.FILES))
@@ -101,9 +100,7 @@ def embedding_fetch_model_async(request):
     model = EmbeddingModel.objects.get(uuid=uuid)
     docs = EmbeddingDocument.objects.filter(model=model)
     res = []
-    print("9999999")
     for doc in docs:
-        print(8888, doc.summarization == 'Processing')
         if doc.summarization == 'Processing':
             text_summary_async(doc)
         res.append({'name': doc.filename, 'summarization': doc.summarization})
