@@ -123,8 +123,7 @@ def feature_grammar(original_text, model):
 
 def feature_summary(original_text, model, max_words=0, max_tokens=1500):
     messages = [
-        {"role": "system", "content": "Generate a summarization for the Input Text."},
-        {"role": "user", "content":"The summarization must use the same language as the input text. If the input is English, the summarization must be in English. 如果原文本是中文, 总结也必须用中文."},
+        {"role": "system", "content": "Generate a summarization for the Input Text. The summarization MUST use the same language as the input text."},
         {"role": "user", "content":f"Input Text:\n\n\n {original_text}"},
     ]
     if max_words>0:
