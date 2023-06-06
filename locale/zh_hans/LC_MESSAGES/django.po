@@ -132,7 +132,7 @@ msgstr "我的答案"
 
 #: embedding/templates/embedding/wuxi.html:19
 msgid "Add Documents"
-msgstr "添加新文件"
+msgstr "导入新文件"
 
 #: embedding/templates/embedding/wuxi.html:28
 msgid "Submit"
