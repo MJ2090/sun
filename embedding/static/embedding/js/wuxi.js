@@ -18,7 +18,7 @@ function fetch_documents() {
 
     for (let i = 0; i < data.length; i++) {
       let a = document.createElement('a');
-      a.href = '/static/embedding/' + data[i]
+      a.href = '/static/embedding/' + data[i].name
       a.target = 'blank'
       a.innerHTML = data[i].name.split("/").slice(-1)[0].substring(16);
 
