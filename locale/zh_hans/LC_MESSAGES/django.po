@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 07:06-0700\n"
+"POT-Creation-Date: 2023-06-06 10:05-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,10 @@ msgstr "文件概述 -- "
 msgid "Add Documents"
 msgstr "导入新文件"
 
+#: embedding/templates/embedding/wuxi.html:36
+msgid "Submit"
+msgstr "提交"
+
 #: embedding/templates/embedding/wuxi.html:43
 msgid "Build Q&A bot"
 msgstr "智能问答机器人"
@@ -161,9 +165,6 @@ msgstr "模型资料文件"
 #: embedding/templates/embedding/wuxi.html:99
 msgid "GO"
 msgstr "开始"
-
-#~ msgid "Submit"
-#~ msgstr "提交"
 
 #~ msgid "Answer from AI"
 #~ msgstr "参考答案"
