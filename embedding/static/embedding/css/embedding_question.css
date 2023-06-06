@@ -38,3 +38,8 @@
         transform: scale(1.0);
     }
 }
+
+.new-model-group {
+    display: flex;
+    justify-content: space-between;
+}

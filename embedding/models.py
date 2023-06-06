@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 import embedding.static_values as sc
+from django.utils.translation import gettext as _
 
 
 class UserProfileManager(UserManager):
@@ -73,7 +74,7 @@ class EmbeddingDocument(models.Model):
     model = models.ForeignKey(EmbeddingModel, on_delete=models.CASCADE,)
     filename = models.CharField(max_length=500, default='')
     pages = models.IntegerField(default=0)
-    summarization = models.CharField(max_length=5000, default='')
+    summarization = models.CharField(max_length=5000, default=_('Processing'))
 
     def __str__(self):
         return u'%s' % (self.filename)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 01:07-0700\n"
+"POT-Creation-Date: 2023-06-06 07:06-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: embedding/models.py:77
+msgid "Processing"
+msgstr "处理中 请等待"
 
 #: embedding/templates/embedding/base.html:57
 #: embedding/templates/embedding/base.html:108
@@ -80,17 +84,17 @@ msgid "New model"
 msgstr "创建新模型"
 
 #: embedding/templates/embedding/embedding_question.html:33
-#: embedding/templates/embedding/wuxi.html:58
+#: embedding/templates/embedding/wuxi.html:59
 msgid "Choose Q&A model"
 msgstr "选择问答模型"
 
 #: embedding/templates/embedding/embedding_question.html:41
-#: embedding/templates/embedding/wuxi.html:78
+#: embedding/templates/embedding/wuxi.html:82
 msgid "Question"
 msgstr "我的问题"
 
 #: embedding/templates/embedding/embedding_question.html:45
-#: embedding/templates/embedding/wuxi.html:82
+#: embedding/templates/embedding/wuxi.html:86
 msgid "Answer"
 msgstr "我的答案"
 
@@ -146,15 +150,15 @@ msgstr "导入新文件"
 msgid "Build Q&A bot"
 msgstr "智能问答机器人"
 
-#: embedding/templates/embedding/wuxi.html:63
-msgid "Documents in this model"
-msgstr "模型资料文件"
-
-#: embedding/templates/embedding/wuxi.html:70
+#: embedding/templates/embedding/wuxi.html:62
 msgid "Add documents"
 msgstr "添加新文件"
 
-#: embedding/templates/embedding/wuxi.html:95
+#: embedding/templates/embedding/wuxi.html:71
+msgid "Documents in this model"
+msgstr "模型资料文件"
+
+#: embedding/templates/embedding/wuxi.html:99
 msgid "GO"
 msgstr "开始"
 
