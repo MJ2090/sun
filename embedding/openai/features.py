@@ -138,10 +138,11 @@ def feature_summary(original_text, model, max_words=0, max_tokens=1500):
             messages=messages,
         )
     except openai.error.InvalidRequestError as e:
-        print(f"OpenAI API request InvalidRequestErro, retry #1..: {e}")
+        print(f"OpenAI API request InvalidRequestErro, retry #1..\n: {e}")
         half_len = len(original_text)//2
         original_text = original_text[:half_len]
         messages[2]["content"] = f"Input Text:\n\n\n {original_text}"
+        print("messages: ", messages)
         response = openai.ChatCompletion.create(
             model=model,
             temperature=0.2,
