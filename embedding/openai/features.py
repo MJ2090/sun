@@ -45,7 +45,8 @@ def feature_question(question, embedding_model, model='gpt-3.5-turbo'):
     if model == 'glm':
         ans = robot.answer_question_glm(my_df, question=question)
     else:
-        ans = robot.answer_question_openai(my_df, question=question, reject_message=embedding_model.reject_message)
+        ans = robot.answer_question_openai(
+            my_df, question=question, reject_message=embedding_model.reject_message)
     return ans
 
 
@@ -124,17 +125,35 @@ def feature_grammar(original_text, model):
 def feature_summary(original_text, model, max_words=0, max_tokens=1500):
     messages = [
         {"role": "system", "content": "Generate a summarization for the Input Text. Step #1. determine which language is using in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
-        {"role": "user", "content":"The summarization MUST use the same language as the input text."},
-        {"role": "user", "content":f"Input Text:\n\n\n {original_text}"},
+        {"role": "user", "content": "The summarization MUST use the same language as the input text."},
+        {"role": "user", "content": f"Input Text:\n\n\n {original_text}"},
     ]
-    if max_words>0:
+    if max_words > 0:
         messages[0]['content'] += f" The summarization should be within {max_words} words."
-    response = openai.ChatCompletion.create(
-        model=model,
-        temperature=0.2,
-        max_tokens=max_tokens,
-        messages=messages,
-    )
+    try:
+        response = openai.ChatCompletion.create(
+            model=model,
+            temperature=0.2,
+            max_tokens=max_tokens,
+            messages=messages,
+        )
+    except openai.error.InvalidRequestError as e:
+        print(f"OpenAI API request InvalidRequestErro, retry #1..: {e}")
+        half_len = len(original_text)/2
+        original_text = original_text[:half_len]
+        messages = [
+            {"role": "system", "content": "Generate a summarization for the Input Text. Step #1. determine which language is using in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
+            {"role": "user", "content": "The summarization MUST use the same language as the input text."},
+            {"role": "user", "content": f"Input Text:\n\n\n {original_text}"},
+        ]
+        response = openai.ChatCompletion.create(
+            model=model,
+            temperature=0.2,
+            max_tokens=max_tokens,
+            messages=messages,
+        )
+        return response
+
     return response
 
 
