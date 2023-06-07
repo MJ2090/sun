@@ -140,6 +140,7 @@ def feature_summary(original_text, model, max_words=0, max_tokens=1500):
     except openai.error.InvalidRequestError as e:
         print(f"OpenAI API request InvalidRequestErro, retry #1..: {e}")
         half_len = len(original_text)/2
+        print("half_len =", half_len)
         original_text = original_text[:half_len]
         messages = [
             {"role": "system", "content": "Generate a summarization for the Input Text. Step #1. determine which language is using in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
