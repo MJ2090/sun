@@ -120,7 +120,7 @@ function therapy_chat() {
     let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
     let history_str = get_history_messages();
     let new_msg_text = document.querySelector("textarea").value;
-    let uuid = '1234567890'
+    let uuid = document.querySelector("div[name='uuid']").value;
     const request_data = new FormData();
     request_data.append('history', history_str);
     request_data.append('message', new_msg_text);
@@ -181,6 +181,8 @@ function therapy_init() {
             show(d5);
             console.log(response);
             display_msg(response.ai_message);
+            let uuid = document.querySelector("div[name='uuid']");
+            uuid.value = response.uuid;
         });
 }
 

@@ -14,7 +14,10 @@
 
 {% block main %}
 <div class="container px-4 py-5">
-  {% csrf_token %}
+  <div class="hidden">
+    {% csrf_token %}
+    <div name="uuid"></div>
+  </div>
   <div name="entrance_1" class="entrance">
     <div class="mb-5">
       <p name="msg_1" class="opacity-zero">Hi this is Olivia, your private therapist.</p>

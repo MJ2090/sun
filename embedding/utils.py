@@ -152,3 +152,7 @@ def move_to_static(src, dest):
     if not os.path.exists(sub_dir):
         os.makedirs(sub_dir)
     shutil.copyfile(src, base_dir + dest)
+
+
+def get_time():
+    return time.time()
