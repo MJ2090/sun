@@ -145,7 +145,7 @@ def feature_summary(original_text, model, max_words=0, max_tokens=1500):
         messages[2]["content"] = f"Input Text:\n\n\n {original_text}"
         print("messages: ", messages)
         response = openai.ChatCompletion.create(
-            model=model,
+            model="gpt-4",
             temperature=0.2,
             max_tokens=max_tokens,
             messages=messages,
