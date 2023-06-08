@@ -1,11 +1,11 @@
 # encoding:utf-8
-from embedding.models import PromptModel, UserProfile, EmbeddingModel
+from embedding.models import VisitorDialogue, PromptModel, UserProfile, EmbeddingModel
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 import pandas as pd
 import os
 
-EXE_CMDS = ['INIT', 'MM']
+EXE_CMDS = ['INIT', 'MM', 'CLEAN']
 
 
 class Command(BaseCommand):
@@ -21,8 +21,14 @@ class Command(BaseCommand):
                     self.init_db()
                 if options['command'] == 'MM':
                     self.merge()
+                if options['command'] == 'CLEAN':
+                    self.clean()
             else:
                 raise CommandError("\nAvailable commands:" + '\n'.join(EXE_CMDS))
+
+
+    def clean(self):
+        VisitorDialogue.objects.filter(ack=False).delete()
 
     def merge(self):
         pref = '/var/www/asuperdomain.com/static/embedding/data/'
