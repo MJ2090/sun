@@ -49,15 +49,9 @@ def olivia_async_ack(request):
     return HttpResponse(json.dumps({'ai_message': 'acked'}))
 
 
-
-def entrance(request):
+def olivia_entrance(request):
     ret = get_basic_data(request, {'hide_nav': True})
     return render(request, 'embedding/olivia_entrance.html', ret)
-
-
-def get_visitor_from_dialogue(d_uuid):
-    exist = VisitorDialogue.objects.filter(dialogue_uuid=d_uuid)[0]
-    return exist.visitor
 
 
 def create_new_dialogue(visitor, message, d_uuid=None, role="ai"):
@@ -94,3 +88,8 @@ def get_prompt(name):
     user_prompt = f"""
     The visitor's name is {name}, and she is 23 years old."""
     return base_prompt + user_prompt
+
+
+def get_visitor_from_dialogue(d_uuid):
+    exist = VisitorDialogue.objects.filter(dialogue_uuid=d_uuid)[0]
+    return exist.visitor
