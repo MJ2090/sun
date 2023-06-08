@@ -165,7 +165,7 @@ class VisitorDialogue(models.Model):
     ack = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.visitor.username + ' ' + self.dialogue_uuid + ' ' + self.message + " " + self.ack
+        return self.visitor.username + ' ' + self.dialogue_uuid + ' ' + self.role + " " + self.message + " " + str(self.ack)
 
 
 class SuicideAssessment(models.Model):

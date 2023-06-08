@@ -15,7 +15,7 @@ def olivia_async_chat(request):
     history_json = json.loads(request.POST.get('history', ''))
     d_uuid = request.POST.get('d_uuid', '')
     visitor = get_visitor_from_dialogue(d_uuid=d_uuid)
-    create_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="user")
+    create_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="hm")
 
     prompt = get_prompt(name=visitor.username)
     messages = [{"role": "system", "content": prompt}]
@@ -64,7 +64,7 @@ def create_new_dialogue(visitor, message, d_uuid=None, role="ai"):
     if not d_uuid:
         d_uuid = load_random_string(10)
     m_uuid = load_random_string(10)
-    ack = role == "user"
+    ack = role == "hm"
     r = VisitorDialogue.objects.create(
         visitor=visitor, message=message, role=role, msg_uuid=m_uuid, dialogue_uuid=d_uuid, timestamp=get_time(), ack=ack)
     return r
