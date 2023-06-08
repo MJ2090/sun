@@ -120,11 +120,11 @@ function therapy_chat() {
     let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
     let history_str = get_history_messages();
     let new_msg_text = document.querySelector("textarea").value;
-    let uuid = document.querySelector("div[name='uuid']").value;
+    let d_uuid = document.querySelector("div[name='d_uuid']").value;
     const request_data = new FormData();
     request_data.append('history', history_str);
     request_data.append('message', new_msg_text);
-    request_data.append('uuid', uuid);
+    request_data.append('d_uuid', d_uuid);
     request_data.append('csrfmiddlewaretoken', csrf);
 
     // prepare UI
@@ -152,6 +152,7 @@ function therapy_chat() {
             pre_process();
             display_msg(response.ai_message);
             post_process();
+            send_ack(response.m_uuid);
         })
         .catch((e) => {
             console.log(777888);
@@ -184,9 +185,21 @@ function therapy_init() {
             show(d5);
             console.log(response);
             display_msg(response.ai_message);
-            let uuid = document.querySelector("div[name='uuid']");
-            uuid.value = response.uuid;
+            let d_uuid = document.querySelector("div[name='d_uuid']");
+            d_uuid.value = response.d_uuid;
+            send_ack(response.m_uuid);
         });
+}
+
+function send_ack(m_uuid) {
+    const request_data = new FormData();
+    let csrf = $("input[name='csrfmiddlewaretoken']");
+    request_data.append('csrfmiddlewaretoken', csrf.val());
+    request_data.append('m_uuid', m_uuid);
+    fetch("/olivia_async_ack/", {
+        method: "POST",
+        body: request_data,
+    })
 }
 
 function next_entrance() {

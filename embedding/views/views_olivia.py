@@ -13,9 +13,9 @@ def olivia_async_chat(request):
     model = 'gpt-4'
     new_message = request.POST.get('message')
     history_json = json.loads(request.POST.get('history', ''))
-    uuid = request.POST.get('uuid', '')
-    visitor = get_visitor_from_dialogue(uuid=uuid)
-    create_new_dialogue(visitor, new_message, uuid, role="user")
+    d_uuid = request.POST.get('d_uuid', '')
+    visitor = get_visitor_from_dialogue(d_uuid=d_uuid)
+    create_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="user")
 
     prompt = get_prompt(name=visitor.username)
     messages = [{"role": "system", "content": prompt}]
@@ -26,15 +26,28 @@ def olivia_async_chat(request):
     openai_response, _ = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     print("\nMsg returned from openai: ", ai_message)
-    create_new_dialogue(visitor, ai_message, uuid, role="ai")
-    return HttpResponse(json.dumps({'ai_message': ai_message}))
+    dialogue = create_new_dialogue(visitor, ai_message, d_uuid, role="ai")
+    return HttpResponse(json.dumps({'ai_message': ai_message, 'm_uuid': dialogue.msg_uuid}))
 
 
 def olivia_async_init(request):
     visitor = create_new_visitor(request)
     greeting = load_random_greeting(visitor.username)
     dialogue = create_new_dialogue(visitor, greeting, None, "ai")
-    return HttpResponse(json.dumps({'ai_message': greeting, 'uuid': dialogue.uuid}))
+    return HttpResponse(json.dumps({'ai_message': greeting, 'd_uuid': dialogue.dialogue_uuid, 'm_uuid': dialogue.msg_uuid}))
+
+
+def olivia_async_ack(request):
+    m_uuid = request.POST.get('m_uuid')
+    dialogues = VisitorDialogue.objects.filter(msg_uuid=m_uuid)
+    if len(dialogues) != 1:
+        print(f"olivia_async_ack: {m_uuid} does not exist")
+        return HttpResponse(json.dumps({'ai_message': 'failed'}))
+    
+    dialogues[0].ack = True
+    dialogues[0].save()
+    return HttpResponse(json.dumps({'ai_message': 'acked'}))
+
 
 
 def entrance(request):
@@ -42,8 +55,8 @@ def entrance(request):
     return render(request, 'embedding/olivia_entrance.html', ret)
 
 
-def get_visitor_from_dialogue(uuid):
-    exist = VisitorDialogue.objects.filter(uuid=uuid)[0]
+def get_visitor_from_dialogue(d_uuid):
+    exist = VisitorDialogue.objects.filter(dialogue_uuid=d_uuid)[0]
     return exist.visitor
 
 

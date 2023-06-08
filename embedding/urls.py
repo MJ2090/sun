@@ -78,6 +78,8 @@ urlpatterns = [
          name='olivia_async_init'),
     path('olivia_async_chat/', views_olivia.olivia_async_chat,
          name='olivia_async_chat'),
+    path('olivia_async_ack/', views_olivia.olivia_async_ack,
+         name='olivia_async_ack'),
 
     path('super/', views_admin.add_prompt_model, name='add_prompt_model'),
 ]
