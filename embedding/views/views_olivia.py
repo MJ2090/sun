@@ -10,6 +10,7 @@ import json
 
 
 def olivia_async_chat(request):
+    ret = get_base_ret(request)
     model = 'gpt-4'
     new_message = request.POST.get('message')
     history_json = json.loads(request.POST.get('history', ''))
@@ -22,12 +23,13 @@ def olivia_async_chat(request):
     messages.extend(history_json)
     messages.append({"role": "user", "content": new_message})
 
-    print("\nMsg sent to openai: ", messages)
     openai_response, _ = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
-    print("\nMsg returned from openai: ", ai_message)
+    ret['ai_message'] = ai_message
+    ret['m_uuid'] = dialogue.msg_uuid
     dialogue = create_new_dialogue(visitor, ai_message, d_uuid, role="ai")
-    return HttpResponse(json.dumps({'ai_message': ai_message, 'm_uuid': dialogue.msg_uuid}))
+
+    return HttpResponse(json.dumps(ret))
 
 
 def olivia_async_init(request):
@@ -74,10 +76,6 @@ def create_new_visitor(request):
     return r
 
 
-def thread_overall(request):
-    pass
-
-
 def get_prompt(name):
     base_prompt = """
     You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules: 
@@ -93,3 +91,19 @@ def get_prompt(name):
 def get_visitor_from_dialogue(d_uuid):
     exist = VisitorDialogue.objects.filter(dialogue_uuid=d_uuid)[0]
     return exist.visitor
+
+
+def thread_overall(visitor):
+    thread_check_suicide(visitor)
+    thread_check_diagnosis(visitor)
+
+
+def thread_check_suicide(visitor):
+    pass
+
+
+def thread_check_diagnosis(visitor):
+    pass
+
+def get_base_ret(request):
+    return {}

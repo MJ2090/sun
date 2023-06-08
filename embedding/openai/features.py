@@ -175,7 +175,8 @@ def feature_glm(request, messages, prompt, temperature):
 
 
 def feature_chat(messages, model):
-    print(f"feature_chat with model {model}")
+    print(f"\nfeature_chat with model {model}")
+    print("\nMsg sent to openai: ", messages)
     request_time = time.time()
     try:
         response = openai.ChatCompletion.create(
@@ -184,6 +185,7 @@ def feature_chat(messages, model):
             max_tokens=1500,
             messages=messages,
         )
+        print("\nMsg returned from openai: ", response)
         return response, request_time
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
