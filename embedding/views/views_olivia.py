@@ -16,7 +16,7 @@ def olivia_async_chat(request):
     history_json = json.loads(request.POST.get('history', ''))
     d_uuid = request.POST.get('d_uuid', '')
     visitor = get_visitor_from_dialogue(d_uuid=d_uuid)
-    create_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="hm")
+    record_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="hm")
 
     prompt = get_prompt(name=visitor.username)
     messages = [{"role": "system", "content": prompt}]
@@ -27,7 +27,7 @@ def olivia_async_chat(request):
     ai_message = openai_response["choices"][0]["message"]["content"]
     ret['ai_message'] = ai_message
     ret['m_uuid'] = dialogue.msg_uuid
-    dialogue = create_new_dialogue(visitor, ai_message, d_uuid, role="ai")
+    dialogue = record_new_dialogue(visitor, ai_message, d_uuid, role="ai")
 
     return HttpResponse(json.dumps(ret))
 
@@ -35,7 +35,7 @@ def olivia_async_chat(request):
 def olivia_async_init(request):
     visitor = create_new_visitor(request)
     greeting = load_random_greeting(visitor.username)
-    dialogue = create_new_dialogue(visitor, greeting, None, "ai")
+    dialogue = record_new_dialogue(visitor, greeting, None, "ai")
     return HttpResponse(json.dumps({'ai_message': greeting, 'd_uuid': dialogue.dialogue_uuid, 'm_uuid': dialogue.msg_uuid}))
 
 
@@ -56,7 +56,7 @@ def olivia_entrance(request):
     return render(request, 'embedding/olivia_entrance.html', ret)
 
 
-def create_new_dialogue(visitor, message, d_uuid=None, role="ai"):
+def record_new_dialogue(visitor, message, d_uuid=None, role="ai"):
     if not d_uuid:
         d_uuid = load_random_string(10)
     m_uuid = load_random_string(10)
