@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from embedding.openai.features import feature_chat
-from embedding.models import SuicideAssessment, VisitorDialogue, VisitorProfile
+from embedding.models import DepressionAssessment, SuicideAssessment, VisitorDialogue, VisitorProfile
 from django.shortcuts import render
 from embedding.utils import get_time, get_int, load_random_greeting, load_random_string, get_basic_data
 import json
@@ -108,6 +108,9 @@ def get_base_ret(request):
 
 def load_side_channel(visitor, ret):
     assessments = SuicideAssessment.objects.filter(visitor=visitor).order_by("timestamp")
-    if len(assessments)>0 and assessments[0].assessment!= '':
+    if len(assessments)>0 and assessments[0].result== 'Y':
+        ret['suicide'] = True
+    assessments = DepressionAssessment.objects.filter(visitor=visitor).order_by("timestamp")
+    if len(assessments)>0 and assessments[0].result== 'Y':
         ret['suicide'] = True
 
