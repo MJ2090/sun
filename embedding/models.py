@@ -162,9 +162,10 @@ class VisitorDialogue(models.Model):
     msg_uuid = models.CharField(max_length=20, default='')
     message = models.CharField(max_length=1500, default='')
     role = models.CharField(max_length=10, default='')
+    ack = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.visitor.username + ' ' + self.uuid + ' ' + self.message
+        return self.visitor.username + ' ' + self.dialogue_uuid + ' ' + self.message + " " + self.ack
 
 
 class SuicideAssessment(models.Model):

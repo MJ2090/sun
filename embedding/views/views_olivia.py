@@ -47,11 +47,13 @@ def get_visitor_from_dialogue(uuid):
     return exist.visitor
 
 
-def create_new_dialogue(visitor, message, uuid=None, role="ai"):
-    if not uuid:
-        uuid = load_random_string(10)
+def create_new_dialogue(visitor, message, d_uuid=None, role="ai"):
+    if not d_uuid:
+        d_uuid = load_random_string(10)
+    m_uuid = load_random_string(10)
+    ack = role == "user"
     r = VisitorDialogue.objects.create(
-        visitor=visitor, message=message, role=role, uuid=uuid, timestamp=get_time())
+        visitor=visitor, message=message, role=role, msg_uuid=m_uuid, dialogue_uuid=d_uuid, timestamp=get_time(), ack=ack)
     return r
 
 
