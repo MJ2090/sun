@@ -158,7 +158,8 @@ class VisitorProfile(models.Model):
 class VisitorDialogue(models.Model):
     visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
     timestamp = models.IntegerField(default=0)
-    uuid = models.CharField(max_length=20, default='')
+    dialogue_uuid = models.CharField(max_length=20, default='')
+    msg_uuid = models.CharField(max_length=20, default='')
     message = models.CharField(max_length=1500, default='')
     role = models.CharField(max_length=10, default='')
 

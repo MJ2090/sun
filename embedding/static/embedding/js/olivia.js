@@ -1,5 +1,5 @@
-const BASE_INTERVAL = 1500
-const TRANSITION_INTERVAL = 4000
+const BASE_INTERVAL = 150
+const TRANSITION_INTERVAL = 400
 let controller = new AbortController();
 
 function flow_messages(messages, callback, el) {
@@ -152,6 +152,9 @@ function therapy_chat() {
             pre_process();
             display_msg(response.ai_message);
             post_process();
+        })
+        .catch((e) => {
+            console.log(777888);
         });
 }
 
