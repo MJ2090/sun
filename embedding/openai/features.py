@@ -174,7 +174,7 @@ def feature_glm(request, messages, prompt, temperature):
     return glm.create(request, messages, prompt, temperature), request_time
 
 
-def feature_chat(messages, model):
+def feature_chat(messages, model, retry = 0):
     print(f"\nfeature_chat with model {model}")
     print("\nMsg sent to openai: ", messages)
     request_time = time.time()
@@ -190,6 +190,13 @@ def feature_chat(messages, model):
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D", request_time
+    except openai.error.APIError as e:
+        print(f"OpenAI API request APIerror: {e} with message {messages}")
+        if retry==0:
+            return feature_chat(messages, model, retry = 1)
+        else:
+            return "ERROR IN OEPNAI API"
+
 
 
 def feature_quiz(context, model="gpt-4", temperature=0.5):

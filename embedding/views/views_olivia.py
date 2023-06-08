@@ -27,7 +27,7 @@ def olivia_async_chat(request):
     dialogue = record_new_dialogue(visitor, ai_message, d_uuid, role="ai")
     ret['m_uuid'] = dialogue.msg_uuid
 
-    thread_start(visitor, new_message)
+    thread_start(visitor, new_message, history_json, d_uuid)
     load_side_channel(visitor, ret)
     return HttpResponse(json.dumps(ret))
 
@@ -93,18 +93,32 @@ def get_visitor_from_dialogue(d_uuid):
     return exist.visitor
 
 
-def thread_start(visitor, new_message):
-    thread = Thread(target = thread_overall, args = (visitor, new_message))
+def thread_start(visitor, new_message, history_json, d_uuid):
+    thread = Thread(target = thread_overall, args = (visitor, new_message, history_json, d_uuid))
     thread.start()
 
 
-def thread_overall(visitor, new_message):
-    thread_check_suicide(visitor, new_message)
+def thread_overall(visitor, new_message, history_json, d_uuid):
+    thread_check_suicide(visitor, new_message, history_json, d_uuid)
 
 
-def thread_check_suicide(visitor, new_message):
-    if "suicide" in new_message:
-        SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
+def thread_check_suicide(visitor, new_message, history_json, d_uuid):
+    if len(history_json)<10:
+        return
+    dialogue_str = get_dialogue_str(d_uuid)
+    prompt = f"""
+    Based on the given dialogue between a visitor and a therapist, tell whether the visitor has a strong tendency to commit suicide. Return one letter only, Y or N, no other words.
+    Dialogue:
+
+    {dialogue_str}
+    """
+    model = ""
+    messages = [{"role": "system", "content": prompt}]
+    openai_response, _ = feature_chat(messages, model='gpt-4')
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
+    # if "suicide" in new_message:
+    #     SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
 
 
 def thread_check_diagnosis(visitor, new_message):
@@ -116,10 +130,23 @@ def get_base_ret(request):
 
 
 def load_side_channel(visitor, ret):
+    side_channel = {}
     assessments = SuicideAssessment.objects.filter(visitor=visitor).order_by("timestamp")
     if len(assessments)>0 and assessments[0].result== 'Y':
-        ret['suicide'] = True
+        side_channel['suicide'] = True
     assessments = DepressionAssessment.objects.filter(visitor=visitor).order_by("timestamp")
     if len(assessments)>0 and assessments[0].result== 'Y':
-        ret['suicide'] = True
+        side_channel['suicide'] = True
+    ret['side_channel'] = side_channel
 
+
+def get_dialogue_str(d_uuid):
+    records = VisitorDialogue.objects.filter(dialogue_uuid=d_uuid, ack=True).order_by("timestamp")
+    dialogue = []
+    for item in records:
+        if item.role == 'hm':
+            dialogue.append('Visitor: ' + item.message)
+        else:
+            dialogue.append('Therapist: ' + item.message)
+
+    return '\n'.join(dialogue)
