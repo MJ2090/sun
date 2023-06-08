@@ -176,3 +176,13 @@ class SuicideAssessment(models.Model):
 
     def __str__(self):
         return self.visitor + ' ' + str(self.timestamp) + ' ' + self.assessment
+    
+
+class DepressionAssessment(models.Model):
+    visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
+    timestamp = models.IntegerField(default=0)
+    assessment = models.CharField(max_length=20, default='')
+    evidence = models.CharField(max_length=1500, default='', blank=True)
+
+    def __str__(self):
+        return self.visitor + ' ' + str(self.timestamp) + ' ' + self.assessment

@@ -1,11 +1,8 @@
 from django.http import HttpResponse
-from embedding.forms.chat import ChatForm
-from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_chat
-from embedding.models import VisitorDialogue, PromptModel, VisitorProfile
+from embedding.models import SuicideAssessment, VisitorDialogue, VisitorProfile
 from django.shortcuts import render
-from embedding.utils import get_time, get_int, load_random_greeting, record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
-import embedding.static_values as sc
+from embedding.utils import get_time, get_int, load_random_greeting, load_random_string, get_basic_data
 import json
 
 
@@ -29,6 +26,7 @@ def olivia_async_chat(request):
     ret['m_uuid'] = dialogue.msg_uuid
     dialogue = record_new_dialogue(visitor, ai_message, d_uuid, role="ai")
 
+    load_side_channel(visitor, ret)
     return HttpResponse(json.dumps(ret))
 
 
@@ -107,3 +105,9 @@ def thread_check_diagnosis(visitor):
 
 def get_base_ret(request):
     return {}
+
+def load_side_channel(visitor, ret):
+    assessments = SuicideAssessment.objects.filter(visitor=visitor).order_by("timestamp")
+    if len(assessments)>0 and assessments[0].assessment!= '':
+        ret['suicide'] = True
+
