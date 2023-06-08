@@ -152,11 +152,21 @@ function therapy_chat() {
             pre_process();
             display_msg(response.ai_message);
             post_process();
+
             send_ack(response.m_uuid);
+
+            process_side_channel(response.side_channel)
         })
         .catch((e) => {
-            console.log(777888);
+            console.log('Request Aborted.');
         });
+}
+
+function process_side_channel(side_channel) {
+    if (side_channel.suicide == true) {
+        let suicide_label = document.querySelector("input[name='msg_1']");
+        show(suicide_label);
+    }
 }
 
 function therapy_init() {

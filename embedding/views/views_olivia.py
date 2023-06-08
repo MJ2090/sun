@@ -4,6 +4,7 @@ from embedding.models import DepressionAssessment, SuicideAssessment, VisitorDia
 from django.shortcuts import render
 from embedding.utils import get_time, get_int, load_random_greeting, load_random_string, get_basic_data
 import json
+from threading import Thread
 
 
 def olivia_async_chat(request):
@@ -23,9 +24,10 @@ def olivia_async_chat(request):
     openai_response, _ = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
     ret['ai_message'] = ai_message
-    ret['m_uuid'] = dialogue.msg_uuid
     dialogue = record_new_dialogue(visitor, ai_message, d_uuid, role="ai")
+    ret['m_uuid'] = dialogue.msg_uuid
 
+    thread_start(visitor, new_message)
     load_side_channel(visitor, ret)
     return HttpResponse(json.dumps(ret))
 
@@ -91,20 +93,27 @@ def get_visitor_from_dialogue(d_uuid):
     return exist.visitor
 
 
-def thread_overall(visitor):
-    thread_check_suicide(visitor)
-    thread_check_diagnosis(visitor)
+def thread_start(visitor, new_message):
+    thread = Thread(target = thread_overall, args = (visitor, new_message))
+    thread.start()
 
 
-def thread_check_suicide(visitor):
+def thread_overall(visitor, new_message):
+    thread_check_suicide(visitor, new_message)
+
+
+def thread_check_suicide(visitor, new_message):
+    if "suicide" in new_message:
+        SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
+
+
+def thread_check_diagnosis(visitor, new_message):
     pass
 
-
-def thread_check_diagnosis(visitor):
-    pass
 
 def get_base_ret(request):
     return {}
+
 
 def load_side_channel(visitor, ret):
     assessments = SuicideAssessment.objects.filter(visitor=visitor).order_by("timestamp")

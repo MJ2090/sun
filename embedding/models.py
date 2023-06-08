@@ -175,7 +175,7 @@ class SuicideAssessment(models.Model):
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
-        return self.visitor + ' ' + str(self.timestamp) + ' ' + self.result
+        return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
     
 
 class DepressionAssessment(models.Model):
@@ -185,4 +185,4 @@ class DepressionAssessment(models.Model):
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
-        return self.visitor + ' ' + str(self.timestamp) + ' ' + self.result
+        return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
