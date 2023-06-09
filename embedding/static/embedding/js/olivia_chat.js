@@ -1,8 +1,6 @@
 let controller = new AbortController();
 
-function flow_messages(page_number) {
-    messages = document.querySelectorAll("[name='msg_" + page_number + "']")
-    parent = document.querySelector("div[name='entrance_" + page_number + "']")
+function flow_messages(messages, callback, el) {
     let index = 0;
     let t = setInterval(show_messages, BASE_INTERVAL);
 
@@ -11,10 +9,8 @@ function flow_messages(page_number) {
         index += 1;
         if (index == messages.length) {
             clearInterval(t);
-            let maybe_input = parent.querySelector("input[type='text']");
-            if (maybe_input) {
-                maybe_input.focus();
-                maybe_input.click();
+            if (callback != null) {
+                callback(el);
             }
         }
     }
@@ -25,7 +21,7 @@ function entrance_finish() {
     let d4 = document.querySelector("div[name='entrance_4']");
     hide(d3);
     show(d4);
-    flow_messages(4);
+    flow_messages(document.querySelectorAll("[name='msg_4']"), null);
     setTimeout(therapy_init, TRANSITION_INTERVAL);
 }
 
@@ -154,11 +150,12 @@ function next_entrance() {
     if (isShown(d1)) {
         hide(d1);
         show(d2);
-        flow_messages(2);
+        let t_age = document.querySelector("input[name='msg_2']");
+        flow_messages(document.querySelectorAll("[name='msg_2']"), setFocus, t_age);
     } else {
         hide(d2);
         show(d3);
-        flow_messages(3);
+        flow_messages(document.querySelectorAll("[name='msg_3']"), null, null);
     }
 }
 
@@ -198,7 +195,12 @@ function post_process() {
     new_msg.focus();
 }
 
+function olivia_start_flow() {
+    let t_name = document.querySelector("input[name='msg_1']");
+    flow_messages(document.querySelectorAll("[name='msg_1']"), setFocus, t_name);
+}
+
 $(document).ready(function () {
-    olivia_overall_init();
-    flow_messages(1);
+    olivia_init();
+    olivia_start_flow();
 })

@@ -10,6 +10,9 @@
 {% load static %}
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <script src="{% static 'embedding/js/olivia.js' %}"></script>
+<script src="{% static 'embedding/js/olivia_utils.js' %}"></script>
+<script src="{% static 'embedding/js/olivia_const.js' %}"></script>
+<script src="{% static 'embedding/js/olivia_init.js' %}"></script>
 {% endblock %}
 
 {% block main %}
@@ -42,7 +45,7 @@
 
   <div name="entrance_3" class="entrance hidden">
     <div class="mb-5">
-      <p name="msg_3" class="opacity-zero">Last question, how do you define yourself?</p>
+      <p name="msg_3" class="opacity-zero">And, how do you define yourself?</p>
     </div>
     <div class="mb-5">
       <div name="msg_3" class="opacity-zero">
@@ -59,13 +62,31 @@
   </div>
 
   <div name="entrance_4" class="entrance hidden">
-    <div class="mb-5 spinner">
-      <div name="msg_4" class="opacity-zero loader">Loading...</div>
+    <div class="mb-5">
+      <p name="msg_4" class="opacity-zero">Last, give me a PIN so I can remember who you are :D</p>
+    </div>
+    <div class="mb-5">
+      <div name="msg_4" class="opacity-zero">
+        <div class="mb-4">
+          <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+          <label name="gender" class="btn btn-secondary btn-lg" for="option1">He</label>
+        </div>
+        <div class="mb-4">
+          <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+          <label name="gender" class="btn btn-secondary btn-lg" for="option2">She</label>
+        </div>
+      </div>
     </div>
   </div>
 
   <div name="entrance_5" class="entrance hidden">
-    <div class="mb-5">
+    <div class="mb-5 spinner">
+      <div name="msg_5" class="opacity-zero loader">Loading...</div>
+    </div>
+  </div>
+
+  <div name="entrance_6" class="entrance hidden">
+    <div class="mb-6">
       <div class="hidden">
         <p name="human_msg" class="dialogue-message-human">
         </p>
@@ -85,7 +106,7 @@
         </div>
       </div>
       <div class="px-0 input-group">
-        <textarea rows="1" name="msg_6" class="w-100 pb-2 entrance-input"></textarea>
+        <textarea rows="1" name="msg_7" class="w-100 pb-2 entrance-input"></textarea>
       </div>
       <div>
         <span name="badge_suicide" class="mt-3 badge rounded-pill text-bg-danger hidden">Suicidal</span>
