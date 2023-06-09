@@ -95,7 +95,12 @@ function olivia_chat_init() {
             display_msg(response.ai_message);
             set_d_uuid(response.d_uuid);
             send_ack(response.m_uuid);
+            store_local_data(t_name);
         });
+}
+
+function store_local_data(t_name) {
+    localStorage.setItem('olivia_username', t_name);
 }
 
 function set_d_uuid(d_uuid) {

@@ -22,7 +22,7 @@
     {% csrf_token %}
     <div name="d_uuid"></div>
   </div>
-  <div name="entrance_1" class="entrance">
+  <div name="entrance_1" class="entrance hidden">
     <div class="mb-5">
       <p name="msg_1" class="opacity-zero">Hi this is Olivia, your private therapist.</p>
       <p name="msg_1" class="opacity-zero">I'm here to listen to you and support you.</p>
@@ -32,6 +32,28 @@
     </div>
     <div class="mb-5">
       <input type="text" rows="1" name="msg_1" class="w-100 entrance-input opacity-zero"></input>
+    </div>
+  </div>
+ 
+  <div name="entrance_6" class="entrance hidden">
+    <div class="mb-5">
+      <p name="msg_6" class="opacity-zero">Hi this is Olivia, your private therapist.</p>
+      <p name="msg_6" class="opacity-zero">I'm here to listen to you and support you.</p>
+    </div>
+    <div class="mb-5">
+      <p name="msg_6" class="opacity-zero">Is that you, <span name="first_page_username"></span>?</p>
+    </div>
+    <div class="mb-5">
+      <div name="msg_6" class="opacity-zero">
+        <div class="mb-3">
+          <input type="radio" class="btn-check" name="options" id="option1" value="Yes" autocomplete="off">
+          <label name="gender" class="btn btn-secondary btn-lg" for="option1">Yeah it's me</label>
+        </div>
+        <div class="mb-3">
+          <input type="radio" class="btn-check" name="options" id="option2" value="Noe" autocomplete="off">
+          <label name="gender" class="btn btn-secondary btn-lg" for="option2">Not really</label>
+        </div>
+      </div>
     </div>
   </div>
 
