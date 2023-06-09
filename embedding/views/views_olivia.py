@@ -107,7 +107,7 @@ def thread_check_suicide(visitor, new_message, history_json, d_uuid):
     print("current_t", current_t)
     if len(history_json)<10:
         return
-    if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=current_t-3600).count>0:
+    if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-3600)).count>0:
         return
     dialogue_str = get_dialogue_str(d_uuid)
     prompt = f"""
