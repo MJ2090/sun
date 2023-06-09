@@ -1,5 +1,10 @@
 let controller = new AbortController();
 
+$(document).ready(function () {
+    olivia_overall_init();
+    flow_messages(1);
+})
+
 function flow_messages(page_number) {
     let messages = document.querySelectorAll("[name='msg_" + page_number + "']")
     let parent = document.querySelector("div[name='entrance_" + page_number + "']")
@@ -49,8 +54,3 @@ function next_entrance() {
 function entrance_finish() {
    setTimeout(olivia_chat_init, TRANSITION_INTERVAL);
 }
-
-$(document).ready(function () {
-    olivia_overall_init();
-    flow_messages(1);
-})
