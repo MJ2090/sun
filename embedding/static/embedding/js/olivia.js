@@ -21,11 +21,11 @@ function flow_messages(page_number) {
 }
 
 function entrance_finish() {
-    let d3 = document.querySelector("div[name='entrance_3']");
     let d4 = document.querySelector("div[name='entrance_4']");
-    hide(d3);
-    show(d4);
-    flow_messages(4);
+    let d5 = document.querySelector("div[name='entrance_5']");
+    hide(d4);
+    show(d5);
+    flow_messages(5);
     setTimeout(therapy_init, TRANSITION_INTERVAL);
 }
 
@@ -151,14 +151,19 @@ function next_entrance() {
     let d1 = document.querySelector("div[name='entrance_1']");
     let d2 = document.querySelector("div[name='entrance_2']");
     let d3 = document.querySelector("div[name='entrance_3']");
+    let d4 = document.querySelector("div[name='entrance_4']");
     if (isShown(d1)) {
         hide(d1);
         show(d2);
         flow_messages(2);
-    } else {
+    } else if (isShown(d2)) {
         hide(d2);
         show(d3);
         flow_messages(3);
+    } else {
+        hide(d3);
+        show(d4);
+        flow_messages(4);
     }
 }
 
