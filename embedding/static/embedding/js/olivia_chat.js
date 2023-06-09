@@ -66,13 +66,6 @@ function therapy_chat() {
         });
 }
 
-function process_side_channel(side_channel) {
-    if (side_channel.suicide == true) {
-        let suicide_label = document.querySelector("span[name='badge_suicide']");
-        show(suicide_label);
-    }
-}
-
 function olivia_chat_init() {
     // prepare data
     let csrf = $("input[name='csrfmiddlewaretoken']");
@@ -93,16 +86,19 @@ function olivia_chat_init() {
         .then(
             response => response.json())
         .then((response) => {
-            let d4 = document.querySelector("div[name='entrance_4']");
             let d5 = document.querySelector("div[name='entrance_5']");
-            hide(d4);
-            show(d5);
-            console.log(response);
+            let d6 = document.querySelector("div[name='entrance_6']");
+            hide(d5);
+            show(d6);
             display_msg(response.ai_message);
-            let d_uuid = document.querySelector("div[name='d_uuid']");
-            d_uuid.value = response.d_uuid;
+            set_d_uuid(response.d_uuid);
             send_ack(response.m_uuid);
         });
+}
+
+function set_d_uuid(d_uuid) {
+    let d_uuid = document.querySelector("div[name='d_uuid']");
+    d_uuid.value = d_uuid;
 }
 
 function send_ack(m_uuid) {

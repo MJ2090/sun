@@ -47,10 +47,10 @@ function next_entrance() {
         hide(d4);
         show(d5);
         flow_messages(5);
-        entrance_finish();
+        flow_finish();
     }
 }
 
-function entrance_finish() {
+function flow_finish() {
    setTimeout(olivia_chat_init, TRANSITION_INTERVAL);
 }
