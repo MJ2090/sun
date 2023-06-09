@@ -20,15 +20,6 @@ function flow_messages(page_number) {
     }
 }
 
-function entrance_finish() {
-    let d4 = document.querySelector("div[name='entrance_4']");
-    let d5 = document.querySelector("div[name='entrance_5']");
-    hide(d4);
-    show(d5);
-    flow_messages(5);
-    setTimeout(therapy_init, TRANSITION_INTERVAL);
-}
-
 function get_history_messages() {
     let history_elements = $(".dialogue");
     let history_msg_dic = [];
@@ -104,7 +95,7 @@ function process_side_channel(side_channel) {
     }
 }
 
-function therapy_init() {
+function olivia_chat_init() {
     // prepare data
     let csrf = $("input[name='csrfmiddlewaretoken']");
     t_name = document.querySelector("input[name='msg_1']").value;
@@ -152,6 +143,7 @@ function next_entrance() {
     let d2 = document.querySelector("div[name='entrance_2']");
     let d3 = document.querySelector("div[name='entrance_3']");
     let d4 = document.querySelector("div[name='entrance_4']");
+    let d5 = document.querySelector("div[name='entrance_5']");
     if (isShown(d1)) {
         hide(d1);
         show(d2);
@@ -160,11 +152,20 @@ function next_entrance() {
         hide(d2);
         show(d3);
         flow_messages(3);
-    } else {
+    } else if (isShown(d3)) {
         hide(d3);
         show(d4);
         flow_messages(4);
+    } else {
+        hide(d4);
+        show(d5);
+        flow_messages(5);
+        entrance_finish();
     }
+}
+
+function entrance_finish() {
+   setTimeout(olivia_chat_init, TRANSITION_INTERVAL);
 }
 
 function display_msg(ai_message) {

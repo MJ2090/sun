@@ -16,8 +16,7 @@ function add_event_listener() {
     let buttons = document.querySelectorAll("label[name='gender']");
     buttons.forEach(e => {
         e.addEventListener("click", function (e) {
-            entrance_pin();
-            // entrance_finish();
+            next_entrance();
         });
     });
 
