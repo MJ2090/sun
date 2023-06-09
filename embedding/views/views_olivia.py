@@ -70,6 +70,7 @@ def create_new_visitor(request):
     t_name = request.POST.get('t_name', '')
     t_age = get_int(request.POST.get('t_age', ''))
     t_gender = request.POST.get('t_gender', '')
+    t_pin = request.POST.get('t_pin', '')
     uuid = load_random_string(10)
     r = VisitorProfile.objects.create(
         uuid=uuid, username=t_name, age=t_age, gender=t_gender)
