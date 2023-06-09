@@ -144,6 +144,7 @@ class TherapyProfile(models.Model):
 
 class VisitorProfile(models.Model):
     username = models.CharField(max_length=100, default='')
+    pin = models.CharField(max_length=5, default='')
     age = models.IntegerField(default=30)
     gender = models.CharField(max_length=50, default='')
     marriage = models.CharField(max_length=50, default='', blank=True)
