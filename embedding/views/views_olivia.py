@@ -103,20 +103,24 @@ def thread_overall(visitor, new_message, history_json, d_uuid):
 
 
 def thread_check_suicide(visitor, new_message, history_json, d_uuid):
+    current_t = get_time()
+    print("current_t", current_t)
     if len(history_json)<10:
+        return
+    if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=current_t-3600).count>0:
         return
     dialogue_str = get_dialogue_str(d_uuid)
     prompt = f"""
-    Based on the given dialogue between a visitor and a therapist, tell whether the visitor has a strong tendency to commit suicide. Return one letter only, Y or N, no other words.
+    Based on the given dialogue between a visitor and a therapist, tell whether the visitor has a strong tendency to commit suicide. You MUST return ONE letter only, Y or N, no other words.
     Dialogue:
 
     {dialogue_str}
     """
-    model = ""
+    model = "gpt-4"
     messages = [{"role": "system", "content": prompt}]
-    openai_response, _ = feature_chat(messages, model='gpt-4')
+    openai_response, _ = feature_chat(messages, model=model)
     ai_message = openai_response["choices"][0]["message"]["content"]
-    SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
+    SuicideAssessment.objects.create(visitor=visitor, result=ai_message, timestamp=get_time())
     # if "suicide" in new_message:
     #     SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
 
