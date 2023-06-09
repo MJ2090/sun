@@ -97,8 +97,8 @@ function olivia_chat_init() {
 }
 
 function set_d_uuid(d_uuid) {
-    let d_uuid = document.querySelector("div[name='d_uuid']");
-    d_uuid.value = d_uuid;
+    let e = document.querySelector("div[name='d_uuid']");
+    e.value = d_uuid;
 }
 
 function send_ack(m_uuid) {
