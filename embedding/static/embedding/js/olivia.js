@@ -1,8 +1,8 @@
 let controller = new AbortController();
 
 function flow_messages(page_number) {
-    messages = document.querySelectorAll("[name='msg_" + page_number + "']")
-    parent = document.querySelector("div[name='entrance_" + page_number + "']")
+    let messages = document.querySelectorAll("[name='msg_" + page_number + "']")
+    let parent = document.querySelector("div[name='entrance_" + page_number + "']")
     let index = 0;
     let t = setInterval(show_messages, BASE_INTERVAL);
 
