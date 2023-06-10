@@ -41,7 +41,9 @@ function add_event_listener() {
     let buttons_3 = document.querySelector("div[name='new_user']");
     buttons_3.addEventListener("click", function (e) {
         hide(d0);
-        localStorage.setItem('olivia_username', '');
+        localStorage.removeItem("olivia_username");
+        localStorage.removeItem("olivia_d_uuid");
+        localStorage.removeItem("olivia_uuid");
         flow_messages(1);
     });
 

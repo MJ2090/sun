@@ -56,3 +56,7 @@
     height: 100px;
     overflow: hidden;
 }
+
+.bold-username {
+    font-weight: bold;
+}

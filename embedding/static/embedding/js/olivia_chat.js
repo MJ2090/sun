@@ -24,7 +24,7 @@ function therapy_chat() {
     let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
     let history_str = get_history_messages();
     let new_msg_text = document.querySelector("textarea").value;
-    let d_uuid = document.querySelector("div[name='d_uuid']").value;
+    let d_uuid = localStorage.olivia_d_uuid;
     const request_data = new FormData();
     request_data.append('history', history_str);
     request_data.append('message', new_msg_text);
@@ -68,16 +68,26 @@ function therapy_chat() {
 
 function olivia_chat_init() {
     // prepare data
+    init_with_old_user = localStorage.olivia_username != undefined
     let csrf = $("input[name='csrfmiddlewaretoken']");
-    t_name = document.querySelector("input[name='msg_1']").value;
-    t_age = document.querySelector("input[name='msg_2']").value;
-    t_pin = document.querySelector("input[name='msg_4']").value;
-    t_gender = document.querySelectorAll("input[type='radio']:checked")[0].value;
+    let t_name = document.querySelector("input[name='msg_1']").value;
+    let t_age = document.querySelector("input[name='msg_2']").value;
+    let t_pin = document.querySelector("input[name='msg_4']").value;
+    let t_gender = null;
+    let t_uuid = null;
+    if (init_with_old_user) {
+        t_gender = '';
+        t_uuid = localStorage.olivia_uuid;
+    } else {
+        t_gender = document.querySelectorAll("input[type='radio']:checked")[0].value;
+        t_uuid = '';
+    }
     const request_data = new FormData();
     request_data.append('t_name', t_name);
     request_data.append('t_age', t_age);
     request_data.append('t_pin', t_pin);
     request_data.append('t_gender', t_gender);
+    request_data.append('t_uuid', t_uuid);
     request_data.append('csrfmiddlewaretoken', csrf.val());
 
     // api fetch
@@ -93,14 +103,15 @@ function olivia_chat_init() {
             hide(d5);
             show(d6);
             display_msg(response.ai_message);
-            set_d_uuid(response.d_uuid);
             send_ack(response.m_uuid);
-            store_local_data(t_name);
+            store_local_data(t_name, response);
         });
 }
 
-function store_local_data(t_name) {
+function store_local_data(t_name, response) {
     localStorage.setItem('olivia_username', t_name);
+    localStorage.setItem('olivia_d_uuid', response.d_uuid);
+    localStorage.setItem('olivia_uuid', response.uuid);
 }
 
 function set_d_uuid(d_uuid) {
