@@ -1,17 +1,18 @@
 let controller = new AbortController();
 
-let d1 = document.querySelector("div[name='entrance_1']");
-let d2 = document.querySelector("div[name='entrance_2']");
-let d3 = document.querySelector("div[name='entrance_3']");
-let d4 = document.querySelector("div[name='entrance_4']");
-let d5 = document.querySelector("div[name='entrance_5']");
-let d6 = document.querySelector("div[name='entrance_6']");
+let d0 = null;
+let d1 = null;
+let d2 = null;
+let d3 = null;
+let d4 = null;
+let d5 = null;
+let d6 = null;
 
 $(document).ready(function () {
     olivia_overall_init();
     if (localStorage.olivia_username) {
         document.querySelector("span[name='first_page_username']").innerHTML = localStorage.olivia_username;
-        flow_messages(6);
+        flow_messages(0);
     } else {
         flow_messages(1);
     }
