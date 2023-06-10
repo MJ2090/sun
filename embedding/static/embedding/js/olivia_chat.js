@@ -78,11 +78,10 @@ function olivia_chat_init() {
         request_data.append('t_uuid', t_uuid);
     } else {
         t_name = document.querySelector("input[name='msg_1']").value;
-        // let t_age = document.querySelector("input[name='msg_2']").value;
-        let t_age = document.querySelectorAll("input[name='age_options']:checked")[0].value;
+        let t_age_range = document.querySelectorAll("input[name='age_options']:checked")[0].value;
         let t_gender = document.querySelectorAll("input[name='gender_options']:checked")[0].value;
         let t_pin = document.querySelector("input[name='msg_4']").value;
-        request_data.append('t_age', t_age);
+        request_data.append('t_age_range', t_age_range);
         request_data.append('t_gender', t_gender);
         request_data.append('t_pin', t_pin);
     }

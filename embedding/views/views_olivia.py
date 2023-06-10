@@ -79,12 +79,12 @@ def create_exist_visitor(request):
 
 def create_new_visitor(request):
     t_name = request.POST.get('t_name', '')
-    t_age = get_int(request.POST.get('t_age', ''))
+    t_age_range = request.POST.get('t_age_range', '')
     t_gender = request.POST.get('t_gender', '')
     t_pin = request.POST.get('t_pin', '')
     uuid = load_random_string(10)
     r = VisitorProfile.objects.create(
-        uuid=uuid, username=t_name, age=t_age, gender=t_gender, pin=t_pin)
+        uuid=uuid, username=t_name, age_range=t_age_range, gender=t_gender, pin=t_pin)
     return r
 
 
@@ -96,7 +96,7 @@ def get_prompt(visitor):
     #3. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
     """
     user_prompt = f"""
-    The visitor's name is {visitor.username}, their gender is {visitor.gender}, and they are 23 years old."""
+    The visitor's name is {visitor.username}, their gender is {visitor.gender}, and their age is {visitor.age_range}."""
     return base_prompt + user_prompt
 
 

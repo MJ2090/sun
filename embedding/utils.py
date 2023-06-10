@@ -142,9 +142,9 @@ def record_dialogue(request, role, message, dialogue_id, source='chat', request_
     dialogue.save()
 
 
-def get_int(t_age, default_value=20):
+def get_int(str_value, default_value=20):
     try:
-        return int(t_age)
+        return int(str_value)
     except ValueError:
         return default_value
 
