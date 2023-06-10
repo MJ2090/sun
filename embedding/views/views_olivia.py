@@ -34,12 +34,11 @@ def olivia_async_chat(request):
 
 def olivia_async_init(request):
     if request.POST.get("t_uuid", '') != '':
-        print("333333333")
         visitor = create_exist_visitor(request)
+        greeting = load_random_greeting(visitor.username, first_meet = False)
     else:
         visitor = create_new_visitor(request)
-        print("444444444")
-    greeting = load_random_greeting(visitor.username)
+        greeting = load_random_greeting(visitor.username)
     dialogue = record_new_dialogue(visitor, greeting, None, "ai")
     return HttpResponse(json.dumps({'ai_message': greeting, 'uuid': visitor.uuid, 'd_uuid': dialogue.dialogue_uuid, 'm_uuid': dialogue.msg_uuid}))
 

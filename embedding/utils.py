@@ -15,11 +15,17 @@ import shutil
 random.seed(datetime.now().timestamp())
 
 
-def load_random_greeting(t_name):
-    greetings = [f'Hi {t_name}, how are you today?',
-                 f'Hello {t_name}, is everything okay?',
-                 f'Hello {t_name}, how is everything going?',
-                 f'Hi {t_name}, welcome to my therapy session, how are you?']
+def load_random_greeting(t_name, first_meet = True):
+    if first_meet:
+        greetings = [f'Hi {t_name}, how are you today?',
+                    f'Hello {t_name}, is everything okay?',
+                    f'Hello {t_name}, how is everything going?',
+                    f'Hi {t_name}, welcome to my therapy session, how are you?']
+    else:
+        greetings = [f'Hi {t_name}, nice to see you again!',
+                    f'Hello {t_name} happy to see you again, is everything okay?',
+                    f'Hello {t_name}, happy to see you again, how is everything going?',
+                    f'Hi {t_name}, welcome to my therapy session again, how are you?']
     return random.choice(greetings)
 
 
