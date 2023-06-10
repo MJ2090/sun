@@ -146,6 +146,7 @@ class VisitorProfile(models.Model):
     username = models.CharField(max_length=100, default='')
     pin = models.CharField(max_length=6, default='')
     age = models.IntegerField(default=30)
+    age_range = models.CharField(max_length=20, default='')
     gender = models.CharField(max_length=50, default='')
     marriage = models.CharField(max_length=50, default='', blank=True)
     uuid = models.CharField(max_length=20, default='')
@@ -153,7 +154,7 @@ class VisitorProfile(models.Model):
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
-        return self.username
+        return f"{self.username}"
 
 
 class VisitorDialogue(models.Model):
