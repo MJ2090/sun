@@ -33,10 +33,12 @@ def olivia_async_chat(request):
 
 
 def olivia_async_init(request):
-    if "uuid" in request.POST:
+    if request.POST.get("t_uuid", '') != '':
+        print("333333333")
         visitor = create_exist_visitor(request)
     else:
         visitor = create_new_visitor(request)
+        print("444444444")
     greeting = load_random_greeting(visitor.username)
     dialogue = record_new_dialogue(visitor, greeting, None, "ai")
     return HttpResponse(json.dumps({'ai_message': greeting, 'uuid': visitor.uuid, 'd_uuid': dialogue.dialogue_uuid, 'm_uuid': dialogue.msg_uuid}))
@@ -70,8 +72,9 @@ def record_new_dialogue(visitor, message, d_uuid=None, role="ai"):
 
 
 def create_exist_visitor(request):
-    uuid = request.POST.get("uuid", '')
+    uuid = request.POST.get("t_uuid", '')
     r = VisitorProfile.objects.get(uuid=uuid)
+    print("existing user found..")
     return r
 
 

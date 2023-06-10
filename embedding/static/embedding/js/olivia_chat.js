@@ -68,26 +68,24 @@ function therapy_chat() {
 
 function olivia_chat_init() {
     // prepare data
-    init_with_old_user = localStorage.olivia_username != undefined
-    let csrf = $("input[name='csrfmiddlewaretoken']");
-    let t_name = document.querySelector("input[name='msg_1']").value;
-    let t_age = document.querySelector("input[name='msg_2']").value;
-    let t_pin = document.querySelector("input[name='msg_4']").value;
-    let t_gender = null;
-    let t_uuid = null;
-    if (init_with_old_user) {
-        t_gender = '';
-        t_uuid = localStorage.olivia_uuid;
-    } else {
-        t_gender = document.querySelectorAll("input[type='radio']:checked")[0].value;
-        t_uuid = '';
-    }
     const request_data = new FormData();
+    init_with_old_user = !!localStorage.olivia_username;
+    let csrf = $("input[name='csrfmiddlewaretoken']");
+    let t_name = null;
+    if (init_with_old_user) {
+        t_name = localStorage.olivia_username;
+        let t_uuid = localStorage.olivia_uuid;
+        request_data.append('t_uuid', t_uuid);
+    } else {
+        t_name = document.querySelector("input[name='msg_1']").value;
+        let t_age = document.querySelector("input[name='msg_2']").value;
+        let t_gender = document.querySelectorAll("input[type='radio']:checked")[0].value;
+        let t_pin = document.querySelector("input[name='msg_4']").value;
+        request_data.append('t_age', t_age);
+        request_data.append('t_gender', t_gender);
+        request_data.append('t_pin', t_pin);
+    }
     request_data.append('t_name', t_name);
-    request_data.append('t_age', t_age);
-    request_data.append('t_pin', t_pin);
-    request_data.append('t_gender', t_gender);
-    request_data.append('t_uuid', t_uuid);
     request_data.append('csrfmiddlewaretoken', csrf.val());
 
     // api fetch
