@@ -16,7 +16,7 @@ def olivia_async_chat(request):
     visitor = get_visitor_from_dialogue(d_uuid=d_uuid)
     record_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="hm")
 
-    prompt = get_prompt(name=visitor.username)
+    prompt = get_prompt(visitor)
     messages = [{"role": "system", "content": prompt}]
     messages.extend(history_json)
     messages.append({"role": "user", "content": new_message})
@@ -88,7 +88,7 @@ def create_new_visitor(request):
     return r
 
 
-def get_prompt(name):
+def get_prompt(visitor):
     base_prompt = """
     You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules: 
     #1. If visitors want to commit suicide or hurt someone, immediately lead them to hotline 988 or 911. 
@@ -96,7 +96,7 @@ def get_prompt(name):
     #3. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
     """
     user_prompt = f"""
-    The visitor's name is {name}, and she is 23 years old."""
+    The visitor's name is {visitor.username}, their gender is {visitor.gender}, and they are 23 years old."""
     return base_prompt + user_prompt
 
 

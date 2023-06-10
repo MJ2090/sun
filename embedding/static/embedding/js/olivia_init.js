@@ -24,22 +24,29 @@ function add_event_listener() {
         });
     })
 
-    let buttons_1 = document.querySelectorAll("label[name='gender']");
-    buttons_1.forEach(e => {
+    let buttons_gender = document.querySelectorAll("label[name='gender']");
+    buttons_gender.forEach(e => {
         e.addEventListener("click", function (e) {
             next_entrance();
         });
     });
 
-    let buttons_2 = document.querySelector("div[name='old_user']");
-    buttons_2.addEventListener("click", function (e) {
+    let buttons_age = document.querySelectorAll("label[name='age']");
+    buttons_age.forEach(e => {
+        e.addEventListener("click", function (e) {
+            next_entrance();
+        });
+    });
+
+    let buttons_old_user = document.querySelector("div[name='old_user']");
+    buttons_old_user.addEventListener("click", function (e) {
         hide(d0);
         flow_messages(5);
         flow_finish();
     });
 
-    let buttons_3 = document.querySelector("div[name='new_user']");
-    buttons_3.addEventListener("click", function (e) {
+    let buttons_new_user = document.querySelector("div[name='new_user']");
+    buttons_new_user.addEventListener("click", function (e) {
         hide(d0);
         localStorage.removeItem("olivia_username");
         localStorage.removeItem("olivia_d_uuid");
