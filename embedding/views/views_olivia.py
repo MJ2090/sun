@@ -123,7 +123,9 @@ def thread_check_suicide(visitor, new_message, history_json, d_uuid):
         return
     dialogue_str = get_dialogue_str(d_uuid)
     prompt = f"""
-    Based on the given dialogue between a visitor and a therapist, tell whether the visitor has a strong tendency to commit suicide. You MUST return ONE letter only, Y or N, no other words.
+    Based on the given Dialogue between a visitor and a therapist, tell whether the visitor has a tendency to commit suicide. 
+    You MUST return ONE of the options only, no other words at all, the options are:, 'Severe suicidal', 'Moderate suicidal', 'Slight suicidal', 'None'.
+    
     Dialogue:
 
     {dialogue_str}

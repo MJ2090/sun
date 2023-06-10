@@ -173,7 +173,7 @@ class VisitorDialogue(models.Model):
 class SuicideAssessment(models.Model):
     visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
     timestamp = models.IntegerField(default=0)
-    result = models.CharField(max_length=20, default='')
+    result = models.CharField(max_length=30, default='')
     evidence = models.CharField(max_length=1500, default='', blank=True)
 
     def __str__(self):
