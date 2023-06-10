@@ -150,9 +150,9 @@ def get_base_ret(request):
 def load_side_channel(visitor, ret):
     side_channel = {}
     assessments = SuicideAssessment.objects.filter(visitor=visitor).order_by("timestamp")
-    if len(assessments)>0 and 'suicide' in assessments[0].result:
-        side_channel['suicide'] = True
-        side_channel['suicide_label'] = assessments[0].result
+    if len(assessments)>0 and 'suicidal' in assessments[0].result:
+        side_channel['suicidal'] = True
+        side_channel['suicidal_label'] = assessments[0].result
     assessments = DepressionAssessment.objects.filter(visitor=visitor).order_by("timestamp")
     if len(assessments)>0 and 'depression' in assessments[0].result:
         side_channel['depression'] = True
