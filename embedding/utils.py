@@ -100,6 +100,8 @@ def save_to_local(original_file, sub_dir=''):
         os.makedirs(file_dir)
     file_name = default_storage.save(os.path.join(
         file_dir, random_prefix+original_file.name), original_file)
+    
+    # save images
     if sub_dir == '' and original_file.size > 3*1000*1000:
         tmp = Image.open(file_name)
         max_size = (1024, 1024)

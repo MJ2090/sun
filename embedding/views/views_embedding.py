@@ -21,7 +21,7 @@ def embedding_training(request):
 
 def embedding_add_doc_async(request):
     model = request.POST.get('model', '')
-    print("original_pdf ", request.FILES, type(request.FILES))
+    print("original_files ", request.FILES, type(request.FILES))
     documents = {}
     text = ''
     for _, original_pdf in request.FILES.items():
