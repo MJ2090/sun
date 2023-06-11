@@ -85,7 +85,7 @@ def text_summary_async(doc):
         print("Hello")
         pdf_pages = load_pdf(doc.filename)
         text = '\n\n'.join([page.page_content for page in pdf_pages])
-        openai_response = feature_summary(text, max_words=1500)
+        openai_response = feature_summary(text, max_words=150)
         summary_text = openai_response["choices"][0]["message"]["content"]
         doc.summarization = summary_text
         doc.save()
