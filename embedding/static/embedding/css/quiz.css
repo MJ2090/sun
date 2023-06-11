@@ -88,3 +88,12 @@ div.question-type {
     display: flex;
     justify-content: space-between;
 }
+
+.label-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.q-clear-button {
+    color: #939393;
+}

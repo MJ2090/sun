@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-11 16:39-0700\n"
+"POT-Creation-Date: 2023-06-11 16:55-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,28 +115,32 @@ msgstr "答题中 请稍后 .."
 msgid "Question Type"
 msgstr "选择题型"
 
-#: embedding/templates/embedding/q.html:52
+#: embedding/templates/embedding/q.html:53
 msgid "Uploaded Question"
 msgstr "上传题目"
 
 #: embedding/templates/embedding/q.html:54
+msgid "Clear"
+msgstr "清空"
+
+#: embedding/templates/embedding/q.html:57
 msgid "Upload question to get the answer"
 msgstr "在此录入题目后求解"
 
-#: embedding/templates/embedding/q.html:56
+#: embedding/templates/embedding/q.html:59
 msgid "Give me the answer"
 msgstr "求解"
 
-#: embedding/templates/embedding/q.html:62
+#: embedding/templates/embedding/q.html:65
 msgid "Upload Image"
 msgstr "截图求解"
 
-#: embedding/templates/embedding/q.html:63
+#: embedding/templates/embedding/q.html:66
 #: embedding/templates/embedding/quiz.html:33
 msgid "No image chosen"
 msgstr "未选择截图"
 
-#: embedding/templates/embedding/q.html:74
+#: embedding/templates/embedding/q.html:77
 msgid "Generated Answer"
 msgstr "回答如下"
 

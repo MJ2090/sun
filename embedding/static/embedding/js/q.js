@@ -98,6 +98,11 @@ function quiz_init() {
   });
   $('[data-toggle="tooltip"]').tooltip();
 
+  document.querySelector("label[name='question_clear']").addEventListener('click', function () {
+    let question = document.querySelector("textarea[name='response_question']");
+    question.value = '';
+  });
+
   var bt = document.getElementById('clipboard-icon-answer');
   let s = new bootstrap.Tooltip(bt);
   document.querySelector("#clipboard-icon-answer").addEventListener('click', copy_clipboard_answer);
