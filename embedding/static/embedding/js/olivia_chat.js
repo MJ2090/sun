@@ -53,6 +53,7 @@ function therapy_chat() {
         .then(
             response => response.json())
         .then((response) => {
+            console.log(response);
             pre_process();
             display_msg(response.ai_message);
             post_process();
