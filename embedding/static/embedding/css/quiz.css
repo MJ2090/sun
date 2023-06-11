@@ -72,6 +72,11 @@ input[type=radio]:checked {
 .q-send-question-text{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    height: 200px;
+}
+
+.q-send-button-input {
+    text-overflow:ellipsis
 }
 
 .q-send-button-question{

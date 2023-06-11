@@ -7,13 +7,23 @@
 {% endblock %}
 
 {% block privatejs %}
-<script src="{% static 'embedding/js/quiz.js' %}"></script>
+<script src="{% static 'embedding/js/q.js' %}"></script>
 {% endblock %}
 
 {% block main %}
 
-<div class="container px-4 py-5">
+<div class="container px-4 py-4">
   <h4 class="mb-3">{% translate "Quiz Terminator" %}</h4>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body py-5">
+          {% translate "Reading image, please Wait.." %}
+        </div>
+      </div>
+    </div>
+  </div>
   <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
     <div class="col-lg-4 col-md-12 mb-4">
@@ -29,15 +39,18 @@
       <div class="row g-3">
         <div class="col-12">
           <label for="address2" class="form-label">{% translate "Uploaded Question" %}</label>
-          <textarea class="form-control q-send-question-text" rows="10" name="response_question" placeholder="{% translate 'Upload question to get the answer' %}"></textarea>
+          <textarea class="form-control q-send-question-text" rows="10" name="response_question"
+            placeholder="{% translate 'Upload question to get the answer' %}"></textarea>
           <button class="send-button-question q-send-button-question w-100 btn btn-primary btn-md mb-3" type="button">
             {% translate "Give me the answer" %}</button>
         </div>
         <div class="col-12">
           {{ form.image_f }}
           <div class="input-group">
-            <span class="input-group-text play-choose-button">{% translate "Upload Image" %}</span>
-            <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
+            <button class="btn btn-primary input-group-text play-choose-button" type="button">
+              {% translate "Upload Image" %}</button>
+            <input disabled id="play-choose-text" value='{% translate "No image chosen" %}' type="text"
+              class="form-control q-send-button-input">
           </div>
           <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
         </div>
@@ -62,7 +75,8 @@
     <div class="col-lg-4 col-md-12">
       <div class="row g-3">
         <div class="col-12 text-muted">
-          <p class="terms mt-3">免责声明: 本工具基于复杂的高级智能技术,我们致力于提供高精准度的信息,但无法保证呈现结果的百分之百准确性. 运行,使用或购买本产品即代表使用者已充分认识AI工具的既有缺陷和潜在风险,并承诺对使用行为及其完整结果承担全部责任.</p>
+          <p class="terms mt-3">免责声明: 本工具基于复杂的高级智能技术,我们致力于提供高精准度的信息,但无法保证呈现结果的百分之百准确性.
+            运行,使用或购买本产品即代表使用者已充分认识AI工具的既有缺陷和潜在风险,并承诺对使用行为及其完整结果承担全部责任.</p>
           <p class="terms mt-3">©2023 Built by L5. All rights reserved.</p>
         </div>
       </div>

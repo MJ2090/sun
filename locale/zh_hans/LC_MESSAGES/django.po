@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-11 15:41-0700\n"
+"POT-Creation-Date: 2023-06-11 16:18-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,31 +104,35 @@ msgid "Quiz Terminator"
 msgstr "答题助手"
 
 #: embedding/templates/embedding/q.html:22
+msgid "Reading image, please Wait.."
+msgstr "图片信息读取中 请稍后.."
+
+#: embedding/templates/embedding/q.html:32
 msgid "Question Type"
 msgstr "选择题型"
 
-#: embedding/templates/embedding/q.html:31
+#: embedding/templates/embedding/q.html:41
 msgid "Uploaded Question"
 msgstr "上传题目"
 
-#: embedding/templates/embedding/q.html:32
+#: embedding/templates/embedding/q.html:43
 msgid "Upload question to get the answer"
 msgstr "在此录入题目后求解"
 
-#: embedding/templates/embedding/q.html:34
+#: embedding/templates/embedding/q.html:45
 msgid "Give me the answer"
 msgstr "求解"
 
-#: embedding/templates/embedding/q.html:39
+#: embedding/templates/embedding/q.html:51
 msgid "Upload Image"
 msgstr "截图求解"
 
-#: embedding/templates/embedding/q.html:40
+#: embedding/templates/embedding/q.html:52
 #: embedding/templates/embedding/quiz.html:33
 msgid "No image chosen"
 msgstr "未选择截图"
 
-#: embedding/templates/embedding/q.html:50
+#: embedding/templates/embedding/q.html:63
 msgid "Generated Answer"
 msgstr "回答如下"
 
