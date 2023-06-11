@@ -122,15 +122,15 @@ def feature_grammar(original_text, model):
     return response
 
 
-def feature_summary(original_text, model, max_words=0, max_tokens=1500):
+def feature_summary(original_text, model='gpt-3.5-turbo', max_words=0, max_tokens=1500):
     original_text = original_text.replace('\n', '')
     messages = [
         {"role": "system", "content": "Summarize the Input Text. Step #1. determine which language is used in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
-        {"role": "user", "content": "The summarization MUST use the same language as the input text."},
+        {"role": "user", "content": "The summary MUST use the same language as the input text."},
         {"role": "user", "content": f"Input Text:\n\n\n {original_text}."},
     ]
     if max_words > 0:
-        messages[0]['content'] += f" The summarization MUST be within {max_words} words."
+        messages[0]['content'] += f" The summary MUST be within {max_words} words."
     try:
         print("model: ", model)
         print("Msg sent to openai: ", messages)
