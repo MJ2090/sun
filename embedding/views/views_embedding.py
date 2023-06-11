@@ -24,8 +24,8 @@ def embedding_add_doc_async(request):
     print("original_files ", request.FILES, type(request.FILES))
     documents = {}
     text = ''
-    for _, original_pdf in request.FILES.items():
-        pdf_file_name = save_to_local(original_pdf, 'pdf')
+    for _, original_file in request.FILES.items():
+        pdf_file_name = save_to_local(original_file, 'pdf')
         move_to_static(pdf_file_name, pdf_file_name)
         pdf_pages = load_pdf(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
