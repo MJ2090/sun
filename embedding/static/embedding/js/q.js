@@ -1,5 +1,8 @@
+let image_model = null;
+let question_modal = null;
+
 function play_fetch_image() {
-  show_image_modal(true);
+  show_modal(image_model, true);
   let original_image = document.querySelector("input[name='image_f']");
   let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
   let llm_model_value = get_llm_model();
@@ -28,11 +31,12 @@ function play_fetch_image() {
       question.value = data.question;
     })
     .finally(() => {
-      show_image_modal(false);
+      show_modal(image_model, false);
     });
 }
 
 function play_fetch_question() {
+  show_modal(question_model, true);
   let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
   let llm_model_value = get_llm_model();
   let question = document.querySelector("textarea[name='response_question']")
@@ -49,16 +53,18 @@ function play_fetch_question() {
   request_data.append('csrfmiddlewaretoken', csrf.value);
   request_data.append('llm_model', llm_model_value);
 
-  // spinner = document.querySelector("div[name='spinner_question']");
-  // spinner.style.display = 'block';
   fetch("/quiz_question_async/", {
     method: "POST",
     body: request_data,
-  }).then(response => response.json()).then((response) => {
-    let data = response;
-    answer.value = data.answer;
-    // spinner.style.display = 'none';
-  });
+  })
+    .then(response => response.json())
+    .then((response) => {
+      let data = response;
+      answer.value = data.answer;
+    })
+    .finally(() => {
+      show_modal(question_model, false);
+    });
 }
 
 function get_llm_model() {
@@ -70,6 +76,9 @@ function get_llm_model() {
 }
 
 function quiz_init() {
+  image_model = new bootstrap.Modal('#imageModal', {});
+  question_model = new bootstrap.Modal('#questionModal', {});
+
   document.querySelector("input[type='radio']").setAttribute('checked', true);
   document.querySelector(".send-button-question").addEventListener('click', function () {
     play_fetch_question();
@@ -94,12 +103,11 @@ function quiz_init() {
   document.querySelector("#clipboard-icon-answer").addEventListener('click', copy_clipboard_answer);
 }
 
-function show_image_modal(show) {
-  const myModal = new bootstrap.Modal('#staticBackdrop', {});
+function show_modal(modal, show) {
   if (show) {
-    myModal.show();
+    modal.show();
   } else {
-    myModal.hide();
+    modal.hide();
   }
 }
 

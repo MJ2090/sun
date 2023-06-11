@@ -14,16 +14,27 @@
 
 <div class="container px-4 py-4">
   <h4 class="mb-3">{% translate "Quiz Terminator" %}</h4>
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+  <!-- Image Modal -->
+  <div class="modal fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body py-5">
-          {% translate "Reading image, please Wait.." %}
+          {% translate "Reading image, please Wait .." %}
         </div>
       </div>
     </div>
   </div>
+  <!-- Question Modal -->
+  <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body py-5">
+          {% translate "Solving the question, please Wait .." %}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
     <div class="col-lg-4 col-md-12 mb-4">
