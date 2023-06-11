@@ -1,15 +1,10 @@
 from django.http import HttpResponse
 from embedding.forms.prompt_model import PromptModelForm
-from embedding.forms.chat import ChatForm
-from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_action, feature_question, feature_chat, feature_chat_llama
-from embedding.models import TherapyProfile, PromptModel, EmbeddingModel, Dialogue
+from embedding.models import PromptModel
 from django.shortcuts import render
-from embedding.utils import load_random_string, get_basic_data, get_user, record_consumption
-import embedding.static_values as sc
-import json
+from embedding.utils import get_basic_data, get_user
 import random
-import time
 from datetime import datetime
 
 random.seed(datetime.now().timestamp())

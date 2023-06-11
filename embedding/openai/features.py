@@ -46,7 +46,7 @@ def feature_question(question, embedding_model, model='gpt-3.5-turbo'):
         ans = robot.answer_question_glm(my_df, question=question)
     else:
         ans = robot.answer_question_openai(
-            my_df, question=question, reject_message=embedding_model.reject_message)
+            my_df, question=question, debug=True, reject_message=embedding_model.reject_message)
     return ans
 
 

@@ -20,11 +20,9 @@ def create_context(question, df, max_len=1800):
     for i, row in df.sort_values('distances', ascending=True).iterrows():
         # Add the length of the text to the current length
         cur_len += row['n_tokens'] + 4
-
         # If the context is too long, break
         if cur_len > max_len:
             break
-
         # Else add it to the text that is being returned
         returns.append(row["text"])
 
