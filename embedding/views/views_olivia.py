@@ -99,7 +99,7 @@ def get_prompt(visitor):
 
 def get_suicide_prompt(visitor):
     assessments = SuicideAssessment.objects.filter(
-        visitor=visitor).order_by("timestamp")
+        visitor=visitor).order_by("-timestamp")
     if len(assessments) == 0:
         return ''
     if assessments[0].result == 'None':
@@ -183,7 +183,8 @@ def get_base_ret(request):
 def load_side_channel(visitor, ret):
     side_channel = {}
     assessments = SuicideAssessment.objects.filter(
-        visitor=visitor).order_by("timestamp")
+        visitor=visitor).order_by("-timestamp")
+    print("assessments", assessments)
     if len(assessments) > 0 and 'suicidal' in assessments[0].result:
         side_channel['suicidal'] = True
         side_channel['suicidal_label'] = assessments[0].result
