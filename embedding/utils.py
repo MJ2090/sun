@@ -164,3 +164,9 @@ def move_to_static(src, dest):
 
 def get_time():
     return time.time()
+
+
+def read_text_from_txt(filename):
+    with open(filename) as f:
+        contents = f.read()
+    return contents

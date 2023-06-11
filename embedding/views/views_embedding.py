@@ -2,12 +2,12 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import activate
 from embedding.forms.embedding import TrainingForm, QuestionForm
-from embedding.vector.file_loader import load_pdf
+from embedding.vector.file_loader import load_pdf_pages, load_pdf_text
 from embedding.polly.audio import generate_audio
 from embedding.openai.features import feature_summary, feature_add_embedding_doc, feature_training, feature_question
 from embedding.models import EmbeddingDocument, EmbeddingModel
 from django.shortcuts import render
-from embedding.utils import move_to_static, load_embedding_models, save_to_local, get_basic_data
+from embedding.utils import read_text_from_txt, move_to_static, load_embedding_models, save_to_local, get_basic_data
 import json
 from threading import Thread
 
@@ -26,16 +26,28 @@ def embedding_add_doc_async(request):
     text = ''
     print(f'embedding_add_doc_async started, embedding uuid {model}')
     for _, original_file in request.FILES.items():
-        pdf_file_name = save_to_local(original_file, 'pdf')
-        move_to_static(pdf_file_name, pdf_file_name)
-        pdf_pages = load_pdf(pdf_file_name)
-        text = '\n\n'.join([page.page_content for page in pdf_pages])
-        page_numbers = len(pdf_pages)
-        openai_response = feature_training(text)
-        print(openai_response)
-        EmbeddingDocument.objects.create(
-            model=embedding_model, filename=pdf_file_name, pages=page_numbers)
-        feature_add_embedding_doc(embedding_model, openai_response)
+        print(original_file.name)
+        if original_file.name.endswith(".pdf"):
+            file_name = save_to_local(original_file, 'pdf')
+            move_to_static(file_name, file_name)
+            pdf_pages = load_pdf_pages(file_name)
+            text = '\n\n'.join([page.page_content for page in pdf_pages])
+            page_numbers = len(pdf_pages)
+            openai_response = feature_training(text)
+            print(openai_response)
+            EmbeddingDocument.objects.create(
+                model=embedding_model, filename=file_name, pages=page_numbers)
+            feature_add_embedding_doc(embedding_model, openai_response)
+        if original_file.name.endswith(".txt"):
+            file_name = save_to_local(original_file, 'txt')
+            move_to_static(file_name, file_name)
+            text = read_text_from_txt(file_name)
+            page_numbers = 1
+            openai_response = feature_training(text)
+            print(openai_response)
+            EmbeddingDocument.objects.create(
+                model=embedding_model, filename=file_name, pages=page_numbers)
+            feature_add_embedding_doc(embedding_model, openai_response)
     return HttpResponse(json.dumps({'result': 'docs added.'}))
 
 
@@ -49,7 +61,7 @@ def embedding_training_async(request):
     for _, original_pdf in request.FILES.items():
         pdf_file_name = save_to_local(original_pdf, 'pdf')
         move_to_static(pdf_file_name, pdf_file_name)
-        pdf_pages = load_pdf(pdf_file_name)
+        pdf_pages = load_pdf_pages(pdf_file_name)
         text += '\n\n'.join([page.page_content for page in pdf_pages])
         print('current text length: ', len(text), text,
               f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
@@ -77,16 +89,18 @@ def embedding_wuxi(request):
 
 def text_summary_async(doc):
     # Define async function
-    def hello_world():
-        print("Hello")
-        pdf_pages = load_pdf(doc.filename)
-        text = '\n\n'.join([page.page_content for page in pdf_pages])
+    def process():
+        print("text_summary_async start")
+        if doc.filename.endswith(".pdf"):
+            text = load_pdf_text(doc.filename)
+        else:
+            text = read_text_from_txt(doc.filename)
         openai_response = feature_summary(text, max_words=150)
         summary_text = openai_response["choices"][0]["message"]["content"]
         doc.summarization = summary_text
         doc.save()
-        print("World finished")
-    thread = Thread(target=hello_world)
+        print("text_summary_async finished")
+    thread = Thread(target=process)
     thread.start()
 
 
