@@ -16,7 +16,7 @@
   <h4 class="mb-3">{% translate "Quiz Terminator" %}</h4>
   <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
     {% csrf_token %}
-    <div class="col-lg-4 col-md-12">
+    <div class="col-lg-4 col-md-12 mb-4">
       <div class="row g-3">
         <div class="col-12">
           <label for="character" class="form-label">{% translate "Question Type" %}</label>
@@ -24,15 +24,28 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-lg-4 col-md-12">
+
+    <div class="col-lg-4 col-md-12 mb-4">
       <div class="row g-3">
         <div class="col-12">
           <label for="address2" class="form-label">{% translate "Uploaded Question" %}</label>
-          <textarea class="form-control q-send-question-text" rows="10" name="response_question"></textarea>
+          <textarea class="form-control q-send-question-text" rows="10" name="response_question" placeholder="{% translate 'Upload question to get the answer' %}"></textarea>
           <button class="send-button-question q-send-button-question w-100 btn btn-primary btn-md mb-3" type="button">
             {% translate "Give me the answer" %}</button>
         </div>
+        <div class="col-12">
+          {{ form.image_f }}
+          <div class="input-group">
+            <span class="input-group-text play-choose-button">{% translate "Upload Image" %}</span>
+            <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
+          </div>
+          <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12 mb-4">
+      <div class="row g-3">
         <div class="col-12">
           <label for="address2" class="form-label">{% translate "Generated Answer" %}</label>
           <div style="position: relative">
@@ -42,25 +55,6 @@
               <i width="1em" height="1em" class="bi-clipboard"></i>
             </button>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-12">
-      <div class="row g-3">
-        <div class="col-12">
-          <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
-          {{ form.image_f }}
-          <div class="input-group">
-            <span class="input-group-text play-choose-button">{% translate "Choose Image" %}</span>
-            <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
-          </div>
-          <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
-        </div>
-        <div class="col-12">
-          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">
-            {% translate "Read Image" %}
-          </button>
         </div>
       </div>
     </div>
