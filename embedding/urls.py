@@ -55,6 +55,7 @@ urlpatterns = [
          name='demo_summary_async'),
 
     path('quiz/', views_quiz.quiz, name='quiz'),
+    path('q/', views_quiz.q, name='q'),
     path('quiz_async/', views_quiz.quiz_async, name='quiz_async'),
     path('quiz_question_async/', views_quiz.quiz_question_async,
          name='quiz_question_async'),

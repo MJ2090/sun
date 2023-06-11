@@ -66,6 +66,14 @@ def quiz(request):
     return render(request, 'embedding/quiz.html', ret)
 
 
+def q(request):
+    user_language = "zh_hans"
+    activate(user_language)
+    ret = get_basic_data(request)
+    ret['form'] = QuizForm()
+    return render(request, 'embedding/q.html', ret)
+
+
 def ocr_record(request, image_path, ocr_result, request_time):
     response_time = time.time()
     record = OcrRecord.objects.create(user=get_user(request),

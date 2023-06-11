@@ -106,3 +106,10 @@ IMAGE_COUNTS = (
     (IMAGE_COUNT_6, 6),
     (IMAGE_COUNT_9, 9),
 )
+
+Q_TYPE_1 = 'q_1'
+Q_TYPE_2 = 'q_2'
+Q_TYPES = (
+    (Q_TYPE_1, '选择题｜判断题'),
+    (Q_TYPE_2, '问答题｜写作题'),
+)

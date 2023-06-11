@@ -1,0 +1,78 @@
+{% extends "embedding/base.html" %}
+{% load i18n %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/quiz.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/quiz.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="container px-4 py-5">
+  <h4 class="mb-3">{% translate "Quiz Terminator" %}</h4>
+  <form class="row needs-validation" novalidate="" action="/play/" method="post" onsubmit="return confirmSubmit(this)">
+    {% csrf_token %}
+    <div class="col-lg-4 col-md-12">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="character" class="form-label">{% translate "Question Type" %}</label>
+          {{ form.question_type }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-4 col-md-12">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="address2" class="form-label">{% translate "Uploaded Question" %}</label>
+          <textarea class="form-control q-send-question-text" rows="10" name="response_question"></textarea>
+          <button class="send-button-question q-send-button-question w-100 btn btn-primary btn-md mb-3" type="button">
+            {% translate "Give me the answer" %}</button>
+        </div>
+        <div class="col-12">
+          <label for="address2" class="form-label">{% translate "Generated Answer" %}</label>
+          <div style="position: relative">
+            <textarea class="form-control mb-3" disabled rows="10" name="response_answer"></textarea>
+            <button id="clipboard-icon-answer" type="button" class="btn text-clipboard-icon" data-bs-toggle="tooltip"
+              data-bs-placement="left" title="Copy to clipboard">
+              <i width="1em" height="1em" class="bi-clipboard"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="address2" class="form-label">{% translate "Upload Question" %}</label>
+          {{ form.image_f }}
+          <div class="input-group">
+            <span class="input-group-text play-choose-button">{% translate "Choose Image" %}</span>
+            <input id="play-choose-text" value='{% translate "No image chosen" %}' type="text" class="form-control">
+          </div>
+          <div class="image-container mt-3"><img id="imagePreview" src="#" /></div>
+        </div>
+        <div class="col-12">
+          <button class="send-button-image w-100 btn btn-primary btn-md mt-3 mb-3" type="button">
+            {% translate "Read Image" %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+      <div class="row g-3">
+        <div class="col-12 text-muted">
+          <p class="terms mt-3">免责声明: 本工具基于复杂的高级智能技术,我们致力于提供高精准度的信息,但无法保证呈现结果的百分之百准确性. 运行,使用或购买本产品即代表使用者已充分认识AI工具的既有缺陷和潜在风险,并承诺对使用行为及其完整结果承担全部责任.</p>
+          <p class="terms mt-3">©2023 Built by L5. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
