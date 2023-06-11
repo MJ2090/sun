@@ -21,25 +21,21 @@ def embedding_training(request):
 
 def embedding_add_doc_async(request):
     model = request.POST.get('model', '')
+    embedding_model = EmbeddingModel.objects.get(uuid=model)
     print("original_files ", request.FILES, type(request.FILES))
-    documents = {}
     text = ''
+    print(f'embedding_add_doc_async started, embedding uuid {model}')
     for _, original_file in request.FILES.items():
         pdf_file_name = save_to_local(original_file, 'pdf')
         move_to_static(pdf_file_name, pdf_file_name)
         pdf_pages = load_pdf(pdf_file_name)
-        text += '\n\n'.join([page.page_content for page in pdf_pages])
-        print('current text length: ', len(text), text,
-              f'current file name: {pdf_file_name}, pages: {len(pdf_pages)}')
-        documents[pdf_file_name] = len(pdf_pages)
-    print(f'embedding_add_doc_async started, embedding uuid {model}')
-    openai_response = feature_training(text)
-    embedding_model = EmbeddingModel.objects.get(uuid=model)
-    for key, v in documents.items():
+        text = '\n\n'.join([page.page_content for page in pdf_pages])
+        page_numbers = len(pdf_pages)
+        openai_response = feature_training(text)
+        print(openai_response)
         EmbeddingDocument.objects.create(
-            model=embedding_model, filename=key, pages=v)
-    feature_add_embedding_doc(embedding_model, openai_response)
-    print(openai_response)
+            model=embedding_model, filename=pdf_file_name, pages=page_numbers)
+        feature_add_embedding_doc(embedding_model, openai_response)
     return HttpResponse(json.dumps({'result': 'docs added.'}))
 
 
