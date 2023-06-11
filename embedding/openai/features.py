@@ -132,12 +132,14 @@ def feature_summary(original_text, model, max_words=0, max_tokens=1500):
     if max_words > 0:
         messages[0]['content'] += f" The summarization MUST be within {max_words} words."
     try:
+        print("Msg sent to openai: ", messages)
         response = openai.ChatCompletion.create(
             model=model,
             temperature=0.2,
             max_tokens=max_tokens,
             messages=messages,
         )
+        print("Msg from openai: ", response)
     except openai.error.InvalidRequestError as e:
         print(f"OpenAI API request InvalidRequestErro, retry #1..\n: {e}")
         half_len = len(original_text)//2
