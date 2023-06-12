@@ -168,8 +168,6 @@ def thread_check_suicide(visitor, new_message, history_json, d_uuid):
     ai_message = openai_response["choices"][0]["message"]["content"]
     SuicideAssessment.objects.create(
         visitor=visitor, result=ai_message, timestamp=get_time())
-    # if "suicide" in new_message:
-    #     SuicideAssessment.objects.create(visitor=visitor, result='Y', timestamp=get_time())
 
 
 def thread_check_diagnosis(visitor, new_message):

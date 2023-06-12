@@ -172,6 +172,16 @@ class VisitorDialogue(models.Model):
         return self.visitor.username + ' ' + self.dialogue_uuid + ' ' + self.role + " " + self.message + " " + str(self.ack)
 
 
+class TherapyAssessment(models.Model):
+    visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
+    timestamp = models.IntegerField(default=0)
+    result = models.CharField(max_length=30, default='')
+    evidence = models.CharField(max_length=1500, default='', blank=True)
+
+    def __str__(self):
+        return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
+    
+
 class SuicideAssessment(models.Model):
     visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
     timestamp = models.IntegerField(default=0)
