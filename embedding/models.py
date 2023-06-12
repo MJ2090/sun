@@ -116,9 +116,8 @@ class QuizRecord(models.Model):
 
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
-        return f"{username} {self.question} {self.response_time - self.request_time} self.llm_model"
-        # return username + " " + self.question + " " + str(self.response_time - self.request_time) + " " + self.llm_model
-    
+        return f"{username} {self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token: {self.token_amount_request} {self.token_amount_response}"
+   
 
 class OcrRecord(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,blank=True, null=True)
