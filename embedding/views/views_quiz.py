@@ -34,8 +34,10 @@ def quiz_image_async(request):
 
 
 def quiz_question_async(request):
-    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4',
-                     'q_1': 'gpt-4', 'q_2': 'gpt-3.5-turbo',
+    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 
+                     'zhun': 'gpt-4',
+                     'q_1': 'gpt-4', 
+                     'q_2': 'gpt-4',
                      '': 'gpt-3.5-turbo'}
     fe_model = request.POST.get('llm_model', '')
     llm_model = llm_model_dic.get(fe_model)
