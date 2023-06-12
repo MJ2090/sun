@@ -63,7 +63,9 @@ function play_fetch_question() {
       answer.value = data.answer;
     })
     .finally(() => {
-      show_modal(question_model, false);
+      setTimeout(() => {
+        show_modal(question_model, false);
+      }, 500);
     });
 }
 

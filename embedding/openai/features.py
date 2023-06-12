@@ -205,6 +205,7 @@ def feature_chat(messages, model, retry=0):
 def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
     messages = get_quiz_prompt(q_type=q_type, context=context)
     request_time = time.time()
+    model='234'
     try:
         print(f"Msg sent to openai {model}: {messages}")
         response = openai.ChatCompletion.create(
@@ -229,6 +230,10 @@ def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
     except openai.error.RateLimitError as e:
         # Handle rate limit error (we recommend using exponential backoff)
         print(f"OpenAI API request exceeded rate limit: {e}")
+        return "ERROR", request_time
+    except openai.error.InvalidRequestError as e:
+        # Handle InvalidRequestError
+        print(f"OpenAI API request is invalid: {e}")
         return "ERROR", request_time
 
 
