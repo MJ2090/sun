@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from embedding.openai.features import feature_chat
-from embedding.models import DepressionAssessment, SuicideAssessment, VisitorDialogue, VisitorProfile
+from embedding.models import TherapyAssessment, DepressionAssessment, SuicideAssessment, VisitorDialogue, VisitorProfile
 from django.shortcuts import render
 from embedding.utils import get_time, load_random_greeting, load_random_string, get_basic_data
 import json
@@ -93,32 +93,33 @@ def get_prompt(visitor):
     prompts = []
     prompts.append(get_base_prompt())
     prompts.append(get_user_prompt(visitor))
-    prompts.append(get_suicide_prompt(visitor))
+    prompts.append(get_assessment_prompt(visitor))
     return '\n'.join(prompts)
 
 
-def get_suicide_prompt(visitor):
-    assessments = SuicideAssessment.objects.filter(
+def get_assessment_prompt(visitor):
+    assessments = TherapyAssessment.objects.filter(
         visitor=visitor).order_by("-timestamp")
     if len(assessments) == 0:
         return ''
     if assessments[0].result == 'None':
         return ''
-    suiside_prompt = f"""
+    therapy_prompt = f"""
     Be aware that the visitor may suffer from {assessments[0].result}
     """
-    return suiside_prompt
+    return therapy_prompt
 
 
 def get_user_prompt(visitor):
     user_prompt = f"""
-    The visitor's name is {visitor.username}, their gender is {visitor.gender}, and their age is {visitor.age_range}."""
+    The visitor's name is {visitor.username}, their gender is {visitor.gender}, and their age is {visitor.age_range}.
+    """
     return user_prompt
 
 
 def get_base_prompt():
     base_prompt = """
-    You act as a professional therapist who uses Cognitive Behavioral Therapy to treat patients. You must respect these rules:
+    You act as a professional therapist. You MUST respect these rules:
     #1. Do not answer questions irrelevant to therapy, for example mathematical or political questions. 
     #2. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
     """
@@ -143,13 +144,45 @@ def thread_start(visitor, new_message, history_json, d_uuid):
 
 
 def thread_overall(visitor, new_message, history_json, d_uuid):
-    thread_check_suicide(visitor, new_message, history_json, d_uuid)
+    thread_assessment_overall(visitor, new_message, history_json, d_uuid)
 
+
+def thread_assessment_overall(visitor, new_message, history_json, d_uuid):
+    current_t = get_time()
+    if len(history_json) < 5:
+        return
+    if TherapyAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-3600)).count() > 0:
+        return
+    dialogue_str = get_dialogue_str(d_uuid)
+    prompt = f"""
+    Based on the given Dialogue between a visitor and a therapist, tell whether it is possible that the visitor is suffering from mental health issues. 
+    You MUST return ONE of the options only, no other words at all. If there is not eough information, return the option 'None'.
+     
+    The options are:
+
+    'Depression',
+    'Anxiety',
+    'ADHD',
+    'Insomnia',
+    'Intermittent Explosive Disorder',
+    'None'
+    
+    Dialogue:
+
+    {dialogue_str}
+    """
+    model = "gpt-4"
+    messages = [{"role": "system", "content": prompt}]
+    openai_response, _ = feature_chat(messages, model=model)
+    ai_message = openai_response["choices"][0]["message"]["content"]
+    TherapyAssessment.objects.create(
+        visitor=visitor, result=ai_message, timestamp=get_time())
+    
 
 def thread_check_suicide(visitor, new_message, history_json, d_uuid):
     current_t = get_time()
     print("current_t", current_t)
-    if len(history_json) < 10:
+    if len(history_json) < 5:
         return
     if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-3600)).count() > 0:
         return
@@ -180,17 +213,11 @@ def get_base_ret(request):
 
 def load_side_channel(visitor, ret):
     side_channel = {}
-    assessments = SuicideAssessment.objects.filter(
+    assessments = TherapyAssessment.objects.filter(
         visitor=visitor).order_by("-timestamp")
-    print("assessments", assessments)
-    if len(assessments) > 0 and 'suicidal' in assessments[0].result:
-        side_channel['suicidal'] = True
-        side_channel['suicidal_label'] = assessments[0].result
-    assessments = DepressionAssessment.objects.filter(
-        visitor=visitor).order_by("timestamp")
-    if len(assessments) > 0 and 'depression' in assessments[0].result:
-        side_channel['depression'] = True
-        side_channel['depression_label'] = assessments[0].result
+    if len(assessments) > 0:
+        side_channel['therapy_assessment'] = True
+        side_channel['therapy_assessment_label'] = assessments[0].result
     ret['side_channel'] = side_channel
 
 
