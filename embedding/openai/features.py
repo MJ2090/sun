@@ -178,7 +178,7 @@ def feature_glm(request, messages, prompt, temperature):
     return glm.create(request, messages, prompt, temperature), request_time
 
 
-def feature_chat(messages, model, retry = 0):
+def feature_chat(messages, model, retry=0):
     print(f"\nfeature_chat with model {model}")
     print("\nMsg sent to openai: ", messages)
     request_time = time.time()
@@ -196,30 +196,48 @@ def feature_chat(messages, model, retry = 0):
         return "Sorry it was time out :D", request_time
     except openai.error.APIError as e:
         print(f"OpenAI API request APIerror: {e} with message {messages}")
-        if retry==0:
-            return feature_chat(messages, model, retry = 1)
+        if retry == 0:
+            return feature_chat(messages, model, retry=1)
         else:
             return "ERROR IN OEPNAI API"
 
 
-
-def feature_quiz(context, model="gpt-4", temperature=0.5):
-    print(f"feature_quiz with model {model}")
-    base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道题目,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'."
-    messages = [
-        {"role": "system", "content": base_prompt},
-        {"role": "user", "content": f"需处理的文字:「{context}」"},
-    ]
-    print(f'promot: {messages}')
+def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
+    messages = get_quiz_prompt(q_type=q_type, context=context)
     request_time = time.time()
     try:
+        print(f"Msg sent to openai {model}: {messages}")
         response = openai.ChatCompletion.create(
             model=model,
             temperature=temperature,
             max_tokens=1500,
             messages=messages,
         )
+        print(f"Msg from openai {model}: {response}")
         return response, request_time
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D", request_time
+
+
+def get_quiz_prompt(q_type='', context=''):
+    if q_type == 'q_1':
+        base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道题目,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'."
+        messages = [
+            {"role": "system", "content": base_prompt},
+            {"role": "user", "content": f"需处理的文字:「{context}」"},
+        ]
+        return messages
+    if q_type == 'q_2':
+        base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道选择题或判断题,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'. 如果无法找到选择题或判断题, 返回'无法回答 请给出更清晰的问题描述'"
+        messages = [
+            {"role": "system", "content": base_prompt},
+            {"role": "user", "content": f"需处理的文字:「{context}」"},
+        ]
+        return messages
+    base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道问答题,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'. 如果无法找到问答题, 返回'无法回答 请给出更清晰的问题描述'"
+    messages = [
+        {"role": "system", "content": base_prompt},
+        {"role": "user", "content": f"需处理的文字:「{context}」"},
+    ]
+    return messages

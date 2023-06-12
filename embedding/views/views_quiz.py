@@ -20,7 +20,6 @@ def quiz_async(request):
     print("ocr_result: ", ocr_result)
     openai_response, request_time = feature_quiz(ocr_result, model=llm_model)
     ai_message = openai_response["choices"][0]["message"]["content"]
-    print("openai_response: ", openai_response)
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
@@ -35,26 +34,29 @@ def quiz_image_async(request):
 
 
 def quiz_question_async(request):
-    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4', 'q_1': 'gpt-4', 'q_2':'gpt-3.5-turbo'}
-    llm_model = llm_model_dic.get(request.POST.get('llm_model'))
+    llm_model_dic = {'kuai': 'gpt-3.5-turbo', 'zhun': 'gpt-4',
+                     'q_1': 'gpt-4', 'q_2': 'gpt-3.5-turbo',
+                     '': 'gpt-3.5-turbo'}
+    fe_model = request.POST.get('llm_model', '')
+    llm_model = llm_model_dic.get(fe_model)
     original_question = request.POST.get('original_question')
     openai_response, request_time = feature_quiz(
-        original_question, model=llm_model)
+        original_question, model=llm_model, q_type=fe_model)
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
-    print("openai_response: ", openai_response)
-    quiz_record(request, original_question, ai_message, llm_model, request_time)
+    quiz_record(request, original_question,
+                ai_message, llm_model, request_time)
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
 def quiz_record(request, question, answer, llm_model, request_time):
     response_time = time.time()
     record = QuizRecord.objects.create(user=get_user(request),
-                                      answer = answer,
-                                      question = question,
-                                      response_time = response_time,
-                                      llm_model = llm_model,
-                                      request_time = request_time)
+                                       answer=answer,
+                                       question=question,
+                                       response_time=response_time,
+                                       llm_model=llm_model,
+                                       request_time=request_time)
     record.save()
 
 
@@ -77,8 +79,8 @@ def q(request):
 def ocr_record(request, image_path, ocr_result, request_time):
     response_time = time.time()
     record = OcrRecord.objects.create(user=get_user(request),
-                                      image_path = image_path,
-                                      question = ocr_result,
-                                      response_time = response_time,
-                                      request_time = request_time)
+                                      image_path=image_path,
+                                      question=ocr_result,
+                                      response_time=response_time,
+                                      request_time=request_time)
     record.save()
