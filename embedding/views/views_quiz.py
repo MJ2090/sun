@@ -35,6 +35,8 @@ def quiz_image_async(request):
 
 
 def quiz_question_async(request):
+    user_language = "zh_hans"
+    activate(user_language)
     llm_model_dic = {'kuai': 'gpt-3.5-turbo', 
                      'zhun': 'gpt-4',
                      'q_1': 'gpt-4', 
