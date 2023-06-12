@@ -52,7 +52,7 @@ def feature_question(question, embedding_model, model='gpt-3.5-turbo'):
 
 def feature_action(question, model):
     msg = """
-    A and B are talking with each other, if A says "{}", is it logically correct for B to reply as 
+    A and B are talking with each other, if A says "{}", is it logically correct for B to reply as
     "You can take the self assessment on our website"?
     Please only give a score between 1 and 100 and don't explain, where 1 means totally not possible, and 100 means very probably.
     """.format(question)
@@ -218,6 +218,18 @@ def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
     except openai.error.Timeout as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D", request_time
+    except openai.error.APIError as e:
+        # Handle API error here, e.g. retry or log
+        print(f"OpenAI API returned an API Error: {e}")
+        pass
+    except openai.error.APIConnectionError as e:
+        # Handle connection error here
+        print(f"Failed to connect to OpenAI API: {e}")
+        pass
+    except openai.error.RateLimitError as e:
+        # Handle rate limit error (we recommend using exponential backoff)
+        print(f"OpenAI API request exceeded rate limit: {e}")
+        pass
 
 
 def get_quiz_prompt(q_type='', context=''):
