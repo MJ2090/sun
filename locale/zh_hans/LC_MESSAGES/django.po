@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-11 16:55-0700\n"
+"POT-Creation-Date: 2023-06-11 23:32-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,6 +203,10 @@ msgstr "模型资料文件"
 #: embedding/templates/embedding/wuxi.html:104
 msgid "GO"
 msgstr "开始"
+
+#: embedding/views/views_quiz.py:49
+msgid "Sorry but we have encountered an error."
+msgstr "对不起 我们遇到了一个错误 请修改后重试"
 
 #~ msgid "Answer from AI"
 #~ msgstr "参考答案"

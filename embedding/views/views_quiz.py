@@ -9,6 +9,7 @@ from embedding.ocr import recognize_image
 import embedding.static_values as sc
 import json
 import time
+from django.utils.translation import gettext as _
 
 
 def quiz_async(request):
@@ -44,11 +45,17 @@ def quiz_question_async(request):
     original_question = request.POST.get('original_question')
     openai_response, request_time = feature_quiz(
         original_question, model=llm_model, q_type=fe_model)
-    record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    if openai_response == 'ERROR':
+        ai_message = _('Sorry but we have encountered an error.')
+        error_msg = 'ERROR'
+    else:
+        record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
+        ai_message = openai_response["choices"][0]["message"]["content"]
+        error_msg = ''
     quiz_record(request, original_question,
                 ai_message, llm_model, request_time, openai_response)
-    return HttpResponse(json.dumps({'answer': ai_message}))
+    ret = {'answer': ai_message, 'error_msg': error_msg}
+    return HttpResponse(json.dumps(ret))
 
 
 def quiz_record(request, question, answer, llm_model, request_time, openai_response):
@@ -56,6 +63,9 @@ def quiz_record(request, question, answer, llm_model, request_time, openai_respo
     if "usage" in openai_response:
         token_request = openai_response["usage"]["prompt_tokens"]
         token_response = openai_response["usage"]["completion_tokens"]
+    else:
+        token_request = -1
+        token_response = -1
     record = QuizRecord.objects.create(user=get_user(request),
                                        answer=answer,
                                        question=question,
