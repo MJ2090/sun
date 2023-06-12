@@ -205,7 +205,6 @@ def feature_chat(messages, model, retry=0):
 def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
     messages = get_quiz_prompt(q_type=q_type, context=context)
     request_time = time.time()
-    model='234'
     try:
         print(f"Msg sent to openai {model}: {messages}")
         response = openai.ChatCompletion.create(
