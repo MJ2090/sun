@@ -116,7 +116,7 @@ class QuizRecord(models.Model):
 
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
-        return f"{username} {self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token: {self.token_request} {self.token_response}"
+        return f"{username} Q:{self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token request: {self.token_request} token response: {self.token_response}"
    
 
 class OcrRecord(models.Model):
