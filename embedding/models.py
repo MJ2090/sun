@@ -111,12 +111,12 @@ class QuizRecord(models.Model):
     response_time = models.IntegerField(default=0)
     request_time = models.IntegerField(default=0)
     llm_model = models.CharField(max_length=25, default='')
-    token_amount_request = models.IntegerField(default=0)
-    token_amount_response = models.IntegerField(default=0)
+    token_request = models.IntegerField(default=0)
+    token_response = models.IntegerField(default=0)
 
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
-        return f"{username} {self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token: {self.token_amount_request} {self.token_amount_response}"
+        return f"{username} {self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token: {self.token_request} {self.token_response}"
    
 
 class OcrRecord(models.Model):

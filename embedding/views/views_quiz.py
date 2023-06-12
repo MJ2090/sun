@@ -47,18 +47,23 @@ def quiz_question_async(request):
     record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
     ai_message = openai_response["choices"][0]["message"]["content"]
     quiz_record(request, original_question,
-                ai_message, llm_model, request_time)
+                ai_message, llm_model, request_time, openai_response)
     return HttpResponse(json.dumps({'answer': ai_message}))
 
 
-def quiz_record(request, question, answer, llm_model, request_time):
+def quiz_record(request, question, answer, llm_model, request_time, openai_response):
     response_time = time.time()
+    if "usage" in openai_response:
+        token_request = openai_response["usage"]["prompt_tokens"]
+        token_response = openai_response["usage"]["completion_tokens"]
     record = QuizRecord.objects.create(user=get_user(request),
                                        answer=answer,
                                        question=question,
                                        response_time=response_time,
                                        llm_model=llm_model,
-                                       request_time=request_time)
+                                       request_time=request_time,
+                                       token_request=token_request,
+                                       token_response=token_response)
     record.save()
 
 
