@@ -1,0 +1,21 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'embedding/css/payment.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+<script src="{% static 'embedding/js/payment.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">Payment </h4>
+  <form action="/pay_session/" method="POST">
+    {% csrf_token %}
+    <button class="send-button w-100 btn btn-primary mt-4" type="submit">Pay Now</button>
+  </form>
+</div>
+</div>
+{% endblock %}
