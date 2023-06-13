@@ -10,18 +10,38 @@ from django.http import HttpResponseRedirect
 from django.conf import settings as conf_settings
 
 
+def stripe_call(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    endpoint_secret = 'whsec_6ajYwJ2I4sNhrIKuDHBWf0FyHjDllUry'
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+    print(event, event['type'])
+    return HttpResponse(status=200)
+
+
 def pay_session(request):
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
     session = stripe.checkout.Session.create(
         line_items=[{
-        'price_data': {
-            'currency': 'usd',
-            'product_data': {
-            'name': 'A.I',
+            'price_data': {
+                'currency': 'usd',
+                'product_data': {
+                    'name': 'A.I',
+                },
+                'unit_amount': 100,
             },
-            'unit_amount': 100,
-        },
-        'quantity': 1,
+            'quantity': 1,
         }],
         mode='payment',
         success_url='https://asuperdomain.com/pay_success',

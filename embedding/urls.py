@@ -86,6 +86,7 @@ urlpatterns = [
     path('pay/', views_pay.pay, name='pay'),
     path('pay_success/', views_pay.pay_success, name='pay_success'),
     path('pay_session/', views_pay.pay_session, name='pay_session'),
+    path('stripe_call/', views_pay.stripe_call, name='stripe_call'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
