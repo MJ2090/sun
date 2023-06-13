@@ -13,19 +13,15 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def stripe_call(request):
-    print("333333333")
     payload = request.body
-    print("333333333")
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
     endpoint_secret = 'whsec_6ajYwJ2I4sNhrIKuDHBWf0FyHjDllUry'
-    print("333333333")
 
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
         )
-        print("333333333")
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -53,6 +49,7 @@ def pay_session(request):
         mode='payment',
         success_url='https://asuperdomain.com/pay_success',
     )
+    print(session)
     return HttpResponseRedirect(session.url)
 
 
