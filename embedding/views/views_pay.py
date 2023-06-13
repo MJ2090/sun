@@ -8,8 +8,10 @@ import json
 import stripe
 from django.http import HttpResponseRedirect
 from django.conf import settings as conf_settings
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def stripe_call(request):
     print("333333333")
     payload = request.body
@@ -36,6 +38,7 @@ def stripe_call(request):
 
 def pay_session(request):
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
+    stripe.api_key = "sk_test_GwtC7lzItVuVtgBPc6KQPS7N"
     session = stripe.checkout.Session.create(
         line_items=[{
             'price_data': {
