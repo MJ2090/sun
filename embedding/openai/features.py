@@ -179,13 +179,13 @@ def feature_glm(request, messages, prompt, temperature):
 
 
 def feature_chat(messages, model, retry=0):
-    print(f"\nfeature_chat with model {model}")
-    print("\nMsg sent to openai: ", messages)
     request_time = time.time()
     try:
+        print(f"\nfeature_chat with model {model}")
+        print("\nMsg sent to openai: ", messages)
         response = openai.ChatCompletion.create(
             model=model,
-            temperature=0.6,
+            temperature=0.9,
             max_tokens=1500,
             messages=messages,
         )

@@ -92,6 +92,7 @@ def create_new_visitor(request):
 def get_prompt(visitor):
     prompts = []
     prompts.append(get_base_prompt())
+    prompts.append(get_stateful_prompt())
     prompts.append(get_user_prompt(visitor))
     prompts.append(get_assessment_prompt(visitor))
     return '\n'.join(prompts)
@@ -110,6 +111,14 @@ def get_assessment_prompt(visitor):
     return therapy_prompt
 
 
+def get_stateful_prompt():
+    stateful_prompt = f"""
+    ## DO NOT privode any suggestions unless the visitor explicitly asks for that.
+    ## BE CURIOUS about the visitor, ask questions based on their talk and experience. 
+    """
+    return stateful_prompt
+
+
 def get_user_prompt(visitor):
     user_prompt = f"""
     The visitor's name is {visitor.username}, their gender is {visitor.gender}, and their age is {visitor.age_range}.
@@ -120,9 +129,8 @@ def get_user_prompt(visitor):
 def get_base_prompt():
     base_prompt = """
     You act as a professional therapist. You MUST respect these rules:
-    #1. Do not answer questions irrelevant to therapy, for example mathematical or political questions. 
-    #2. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
-    #3. NEVER provide a tons of suggestions or steps, unless the visitor explicitly asks for that.
+    ### Focus on Therapy, Do not answer irrelevant questions like mathematical or political ones. 
+    ### If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
     """
     return base_prompt
 
@@ -216,7 +224,7 @@ def load_side_channel(visitor, ret):
     side_channel = {}
     assessments = TherapyAssessment.objects.filter(
         visitor=visitor).order_by("-timestamp")
-    if len(assessments) > 0:
+    if len(assessments) > 0 and assessments[0].result != 'None':
         side_channel['therapy_assessment'] = True
         side_channel['therapy_assessment_label'] = assessments[0].result
 
