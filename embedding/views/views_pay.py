@@ -11,15 +11,19 @@ from django.conf import settings as conf_settings
 
 
 def stripe_call(request):
+    print("333333333")
     payload = request.body
+    print("333333333")
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
     endpoint_secret = 'whsec_6ajYwJ2I4sNhrIKuDHBWf0FyHjDllUry'
+    print("333333333")
 
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
         )
+        print("333333333")
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
