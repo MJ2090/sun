@@ -169,11 +169,11 @@ def thread_assessment_overall(visitor, new_message, history_json, d_uuid):
      
     The options are:
 
-    'Depression',
     'Anxiety',
     'ADHD',
+    'Angry',
+    'Depression',
     'Insomnia',
-    'Intermittent Explosive Disorder',
     'None'
     
     Dialogue:
@@ -193,7 +193,7 @@ def thread_check_suicide(visitor, new_message, history_json, d_uuid):
     print("current_t", current_t)
     if len(history_json) < 5:
         return
-    if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-3600)).count() > 0:
+    if SuicideAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-60)).count() > 0:
         return
     dialogue_str = get_dialogue_str(d_uuid)
     prompt = f"""
@@ -224,7 +224,7 @@ def load_side_channel(visitor, ret):
     side_channel = {}
     assessments = TherapyAssessment.objects.filter(
         visitor=visitor).order_by("-timestamp")
-    if len(assessments) > 0 and assessments[0].result != 'None':
+    if len(assessments) > 0:
         side_channel['therapy_assessment'] = True
         side_channel['therapy_assessment_label'] = assessments[0].result
 
