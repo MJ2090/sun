@@ -11,7 +11,6 @@ from django.conf import settings as conf_settings
 
 
 def pay_session(request):
-    # prod
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
     session = stripe.checkout.Session.create(
         line_items=[{
@@ -25,7 +24,7 @@ def pay_session(request):
         'quantity': 1,
         }],
         mode='payment',
-        success_url='http://localhost:8000/pay_success',
+        success_url='https://asuperdomain.com/pay_success',
     )
     return HttpResponseRedirect(session.url)
 
