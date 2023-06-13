@@ -17,7 +17,7 @@ def pay_session(request):
         'price_data': {
             'currency': 'usd',
             'product_data': {
-            'name': 'T-shirt',
+            'name': 'A.I',
             },
             'unit_amount': 100,
         },
