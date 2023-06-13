@@ -71,7 +71,7 @@ function olivia_chat_init() {
     // prepare data
     const request_data = new FormData();
     init_with_old_user = !!localStorage.olivia_username;
-    let csrf = $("input[name='csrfmiddlewaretoken']");
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
     let t_name = null;
     if (init_with_old_user) {
         t_name = localStorage.olivia_username;
@@ -87,7 +87,7 @@ function olivia_chat_init() {
         request_data.append('t_pin', t_pin);
     }
     request_data.append('t_name', t_name);
-    request_data.append('csrfmiddlewaretoken', csrf.val());
+    request_data.append('csrfmiddlewaretoken', csrf.value);
 
     // api fetch
     fetch("/olivia_async_init/", {
@@ -120,8 +120,8 @@ function set_d_uuid(d_uuid) {
 
 function send_ack(m_uuid) {
     const request_data = new FormData();
-    let csrf = $("input[name='csrfmiddlewaretoken']");
-    request_data.append('csrfmiddlewaretoken', csrf.val());
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']");
+    request_data.append('csrfmiddlewaretoken', csrf.value);
     request_data.append('m_uuid', m_uuid);
     fetch("/olivia_async_ack/", {
         method: "POST",
@@ -155,12 +155,9 @@ function display_msg_piece(final_list, current_index) {
 
 function pre_process() {
     toggle_spinner(false);
-    $(".still-thinking").hide();
 }
 
 function post_process() {
     let new_msg = $("input[name='message']");
-    let button = $("button[name='send_button']");
-    button.prop("disabled", false);
     new_msg.focus();
 }

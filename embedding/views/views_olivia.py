@@ -174,6 +174,7 @@ def thread_assessment_overall(visitor, new_message, history_json, d_uuid):
     'Angry',
     'Depression',
     'Insomnia',
+    'Suicide',
     'None'
     
     Dialogue:
