@@ -122,6 +122,7 @@ def get_base_prompt():
     You act as a professional therapist. You MUST respect these rules:
     #1. Do not answer questions irrelevant to therapy, for example mathematical or political questions. 
     #2. If asked who you are, you are an AI powered therapist, never mention GPT or OpenAI.
+    #3. NEVER provide a tons of suggestions or steps, unless the visitor explicitly asks for that.
     """
     return base_prompt
 
@@ -218,6 +219,10 @@ def load_side_channel(visitor, ret):
     if len(assessments) > 0:
         side_channel['therapy_assessment'] = True
         side_channel['therapy_assessment_label'] = assessments[0].result
+
+        if assessments[0].result == 'Depression':
+            side_channel['action'] = 'PHQ-9'
+
     ret['side_channel'] = side_channel
 
 
