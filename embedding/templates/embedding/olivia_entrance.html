@@ -22,6 +22,23 @@
   <div class="hidden">
     {% csrf_token %}
     <div name="d_uuid"></div>
+
+    <div class="hide" name="depression_buttons">
+      <div class="fade-in">
+        <div class="mb-3">
+          <input type="radio" class="btn-check" name="depression_q_options" id="option1" value="1" autocomplete="off">
+          <label name="depression_q" class="btn btn-secondary btn-lg" for="option1">Yeah sure</label>
+        </div>
+        <div class="mb-3">
+          <input type="radio" class="btn-check" name="depression_q_options" id="option2" value="2" autocomplete="off">
+          <label name="depression_q" class="btn btn-secondary btn-lg" for="option2">No</label>
+        </div>
+        <div class="mb-3">
+          <input type="radio" class="btn-check" name="depression_q_options" id="option3" value="3" autocomplete="off">
+          <label name="depression_q" class="btn btn-secondary btn-lg" for="option3">What is PHQ-9?</label>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div name="entrance_0" class="entrance hidden">

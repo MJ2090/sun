@@ -129,6 +129,11 @@ function send_ack(m_uuid) {
     })
 }
 
+function display_element(el) {
+    let content = $('.message-container');
+    content.append(el);
+}
+
 function display_msg(ai_message) {
     message_list = ai_message.split('\n\n');
     display_msg_piece(message_list, 0);
