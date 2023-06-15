@@ -2,19 +2,22 @@ import pandas as pd
 import tiktoken
 import openai
 import numpy as np
+import re
 
-domain = "www.donefirst.com"
-max_tokens = 3000
+max_tokens = 400
 
 
 def remove_newlines(serie):
-    serie = serie.str.replace('。', '.', regex=False)
+    print("33333333", type(serie.str))
     serie = serie.str.replace('，', ',', regex=False)
-    serie = serie.str.replace('\n', ' ', regex=False)
+    serie = serie.str.replace('。', '.', regex=False)
     serie = serie.str.replace('\r', ' ', regex=False)
+    serie = serie.str.replace('\n', '', regex=False)
+    serie = serie.str.replace(' ', '', regex=False)
+    serie = serie.str.replace('  ', ' ', regex=False)
+    serie = serie.str.replace('   ', ' ', regex=False)
+    serie = serie.str.replace('    ', ' ', regex=False)
     serie = serie.str.replace('\\n', ' ', regex=False)
-    serie = serie.str.replace('  ', ' ', regex=False)
-    serie = serie.str.replace('  ', ' ', regex=False)
     return serie
 
 
@@ -24,6 +27,7 @@ def generate_scraped_csv(my_texts=None):
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
     # Set the text column to be the raw text with the newlines removed
+    print("df.text", df.text)
     df['text'] = df.fname + ". " + remove_newlines(df.text)
     df.to_csv('processed/scraped.csv')
     df.head()
@@ -32,7 +36,7 @@ def generate_scraped_csv(my_texts=None):
 # Splits the text into chunks of a maximum number of tokens
 def split_into_many(text, tokenizer, max_tokens=max_tokens):
     # Split the text into sentences
-    sentences = text.split('. ')
+    sentences = re.split('[\.]+[ ]*', text)
 
     # Get the number of tokens for each sentence
     n_tokens = [len(tokenizer.encode(" " + sentence))
@@ -85,10 +89,7 @@ def generate_embedding_csv():
 
     # Tokenize the text and save the number of tokens to a new column
     df['n_tokens'] = df.text.apply(myf)
-
-    # Visualize the distribution of the number of tokens per row using a histogram
     shortened = []
-
     # Loop through the dataframe
     for row in df.iterrows():
         # If the text is None, go to the next row
@@ -102,7 +103,8 @@ def generate_embedding_csv():
         # Otherwise, add the text to the list of shortened texts
         else:
             shortened.append(row[1]['text'])
-    print("shortened: ", shortened)
+    for s in shortened:
+        print("shortened........: ", s)
 
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)
