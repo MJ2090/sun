@@ -9,7 +9,7 @@ import json
 
 def summary_async(request):
     original_text = request.POST.get('original_text', '')
-    openai_response = feature_summary(original_text, model='gpt-3.5-turbo')
+    openai_response = feature_summary(original_text, model='gpt-3.5-turbo-16k')
     summary_text = openai_response["choices"][0]["message"]["content"]
     record_consumption(
         request, sc.MODEL_TYPES_SUMMARY, openai_response)
