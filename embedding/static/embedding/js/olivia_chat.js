@@ -103,7 +103,6 @@ function olivia_chat_init() {
             show(d6);
             display_msg(response.ai_message);
             send_ack(response.m_uuid);
-            store_local_data(t_name, response);
         });
 }
 
@@ -153,6 +152,7 @@ function display_msg_piece(final_list, current_index) {
 
     if (current_index >= final_list.length - 1) {
         post_process();
+        store_local_data(t_name, response);
     } else {
         setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 3000);
     }
