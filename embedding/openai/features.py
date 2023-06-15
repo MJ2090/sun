@@ -122,7 +122,7 @@ def feature_grammar(original_text, model):
     return response
 
 
-def feature_summary(original_text, model='gpt-3.5-turbo', max_words=0, max_tokens=1500):
+def feature_summary(original_text, model='gpt-3.5-turbo-0613', max_words=0, max_tokens=1500):
     original_text = original_text.replace('\n', '')
     messages = [
         {"role": "system", "content": "Summarize the Input Text. Step #1. determine which language is used in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
