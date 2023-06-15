@@ -34,7 +34,7 @@ def stripe_call(request):
 
 def pay_session(request):
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
-    stripe.api_key = "sk_test_GwtC7lzItVuVtgBPc6KQPS7N"
+    # stripe.api_key = "sk_test_GwtC7lzItVuVtgBPc6KQPS7N"
     session = stripe.checkout.Session.create(
         line_items=[{
             'price_data': {
