@@ -160,7 +160,7 @@ def thread_assessment_overall(visitor, new_message, history_json, d_uuid):
     current_t = get_time()
     if len(history_json) < 5:
         return
-    if TherapyAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-3600)).count() > 0:
+    if TherapyAssessment.objects.filter(visitor=visitor, timestamp__gte=(current_t-60)).count() > 0:
         return
     dialogue_str = get_dialogue_str(d_uuid)
     prompt = f"""
