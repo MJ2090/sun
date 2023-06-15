@@ -4,7 +4,7 @@ import openai
 import numpy as np
 import re
 
-max_tokens = 400
+max_tokens_per_csv_line = 500
 
 
 def remove_newlines(serie):
@@ -32,7 +32,7 @@ def generate_scraped_csv(my_texts=None):
 
 
 # Splits the text into chunks of a maximum number of tokens
-def split_into_many(text, tokenizer, max_tokens=max_tokens):
+def split_into_many(text, tokenizer, max_tokens_per_csv_line=max_tokens_per_csv_line):
     # Split the text into sentences
     sentences = re.split('[\.]+[ ]*', text)
 
@@ -50,14 +50,14 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
         # If the number of tokens so far plus the number of tokens in the current sentence is greater
         # than the max number of tokens, then add the chunk to the list of chunks and reset
         # the chunk and tokens so far
-        if tokens_so_far + token > max_tokens:
+        if tokens_so_far + token > max_tokens_per_csv_line:
             chunks.append(". ".join(chunk) + ".")
             chunk = []
             tokens_so_far = 0
 
         # If the number of tokens in the current sentence is greater than the max number of
         # tokens, go to the next sentence
-        if token > max_tokens:
+        if token > max_tokens_per_csv_line:
             continue
 
         # Otherwise, add the sentence to the chunk and add the number of tokens to the total
@@ -94,7 +94,7 @@ def generate_embedding_csv():
             continue
 
         # If the number of tokens is greater than the max number of tokens, split the text into chunks
-        if row[1]['n_tokens'] > max_tokens:
+        if row[1]['n_tokens'] > max_tokens_per_csv_line:
             shortened += split_into_many(row[1]['text'], tokenizer)
 
         # Otherwise, add the text to the list of shortened texts
