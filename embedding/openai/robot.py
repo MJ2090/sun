@@ -32,9 +32,9 @@ def create_context(question, df, max_len=1800):
 
 def answer_question_openai(
         df,
-        model="gpt-3.5-turbo-0613",
+        model="gpt-3.5-turbo-16k",
         question="Am I allowed to publish model outputs to Twitter, without a human review?",
-        max_len=5000,
+        max_len=12000,
         debug=False,
         reject_message="No Answer"
 ):
