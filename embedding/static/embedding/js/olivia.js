@@ -7,11 +7,14 @@ let d3 = null;
 let d4 = null;
 let d5 = null;
 let d6 = null;
+let d7 = null;
 
 $(document).ready(function () {
     olivia_overall_init();
     if (localStorage.olivia_username) {
-        document.querySelector("span[name='first_page_username']").innerHTML = localStorage.olivia_username;
+        document.querySelectorAll("span[name='first_page_username']").forEach(e => {
+            e.innerHTML = localStorage.olivia_username;
+        });
         flow_messages(0);
     } else {
         flow_messages(1);
@@ -57,5 +60,5 @@ function next_entrance() {
 }
 
 function flow_finish() {
-   setTimeout(olivia_chat_init, TRANSITION_INTERVAL);
+    setTimeout(olivia_chat_init, TRANSITION_INTERVAL);
 }

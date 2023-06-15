@@ -55,12 +55,10 @@ function therapy_chat() {
         .then((response) => {
             console.log(response);
             pre_process();
-            display_msg(response.ai_message);
+            display_msg(response);
             post_process();
 
             send_ack(response.m_uuid);
-
-            process_side_channel(response.side_channel)
         })
         .catch((e) => {
             console.log('Request Aborted.');
@@ -101,8 +99,9 @@ function olivia_chat_init() {
             let d6 = document.querySelector("div[name='entrance_6']");
             hide(d5);
             show(d6);
-            display_msg(response.ai_message);
+            display_msg(response);
             send_ack(response.m_uuid);
+            store_local_data(t_name, response);
         });
 }
 
@@ -133,16 +132,16 @@ function display_element(el) {
     content.append(el);
 }
 
-function display_msg(ai_message) {
-    message_list = ai_message.split('\n\n');
-    display_msg_piece(message_list, 0);
+function display_msg(response) {
+    message_list = response.ai_message.split('\n\n');
+    display_msg_piece(response, message_list, 0);
 }
 
-function display_msg_piece(final_list, current_index) {
+function display_msg_piece(response, message_list, current_index) {
     let content = $('.message-container');
     let ai_msg = $("p[name='ai_msg']").clone();
     ai_msg.css('display', 'none');
-    ai_msg.get(0).innerHTML = final_list[current_index];
+    ai_msg.get(0).innerHTML = message_list[current_index];
     ai_msg.addClass("dialogue");
     content.append(ai_msg.get(0));
     ai_msg.fadeIn();
@@ -150,11 +149,15 @@ function display_msg_piece(final_list, current_index) {
         scroll_up();
     }
 
-    if (current_index >= final_list.length - 1) {
+    if (current_index >= message_list.length - 1) {
         post_process();
-        store_local_data(t_name, response);
+        if (response.side_channel) {
+            process_side_channel(response.side_channel)
+        }
     } else {
-        setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 3000);
+        setTimeout(() => { 
+            display_msg_piece(response, message_list, current_index + 1); 
+        }, 3000);
     }
 }
 

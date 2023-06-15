@@ -11,6 +11,7 @@ function element_init() {
     d4 = document.querySelector("div[name='entrance_4']");
     d5 = document.querySelector("div[name='entrance_5']");
     d6 = document.querySelector("div[name='entrance_6']");
+    d7 = document.querySelector("div[name='entrance_7']");
 }
 
 function add_event_listener() {
@@ -41,8 +42,8 @@ function add_event_listener() {
     let buttons_old_user = document.querySelector("div[name='old_user']");
     buttons_old_user.addEventListener("click", function (e) {
         hide(d0);
-        flow_messages(5);
-        flow_finish();
+        flow_messages(7);
+        // flow_finish();
     });
 
     let buttons_new_user = document.querySelector("div[name='new_user']");
@@ -61,5 +62,12 @@ function add_event_listener() {
             e.preventDefault();
             return false;
         }
+    });
+
+    let buttons_task_chat = document.querySelector("div[name='task_chat']");
+    buttons_task_chat.addEventListener("click", function (e) {
+        hide(d7);
+        flow_messages(5);
+        flow_finish();
     });
 }
