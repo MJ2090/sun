@@ -57,6 +57,7 @@ def split_into_many(text, tokenizer, max_tokens_per_csv_line=max_tokens_per_csv_
 
         # If the number of tokens in the current sentence is greater than the max number of
         # tokens, go to the next sentence
+        # TODO: this may be a bug. we should not just simply drop the information.
         if token > max_tokens_per_csv_line:
             continue
 
