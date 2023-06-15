@@ -8,7 +8,6 @@ max_tokens = 400
 
 
 def remove_newlines(serie):
-    print("33333333", type(serie.str))
     serie = serie.str.replace('，', ',', regex=False)
     serie = serie.str.replace('。', '.', regex=False)
     serie = serie.str.replace('\r', ' ', regex=False)
@@ -27,7 +26,6 @@ def generate_scraped_csv(my_texts=None):
     # Create a dataframe from the list of texts
     df = pd.DataFrame(texts, columns=['fname', 'text'])
     # Set the text column to be the raw text with the newlines removed
-    print("df.text", df.text)
     df['text'] = df.fname + ". " + remove_newlines(df.text)
     df.to_csv('processed/scraped.csv')
     df.head()
@@ -64,7 +62,6 @@ def split_into_many(text, tokenizer, max_tokens=max_tokens):
 
         # Otherwise, add the sentence to the chunk and add the number of tokens to the total
         chunk.append(sentence)
-        # print("appended, ", sentence)
         tokens_so_far += token + 1
 
     return chunks
@@ -103,8 +100,6 @@ def generate_embedding_csv():
         # Otherwise, add the text to the list of shortened texts
         else:
             shortened.append(row[1]['text'])
-    for s in shortened:
-        print("shortened........: ", s)
 
     df = pd.DataFrame(shortened, columns=['text'])
     df['n_tokens'] = df.text.apply(myf)
