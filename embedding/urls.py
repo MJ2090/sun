@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_pay, views_olivia, views_admin, views_chat, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_sign, views_image, views_translation, views_grammar
+from .views import views_tele, views_pay, views_olivia, views_admin, views_chat, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -87,6 +87,8 @@ urlpatterns = [
     path('pay_success/', views_pay.pay_success, name='pay_success'),
     path('pay_session/', views_pay.pay_session, name='pay_session'),
     path('stripe_call/', views_pay.stripe_call, name='stripe_call'),
+
+    path('tele/', views_tele.tele, name='tele'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
