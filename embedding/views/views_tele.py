@@ -13,5 +13,5 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def tele(request):
-    print("333333333333333333333", request)
+    print("333333333333333333333", request.GET)
     return HttpResponse(json.dumps({'question': 'okk'}))
