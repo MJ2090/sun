@@ -22,7 +22,7 @@ def tele(request):
     loop = asyncio.new_event_loop()
     task = loop.create_task(send_telegram_message())
     loop.run_until_complete(task)
-    print("33333333333333333333300000000000000000000", request.body)
+    print("33333333333333333333300000000000000000000", json.loads(request.body))
     # telegram_request = Request(
     #     request=request.body,
     #     headers=request.headers,
