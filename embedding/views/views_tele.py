@@ -5,10 +5,10 @@ from telegram import Bot
 from telegram.error import TelegramError
 
 
-def send_telegram_message(bot_token, chat_id, message):
+async def send_telegram_message(bot_token, chat_id, message):
     try:
         bot = Bot(token=bot_token)
-        bot.send_message(chat_id=chat_id, text=message)
+        await bot.send_message(chat_id=chat_id, text=message)
         return True
     except TelegramError as e:
         # Handle any errors that occur during sending the message
@@ -16,7 +16,7 @@ def send_telegram_message(bot_token, chat_id, message):
         return False
     
 @csrf_exempt
-async def tele(request):
+def tele(request):
     print("33333333333333333333300000000000000000000", request.body)
     # telegram_request = Request(
     #     request=request.body,
@@ -28,7 +28,7 @@ async def tele(request):
     message = "Hello, Telegram!"
     chat_id = 6208450080
 
-    await send_telegram_message(bot_token, chat_id, message)
+    send_telegram_message(bot_token, chat_id, message)
     return HttpResponse(json.dumps({'question': 'okk'}))
 
 # curl -F "url=https://www.asuperdomain.com/tele" -F "certificate=@a.pem" https://api.telegram.org/bot6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY/getWebhookInfo
