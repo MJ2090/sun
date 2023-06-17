@@ -107,7 +107,7 @@ def text_summary_async(doc):
 def embedding_fetch_model_async(request):
     uuid = request.POST.get('model', '')
     model = EmbeddingModel.objects.get(uuid=uuid)
-    docs = EmbeddingDocument.objects.filter(model=model)
+    docs = EmbeddingDocument.objects.filter(model=model)[:5]
     res = []
     for doc in docs:
         if doc.summarization == 'Processing':
