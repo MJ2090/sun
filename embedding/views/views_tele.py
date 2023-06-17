@@ -6,11 +6,11 @@ from telegram.error import TelegramError
 import asyncio
 
 
-def send_telegram_message(chat_id=6208450080, message="343434"):
+async def send_telegram_message(chat_id=6208450080, message="343434"):
     try:
         bot_token = "6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY"
         bot = Bot(token=bot_token)
-        bot.send_message(chat_id=chat_id, text=message)
+        await bot.send_message(chat_id=chat_id, text=message)
         return True
     except TelegramError as e:
         # Handle any errors that occur during sending the message
