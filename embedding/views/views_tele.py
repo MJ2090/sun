@@ -26,9 +26,9 @@ def tele(request):
 
     bot_token = "6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY"
     message = "Hello, Telegram!"
-    chat_id = "YOUR_CHAT_ID"
+    chat_id = "6208450080"
 
-    # send_telegram_message(bot_token, chat_id, message)
+    send_telegram_message(bot_token, chat_id, message)
     return HttpResponse(json.dumps({'question': 'okk'}))
 
 # curl -F "url=https://www.asuperdomain.com/tele" -F "certificate=@a.pem" https://api.telegram.org/bot6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY/getWebhookInfo
