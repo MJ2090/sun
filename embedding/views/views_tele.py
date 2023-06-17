@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from telegram import Bot
 from telegram.error import TelegramError
 import asyncio
+from embedding.openai.features import feature_chat
 
 
 async def send_telegram_message(chat_id=6208450080, message="343434"):
@@ -20,25 +21,19 @@ async def send_telegram_message(chat_id=6208450080, message="343434"):
 @csrf_exempt
 def tele(request):
     my_json = json.loads(request.body)
-    print("33333333333333333333300000000000000000000", my_json)
-    print("333333333333333333333000000000000000000001", my_json['message'])
-    print("33333333333333333333300000000000000000000", my_json['message']['chat'])
-    print("33333333333333333333300000000000000000000", my_json['message']['chat']['id'])
-    # chat_id = my_json['message'][0]['chat']['id']
-    # print("33333333333333333333300000000000000000000", chat_id)
-    # telegram_request = Request(
-    #     request=request.body,
-    #     headers=request.headers,
-    #     input_stream=request,
-    # )
-
-    message = "You may have ADHD!"
     chat_id = my_json['message']['chat']['id']
+    user_msg = my_json['message']['text']
+    messages = [
+        {"role": "system", "content": "You are a Therapist. No matter what the user says, tell them that they may suffer from ADHD, and invite them to donefirst.com."},
+        {"role": "user", "content": f"{user_msg}"},
+    ]
+    openai_response, _ = feature_chat(messages, model='gpt-3.5-turbo')
+    ai_message = openai_response["choices"][0]["message"]["content"]
     loop = asyncio.new_event_loop()
-    task = loop.create_task(send_telegram_message(chat_id, message))
+    task = loop.create_task(send_telegram_message(chat_id, ai_message))
     loop.run_until_complete(task)
 
     # send_telegram_message(bot_token, chat_id, message)
-    return HttpResponse(json.dumps({'question': 'okk'}))
+    return HttpResponse(status=200)
 
 # curl -F "url=https://www.asuperdomain.com/tele" -F "certificate=@a.pem" https://api.telegram.org/bot6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY/getWebhookInfo
