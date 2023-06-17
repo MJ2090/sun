@@ -7,9 +7,9 @@ import asyncio
 from embedding.openai.features import feature_chat
 
 
-async def send_telegram_message(chat_id=6208450080, message="343434"):
+async def send_telegram_message(chat_id=6208450080, message=""):
     try:
-        bot_token = "6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY"
+        bot_token = "6223510708:AAFDXWFL-4j3DedW7hVfdjdtMH5q3z0htow"
         bot = Bot(token=bot_token)
         await bot.send_message(chat_id=chat_id, text=message)
         return True
