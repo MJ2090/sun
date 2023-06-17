@@ -19,7 +19,7 @@ async def send_telegram_message(chat_id=6208450080, message="343434"):
     
 @csrf_exempt
 def tele(request):
-    loop = asyncio.get_running_loop()
+    loop = asyncio.new_event_loop()
     task = loop.create_task(send_telegram_message())
     loop.run_until_complete(task)
     print("33333333333333333333300000000000000000000", request.body)
