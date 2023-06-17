@@ -17,7 +17,7 @@ def send_telegram_message(bot_token, chat_id, message):
     
 @csrf_exempt
 def tele(request):
-    print("33333333333333333333300000000000000000000", request.body, request.GET, request['result'])
+    print("33333333333333333333300000000000000000000", request.body)
     # telegram_request = Request(
     #     request=request.body,
     #     headers=request.headers,
