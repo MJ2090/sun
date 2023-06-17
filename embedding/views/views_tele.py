@@ -16,7 +16,7 @@ def send_telegram_message(bot_token, chat_id, message):
         return False
     
 @csrf_exempt
-def tele(request):
+async def tele(request):
     print("33333333333333333333300000000000000000000", request.body)
     # telegram_request = Request(
     #     request=request.body,
@@ -28,7 +28,7 @@ def tele(request):
     message = "Hello, Telegram!"
     chat_id = 6208450080
 
-    send_telegram_message(bot_token, chat_id, message)
+    await send_telegram_message(bot_token, chat_id, message)
     return HttpResponse(json.dumps({'question': 'okk'}))
 
 # curl -F "url=https://www.asuperdomain.com/tele" -F "certificate=@a.pem" https://api.telegram.org/bot6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY/getWebhookInfo
