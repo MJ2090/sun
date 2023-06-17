@@ -26,7 +26,7 @@ def tele(request):
 
     bot_token = "6186366547:AAHgkEeWAt_IkWJfxRvQGdRwB2P-ZIOprGY"
     message = "Hello, Telegram!"
-    chat_id = "6208450080"
+    chat_id = 6208450080
 
     send_telegram_message(bot_token, chat_id, message)
     return HttpResponse(json.dumps({'question': 'okk'}))
