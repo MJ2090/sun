@@ -22,8 +22,7 @@ def tele(request):
     my_json = json.loads(request.body)
     print("33333333333333333333300000000000000000000", my_json)
     print("333333333333333333333000000000000000000001", my_json['message'])
-    # print("33333333333333333333300000000000000000000", my_json['message'][0])
-    # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat'])
+    print("33333333333333333333300000000000000000000", my_json['message']['chat'])
     # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat']['id'])
     # chat_id = my_json['message'][0]['chat']['id']
     # print("33333333333333333333300000000000000000000", chat_id)
