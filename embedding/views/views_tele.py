@@ -3,9 +3,6 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from telegram import Bot
 from telegram.error import TelegramError
-from telegram import Update
-from telegram.ext import Dispatcher, CommandHandler
-from telegram.ext import CallbackContext
 
 
 def send_telegram_message(bot_token, chat_id, message):
