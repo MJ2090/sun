@@ -19,18 +19,20 @@ async def send_telegram_message(chat_id=6208450080, message="343434"):
     
 @csrf_exempt
 def tele(request):
-    loop = asyncio.new_event_loop()
-    task = loop.create_task(send_telegram_message())
-    loop.run_until_complete(task)
-    print("33333333333333333333300000000000000000000", json.loads(request.body))
+    my_json = json.loads(request.body)
+    chat_id = my_json['message'][0]['chat']['id']
+    print("33333333333333333333300000000000000000000", chat_id)
     # telegram_request = Request(
     #     request=request.body,
     #     headers=request.headers,
     #     input_stream=request,
     # )
 
-    message = "Hello, Telegram!"
-    chat_id = 6208450080
+    message = "You may have ADHD!"
+
+    loop = asyncio.new_event_loop()
+    task = loop.create_task(send_telegram_message(chat_id, message))
+    loop.run_until_complete(task)
 
     # send_telegram_message(bot_token, chat_id, message)
     return HttpResponse(json.dumps({'question': 'okk'}))
