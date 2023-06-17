@@ -21,7 +21,7 @@ async def send_telegram_message(chat_id=6208450080, message="343434"):
 def tele(request):
     my_json = json.loads(request.body)
     print("33333333333333333333300000000000000000000", my_json)
-    # print("33333333333333333333300000000000000000000", my_json['message'])
+    print("333333333333333333333000000000000000000001", my_json['message'])
     # print("33333333333333333333300000000000000000000", my_json['message'][0])
     # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat'])
     # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat']['id'])
