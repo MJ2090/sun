@@ -25,8 +25,8 @@ def tele(request):
     # print("33333333333333333333300000000000000000000", my_json['message'][0])
     # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat'])
     # print("33333333333333333333300000000000000000000", my_json['message'][0]['chat']['id'])
-    chat_id = my_json['message'][0]['chat']['id']
-    print("33333333333333333333300000000000000000000", chat_id)
+    # chat_id = my_json['message'][0]['chat']['id']
+    # print("33333333333333333333300000000000000000000", chat_id)
     # telegram_request = Request(
     #     request=request.body,
     #     headers=request.headers,
@@ -34,7 +34,7 @@ def tele(request):
     # )
 
     message = "You may have ADHD!"
-
+    chat_id = 6208450080
     loop = asyncio.new_event_loop()
     task = loop.create_task(send_telegram_message(chat_id, message))
     loop.run_until_complete(task)
