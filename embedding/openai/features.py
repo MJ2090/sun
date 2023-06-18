@@ -50,11 +50,7 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
     if not os.path.exists(file_path):
         return embedding_model.reject_message
     my_df = pd.read_csv(file_path, index_col=0, nrows=5280).dropna()
-    print("333333333 1")
-    # my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
-    # my_df['embeddings'] = my_df['embeddings'].apply(lambda row, index: safe_literal_eval(row, index), args=(df['embeddings'].index,))
     my_df['embeddings'] = my_df['embeddings'].apply(safe_literal_eval).apply(np.array)
-    print("333333333 111")
     if llm_model == 'glm':
         ans = robot.answer_question_glm(my_df, question=question)
     else:
