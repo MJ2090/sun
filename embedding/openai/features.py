@@ -44,6 +44,7 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
         try:
             return ast.literal_eval(value)
         except (ValueError, SyntaxError):
+            print("value=", value)
             return np.nan
         
     file_path = relative_path + embedding_model.uuid + '.csv'
