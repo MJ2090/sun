@@ -20,7 +20,7 @@ def embedding_training(request):
     return render(request, 'embedding/embedding_training.html', ret)
 
 
-@ratelimit(key='ip', rate='3/m')
+@ratelimit(key='ip', rate='5/m')
 def embedding_add_doc_async(request):
     model = request.POST.get('model', '')
     embedding_model = EmbeddingModel.objects.get(uuid=model)
