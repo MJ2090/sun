@@ -125,7 +125,14 @@ def feature_grammar(original_text, model):
 
 def feature_summary(original_text, model='gpt-3.5-turbo-16k', max_words=0, max_tokens=1500):
     original_text = original_text.replace('\n', '')
+    n_tokens = count_tokens(original_text, model)
     token_limit = 12000
+    if n_tokens > token_limit:
+        original_len = len(original_text)
+        original_text = original_text[:original_len * 12000 // n_tokens]
+        print("===========================\nn_tokens exceeded 12000: ", n_tokens)
+        print("after truncation: n_tokens =",
+              count_tokens(original_text, model))
     messages = [
         {"role": "system", "content": "Summarize the Input Text. Step #1. determine which language is used in the Input Text. Step #2. write a summary based on the Input Text in the same language."},
         {"role": "user", "content": "The Output MUST only contains the summary. The summary MUST use the same language as the input text."},
@@ -136,12 +143,7 @@ def feature_summary(original_text, model='gpt-3.5-turbo-16k', max_words=0, max_t
     try:
         print("model: ", model)
         print("Msg sent to openai: ", messages)
-        n_tokens = count_tokens(original_text, model)
-        if n_tokens>token_limit:
-            original_len = len(original_text)
-            original_text = original_text[:original_len * 12000 // n_tokens]
-            print("n_tokens exceeded 12000: ===========================", n_tokens)
-            print("after truncation: n_tokens =", count_tokens(original_text, model))
+
         response = openai.ChatCompletion.create(
             model=model,
             temperature=0.2,
@@ -264,7 +266,7 @@ def get_quiz_prompt(q_type='', context=''):
         {"role": "system", "content": base_prompt},
         {"role": "user", "content": f"需处理的文字:「{context}」"},
     ]
-    return messages 
+    return messages
 
 
 def count_tokens(message, model):
