@@ -131,15 +131,18 @@ def embedding_question(request):
 
 
 def embedding_question_async(request):
-    question = request.POST.get('question', '')
-    uuid = request.POST.get('character', '')
-    enable_speech = request.POST.get('enable_speech', '')
-    embedding_model = EmbeddingModel.objects.get(uuid=uuid)
-    answer = feature_question(question, embedding_model)
-    print(answer)
+    try:
+        question = request.POST.get('question', '')
+        uuid = request.POST.get('character', '')
+        enable_speech = request.POST.get('enable_speech', '')
+        embedding_model = EmbeddingModel.objects.get(uuid=uuid)
+        answer = feature_question(question, embedding_model)
+        print(answer)
 
-    if enable_speech == 'true':
-        audio_address = generate_audio(answer, 'Stephen')
-    else:
-        audio_address = ''
+        if enable_speech == 'true':
+            audio_address = generate_audio(answer, 'Stephen')
+        else:
+            audio_address = ''
+    except Exception as e:
+        print(e)
     return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address}))
