@@ -3,6 +3,7 @@ from openai.embeddings_utils import distances_from_embeddings
 
 
 def create_context(question, df, max_len=1800):
+    print("333333333 12")
     """
     Create a context for a question by finding the most similar context from the dataframe
     """
@@ -38,6 +39,7 @@ def answer_question_openai(
         debug=False,
         reject_message="No Answer"
 ):
+    print("333333333 3")
     """
     Answer a question based on the most similar context from the dataframe texts
     """
