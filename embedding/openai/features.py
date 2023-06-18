@@ -46,8 +46,8 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
     my_df = pd.read_csv(file_path, index_col=0)
     print("333333333 1")
     from numpy import nan
-    my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
-    # my_df['embeddings'] = my_df['embeddings'].apply(ast.literal_eval)
+    # my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
+    my_df['embeddings'] = my_df['embeddings'].apply(ast.literal_eval)
     print("333333333 111")
     if llm_model == 'glm':
         ans = robot.answer_question_glm(my_df, question=question)
