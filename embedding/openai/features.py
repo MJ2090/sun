@@ -12,6 +12,7 @@ import numpy as np
 from django.conf import settings as conf_settings
 import tiktoken
 import ast
+from numpy import nan
 
 relative_path = conf_settings.EMBEDDING_DIR
 
