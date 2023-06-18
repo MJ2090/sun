@@ -10,6 +10,7 @@ import pandas as pd
 import os
 import numpy as np
 from django.conf import settings as conf_settings
+import tiktoken
 
 relative_path = conf_settings.EMBEDDING_DIR
 
@@ -134,6 +135,8 @@ def feature_summary(original_text, model='gpt-3.5-turbo-16k', max_words=0, max_t
     try:
         print("model: ", model)
         print("Msg sent to openai: ", messages)
+        n_tokens = count_tokens(original_text, model)
+        print("n_tokens: ===========================", n_tokens)
         response = openai.ChatCompletion.create(
             model=model,
             temperature=0.2,
@@ -257,3 +260,9 @@ def get_quiz_prompt(q_type='', context=''):
         {"role": "user", "content": f"需处理的文字:「{context}」"},
     ]
     return messages 
+
+
+def count_tokens(message, model):
+    encoding = tiktoken.encoding_for_model(model)
+    count = len(encoding.encode(message))
+    return count
