@@ -145,4 +145,7 @@ def embedding_question_async(request):
             audio_address = ''
     except Exception as e:
         print(e)
+        import traceback
+        import sys
+        print(traceback.format_exc())
     return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address}))
