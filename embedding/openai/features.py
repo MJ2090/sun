@@ -40,11 +40,10 @@ def feature_add_embedding_doc(embedding_model, openai_response):
 
 
 def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
-    def safe_literal_eval(value, index):
+    def safe_literal_eval(value):
         try:
             return ast.literal_eval(value)
         except (ValueError, SyntaxError):
-            print("value=", value, type(value), index)
             return np.nan
 
     file_path = relative_path + embedding_model.uuid + '.csv'
@@ -53,8 +52,8 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
     my_df = pd.read_csv(file_path, index_col=0, nrows=5280).dropna()
     print("333333333 1")
     # my_df['embeddings'] = my_df['embeddings'].apply(eval).apply(np.array)
-    my_df['embeddings'] = my_df['embeddings'].apply(lambda row, index: safe_literal_eval(
-        row, index), args=(df['embeddings'].index,)).apply(np.array)
+    # my_df['embeddings'] = my_df['embeddings'].apply(lambda row, index: safe_literal_eval(row, index), args=(df['embeddings'].index,))
+    my_df['embeddings'] = my_df['embeddings'].apply(safe_literal_eval).apply(np.array)
     print("333333333 111")
     if llm_model == 'glm':
         ans = robot.answer_question_glm(my_df, question=question)
