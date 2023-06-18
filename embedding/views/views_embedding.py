@@ -10,6 +10,7 @@ from django.shortcuts import render
 from embedding.utils import read_text_from_txt, move_to_static, load_embedding_models, save_to_local, get_basic_data
 import json
 from threading import Thread
+from django_ratelimit.decorators import ratelimit
 
 
 @login_required
@@ -19,6 +20,7 @@ def embedding_training(request):
     return render(request, 'embedding/embedding_training.html', ret)
 
 
+@ratelimit(key='ip', rate='3/m')
 def embedding_add_doc_async(request):
     model = request.POST.get('model', '')
     embedding_model = EmbeddingModel.objects.get(uuid=model)
