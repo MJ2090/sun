@@ -15,9 +15,7 @@ def yangmei_intent(request):
     intent = stripe.PaymentIntent.create(
         amount=14000,
         currency='cny',
-        automatic_payment_methods={
-            'enabled': True,
-        },
+        payment_method_types=['alipay', 'wechat_pay']
     )
     return HttpResponse(json.dumps({
         'clientSecret': intent['client_secret']
