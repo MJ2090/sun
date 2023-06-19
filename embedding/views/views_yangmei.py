@@ -17,6 +17,7 @@ def yangmei_intent(request):
         currency='cny',
         payment_method_types=['alipay', 'wechat_pay']
     )
+    print("intent=", intent)
     return HttpResponse(json.dumps({
         'clientSecret': intent['client_secret']
     }))
