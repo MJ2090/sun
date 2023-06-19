@@ -15,7 +15,7 @@ def create_context(question, df, max_len=1800):
     df['distances'] = distances_from_embeddings(
         q_embeddings, df['embeddings'].values, distance_metric='cosine')
 
-    returns = []
+    ret = []
     cur_len = 0
 
     # Sort by distance and add the text to the context until the context is too long
@@ -26,10 +26,10 @@ def create_context(question, df, max_len=1800):
         if cur_len > max_len:
             break
         # Else add it to the text that is being returned
-        returns.append(row["text"])
+        ret.append(row["text"])
 
-    # Return the context
-    return "\n\n###\n\n".join(returns)
+    # Return the context list
+    return ret
 
 
 def answer_question_openai(
@@ -48,11 +48,12 @@ def answer_question_openai(
         df,
         max_len=max_len,
     )
+    context_str = "\n\n###\n\n".join(context)
     # If debug, print the raw model response
 
     try:
         system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. Do not miss any points in the context. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."
-        user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
+        user_prompt = f"Context: {context_str}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
 
         messages = [
             {"role": "system", "content": system_prompt},
@@ -67,7 +68,7 @@ def answer_question_openai(
         )
         if debug:
             print(f"Msg returned from openai:\n{response}\n\n")
-        return response["choices"][0]["message"]["content"]
+        return response["choices"][0]["message"]["content"], context
     except Exception as e:
         print(e)
         return ""
@@ -88,11 +89,12 @@ def get_glm_embedding_prompt(
         df,
         max_len=max_len,
     )
+    context_str = "\n\n###\n\n".join(context)
     print("get_glm_embedding_prompt, end")
     # If debug, print the raw model response
     if debug:
-        print("Context:\n" + context)
+        print("Context:\n" + context_str)
         print("\n\n")
 
-    system_prompt = f"根据下文提供的内容回答问题. 如果无法从下文中得到答案, 回答 我不知.\n\n内容: {context}\n\n问题: {question}"
+    system_prompt = f"根据下文提供的内容回答问题. 如果无法从下文中得到答案, 回答 我不知.\n\n内容: {context_str}\n\n问题: {question}"
     return system_prompt

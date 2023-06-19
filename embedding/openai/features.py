@@ -53,11 +53,11 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
     print("feature_question read embedding CSV..")
     my_df['embeddings'] = my_df['embeddings'].apply(safe_literal_eval).apply(np.array)
     if llm_model == 'glm':
-        ans = robot.answer_question_glm(my_df, question=question)
+        ans, context = robot.answer_question_glm(my_df, question=question)
     else:
-        ans = robot.answer_question_openai(
+        ans, context = robot.answer_question_openai(
             my_df, question=question, debug=True, reject_message=embedding_model.reject_message)
-    return ans
+    return ans, context
 
 
 def feature_action(question, model):

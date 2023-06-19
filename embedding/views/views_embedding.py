@@ -136,7 +136,7 @@ def embedding_question_async(request):
         uuid = request.POST.get('character', '')
         enable_speech = request.POST.get('enable_speech', '')
         embedding_model = EmbeddingModel.objects.get(uuid=uuid)
-        answer = feature_question(question, embedding_model)
+        answer, context = feature_question(question, embedding_model)
         print(answer)
 
         if enable_speech == 'true':
@@ -148,4 +148,4 @@ def embedding_question_async(request):
         import traceback
         import sys
         print(traceback.format_exc())
-    return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address}))
+    return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address, 'context':context}))

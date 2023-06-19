@@ -44,6 +44,22 @@
   </div>
 </div>
 
+<div class="modal" tabindex="-1" id="contextModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border:none">
+        <h5 class="modal-title">{% translate "Context" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12">
+          <p name="answer_context">...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container px-4 py-5">
   <h4 class="mb-3">{% translate "Build Q&A bot" %}</h4>
   <form class="row needs-validation" novalidate="" action="/embedding/" method="post"
@@ -70,8 +86,6 @@
           {{ form.character }}
         </div>
 
-
-
         <div class="col-12">
           <label for="character" class="form-label">{% translate "Documents in this model" %}</label>
           <ul class="list-group">
@@ -88,7 +102,10 @@
           {{ form.question }}
         </div>
         <div class="col-12">
-          <label for="answer" class="form-label">{% translate "Answer" %}</label>
+          <div style="display: flex; justify-content: space-between;">
+            <label for="answer" class="form-label">{% translate "Answer" %}</label>
+            <a type="button" data-bs-toggle="modal" style="color:#6363ff" target="blank" data-bs-target="#contextModal">{% translate "Show context" %}</a>
+          </div>
           {{ form.answer }}
           <div class="pt-2 spinner" name="spinner" style="display: none">
             <div class="loading">

@@ -20,6 +20,15 @@ function embedding_question_fetch() {
     answer.val(my_answer);
     $("div[name='spinner").hide();
     answer.show();
+
+    let context = data.context;
+    let context_p = document.querySelector("p[name='answer_context']");
+    if (context_p) {
+      context_p.innerHTML = '';
+      context.forEach(e => {
+        context_p.innerHTML += e + '<br></br>';
+      })
+    }
   });
 }
 

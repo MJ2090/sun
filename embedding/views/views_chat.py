@@ -19,7 +19,7 @@ def chat_async_customer_service(request):
 
     if use_embedding:
         embedding_model = EmbeddingModel.objects.get(uuid='NX32LBMJ3E')
-        answer = feature_question(new_message, embedding_model)
+        answer, _ = feature_question(new_message, embedding_model)
         if not answer == "I don't know.":
             return_dict['ai_message'] = answer
             # return HttpResponse(json.dumps({'ai_message': answer}))
