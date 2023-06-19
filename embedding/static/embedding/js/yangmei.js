@@ -5,7 +5,7 @@ const stripe = Stripe("pk_live_51MyeVkHDR3k1aZOHkBfRpVmtiyS1aH1HGj9zqMy9h1P62ZEV
 const items = [{ id: "xl-tshirt" }];
 
 let elements;
-
+const carousel = new bootstrap.Carousel('#myCarousel');
 
 
 let emailAddress = '';
@@ -33,8 +33,6 @@ async function initialize() {
 
 async function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
-
     const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
@@ -54,8 +52,6 @@ async function handleSubmit(e) {
     } else {
         showMessage("An unexpected error occurred.");
     }
-
-    setLoading(false);
 }
 
 // Fetches the payment intent status after payment submission
@@ -100,27 +96,25 @@ function showMessage(messageText) {
     }, 4000);
 }
 
-// Show a spinner on payment submission
-function setLoading(isLoading) {
-    if (isLoading) {
-        // Disable the button and show a spinner
-        document.querySelector("#submit").disabled = true;
-        document.querySelector("#spinner").classList.remove("hidden");
-        document.querySelector("#button-text").classList.add("hidden");
-    } else {
-        document.querySelector("#submit").disabled = false;
-        document.querySelector("#spinner").classList.add("hidden");
-        document.querySelector("#button-text").classList.remove("hidden");
-    }
-}
-
 function yangmei_init() {
+    document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
+    document.querySelector("label[name='size']").addEventListener(e => {
+        next_entrance(1);
+    });
+    document.querySelector("label[name='quantity']").addEventListener(e => {
+        next_entrance(2);
+    });
+    document.querySelector("label[name='area']").addEventListener(e => {
+        next_entrance(3);
+    });
+    document.querySelector("button[name='order']").addEventListener(e => {
+        next_entrance(4);
+    });
+    document.querySelector("button[name='pay']").addEventListener(e => {
+        next_entrance(5);
+    });
     initialize();
     checkStatus();
-
-    document
-        .querySelector("#payment-form")
-        .addEventListener("submit", handleSubmit);
 }
 
 $(document).ready(function () {
