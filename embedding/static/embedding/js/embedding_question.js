@@ -7,6 +7,11 @@ function embedding_question_fetch() {
   answer.hide();
   $("div[name='spinner").show();
 
+  let context_p = document.querySelector("p[name='answer_context']");
+  if (context_p) {
+    context_p.innerHTML = '...';
+  }
+
   const request_data = new FormData();
   request_data.append('question', question.val());
   request_data.append('character', character.val());
