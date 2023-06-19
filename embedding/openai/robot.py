@@ -8,10 +8,12 @@ def create_context(question, df, max_len=1800):
     """
 
     # Get the embeddings for the question
-    q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
+    q_embeddings = openai.Embedding.create(
+        input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
-    df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values, distance_metric='cosine')
+    df['distances'] = distances_from_embeddings(
+        q_embeddings, df['embeddings'].values, distance_metric='cosine')
 
     returns = []
     cur_len = 0
@@ -47,28 +49,29 @@ def answer_question_openai(
         max_len=max_len,
     )
     # If debug, print the raw model response
-    if debug:
-        print("Context:\n" + context)
-        print("\n\n")
 
     try:
         system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
-        
+
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ]
+        if debug:
+            print(f"Context:\n{context}\n\n")
         response = openai.ChatCompletion.create(
             model=model,
             messages=messages,
             temperature=0
         )
+        if debug:
+            print(f"response:\n{response}\n\n")
         return response["choices"][0]["message"]["content"]
     except Exception as e:
         print(e)
         return ""
-    
+
 
 def get_glm_embedding_prompt(
         df,
