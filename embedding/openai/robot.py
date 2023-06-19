@@ -63,7 +63,7 @@ def answer_question_openai(
         response = openai.ChatCompletion.create(
             model=model,
             messages=messages,
-            temperature=0
+            temperature=0.8
         )
         if debug:
             print(f"Msg returned from openai:\n{response}\n\n")
