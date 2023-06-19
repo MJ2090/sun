@@ -41,43 +41,53 @@
           <h4 class="mb-3">{% translate "Choose Quantity" %}</h4>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option1" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option1">{% translate "1 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option1">{% translate "1 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option2" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option2">{% translate "2 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option2">{% translate "2 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option3" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option3">{% translate "3 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option3">{% translate "3 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option4" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option4">{% translate "4 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option4">{% translate "4 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option5" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option5">{% translate "5 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option5">{% translate "5 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option6" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option6">{% translate "6 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option6">{% translate "6 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option7" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option7">{% translate "7 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option7">{% translate "7 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option8" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option8">{% translate "8 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option8">{% translate "8 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option9" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option9">{% translate "9 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option9">{% translate "9 box"
+              %}</label>
           </div>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option10" value="1">
-            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option10">{% translate "10 box" %}</label>
+            <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option10">{% translate "10 box"
+              %}</label>
           </div>
         </div>
       </div>
@@ -120,14 +130,16 @@
           </div>
           <div class="col-12">
             <label for="message" class="form-label">Detail Address</label>
-            <textarea name="address" style="height: 120px;" cols="40" rows="10" class="form-control" placeholder="Contents" maxlength="1500" id="id_message"></textarea>
+            <textarea name="address" style="height: 120px;" cols="40" rows="10" class="form-control"
+              placeholder="Contents" maxlength="1500" id="id_message"></textarea>
             <div class="invalid-feedback">
               Your address is required.
             </div>
           </div>
           <div class="col-12">
             <label for="message" class="form-label">Notes</label>
-            <textarea name="notes" style="height: 120px;" cols="40" rows="10" class="form-control" placeholder="Contents" maxlength="1500" id="id_message"></textarea>
+            <textarea name="notes" style="height: 120px;" cols="40" rows="10" class="form-control"
+              placeholder="Contents" maxlength="1500" id="id_message"></textarea>
             <div class="invalid-feedback">
               Your notes is required.
             </div>
@@ -141,23 +153,29 @@
       </div>
 
       <div class="carousel-item">
-        <form id="payment-form">
-          <div class="mb-4">Total: 140 CNY</div>
-          <div id="link-authentication-element">
+        <div class="row col-12">
+          <div class="col-12">
+            <div class="mb-4">Total: 140 CNY</div>
           </div>
-          <div id="payment-element">
+          <div class="col-12">
+            <form id="payment-form">
+              <div id="link-authentication-element">
+              </div>
+              <div id="payment-element">
+              </div>
+              <button id="submit" class="mt-4 btn-primary w-100 btn">
+                <span id="button-text">Order Now</span>
+              </button>
+              <div id="payment-message" class="hidden"></div>
+            </form>
           </div>
-          <button id="submit" class="mt-4 btn-primary w-100 btn">
-            <span id="button-text">Order Now</span>
-          </button>
-          <div id="payment-message" class="hidden"></div>
-        </form>
+          <div class="col-12">
+            <div>Add Wechat to Learn More :D</div>
+            <img class="" src="{% static 'embedding/img/xd.JPG' %}">
+          </div>
+        </div>
       </div>
     </div>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
 
 </div>
