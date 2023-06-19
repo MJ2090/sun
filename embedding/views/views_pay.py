@@ -16,7 +16,7 @@ def stripe_call(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
-    endpoint_secret = 'whsec_6ajYwJ2I4sNhrIKuDHBWf0FyHjDllUry'
+    endpoint_secret = 'whsec_wYrQoZJ1zzl6ueWQ8Fm1LUOOsQhUxULZ'
 
     try:
         event = stripe.Webhook.construct_event(
