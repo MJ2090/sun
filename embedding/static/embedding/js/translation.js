@@ -8,7 +8,7 @@ function translation_async_call() {
     let target = $("select[name='target']");
     translated_text.val('');
     translated_text.hide();
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
 
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
@@ -19,7 +19,7 @@ function translation_async_call() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         translated_text.val(response.result);
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
         translated_text.show();
     });
 }

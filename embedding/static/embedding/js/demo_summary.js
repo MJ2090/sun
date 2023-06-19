@@ -13,7 +13,7 @@ function demo_async_call() {
 
     result_text.val('');
     result_text.hide();
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
 
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
@@ -27,7 +27,7 @@ function demo_async_call() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         result_text.val(response.result);
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
         result_text.show();
     });
 }

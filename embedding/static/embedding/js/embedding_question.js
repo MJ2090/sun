@@ -5,7 +5,7 @@ function embedding_question_fetch() {
   let answer = $("textarea[name='answer']");
   answer.val('');
   answer.hide();
-  $("div[name='spinner").show();
+  $("div[name='spinner']").show();
 
   let context_p = document.querySelector("p[name='answer_context']");
   if (context_p) {
@@ -23,7 +23,7 @@ function embedding_question_fetch() {
     let data = response;
     let my_answer = data.answer
     answer.val(my_answer);
-    $("div[name='spinner").hide();
+    $("div[name='spinner']").hide();
     answer.show();
 
     let context = data.context;

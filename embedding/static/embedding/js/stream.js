@@ -8,7 +8,7 @@ async function stream_async_call() {
     let target = $("select[name='target']");
     translated_text.val('');
     translated_text.hide();
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
 
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
@@ -26,7 +26,7 @@ async function stream_async_call() {
         .getReader();
     while (true) {
         var { value, done } = await reader.read();
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
         translated_text.show();
         if (!value) {
             break;
@@ -38,7 +38,7 @@ async function stream_async_call() {
     // var source = new EventSource("/stream_async");
     // source.onmessage = function (event) {
     //     translated_text.show();
-    //     $("div[name='spinner").hide();
+    //     $("div[name='spinner']").hide();
     //     console.log(event.data);
     //     if (event.data == 'DONE') {
     //         source.close();

@@ -4,7 +4,7 @@ function summary_async_call() {
     let summary_text = $("textarea[name='summary_text']");
     summary_text.val('');
     summary_text.hide();
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
 
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
@@ -14,7 +14,7 @@ function summary_async_call() {
         body: request_data,
     }).then(response => response.json()).then((response) => {
         summary_text.val(response.result);
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
         summary_text.show();
     });
 }

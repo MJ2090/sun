@@ -35,7 +35,7 @@ async function home_chat_fetch() {
     let ai_title = $("div[name='ai_title']").clone();
     content.append(ai_title.get(0));
 
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
     $(".message-inner-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
     const request_data = new FormData();
@@ -55,7 +55,7 @@ async function home_chat_fetch() {
         button.prop("disabled", false);
         new_msg.focus();
 
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
 
         if (ai_message) {
             let ai_msg = $("p[name='ai_msg']").clone();

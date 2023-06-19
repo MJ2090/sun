@@ -25,8 +25,8 @@ function isShown(element) {
 
 function toggle_spinner(show) {
     if (show) {
-        document.querySelector("div[name='spinner").classList.remove("invisible");
+        document.querySelector("div[name='spinner']").classList.remove("invisible");
     } else {
-        document.querySelector("div[name='spinner").classList.add("invisible");
+        document.querySelector("div[name='spinner']").classList.add("invisible");
     }
 }

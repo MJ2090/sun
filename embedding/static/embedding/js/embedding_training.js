@@ -7,7 +7,7 @@ function async_call() {
   let answer = $("p[name='response']");
   answer.val('');
   answer.hide();
-  $("div[name='spinner").show();
+  $("div[name='spinner']").show();
 
   const request_data = new FormData();
   request_data.append('text', text.val());
@@ -24,7 +24,7 @@ function async_call() {
     body: request_data,
   }).then(response => response.json()).then((response) => {
     answer.text(response.result);
-    $("div[name='spinner").hide();
+    $("div[name='spinner']").hide();
     answer.show();
   });
 }

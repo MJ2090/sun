@@ -38,7 +38,7 @@ function chat_async_call() {
     let ai_title = $("div[name='ai_title']").clone();
     content.append(ai_title.get(0));
 
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
     timer = setTimeout(() => { display_still_thinking(); }, 10000);
     $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, "fast");
 
@@ -130,7 +130,7 @@ function audio_process(audio_address, enabled) {
 }
 
 function pre_process() {
-    $("div[name='spinner").hide();
+    $("div[name='spinner']").hide();
     $(".still-thinking").hide();
     clearTimeout(timer);
 }

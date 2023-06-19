@@ -4,7 +4,7 @@ function grammar_fetch() {
     let fixed_text = $("textarea[name='fixed_text']");
     fixed_text.val('');
     fixed_text.hide();
-    $("div[name='spinner").show();
+    $("div[name='spinner']").show();
 
     const request_data = new FormData();
     request_data.append('original_text', original_text.val());
@@ -15,7 +15,7 @@ function grammar_fetch() {
     }).then(response => response.json()).then((response) => {
         let data = response;
         fixed_text.val(data.plain_result);
-        $("div[name='spinner").hide();
+        $("div[name='spinner']").hide();
         fixed_text.show();
     });
 }
