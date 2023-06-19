@@ -38,16 +38,18 @@ def pay_session(request):
     session = stripe.checkout.Session.create(
         line_items=[{
             'price_data': {
-                'currency': 'usd',
+                'currency': 'cny',
                 'product_data': {
-                    'name': 'A.I',
+                    'name': '新鲜杨梅🥇',
                 },
-                'unit_amount': 100,
+                'unit_amount': 14000,
             },
             'quantity': 1,
         }],
+        phone_number_collection={'enabled': True},
         mode='payment',
         success_url='https://asuperdomain.com/pay_success',
+        locale='zh',
     )
     print(session)
     return HttpResponseRedirect(session.url)
