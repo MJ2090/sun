@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from embedding.utils import get_basic_data
+from django.utils.translation import activate
 import json
 from datetime import datetime
 import stripe
@@ -32,5 +33,7 @@ def yangmei_async(request):
 
 
 def yangmei(request):
-    ret = get_basic_data(request)
+    user_language = "zh_hans"
+    activate(user_language)
+    ret = get_basic_data(request, {'hide_nav': True})
     return render(request, 'embedding/yangmei.html', ret)

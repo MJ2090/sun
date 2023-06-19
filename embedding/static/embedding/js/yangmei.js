@@ -103,15 +103,30 @@ function yangmei_init() {
     carousel = new bootstrap.Carousel('#myCarousel');
 
     document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-    document.querySelector("label[name='size']").addEventListener('click', e => {
-        next_entrance(1);
+    document.querySelectorAll("label[name='size']").forEach(e => {
+        e.addEventListener(
+            'click',
+            e => {
+                next_entrance(1);
+            });
     });
-    // document.querySelector("label[name='quantity']").addEventListener(e => {
-    //     next_entrance(2);
-    // });
-    // document.querySelector("label[name='area']").addEventListener(e => {
-    //     next_entrance(3);
-    // });
+    document.querySelectorAll("label[name='quantity']").forEach(e => {
+        e.addEventListener(
+            'click',
+            e => {
+                next_entrance(2);
+            });
+    });
+    document.querySelectorAll("label[name='area']").forEach(e => {
+        e.addEventListener(
+            'click',
+            e => {
+                next_entrance(3);
+            });
+    });
+    document.querySelector("div[name='order_button']").addEventListener('click', e => {
+        next_entrance(4);
+    });
     // document.querySelector("button[name='order']").addEventListener(e => {
     //     next_entrance(4);
     // });
