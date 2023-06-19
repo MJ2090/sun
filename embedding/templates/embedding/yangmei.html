@@ -17,8 +17,8 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="col-md-12">
-          <h4 class="mb-3">{% translate "Choose Size" %}</h4>
-          <div class="card mt-5">
+          <h4 class="mb-5">{% translate "Choose Size" %}</h4>
+          <div class="card mb-5">
             <div class="card-body">
               <h5 class="card-title">{% translate "Big box" %}</h5>
               <p class="card-text">{% translate "Big box 1" %}</p>
@@ -26,7 +26,7 @@
               <label name="size" class="btn btn-primary" for="size_option1">{% translate "That's it" %}</label>
             </div>
           </div>
-          <div class="card mt-5">
+          <div class="card mb-5">
             <div class="card-body">
               <h5 class="card-title">{% translate "Small box" %}</h5>
               <p class="card-text">{% translate "Small box 1" %}</p>
@@ -38,7 +38,7 @@
       </div>
       <div class="carousel-item">
         <div class="row col-12">
-          <h4 class="mb-3">{% translate "Choose Quantity" %}</h4>
+          <h4 class="mb-5">{% translate "Choose Quantity" %}</h4>
           <div class=" col-6">
             <input type="radio" class="btn-check" name="quantity_options" id="quantity_option1" value="1">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option1">
@@ -94,7 +94,7 @@
 
       <div class="carousel-item">
         <div class="row col-12">
-          <h4 class="mb-3">{% translate "Choose Area" %}</h4>
+          <h4 class="mb-5">{% translate "Choose Area" %}</h4>
           <div class=" col-12">
             <input type="radio" class="btn-check" name="area_options" id="area_option1" value="1">
             <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option1">浙江 苏州 上海</label>
@@ -116,7 +116,7 @@
 
       <div class="carousel-item">
         <div class="row col-12">
-          <h4 class="mb-3">{% translate "Detail Information" %}</h4>
+          <h4 class="mb-5">{% translate "Detail Information" %}</h4>
           <div class="col-12">
             <label for="email" class="form-label">Name</label>
             <input type="email" name="email" class="form-control" maxlength="100" required="" id="id_email">
@@ -154,6 +154,7 @@
 
       <div class="carousel-item">
         <div class="row col-12">
+          <h4 class="mb-5">{% translate "Payment" %}</h4>
           <div class="col-12">
             <div class="mb-4">Total: 140 CNY</div>
           </div>
@@ -169,9 +170,9 @@
               <div id="payment-message" class="hidden"></div>
             </form>
           </div>
-          <div class="col-12">
-            <div>Add Wechat to Learn More :D</div>
-            <img style="width: 100%" src="{% static 'embedding/img/xd.JPG' %}">
+          <div class="row col-12 mt-5">
+            <img class="col-6" src="{% static 'embedding/img/xd.JPG' %}">
+            <div class="col-6 mt-5">Add Wechat to Learn More :D</div>
           </div>
         </div>
       </div>
