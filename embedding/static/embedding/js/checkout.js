@@ -23,13 +23,6 @@ async function initialize() {
     };
     elements = stripe.elements({ appearance, clientSecret });
 
-    // const linkAuthenticationElement = elements.create("linkAuthentication");
-    // linkAuthenticationElement.mount("#link-authentication-element");
-
-    // linkAuthenticationElement.on('change', (event) => {
-    //     emailAddress = event.value.email;
-    // });
-
     const paymentElementOptions = {
         layout: "tabs",
     };
@@ -47,7 +40,7 @@ async function handleSubmit(e) {
         confirmParams: {
             // Make sure to change this to your payment completion page
             return_url: "https://www.asuperdomain.com/pay_success/",
-            // receipt_email: '123456789@123.com',
+            receipt_email: 'zhuminjun01@gmail.com',
         },
     });
 
