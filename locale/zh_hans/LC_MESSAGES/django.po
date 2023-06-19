@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 16:34-0700\n"
+"POT-Creation-Date: 2023-06-19 16:55-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -222,24 +222,24 @@ msgstr "包装规格"
 
 #: embedding/templates/embedding/yangmei.html:23
 msgid "Big box"
-msgstr "大盒子"
+msgstr "一大箱"
 
 #: embedding/templates/embedding/yangmei.html:24
 msgid "Big box 1"
-msgstr "每箱4斤 哈哈"
+msgstr "每箱四斤 哈哈"
 
 #: embedding/templates/embedding/yangmei.html:26
 #: embedding/templates/embedding/yangmei.html:34
 msgid "That's it"
-msgstr "就这个"
+msgstr "就这个了"
 
 #: embedding/templates/embedding/yangmei.html:31
 msgid "Small box"
-msgstr "小箱子"
+msgstr "尝鲜盒子"
 
 #: embedding/templates/embedding/yangmei.html:32
 msgid "Small box 1"
-msgstr "每箱两斤 哈哈"
+msgstr "每盒两斤 哈哈"
 
 #: embedding/templates/embedding/yangmei.html:41
 msgid "Choose Quantity"
@@ -289,47 +289,47 @@ msgstr "10"
 msgid "Choose Area"
 msgstr "送单区域"
 
-#: embedding/templates/embedding/yangmei.html:119
+#: embedding/templates/embedding/yangmei.html:131
 msgid "Detail Information"
 msgstr "收件人具体信息"
 
-#: embedding/templates/embedding/yangmei.html:121
+#: embedding/templates/embedding/yangmei.html:133
 msgid "Name"
 msgstr "姓名"
 
-#: embedding/templates/embedding/yangmei.html:125
+#: embedding/templates/embedding/yangmei.html:137
 msgid "Mobile"
 msgstr "手机号码"
 
-#: embedding/templates/embedding/yangmei.html:129
+#: embedding/templates/embedding/yangmei.html:141
 msgid "Detail Address"
 msgstr "详细地址"
 
-#: embedding/templates/embedding/yangmei.html:134
+#: embedding/templates/embedding/yangmei.html:146
 msgid "Notes"
 msgstr "备注"
 
-#: embedding/templates/embedding/yangmei.html:140
+#: embedding/templates/embedding/yangmei.html:152
 msgid "Looks good"
 msgstr "好了"
 
-#: embedding/templates/embedding/yangmei.html:148
+#: embedding/templates/embedding/yangmei.html:160
 msgid "Payment"
 msgstr "付款"
 
-#: embedding/templates/embedding/yangmei.html:150
+#: embedding/templates/embedding/yangmei.html:162
 msgid "Total:"
 msgstr "总价: "
 
-#: embedding/templates/embedding/yangmei.html:150
+#: embedding/templates/embedding/yangmei.html:162
 msgid "CNY"
 msgstr "元"
 
-#: embedding/templates/embedding/yangmei.html:159
+#: embedding/templates/embedding/yangmei.html:171
 msgid "Order Now"
 msgstr "下单吧"
 
-#: embedding/templates/embedding/yangmei.html:166
+#: embedding/templates/embedding/yangmei.html:178
 msgid "Add Wechat to Learn More :D"
 msgstr "有问题 加微信"
 
