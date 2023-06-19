@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 01:20-0700\n"
+"POT-Creation-Date: 2023-06-19 10:28-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,17 +84,17 @@ msgid "New model"
 msgstr "创建新模型"
 
 #: embedding/templates/embedding/embedding_question.html:33
-#: embedding/templates/embedding/wuxi.html:80
+#: embedding/templates/embedding/wuxi.html:87
 msgid "Choose Q&A model"
 msgstr "选择问答模型"
 
 #: embedding/templates/embedding/embedding_question.html:41
-#: embedding/templates/embedding/wuxi.html:101
+#: embedding/templates/embedding/wuxi.html:108
 msgid "Question"
 msgstr "我的问题"
 
 #: embedding/templates/embedding/embedding_question.html:45
-#: embedding/templates/embedding/wuxi.html:106
+#: embedding/templates/embedding/wuxi.html:113
 msgid "Answer"
 msgstr "我的答案"
 
@@ -196,19 +196,23 @@ msgstr "相关资料"
 msgid "Build Q&A bot"
 msgstr "智能问答"
 
-#: embedding/templates/embedding/wuxi.html:83
+#: embedding/templates/embedding/wuxi.html:80
+msgid "Choose LLM"
+msgstr "指定高级语言模型"
+
+#: embedding/templates/embedding/wuxi.html:90
 msgid "Add documents"
 msgstr "添加新文件"
 
-#: embedding/templates/embedding/wuxi.html:90
+#: embedding/templates/embedding/wuxi.html:97
 msgid "Documents in this model"
 msgstr "模型资料文件"
 
-#: embedding/templates/embedding/wuxi.html:107
+#: embedding/templates/embedding/wuxi.html:114
 msgid "Show context"
 msgstr "显示相关资料"
 
-#: embedding/templates/embedding/wuxi.html:121
+#: embedding/templates/embedding/wuxi.html:128
 msgid "GO"
 msgstr "开始"
 
