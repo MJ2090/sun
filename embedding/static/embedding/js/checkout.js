@@ -23,8 +23,8 @@ async function initialize() {
     };
     elements = stripe.elements({ appearance, clientSecret });
 
-    const linkAuthenticationElement = elements.create("linkAuthentication");
-    linkAuthenticationElement.mount("#link-authentication-element");
+    // const linkAuthenticationElement = elements.create("linkAuthentication");
+    // linkAuthenticationElement.mount("#link-authentication-element");
 
     // linkAuthenticationElement.on('change', (event) => {
     //     emailAddress = event.value.email;
