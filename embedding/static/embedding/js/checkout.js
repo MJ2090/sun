@@ -23,8 +23,8 @@ async function initialize() {
     };
     elements = stripe.elements({ appearance, clientSecret });
 
-    // const linkAuthenticationElement = elements.create("linkAuthentication");
-    // linkAuthenticationElement.mount("#link-authentication-element");
+    const linkAuthenticationElement = elements.create("linkAuthentication");
+    linkAuthenticationElement.mount("#link-authentication-element");
 
     // linkAuthenticationElement.on('change', (event) => {
     //     emailAddress = event.value.email;
@@ -46,8 +46,9 @@ async function handleSubmit(e) {
         elements,
         confirmParams: {
             // Make sure to change this to your payment completion page
-            return_url: "http://localhost:4242/checkout.html",
+            return_url: "https://www.asuperdomain.com/pay_success/",
             receipt_email: emailAddress,
+            mobile: 12345555,
         },
     });
 
