@@ -59,14 +59,14 @@ def answer_question_openai(
             {"role": "user", "content": user_prompt},
         ]
         if debug:
-            print(f"Context:\n{context}\n\n")
+            print(f"Msg sent to openai:\n{messages}\n\n")
         response = openai.ChatCompletion.create(
             model=model,
             messages=messages,
             temperature=0
         )
         if debug:
-            print(f"response:\n{response}\n\n")
+            print(f"Msg returned from openai:\n{response}\n\n")
         return response["choices"][0]["message"]["content"]
     except Exception as e:
         print(e)
