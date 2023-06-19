@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-11 23:32-0700\n"
+"POT-Creation-Date: 2023-06-19 01:20-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,17 +84,17 @@ msgid "New model"
 msgstr "创建新模型"
 
 #: embedding/templates/embedding/embedding_question.html:33
-#: embedding/templates/embedding/wuxi.html:64
+#: embedding/templates/embedding/wuxi.html:80
 msgid "Choose Q&A model"
 msgstr "选择问答模型"
 
 #: embedding/templates/embedding/embedding_question.html:41
-#: embedding/templates/embedding/wuxi.html:87
+#: embedding/templates/embedding/wuxi.html:101
 msgid "Question"
 msgstr "我的问题"
 
 #: embedding/templates/embedding/embedding_question.html:45
-#: embedding/templates/embedding/wuxi.html:91
+#: embedding/templates/embedding/wuxi.html:106
 msgid "Answer"
 msgstr "我的答案"
 
@@ -188,23 +188,35 @@ msgstr "导入新文件"
 msgid "Submit"
 msgstr "提交"
 
-#: embedding/templates/embedding/wuxi.html:48
+#: embedding/templates/embedding/wuxi.html:51
+msgid "Context"
+msgstr "相关资料"
+
+#: embedding/templates/embedding/wuxi.html:64
 msgid "Build Q&A bot"
 msgstr "智能问答"
 
-#: embedding/templates/embedding/wuxi.html:67
+#: embedding/templates/embedding/wuxi.html:83
 msgid "Add documents"
 msgstr "添加新文件"
 
-#: embedding/templates/embedding/wuxi.html:76
+#: embedding/templates/embedding/wuxi.html:90
 msgid "Documents in this model"
 msgstr "模型资料文件"
 
-#: embedding/templates/embedding/wuxi.html:104
+#: embedding/templates/embedding/wuxi.html:107
+msgid "Show context"
+msgstr "显示相关资料"
+
+#: embedding/templates/embedding/wuxi.html:121
 msgid "GO"
 msgstr "开始"
 
-#: embedding/views/views_quiz.py:49
+#: embedding/templates/embedding/yangmei.html:16
+msgid "YM"
+msgstr "杨梅"
+
+#: embedding/views/views_quiz.py:51
 msgid "Sorry but we have encountered an error."
 msgstr "对不起 我们遇到了一个错误 请修改后重试"
 
