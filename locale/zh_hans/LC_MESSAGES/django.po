@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 10:28-0700\n"
+"POT-Creation-Date: 2023-06-19 16:34-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,13 +216,129 @@ msgstr "显示相关资料"
 msgid "GO"
 msgstr "开始"
 
-#: embedding/templates/embedding/yangmei.html:16
-msgid "YM"
-msgstr "杨梅"
+#: embedding/templates/embedding/yangmei.html:20
+msgid "Choose Size"
+msgstr "包装规格"
+
+#: embedding/templates/embedding/yangmei.html:23
+msgid "Big box"
+msgstr "大盒子"
+
+#: embedding/templates/embedding/yangmei.html:24
+msgid "Big box 1"
+msgstr "每箱4斤 哈哈"
+
+#: embedding/templates/embedding/yangmei.html:26
+#: embedding/templates/embedding/yangmei.html:34
+msgid "That's it"
+msgstr "就这个"
+
+#: embedding/templates/embedding/yangmei.html:31
+msgid "Small box"
+msgstr "小箱子"
+
+#: embedding/templates/embedding/yangmei.html:32
+msgid "Small box 1"
+msgstr "每箱两斤 哈哈"
+
+#: embedding/templates/embedding/yangmei.html:41
+msgid "Choose Quantity"
+msgstr "要几箱"
+
+#: embedding/templates/embedding/yangmei.html:45
+msgid "1 box"
+msgstr "1"
+
+#: embedding/templates/embedding/yangmei.html:50
+msgid "2 boxes"
+msgstr "2"
+
+#: embedding/templates/embedding/yangmei.html:55
+msgid "3 boxes"
+msgstr "3"
+
+#: embedding/templates/embedding/yangmei.html:60
+msgid "4 boxes"
+msgstr "4"
+
+#: embedding/templates/embedding/yangmei.html:65
+msgid "5 boxes"
+msgstr "5"
+
+#: embedding/templates/embedding/yangmei.html:70
+msgid "6 boxes"
+msgstr "6"
+
+#: embedding/templates/embedding/yangmei.html:75
+msgid "7 boxes"
+msgstr "7"
+
+#: embedding/templates/embedding/yangmei.html:80
+msgid "8 boxes"
+msgstr "8"
+
+#: embedding/templates/embedding/yangmei.html:85
+msgid "9 boxes"
+msgstr "9"
+
+#: embedding/templates/embedding/yangmei.html:90
+msgid "10 boxes"
+msgstr "10"
+
+#: embedding/templates/embedding/yangmei.html:97
+msgid "Choose Area"
+msgstr "送单区域"
+
+#: embedding/templates/embedding/yangmei.html:119
+msgid "Detail Information"
+msgstr "收件人具体信息"
+
+#: embedding/templates/embedding/yangmei.html:121
+msgid "Name"
+msgstr "姓名"
+
+#: embedding/templates/embedding/yangmei.html:125
+msgid "Mobile"
+msgstr "手机号码"
+
+#: embedding/templates/embedding/yangmei.html:129
+msgid "Detail Address"
+msgstr "详细地址"
+
+#: embedding/templates/embedding/yangmei.html:134
+msgid "Notes"
+msgstr "备注"
+
+#: embedding/templates/embedding/yangmei.html:140
+msgid "Looks good"
+msgstr "好了"
+
+#: embedding/templates/embedding/yangmei.html:148
+msgid "Payment"
+msgstr "付款"
+
+#: embedding/templates/embedding/yangmei.html:150
+msgid "Total:"
+msgstr "总价: "
+
+#: embedding/templates/embedding/yangmei.html:150
+msgid "CNY"
+msgstr "元"
+
+#: embedding/templates/embedding/yangmei.html:159
+msgid "Order Now"
+msgstr "下单吧"
+
+#: embedding/templates/embedding/yangmei.html:166
+msgid "Add Wechat to Learn More :D"
+msgstr "有问题 加微信"
 
 #: embedding/views/views_quiz.py:51
 msgid "Sorry but we have encountered an error."
 msgstr "对不起 我们遇到了一个错误 请修改后重试"
+
+#~ msgid "YM"
+#~ msgstr "杨梅"
 
 #~ msgid "Answer from AI"
 #~ msgstr "参考答案"
