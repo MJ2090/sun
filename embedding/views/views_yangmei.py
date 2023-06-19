@@ -13,7 +13,7 @@ def yangmei_intent(request):
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
     
     intent = stripe.PaymentIntent.create(
-        amount=14000,
+        amount=700,
         currency='cny',
         payment_method_types=['alipay', 'wechat_pay']
     )
