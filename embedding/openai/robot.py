@@ -51,7 +51,7 @@ def answer_question_openai(
     # If debug, print the raw model response
 
     try:
-        system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."
+        system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. Do not miss any points in the context. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."
         user_prompt = f"Context: {context}\n\n---\n\nQuestion: {question}\n\n---\n\nAnswer:"
 
         messages = [
