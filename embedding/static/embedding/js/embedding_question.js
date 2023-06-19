@@ -3,6 +3,8 @@ function embedding_question_fetch() {
   let character = $("select[name='character']");
   let csrf = $("input[name='csrfmiddlewaretoken']");
   let answer = $("textarea[name='answer']");
+  let llm = $("select[name='llm']");
+
   answer.val('');
   answer.hide();
   $("div[name='spinner']").show();
@@ -16,6 +18,9 @@ function embedding_question_fetch() {
   request_data.append('question', question.val());
   request_data.append('character', character.val());
   request_data.append('csrfmiddlewaretoken', csrf.val());
+  if (llm) {
+    request_data.append('llm', llm.val());
+  }
   fetch("/embedding_question_async/", {
     method: "POST",
     body: request_data,

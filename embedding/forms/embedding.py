@@ -1,5 +1,6 @@
 from django import forms
 from embedding.models import EmbeddingModel
+import embedding.static_values as sc
 
 
 class TrainingForm(forms.Form):
@@ -14,6 +15,8 @@ class TrainingForm(forms.Form):
 
 
 class QuestionForm(forms.Form):
+    llm = forms.ChoiceField(required=True, choices=sc.QUESTION_LLM_TYPES, widget=forms.Select(
+        attrs={'class': 'character form-select', }))
     character = forms.ChoiceField(required=True, choices=(), widget=forms.Select(
         attrs={'class': 'character form-select', }))
     question = forms.CharField(required=True, max_length=500, widget=forms.Textarea(

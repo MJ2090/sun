@@ -1,5 +1,7 @@
 import openai
 from openai.embeddings_utils import distances_from_embeddings
+import time
+from embedding.llm import glm
 
 
 def create_context(question, df, max_len=1800):
@@ -32,6 +34,24 @@ def create_context(question, df, max_len=1800):
     return ret
 
 
+def answer_question_glm(df, question, max_len, debug, reject_message):
+    """
+    Answer a question based on the most similar context from the dataframe texts
+    """
+    context = create_context(
+        question,
+        df,
+        max_len=max_len,
+    )
+    context_str = "\n\n###\n\n".join(context)
+    system_prompt = f"根据下文提供的内容回答问题. 如果无法从下文中得到答案, 回答 {reject_message}.\n\n内容: {context_str}\n\n问题: {question}"
+    
+    request_time = time.time()
+    gml_response, _ = glm.create('', system_prompt, temperature=0.1), request_time
+
+    return gml_response['ai_message'], context
+
+
 def answer_question_openai(
         df,
         model="gpt-3.5-turbo-16k",
@@ -49,7 +69,6 @@ def answer_question_openai(
         max_len=max_len,
     )
     context_str = "\n\n###\n\n".join(context)
-    # If debug, print the raw model response
 
     try:
         system_prompt = f"Answer the question based on the context below. If it can't be answered based on the context, say exactly \"{reject_message}\". Write the answer in the same language as the question. Do not miss any points in the context. If asked who you are, NEVER mention GPT or Openai, your name is AI Assistant."

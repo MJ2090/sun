@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def create(request, messages, prompt, temperature):
+def create(messages, prompt, temperature):
     url = 'https://llm.asuperdomain.com/glm_async/'
     print(f"create: messages:\n {messages}, temperature:\n {temperature}, prompt:\n {prompt}")
     post_response = requests.Session().post(url, data={

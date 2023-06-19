@@ -17,7 +17,7 @@ def demo_pdf_async(request):
     character = request.POST.get('character', '')
     prompt = get_embedding_prompt(question, character, model='glm')
     print(prompt)
-    gml_response, _ = feature_glm(request, '', prompt, temperature)
+    gml_response, _ = feature_glm('', prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 
@@ -27,7 +27,7 @@ def demo_summary_async(request):
     original_text = request.POST.get('original_text', '')
     prompt = get_summary_prompt(request.POST.get('prompt', ''), original_text)
     print(prompt)
-    gml_response, _ = feature_glm(request, '', prompt, temperature)
+    gml_response, _ = feature_glm('', prompt, temperature)
     print(gml_response)
     return HttpResponse(json.dumps({'result': gml_response['ai_message']}))
 

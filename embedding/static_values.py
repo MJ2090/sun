@@ -113,3 +113,10 @@ Q_TYPES = (
     (Q_TYPE_1, '选择题｜判断题'),
     (Q_TYPE_2, '问答题｜写作题'),
 )
+
+QUESTION_LLM_TYPE_GPT = 'gpt-3.5-turbo-16k'
+QUESTION_LLM_TYPE_GLM = 'glm'
+QUESTION_LLM_TYPES =(
+    (QUESTION_LLM_TYPE_GPT, 'GPT 公开模型'),
+    (QUESTION_LLM_TYPE_GLM, 'GLM 私有模型'),
+)

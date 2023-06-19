@@ -77,6 +77,13 @@
       <div class="row g-3">
         <div class="col-12">
           <div class="new-model-group">
+            <label for="llm" class="form-label">{% translate "Choose LLM" %}</label>
+          </div>
+          {{ form.llm }}
+        </div>
+
+        <div class="col-12">
+          <div class="new-model-group">
             <label for="character" class="form-label">{% translate "Choose Q&A model" %}</label>
             <!-- Button trigger modal -->
             <a type="button" style="color:#6363ff" data-bs-toggle="modal" data-bs-target="#exampleModal">

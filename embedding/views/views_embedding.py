@@ -11,6 +11,7 @@ from embedding.utils import read_text_from_txt, move_to_static, load_embedding_m
 import json
 from threading import Thread
 from django_ratelimit.decorators import ratelimit
+import traceback
 
 
 @login_required
@@ -135,9 +136,10 @@ def embedding_question_async(request):
         question = request.POST.get('question', '')
         uuid = request.POST.get('character', '')
         enable_speech = request.POST.get('enable_speech', '')
+        llm_model = request.POST.get('llm', 'gpt-3.5-turbo-16k')
         embedding_model = EmbeddingModel.objects.get(uuid=uuid)
-        answer, context = feature_question(question, embedding_model)
-        print(answer)
+        answer, context = feature_question(question, embedding_model, llm_model)
+        print(answer, llm_model)
 
         if enable_speech == 'true':
             audio_address = generate_audio(answer, 'Stephen')
@@ -145,7 +147,5 @@ def embedding_question_async(request):
             audio_address = ''
     except Exception as e:
         print(e)
-        import traceback
-        import sys
         print(traceback.format_exc())
     return HttpResponse(json.dumps({'answer': answer.strip(), 'audio_address': audio_address, 'context':context}))

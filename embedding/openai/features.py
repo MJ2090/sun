@@ -51,9 +51,11 @@ def feature_question(question, embedding_model, llm_model='gpt-3.5-turbo-16k'):
         return embedding_model.reject_message
     my_df = pd.read_csv(file_path, index_col=0, nrows=8000)
     print("feature_question read embedding CSV..")
-    my_df['embeddings'] = my_df['embeddings'].apply(safe_literal_eval).apply(np.array)
+    my_df['embeddings'] = my_df['embeddings'].apply(
+        safe_literal_eval).apply(np.array)
     if llm_model == 'glm':
-        ans, context = robot.answer_question_glm(my_df, question=question)
+        ans, context = robot.answer_question_glm(
+            my_df, question=question, debug=True, reject_message=embedding_model.reject_message, max_len = 2048)
     else:
         ans, context = robot.answer_question_openai(
             my_df, question=question, debug=True, reject_message=embedding_model.reject_message)
@@ -192,9 +194,9 @@ def feature_chat_llama(request, messages, model):
     return llama.create(request, messages), request_time
 
 
-def feature_glm(request, messages, prompt, temperature):
+def feature_glm(messages, prompt, temperature):
     request_time = time.time()
-    return glm.create(request, messages, prompt, temperature), request_time
+    return glm.create(messages, prompt, temperature), request_time
 
 
 def feature_chat(messages, model, retry=0):
