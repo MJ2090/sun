@@ -47,7 +47,7 @@ async function handleSubmit(e) {
         confirmParams: {
             // Make sure to change this to your payment completion page
             return_url: "https://www.asuperdomain.com/pay_success/",
-            receipt_email: emailAddress,
+            receipt_email: '123456789',
         },
     });
 
