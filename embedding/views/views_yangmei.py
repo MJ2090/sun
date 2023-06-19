@@ -1,7 +1,6 @@
 from django.http import HttpResponse
-from embedding.openai.features import get_embedding_prompt, feature_glm
 from django.shortcuts import render
-from embedding.utils import load_embedding_models, get_basic_data
+from embedding.utils import get_basic_data
 import json
 from datetime import datetime
 import stripe
