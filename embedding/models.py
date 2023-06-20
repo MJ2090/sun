@@ -56,7 +56,7 @@ class PromptModel(models.Model):
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.history)
-    
+
 
 class EmbeddingModel(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
@@ -64,7 +64,7 @@ class EmbeddingModel(models.Model):
     uuid = models.CharField(max_length=10, default='')
     is_public = models.BooleanField(default=False)
     reject_message = models.CharField(max_length=500, default='')
-    enabled = models.BooleanField(default = True)
+    enabled = models.BooleanField(default=True)
 
     def __str__(self):
         return u'%s %s %s' % (self.owner.username, self.name, self.uuid)
@@ -78,7 +78,7 @@ class EmbeddingDocument(models.Model):
 
     def __str__(self):
         return u'%s' % (self.filename)
-    
+
 
 class Contact(models.Model):
     username = models.CharField(max_length=100, default='')
@@ -105,7 +105,8 @@ class Dialogue(models.Model):
 
 
 class QuizRecord(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,blank=True, null=True)
+    user = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, blank=True, null=True)
     question = models.EmailField(max_length=1500, default='')
     answer = models.CharField(max_length=2500, default='')
     response_time = models.IntegerField(default=0)
@@ -117,10 +118,11 @@ class QuizRecord(models.Model):
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
         return f"{username} Q:{self.question} latency: {self.response_time - self.request_time}s {self.llm_model} token request: {self.token_request} token response: {self.token_response}"
-   
+
 
 class OcrRecord(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,blank=True, null=True)
+    user = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, blank=True, null=True)
     image_path = models.EmailField(max_length=200, default='')
     question = models.CharField(max_length=1500, default='')
     response_time = models.IntegerField(default=0)
@@ -129,7 +131,7 @@ class OcrRecord(models.Model):
     def __str__(self):
         username = self.user.username if self.user is not None else 'None'
         return username + " " + self.question + " " + str(self.response_time - self.request_time)
-        
+
 
 class TherapyProfile(models.Model):
     username = models.CharField(max_length=100, default='')
@@ -180,7 +182,7 @@ class TherapyAssessment(models.Model):
 
     def __str__(self):
         return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
-    
+
 
 class SuicideAssessment(models.Model):
     visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
@@ -190,7 +192,7 @@ class SuicideAssessment(models.Model):
 
     def __str__(self):
         return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
-    
+
 
 class DepressionAssessment(models.Model):
     visitor = models.ForeignKey(VisitorProfile, on_delete=models.CASCADE,)
@@ -200,7 +202,7 @@ class DepressionAssessment(models.Model):
 
     def __str__(self):
         return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
-    
+
 
 class FruitOrder(models.Model):
     username = models.CharField(max_length=300, default='')
@@ -220,4 +222,21 @@ class FruitOrder(models.Model):
     order_id = models.CharField(max_length=100, default='')
 
     def __str__(self):
-        return f"name: {self.username} mobile: {self.mobile} price: {self.price}"
+        size_dic = {'1': '大箱', '2': '小箱'}
+        area_dic = {'1': '江浙沪', 
+                    '2': '北京 河北 天津 山西', 
+                    '3': '山东 福建 湖南 陕西', 
+                    '4': '广东 广西 四川 重庆 贵州', 
+                    '5': '内蒙古 海南 青海 甘肃', 
+                    '6': '黑龙江 吉林 云南', 
+                    '7': '新疆 西藏'}
+        return f"""
+        name: {self.username}
+        mobile: {self.mobile}
+        area: {self.area}
+        address: {self.address}
+        price: {self.price}
+        size: {size_dic.get(self.size, '未知')}
+        quantity: {self.quantity} 箱
+        stripe_id: {self.pi_id}
+        """
