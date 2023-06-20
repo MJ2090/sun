@@ -5,16 +5,16 @@ from django.utils.translation import activate
 import json
 from datetime import datetime
 import stripe
-from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings as conf_settings
 
 
-@csrf_exempt
 def yangmei_intent(request):
+    print("in request,", request.POST)
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
     
+    amount = calc_amount()
     intent = stripe.PaymentIntent.create(
-        amount=700,
+        amount=amount,
         currency='cny',
         payment_method_types=['alipay', 'wechat_pay']
     )
@@ -22,6 +22,10 @@ def yangmei_intent(request):
     return HttpResponse(json.dumps({
         'clientSecret': intent['client_secret']
     }))
+
+
+def calc_amount():
+    return 400
 
 
 def yangmei_async(request):

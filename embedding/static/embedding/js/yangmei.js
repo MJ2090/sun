@@ -8,28 +8,6 @@ let elements;
 let carousel = null;
 let emailAddress = '';
 
-// Fetches a payment intent and captures the client secret
-async function initialize() {
-    const response = await fetch("/yangmei_intent/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
-    });
-    const { clientSecret } = await response.json();
-
-    const appearance = {
-        theme: 'stripe',
-    };
-    elements = stripe.elements({ appearance, clientSecret });
-
-    const paymentElementOptions = {
-        layout: "tabs",
-    };
-
-    const paymentElement = elements.create("payment", paymentElementOptions);
-    paymentElement.mount("#payment-element");
-}
-
 async function handleSubmit(e) {
     e.preventDefault();
     const { error } = await stripe.confirmPayment({
@@ -95,8 +73,45 @@ function showMessage(messageText) {
     }, 4000);
 }
 
-function next_entrance(index) {
+function next_slice() {
     carousel.next();
+}
+
+async function create_order() {
+    let t_size = document.querySelector("input[name='size_options']:checked").value;
+    let t_quantity = document.querySelector("input[name='quantity_options']:checked").value;
+    let t_area = document.querySelector("input[name='area_options']:checked").value;
+    let t_name = document.querySelector("input[name='name']").value;
+    let t_mobile = document.querySelector("input[name='mobile']").value;
+    let t_address = document.querySelector("textarea[name='address']").value;
+    let t_notes = document.querySelector("textarea[name='notes']").value;
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+
+    const request_data = new FormData();
+    request_data.append('t_size', t_size);
+    request_data.append('t_quantity', t_quantity);
+    request_data.append('t_area', t_area);
+    request_data.append('t_name', t_name);
+    request_data.append('t_mobile', t_mobile);
+    request_data.append('t_address', t_address);
+    request_data.append('t_notes', t_notes);
+    request_data.append('csrfmiddlewaretoken', csrf);
+
+    const response = await fetch("/yangmei_intent/", {
+        method: "POST",
+        body: request_data,
+    });
+
+    const { clientSecret } = await response.json();
+    const appearance = {
+        theme: 'stripe',
+    };
+    const paymentElementOptions = {
+        layout: "tabs",
+    };
+    elements = stripe.elements({ appearance, clientSecret });
+    const paymentElement = elements.create("payment", paymentElementOptions);
+    paymentElement.mount("#payment-element");
 }
 
 function yangmei_init() {
@@ -107,33 +122,26 @@ function yangmei_init() {
         e.addEventListener(
             'click',
             e => {
-                next_entrance(1);
+                next_slice();
             });
     });
     document.querySelectorAll("label[name='quantity']").forEach(e => {
         e.addEventListener(
             'click',
             e => {
-                next_entrance(2);
+                next_slice();
             });
     });
     document.querySelectorAll("label[name='area']").forEach(e => {
         e.addEventListener(
             'click',
             e => {
-                next_entrance(3);
+                next_slice();
             });
     });
     document.querySelector("div[name='order_button']").addEventListener('click', e => {
-        next_entrance(4);
+        create_order();
     });
-    // document.querySelector("button[name='order']").addEventListener(e => {
-    //     next_entrance(4);
-    // });
-    // document.querySelector("button[name='pay']").addEventListener(e => {
-    //     next_entrance(5);
-    // });
-    initialize();
     checkStatus();
 }
 

@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block main %}
+{% csrf_token %}
+
 <div class="container px-4 py-5">
   <div id="myCarousel" class="carousel slide">
     <div class="carousel-inner">
@@ -22,7 +24,7 @@
             <div class="card-body">
               <h5 class="card-title">{% translate "Big box" %}</h5>
               <p class="card-text">{% translate "Big box 1" %}</p>
-              <input type="radio" class="btn-check" name="age_options" id="size_option1" value="1">
+              <input type="radio" class="btn-check" name="size_options" id="size_option1" value="1">
               <label name="size" class="btn btn-primary" for="size_option1">{% translate "That's it" %}</label>
             </div>
           </div>
@@ -30,7 +32,7 @@
             <div class="card-body">
               <h5 class="card-title">{% translate "Small box" %}</h5>
               <p class="card-text">{% translate "Small box 1" %}</p>
-              <input type="radio" class="btn-check" name="age_options" id="size_option2" value="2">
+              <input type="radio" class="btn-check" name="size_options" id="size_option2" value="2">
               <label name="size" class="btn btn-primary" for="size_option2">{% translate "That's it" %}</label>
             </div>
           </div>
@@ -45,47 +47,47 @@
               {% translate "1 box" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option2" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option2" value="2">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option2">
               {% translate "2 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option3" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option3" value="3">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option3">
               {% translate "3 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option4" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option4" value="4">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option4">
               {% translate "4 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option5" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option5" value="5">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option5">
               {% translate "5 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option6" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option6" value="6">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option6">
               {% translate "6 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option7" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option7" value="7">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option7">
               {% translate "7 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option8" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option8" value="8">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option8">
               {% translate "8 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option9" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option9" value="9">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option9">
               {% translate "9 boxes" %}</label>
           </div>
           <div class=" col-6">
-            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option10" value="1">
+            <input type="radio" class="btn-check" name="quantity_options" id="quantity_option10" value="10">
             <label name="quantity" class="py-3 card mb-4 btn btn-light" for="quantity_option10">
               {% translate "10 boxes" %}</label>
           </div>
@@ -104,24 +106,24 @@
             <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option2">北京 河北 天津 山西</label>
           </div>
           <div class=" col-12">
-            <input type="radio" class="btn-check" name="area_options" id="area_option2" value="2">
-            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option2">山东 福建 湖南 陕西</label>
-          </div>
-          <div class=" col-12">
-            <input type="radio" class="btn-check" name="area_options" id="area_option2" value="2">
-            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option2">广东 广西 四川 重庆 贵州</label>
-          </div>
-          <div class=" col-12">
-            <input type="radio" class="btn-check" name="area_options" id="area_option2" value="2">
-            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option2">内蒙古 海南 青海 甘肃</label>
-          </div>
-          <div class=" col-12">
             <input type="radio" class="btn-check" name="area_options" id="area_option3" value="3">
-            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option3">黑龙江 吉林 云南</label>
+            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option3">山东 福建 湖南 陕西</label>
           </div>
           <div class=" col-12">
             <input type="radio" class="btn-check" name="area_options" id="area_option4" value="4">
-            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option4">新疆 西藏</label>
+            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option4">广东 广西 四川 重庆 贵州</label>
+          </div>
+          <div class=" col-12">
+            <input type="radio" class="btn-check" name="area_options" id="area_option5" value="5">
+            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option5">内蒙古 海南 青海 甘肃</label>
+          </div>
+          <div class=" col-12">
+            <input type="radio" class="btn-check" name="area_options" id="area_option6" value="6">
+            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option6">黑龙江 吉林 云南</label>
+          </div>
+          <div class=" col-12">
+            <input type="radio" class="btn-check" name="area_options" id="area_option7" value="7">
+            <label name="area" class="py-3 card mb-4 btn btn-light" for="area_option7">新疆 西藏</label>
           </div>
         </div>
       </div>
@@ -130,22 +132,22 @@
         <div class="row col-12">
           <h4 class="mb-5">{% translate "Detail Information" %}</h4>
           <div class="col-12">
-            <label for="email" class="form-label">{% translate "Name" %}</label>
-            <input type="email" name="email" class="form-control" maxlength="100" required="" id="id_email">
+            <label for="name" class="form-label">{% translate "Name" %}</label>
+            <input type="text" name="name" class="form-control" maxlength="100" required="" id="id_name">
           </div>
           <div class="col-12">
-            <label for="email" class="form-label">{% translate "Mobile" %}</label>
-            <input type="email" name="email" class="form-control" maxlength="100" required="" id="id_email">
+            <label for="mobile" class="form-label">{% translate "Mobile" %}</label>
+            <input type="text" name="mobile" class="form-control" maxlength="100" required="" id="id_mobile">
           </div>
           <div class="col-12">
-            <label for="message" class="form-label">{% translate "Detail Address" %}</label>
+            <label for="address" class="form-label">{% translate "Detail Address" %}</label>
             <textarea name="address" style="height: 120px;" cols="40" rows="10" class="form-control"
-              placeholder="Contents" maxlength="1500" id="id_message"></textarea>
+              placeholder="Contents" maxlength="1500" id="id_address"></textarea>
           </div>
           <div class="col-12">
-            <label for="message" class="form-label">{% translate "Notes" %}</label>
+            <label for="notes" class="form-label">{% translate "Notes" %}</label>
             <textarea name="notes" style="height: 120px;" cols="40" rows="10" class="form-control"
-              placeholder="Contents" maxlength="1500" id="id_message"></textarea>
+              placeholder="Contents" maxlength="1500" id="id_notes"></textarea>
           </div>
           <div class="col-12">
             <div name="order_button" class="mt-4 w-100 btn btn-primary">

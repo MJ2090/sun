@@ -200,3 +200,22 @@ class DepressionAssessment(models.Model):
 
     def __str__(self):
         return self.visitor.username + ' ' + str(self.timestamp) + ' ' + self.result
+    
+
+class FruitOrder(models.Model):
+    username = models.CharField(max_length=300, default='')
+    area = models.CharField(max_length=30, default='')
+    mobile = models.CharField(max_length=30, default='')
+    address = models.CharField(max_length=1000, default='')
+    notes = models.CharField(max_length=1000, default='')
+    size = models.CharField(max_length=30, default='')
+    quantity = models.IntegerField(default=0)
+    pi_id = models.CharField(max_length=100, default='')
+    order_state = models.CharField(max_length=100, default='')
+    created_time = models.IntegerField(default=0)
+    paid_time = models.IntegerField(default=0)
+    delivery_time = models.IntegerField(default=0)
+    delivery_id = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.username + ' ' + self.mobile + ' ' + self.result
