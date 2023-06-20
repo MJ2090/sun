@@ -52,10 +52,11 @@ def yangmei_intent(request):
 
 def calc_price(t_size, t_quantity, t_area):
     if t_size == '1':
-        base_price = 140
+        base_price = 120
+        area_price = {'1': 20, '2': 60, '3': 60, '4': 72, '5': 72, '6': 84, '7': 96}
     else:
         base_price = 60
-    area_price = {'1': 20, '2': 20, '3': 20, '4': 20, '5': 20, '6': 20, '7': 20, '8': 20, '9': 20}
+        area_price = {'1': 20, '2': 49, '3': 49, '4': 57, '5': 57, '6': 65, '7': 74}
     if t_area in area_price:
         base_price += area_price[t_area]
     
