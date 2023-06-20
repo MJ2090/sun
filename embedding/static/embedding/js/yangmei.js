@@ -102,7 +102,7 @@ async function create_order() {
         body: request_data,
     });
 
-    const { clientSecret } = await response.json();
+    const { clientSecret, price } = await response.json();
     const appearance = {
         theme: 'stripe',
     };
@@ -112,6 +112,8 @@ async function create_order() {
     elements = stripe.elements({ appearance, clientSecret });
     const paymentElement = elements.create("payment", paymentElementOptions);
     paymentElement.mount("#payment-element");
+
+    document.querySelector("span[name='yangmei_price']").innerHTML = price;
 }
 
 function yangmei_init() {

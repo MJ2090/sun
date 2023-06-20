@@ -38,6 +38,14 @@ def load_random_string(num, seed=None):
     return randStr
 
 
+def load_random_number_string(num):
+    randStr = ''
+    seed = string.digits
+    for _ in range(num):
+        randStr += seed[random.randrange(1, len(seed))]
+    return randStr
+
+
 def get_basic_data(request, params={}):
     ret = {}
     if request.user.is_authenticated:
