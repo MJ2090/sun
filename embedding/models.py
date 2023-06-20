@@ -210,12 +210,14 @@ class FruitOrder(models.Model):
     notes = models.CharField(max_length=1000, default='')
     size = models.CharField(max_length=30, default='')
     quantity = models.IntegerField(default=0)
-    pi_id = models.CharField(max_length=100, default='')
     order_state = models.CharField(max_length=100, default='')
     created_time = models.IntegerField(default=0)
     paid_time = models.IntegerField(default=0)
     delivery_time = models.IntegerField(default=0)
+    price = models.IntegerField(default=0)
+    pi_id = models.CharField(max_length=100, default='')
     delivery_id = models.CharField(max_length=100, default='')
+    order_id = models.CharField(max_length=100, default='')
 
     def __str__(self):
         return self.username + ' ' + self.mobile + ' ' + self.result
