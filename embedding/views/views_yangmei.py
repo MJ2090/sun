@@ -5,12 +5,21 @@ from django.utils.translation import activate
 import json
 from datetime import datetime
 import stripe
+from embedding.models import FruitOrder
 from django.conf import settings as conf_settings
+import time
 
 
 def yangmei_intent(request):
     print("in request,", request.POST)
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
+    t_name = request.POST.get('t_name')
+    t_size = request.POST.get('t_size')
+    t_address = request.POST.get('t_address')
+    t_area = request.POST.get('t_area')
+    t_quantity = request.POST.get('t_quantity')
+    t_mobile = request.POST.get('t_mobile')
+    t_notes = request.POST.get('t_notes')
     
     amount = calc_amount()
     intent = stripe.PaymentIntent.create(
