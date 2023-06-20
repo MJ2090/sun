@@ -114,6 +114,7 @@ async function create_order() {
     paymentElement.mount("#payment-element");
 
     document.querySelector("span[name='yangmei_price']").innerHTML = price;
+    next_slice();
 }
 
 function yangmei_init() {
