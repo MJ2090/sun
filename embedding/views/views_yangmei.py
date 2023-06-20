@@ -13,23 +13,35 @@ import time
 def yangmei_intent(request):
     print("in request,", request.POST)
     stripe.api_key = conf_settings.STRIPE_SECRET_KEY
-    t_name = request.POST.get('t_name')
-    t_size = request.POST.get('t_size')
-    t_address = request.POST.get('t_address')
-    t_area = request.POST.get('t_area')
-    t_quantity = request.POST.get('t_quantity')
-    t_mobile = request.POST.get('t_mobile')
-    t_notes = request.POST.get('t_notes')
+    t_name = request.POST.get('t_name', '')
+    t_size = request.POST.get('t_size', '')
+    t_address = request.POST.get('t_address', '')
+    t_area = request.POST.get('t_area', '')
+    t_quantity = int(request.POST.get('t_quantity', 0))
+    t_mobile = request.POST.get('t_mobile', '')
+    t_notes = request.POST.get('t_notes', '')
     
-    amount = calc_amount()
+    amount = calc_amount(t_size, t_quantity, t_area)
     intent = stripe.PaymentIntent.create(
         amount=amount,
         currency='cny',
         payment_method_types=['alipay', 'wechat_pay']
     )
     print("intent=", intent)
+    current_time = time.time()
+    FruitOrder.objects.create(username=t_name,
+                              area=t_area,
+                              mobile=t_mobile,
+                              address=t_address,
+                              notes=t_notes,
+                              size=t_size,
+                              pi_id='',
+                              created_time=current_time,
+                              quantity=t_quantity,
+                              )
+
     return HttpResponse(json.dumps({
-        'clientSecret': intent['client_secret']
+        'clientSecret': intent['client_secret'], 'amount': amount
     }))
 
 
