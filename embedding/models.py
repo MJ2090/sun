@@ -220,4 +220,4 @@ class FruitOrder(models.Model):
     order_id = models.CharField(max_length=100, default='')
 
     def __str__(self):
-        return self.username + ' ' + self.mobile + ' ' + self.result
+        return self.username + ' ' + self.mobile + ' ' + self.price
