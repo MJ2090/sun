@@ -233,10 +233,11 @@ class FruitOrder(models.Model):
         return f"""
         name: {self.username}
         mobile: {self.mobile}
-        area: {self.area}
+        area: {area_dic.get(self.area, '未知')}
         address: {self.address}
         price: {self.price}
         size: {size_dic.get(self.size, '未知')}
         quantity: {self.quantity} 箱
         stripe_id: {self.pi_id}
+        order_state: {self.order_state}
         """
