@@ -23,6 +23,18 @@ def yangmei_stripe_call(request):
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
         )
+        obj = event['data']['object']
+        pi_id = obj['payment_intent']
+        if FruitOrder.objects.filter(pi_id=pi_id).count() != 1:
+            print(f"!!! PI_ID {pi_id} does not exist...")
+            return
+        order = FruitOrder.objects.get(pi_id=pi_id)
+        order.order_state = 'Paid'
+        order.paid_time = time.time()
+        order.pay_id = obj['id']
+        order.save()
+        print(f"PI_ID {pi_id} paid successfully...")
+
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)

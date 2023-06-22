@@ -220,6 +220,7 @@ class FruitOrder(models.Model):
     pi_id = models.CharField(max_length=100, default='')
     delivery_id = models.CharField(max_length=100, default='')
     order_id = models.CharField(max_length=100, default='')
+    pay_id = models.CharField(max_length=100, default='')
 
     def __str__(self):
         size_dic = {'1': '大箱', '2': '小箱'}
