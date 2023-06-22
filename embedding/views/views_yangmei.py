@@ -57,7 +57,7 @@ def yangmei_intent(request):
     t_notes = request.POST.get('t_notes', '')
     order_id = load_random_number_string(8)
 
-    price_yangmei = calc_price_yangmei(t_size, t_quantity, t_area)
+    price_yangmei = calc_price_yangmei(t_size, t_quantity)
     price_delivery = calc_price_delivery(t_size, t_quantity, t_area)
     price = price_yangmei + price_delivery
     intent = stripe.PaymentIntent.create(
