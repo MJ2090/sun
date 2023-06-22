@@ -226,7 +226,7 @@ msgstr "一大箱"
 
 #: embedding/templates/embedding/yangmei.html:24
 msgid "Big box 1"
-msgstr "每箱四斤 哈哈"
+msgstr "每箱120元(不含运费) 净重四斤 哈哈"
 
 #: embedding/templates/embedding/yangmei.html:26
 #: embedding/templates/embedding/yangmei.html:34
@@ -239,11 +239,11 @@ msgstr "尝鲜盒子"
 
 #: embedding/templates/embedding/yangmei.html:32
 msgid "Small box 1"
-msgstr "每盒两斤 哈哈"
+msgstr "每箱60元(不含运费) 净重两斤 哈哈"
 
 #: embedding/templates/embedding/yangmei.html:41
 msgid "Choose Quantity"
-msgstr "要几箱"
+msgstr "刘老板要几箱"
 
 #: embedding/templates/embedding/yangmei.html:45
 msgid "1 box"
