@@ -102,7 +102,7 @@ async function create_order() {
         body: request_data,
     });
 
-    const { clientSecret, price } = await response.json();
+    const { clientSecret, price, price_delivery, price_yangmei } = await response.json();
     const appearance = {
         theme: 'stripe',
     };
