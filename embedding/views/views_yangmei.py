@@ -9,6 +9,28 @@ from embedding.models import FruitOrder
 from django.conf import settings as conf_settings
 import time
 from embedding.utils import load_random_number_string
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def yangmei_stripe_call(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    endpoint_secret = 'whsec_wYrQoZJ1zzl6ueWQ8Fm1LUOOsQhUxULZ'
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+    print(event, event['type'])
+    return HttpResponse(status=200)
 
 
 def yangmei_intent(request):
@@ -24,6 +46,7 @@ def yangmei_intent(request):
     order_id = load_random_number_string(8)
 
     price = calc_price(t_size, t_quantity, t_area)
+    price = 7
     intent = stripe.PaymentIntent.create(
         amount=price * 100,
         currency='cny',

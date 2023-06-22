@@ -86,12 +86,13 @@ urlpatterns = [
     path('pay/', views_pay.pay, name='pay'),
     path('pay_success/', views_pay.pay_success, name='pay_success'),
     path('pay_session/', views_pay.pay_session, name='pay_session'),
-    path('stripe_call/', views_pay.stripe_call, name='stripe_call'),
+#     path('stripe_call/', views_pay.stripe_call, name='stripe_call'),
 
     path('tele/', views_tele.tele, name='tele'),
 
     path('yangmei/', views_yangmei.yangmei, name='yangmei'),
     path('yangmei_intent/', views_yangmei.yangmei_intent, name='yangmei_intent'),
+    path('stripe_call/', views_yangmei.yangmei_stripe_call, name='yangmei_stripe_call'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
