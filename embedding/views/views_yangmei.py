@@ -57,8 +57,9 @@ def yangmei_intent(request):
     t_notes = request.POST.get('t_notes', '')
     order_id = load_random_number_string(8)
 
-    price = calc_price(t_size, t_quantity, t_area)
-    price = 7
+    price_yangmei = calc_price_yangmei(t_size, t_quantity, t_area)
+    price_delivery = calc_price_delivery(t_size, t_quantity, t_area)
+    price = price_yangmei + price_delivery
     intent = stripe.PaymentIntent.create(
         amount=price * 100,
         currency='cny',
@@ -81,16 +82,26 @@ def yangmei_intent(request):
                               )
 
     return HttpResponse(json.dumps({
-        'clientSecret': intent['client_secret'], 'price': price
+        'clientSecret': intent['client_secret'], 
+        'price': price, 
+        'price_delivery': price_delivery, 
+        'price_yangmei': price_yangmei
     }))
 
 
-def calc_price(t_size, t_quantity, t_area):
+def calc_price_yangmei(t_size, t_quantity):
     if t_size == '1':
         base_price = 120
-        area_price = {'1': 20, '2': 60, '3': 60, '4': 72, '5': 72, '6': 84, '7': 96}
     else:
         base_price = 60
+    return base_price * t_quantity
+
+
+def calc_price_delivery(t_size, t_quantity, t_area):
+    base_price = 0
+    if t_size == '1':
+        area_price = {'1': 20, '2': 60, '3': 60, '4': 72, '5': 72, '6': 84, '7': 96}
+    else:
         area_price = {'1': 20, '2': 49, '3': 49, '4': 57, '5': 57, '6': 65, '7': 74}
     if t_area in area_price:
         base_price += area_price[t_area]

@@ -113,7 +113,9 @@ async function create_order() {
     const paymentElement = elements.create("payment", paymentElementOptions);
     paymentElement.mount("#payment-element");
 
-    document.querySelector("span[name='yangmei_price']").innerHTML = price;
+    document.querySelector("span[name='yangmei_price_total']").innerHTML = price;
+    document.querySelector("span[name='yangmei_price_yangmei']").innerHTML = price_yangmei;
+    document.querySelector("span[name='yangmei_price_delivery']").innerHTML = price_delivery;
     next_slice();
 }
 
