@@ -9,7 +9,7 @@ from threading import Thread
 
 def olivia_async_chat(request):
     ret = get_base_ret(request)
-    model = 'gpt-4'
+    model = 'gpt-3.5-turbo'
     new_message = request.POST.get('message')
     history_json = json.loads(request.POST.get('history', ''))
     d_uuid = request.POST.get('d_uuid', '')
@@ -17,6 +17,7 @@ def olivia_async_chat(request):
     record_new_dialogue(visitor, new_message, d_uuid=d_uuid, role="hm")
 
     prompt = get_prompt(visitor)
+    prompt = get_prompt_question(request)
     messages = [{"role": "system", "content": prompt}]
     messages.extend(history_json)
     messages.append({"role": "user", "content": new_message})
@@ -246,3 +247,53 @@ def get_dialogue_str(d_uuid):
             dialogue.append('Therapist: ' + item.message)
 
     return '\n'.join(dialogue)
+
+
+def get_prompt_question(request):
+    questions = ['Little interest or pleasure in doing things?', 
+                 'Feeling down, depressed, or hopeless?', 
+                 'Trouble falling or staying asleep, or sleeping too much?',
+                 'Feeling tired or having little energy?',
+                 'Poor appetite or overeating?',
+                 'Feeling bad about yourself — or that you are a failure or have let yourself or your family down?',
+                 'Trouble concentrating on things, such as reading the newspaper or watching television?',
+                 'Moving or speaking so slowly that other people could have noticed? Or so fidgety or restless that you have been moving a lot more than usual?',
+                 'Thoughts that you would be better off dead, or thoughts of hurting yourself in some way?']
+    questions_str = '\n'.join(questions)
+    base_prompt = f"""
+    You act as a professional therapist. 
+    You are meeting with your visitor now.
+    You are focusing on asking the visitor these 9 questions as the PHQ-9 assessment.
+    Please ask these questions one by one.
+    If you get a proper answer for one question from the visitor, then go to the next question.
+    If all questions are answered, simple output 'DONE, THANKS'.
+
+    The questions are:
+    {questions_str}
+    """
+    return base_prompt
+
+
+def get_prompt_question(request):
+    questions = ['Little interest or pleasure in doing things?', 
+                 'Feeling down, depressed, or hopeless?', 
+                 'Trouble falling or staying asleep, or sleeping too much?',
+                 'Feeling tired or having little energy?',
+                 'Poor appetite or overeating?',
+                 'Feeling bad about yourself — or that you are a failure or have let yourself or your family down?',
+                 'Trouble concentrating on things, such as reading the newspaper or watching television?',
+                 'Moving or speaking so slowly that other people could have noticed? Or so fidgety or restless that you have been moving a lot more than usual?',
+                 'Thoughts that you would be better off dead, or thoughts of hurting yourself in some way?']
+    questions_str = '\n'.join(questions)
+    base_prompt = f"""
+    You act as a professional therapist. 
+    You are meeting with your visitor now.
+    You are focusing on asking the visitor these 9 questions as the PHQ-9 assessment.
+    Please ask these questions one by one.
+    If you get a proper answer for one question from the visitor, then go to the next question.
+    If all questions are answered, simple output 'DONE, THANKS'.
+
+    The questions are:
+    {questions_str}
+    """
+    return base_prompt
