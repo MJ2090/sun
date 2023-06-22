@@ -4,7 +4,7 @@ import openai
 import numpy as np
 import re
 
-max_tokens_per_csv_line = 200
+max_tokens_per_csv_line = 3000
 
 
 def remove_newlines(serie):
