@@ -265,8 +265,8 @@ def get_prompt_question(request):
     You are meeting with your visitor now.
     You are focusing on asking the visitor these 9 questions as the PHQ-9 assessment.
     Please ask these questions one by one.
-    If you get a proper answer for one question from the visitor, then go to the next question.
-    If all questions are answered, simple output 'DONE, THANKS'.
+    If you get a proper answer for one question from the visitor, go to the next question.
+    If all questions are answered, simply output '**DONE, THANKS**'.
 
     The questions are:
     {questions_str}
