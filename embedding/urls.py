@@ -5,7 +5,6 @@ from .views import views_yangmei, views_tele, views_pay, views_olivia, views_adm
 
 
 urlpatterns = [
-    # ex: /summary/
     path('', views_tab.home, name='index'),
     path('answer/', views_tab.answer, name='answer'),
     path('about/', views_tab.about, name='about'),
