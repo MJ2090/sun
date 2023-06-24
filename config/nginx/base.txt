@@ -1,0 +1,13 @@
+server_tokens               off;
+access_log                  /var/log/nginx/supersecure.access.log;
+error_log                   /var/log/nginx/supersecure.error.log;
+
+# This configuration will be changed to redirect to HTTPS later
+server {
+  server_name               IP_ADDRESS;
+  listen                    80;
+  location / {
+    proxy_pass              http://localhost:8000;
+    proxy_set_header        Host $host;
+  }
+}

@@ -1,0 +1,8 @@
+ls /etc/nginx/sites-available
+sudo vi /etc/nginx/sites-available/olivia
+# copy base.txt to /etc/nginx/sites-available/olivia
+# sudo cp base.txt /etc/nginx/sites-available/olivia
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/olivia .
+sudo systemctl restart nginx
+# open http://IP to verify
