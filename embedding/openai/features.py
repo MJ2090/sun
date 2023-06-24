@@ -259,6 +259,29 @@ def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
 
 def get_quiz_prompt(q_type='', context=''):
     if q_type == 'q_1':
+        base_prompt = "There are some texts in the Context, which may contains some multiple choices questions, you do the following steps: 1.remove irrelevant words or chars. 2.remove those questions which are incomplete or invalid. 3.give answers to the valid questions, in the format 'Question[1]: X\nQuestion[2]: Y.'. If you cannot answer the questions, return 'Hmm sorry but I do not have an answer.'. If you cannot find any valid questions, return 'Hmm seems the questions are invalid.'"
+        messages = [
+            {"role": "system", "content": base_prompt},
+            {"role": "user", "content": f"Context:「{context}」"},
+        ]
+        return messages
+    if q_type == 'q_2':
+        base_prompt = "There are some texts in the Context, which may contains some questions. Identify these questions and give answers accordingly, if cannot find any valid questions or cannot find good answers, return 'Hmm it is not clear to me..' "
+        messages = [
+            {"role": "system", "content": base_prompt},
+            {"role": "user", "content": f"Context:「{context}」"},
+        ]
+        return messages
+    base_prompt = "There are some texts in the Context, which may contains some questions, you do the following steps: 1.remove irrelevant words or chars. 2.remove those questions which are incomplete or invalid. 3.give answers to the valid questions, in the format 'Question[1]: X\nQuestion[2]: Y.'."
+    messages = [
+        {"role": "system", "content": base_prompt},
+        {"role": "user", "content": f"Context:「{context}」"},
+    ]
+    return messages
+
+
+def get_quiz_prompt_zh(q_type='', context=''):
+    if q_type == 'q_1':
         base_prompt = "有一段OCT识别产生的文字在「」内,可能包含一道或多道选择题或判断题,按以下步骤处理:1,去掉与题目无关的文字.2,去掉缺失内容较多,无法作答的题目.3,整理剩下的题目,补上缺失,校正错字.4,解答.你的回答仅包含答案,不要输出别的内容,格式为'第1题: X\n第2题: Y.'. 如果无法找到选择题或判断题, 返回'无法找到选择或判断题 请给出更清晰的描述'"
         messages = [
             {"role": "system", "content": base_prompt},
