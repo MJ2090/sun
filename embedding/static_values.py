@@ -48,8 +48,8 @@ TRAINING_MODELS = (
 QUIZ_MODELS_T = 'kuai'
 QUIZ_MODELS_F = 'zhun'
 QUIZ_MODELS = (
-    (QUIZ_MODELS_T, '👩🏻‍🏫 陈老师 - 反应快 擅长判断题 写作题'),
-    (QUIZ_MODELS_F, '👨🏻‍💻 贾老师 - 谨慎 处理选择题正确率高'),
+    (QUIZ_MODELS_T, '👩🏻‍🏫 Alice, expert of multiple choices'),
+    (QUIZ_MODELS_F, '👨🏻‍💻 Bob, good at writing'),
 )
 
 IMAGE_TYPES_DEFAULT = ''
@@ -110,13 +110,13 @@ IMAGE_COUNTS = (
 Q_TYPE_1 = 'q_1'
 Q_TYPE_2 = 'q_2'
 Q_TYPES = (
-    (Q_TYPE_1, '选择题｜判断题'),
-    (Q_TYPE_2, '问答题｜写作题'),
+    (Q_TYPE_1, 'multiple choices'),
+    (Q_TYPE_2, 'article writing'),
 )
 
 QUESTION_LLM_TYPE_GPT = 'gpt-3.5-turbo-16k'
 QUESTION_LLM_TYPE_GLM = 'glm'
 QUESTION_LLM_TYPES =(
-    (QUESTION_LLM_TYPE_GPT, 'OpenAI GPT模型'),
-    (QUESTION_LLM_TYPE_GLM, 'GLM 私有高级模型'),
+    (QUESTION_LLM_TYPE_GPT, 'GPT'),
+    (QUESTION_LLM_TYPE_GLM, 'GLM'),
 )

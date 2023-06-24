@@ -35,8 +35,8 @@ def quiz_image_async(request):
 
 
 def quiz_question_async(request):
-    user_language = "zh_hans"
-    activate(user_language)
+    # user_language = "zh_hans"
+    # activate(user_language)
     llm_model_dic = {'kuai': 'gpt-3.5-turbo', 
                      'zhun': 'gpt-4',
                      'q_1': 'gpt-4', 
@@ -80,16 +80,16 @@ def quiz_record(request, question, answer, llm_model, request_time, openai_respo
 
 
 def quiz(request):
-    user_language = "zh_hans"
-    activate(user_language)
+    # user_language = "zh_hans"
+    # activate(user_language)
     ret = get_basic_data(request)
     ret['form'] = QuizForm()
     return render(request, 'embedding/quiz.html', ret)
 
 
 def q(request):
-    user_language = "zh_hans"
-    activate(user_language)
+    # user_language = "zh_hans"
+    # activate(user_language)
     ret = get_basic_data(request)
     ret['form'] = QuizForm()
     return render(request, 'embedding/q.html', ret)
