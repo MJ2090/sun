@@ -11,6 +11,7 @@ pip install numpy
 pip install pandas
 pip install tiktoken
 pip install mysql-connector-python
+pip install boto3
 echo "BASE ended =============================="
 
 echo "DJANGO started =============================="
