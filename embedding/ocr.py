@@ -87,7 +87,7 @@ def ocr_xunfei(file_name):
         for line in page['lines']:
             print("line: ", line)
             if 'words' in line:
-                tmp = ' '.join([word['content']for word in line['words'] if word['conf']>0.95])
+                tmp = ' '.join([word['content']for word in line['words'] if word['conf']>0.8])
                 context += tmp + '\n'
     # print(context)
     return context
