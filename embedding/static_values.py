@@ -49,7 +49,7 @@ QUIZ_MODELS_T = 'kuai'
 QUIZ_MODELS_F = 'zhun'
 QUIZ_MODELS = (
     (QUIZ_MODELS_T, '👩🏻‍🏫 Alice, expert of multiple choices'),
-    (QUIZ_MODELS_F, '👨🏻‍💻 Bob, good at writing'),
+    (QUIZ_MODELS_F, '👨🏻‍💻 Bob, good at article writing'),
 )
 
 IMAGE_TYPES_DEFAULT = ''
@@ -110,8 +110,8 @@ IMAGE_COUNTS = (
 Q_TYPE_1 = 'q_1'
 Q_TYPE_2 = 'q_2'
 Q_TYPES = (
-    (Q_TYPE_1, 'multiple choices'),
-    (Q_TYPE_2, 'article writing'),
+    (Q_TYPE_1, 'Multiple choices'),
+    (Q_TYPE_2, 'Article writing'),
 )
 
 QUESTION_LLM_TYPE_GPT = 'gpt-3.5-turbo-16k'
