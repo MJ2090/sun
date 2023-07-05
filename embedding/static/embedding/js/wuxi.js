@@ -86,7 +86,7 @@ function wuxi_init() {
     add_doc_async();
   });
 
-  let selecor = document.querySelector("select");
+  let selecor = document.querySelector("select[name='character']");
   selecor.addEventListener("change", function (e) {
     fetch_documents();
   });
