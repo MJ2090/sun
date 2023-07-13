@@ -1,0 +1,70 @@
+{% extends "embedding/base.html" %}
+
+{% block privatecss %}
+{% load static %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
+<link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
+{% endblock %}
+
+{% block privatejs %}
+{% load static %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="{% static 'embedding/js/chat_therapy.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container px-4 py-5">
+  <h4 class="mb-3">{{ welcome_word }}</h4>
+  <form class="row needs-validation" novalidate="" action="/chat/" method="post">
+    {% csrf_token %}
+
+    <div class="col-12">
+      <div class="row g-3">
+        <div class="hidden">
+          {{ form.source_id }}
+          {{ form.dialogue_id }}
+          <div name="human_title" class="dialogue-title">
+            😀 You
+          </div>
+          <div name="ai_title" class="dialogue-title">
+            {{ ai_emoji }} Therapy AI
+          </div>
+          <p name="human_msg" class="dialogue-message">
+          </p>
+          <p name="ai_msg" class="dialogue-message">
+          </p>
+        </div>
+        <div class="message-outer-container">
+          <div class="message-container">
+            <div name="ai_title" class="dialogue-title first-msg-1" style="display: none">
+              {{ ai_emoji }} Therapy AI
+            </div>
+            <p name="ai_msg" class="dialogue-message dialogue first-msg-2" style="display: none"></p>
+          </div>
+          <div class="spinner" name="spinner" style="display: none">
+            <div class="loading">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <div name="still_thinking" class="still-thinking" style="display: none;">
+                Still thinking ...
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-0 input-group">
+          {{ form.message }}
+          <button type="button" name="send_button" class="btn btn-primary send-button">
+            <div>
+              <i width="1em" height="1em" class="bi-send"></i>
+            </div>
+          </button>
+        </div>
+        {% include "comp/audio_comp.html" %}
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

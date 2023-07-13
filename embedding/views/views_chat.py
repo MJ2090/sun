@@ -219,6 +219,16 @@ def chat_async_therapy_openai(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
+def chat_gaga(request):
+    ret = get_basic_data(request)
+    form = ChatForm()
+    ret['form'] = form
+    ret['welcome_word'] = 'Chat with Gagamia'
+    ret['ai_emoji'] = load_random_emoji()
+    form.fields['dialogue_id'].initial = load_random_string(10)
+    return render(request, 'embedding/gaga.html', ret)
+
+
 def chat_therapy_gpt(request):
     ret = get_basic_data(request)
     form = ChatForm()
