@@ -46,7 +46,7 @@ function chat_async_call() {
     request_data.append('dialogue_id', $("input[name='dialogue_id']").val());
     request_data.append('csrfmiddlewaretoken', csrf.val());
     request_data.append('source_id', source_id);
-    fetch("/chat_async_therapy/", {
+    fetch("/chat_async_gaga/", {
         method: "POST",
         body: request_data,
     })
