@@ -220,7 +220,7 @@ def chat_async_therapy_openai(request):
 
 
 def chat_async_gaga(request):
-    model = 'gpt-4'
+    model = 'gpt-3.5-turbo'
     new_message = request.POST['message']
     character = 'gaga'
     dialogue_id = request.POST.get('dialogue_id', '')

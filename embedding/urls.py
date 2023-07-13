@@ -94,6 +94,7 @@ urlpatterns = [
     path('stripe_call/', views_yangmei.yangmei_stripe_call, name='yangmei_stripe_call'),
 
     path('gaga/', views_chat.chat_gaga, name='chat_gaga'),
+    path('chat_async_gaga/', views_chat.chat_async_gaga, name='chat_async_gaga'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
