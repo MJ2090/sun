@@ -75,8 +75,8 @@ function chat_async_call() {
 }
 
 function display_msg(ai_message) {
-    final_list = ai_message.split('\n\n');
-    display_msg_piece(final_list, 0);
+    // final_list = ai_message.split('\n\n');
+    display_msg_piece([ai_message], 0);
 }
 
 function display_msg_piece(final_list, current_index) {
