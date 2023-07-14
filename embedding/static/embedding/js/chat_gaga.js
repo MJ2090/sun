@@ -55,6 +55,8 @@ function chat_async_call() {
     .then(
         response => response.json())
     .then((response) => {
+        const rewritten_query = document.querySelector("input[name='rewritten_query']");
+        rewritten_query.value = response.rewritten_query;
         let ai_message = response.ai_message;
         while (true) {
             my_ind = ai_message.indexOf('```');

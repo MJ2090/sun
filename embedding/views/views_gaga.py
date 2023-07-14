@@ -191,14 +191,14 @@ def chat_async_gaga(request):
 
     ai_response = openai_response["choices"][0]["message"]
     ai_message = None
-    rewrite_query = None
+    rewritten_query = None
     if "function_call" in ai_response:
         my_call = ai_response['function_call']
         if my_call['name'] == 'get_math_answer':
             params = json.loads(my_call['arguments'])
-            rewrite_query = params['query']
-            print("Rewritten Query:", rewrite_query)
-            wolfram_answer = get_math_answer(rewrite_query)
+            rewritten_query = params['query']
+            print("Rewritten Query:", rewritten_query)
+            wolfram_answer = get_math_answer(rewritten_query)
             if wolfram_answer:
                 print("Got Wolfram Answer:", wolfram_answer)
                 ai_message = rephrase(new_message, wolfram_answer)
@@ -214,7 +214,7 @@ def chat_async_gaga(request):
     record_dialogue(request, 'AI', ai_message, dialogue_id,
                     'gaga', request_time=request_time)
 
-    return HttpResponse(json.dumps({'ai_message': ai_message, 'rewrite_query': rewrite_query}))
+    return HttpResponse(json.dumps({'ai_message': ai_message, 'rewritten_query': rewritten_query}))
 
 
 def chat_gaga(request):
@@ -222,7 +222,7 @@ def chat_gaga(request):
     ret['hide_nav'] = True
     form = GagaForm()
     ret['form'] = form
-    ret['welcome_word'] = 'Chat with Gagamia'
+    ret['welcome_word'] = 'Chat with Gagamia 👀'
     ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/gaga.html', ret)

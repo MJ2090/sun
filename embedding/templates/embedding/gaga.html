@@ -18,7 +18,7 @@
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
 
-    <div class="col-10">
+    <div class="col-lg-9 col-md-9 col-12">
       <div class="row g-3">
         <div class="hidden">
           {{ form.source_id }}
@@ -63,9 +63,11 @@
         </div>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-lg-3 col-md-4 col-12">
       <label for="character" class="form-label">Model Settings</label>
       {{ form.character }}
+      <label class="form-label mt-3">Rewritten Query</label>
+      <input type="text" class="form-control" name="rewritten_query" disabled></input>
     </div>
   </form>
 </div>
