@@ -3,7 +3,7 @@ import openai
 import json
 from django.http import HttpResponse
 from embedding.forms.chat import ChatForm
-from embedding.openai.features import feature_chat
+from embedding.openai.features import feature_chat, feature_chat_with_function
 from embedding.models import PromptModel
 from django.shortcuts import render
 from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
@@ -12,6 +12,7 @@ import embedding.static_values as sc
 
 # model="gpt-3.5-turbo"
 model = "gpt-4"
+gpt_only = False
 
 
 def get_my_function():
@@ -156,7 +157,6 @@ def main():
 
 
 def chat_async_gaga(request):
-    model = 'gpt-3.5-turbo'
     new_message = request.POST['message']
     character = 'gaga'
     dialogue_id = request.POST.get('dialogue_id', '')
@@ -167,9 +167,31 @@ def chat_async_gaga(request):
     my_json = json.loads(history)
     messages.extend(my_json)
     messages.append({"role": "user", "content": new_message})
-    openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
+
+    if gpt_only:
+        openai_response, request_time = feature_chat(messages, model=model)
+    else:
+        functions = [get_my_function()]
+        openai_response, request_time = feature_chat_with_function(messages, model=model, functions=functions)
+    
+    ai_response = openai_response["choices"][0]["message"]
+    ai_message = None
+    if "function_call" in ai_response:
+        my_call = ai_response['function_call']
+        if my_call['name'] == 'get_math_answer':
+            params = json.loads(my_call['arguments'])
+            rewrite_query = params['query']
+            print("Rewritten Query:", rewrite_query)
+            wolfram_answer = get_math_answer(rewrite_query)
+            if wolfram_answer:
+                print("Got Wolfram Answer:")
+                print(wolfram_answer)
+                ai_message = rephrase(new_message, wolfram_answer)
+    else:
+        print("No function call ======================")
+        
+    if ai_message is None:
+        ai_message = ai_response['content']
 
     record_dialogue(request, 'User', new_message,
                     dialogue_id, 'therapy', request_time=request_time)
@@ -181,6 +203,7 @@ def chat_async_gaga(request):
 
 def chat_gaga(request):
     ret = get_basic_data(request)
+    ret['hide_nav'] = True
     form = ChatForm()
     ret['form'] = form
     ret['welcome_word'] = 'Chat with Gagamia'
