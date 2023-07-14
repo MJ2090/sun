@@ -18,8 +18,8 @@ gpt_only = False
 def get_my_function():
     query_description = """
 The math query extracted from user message and sent to wolfram. 
-sample input:'we know x^2+x-6=0, what is x?' 
-sample query: 'solve x^2+x-6=0 for x' 
+sample input: 'we know x^2+x-6=0, what is x+100?' 
+sample query: 'if x^2+x-6=0, what is x+100' 
 sample input:'I have two books, Alice has 10 more, how many does Alice have?'
 sample query: 'solve 2+10'
 sample input: 'The cheese cost 3.5$, Bob paid 10$, how much change should he have?'
@@ -30,6 +30,8 @@ sample input: 'tell if 2137 is exactly two times larger than 32'
 sample output: '2137 = 2*32'
 sample input: 'the hotel charges 50$ per night per person, additionally there is a 8% tax and a one-time checkin fee which is 11 per person. Alice & bob stayed there for 10 nights, how much is the total cost?'
 sample output: '2 * ((50 * 10 * 1.08) + 11)'
+sample input: 'i have 10 dollars, Alice has 324 more, how much do we have together?'
+sample output: 'solve 10 + 432 + 10'
 """
     my_function = {
         "name": "get_math_answer",
@@ -97,13 +99,14 @@ def ask_one_question(question):
 
 
 def rephrase(question, answer):
+    print("rephrase start:", question, answer)
     base_prompt = f"""
 There is a question and an answer, rephrase the answer so that it sounds more nature.
 question: {question}
 answer: {answer}
 """
     messages = [
-        {"role": "user", "content": base_prompt},
+        {"role": "system", "content": base_prompt},
     ]
     response = openai.ChatCompletion.create(
         model=model,
@@ -112,6 +115,7 @@ answer: {answer}
         messages=messages,
     )
     ai_response = response['choices'][0]['message']['content']
+    print("rephrased message:", ai_response)
     return ai_response
 
 
@@ -120,8 +124,10 @@ def get_math_answer(query):
     client = wolframalpha.Client(appid)
     res = client.query(query)
     ans = []
+    print("33333333333 4444")
     for pod in res.pods:
-        if pod['@title'] in ['Solution over the reals', 'Results', 'Result', 'Exact result']:
+        print("33333333333", pod['@title'])
+        if pod['@title'] in ['Solution over the reals', 'Results', 'Result', 'Exact result', 'Substitution']:
             for sub in pod.subpods:
                 ans.append(sub.plaintext)
     return ans
@@ -184,19 +190,19 @@ def chat_async_gaga(request):
             print("Rewritten Query:", rewrite_query)
             wolfram_answer = get_math_answer(rewrite_query)
             if wolfram_answer:
-                print("Got Wolfram Answer:")
-                print(wolfram_answer)
+                print("Got Wolfram Answer:", wolfram_answer)
                 ai_message = rephrase(new_message, wolfram_answer)
     else:
         print("No function call ======================")
         
     if ai_message is None:
         ai_message = ai_response['content']
+    print("ai_message========", ai_message)
 
     record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', request_time=request_time)
+                    dialogue_id, 'gaga', request_time=request_time)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', request_time=request_time)
+                    'gaga', request_time=request_time)
 
     return HttpResponse(json.dumps({'ai_message': ai_message}))
 
