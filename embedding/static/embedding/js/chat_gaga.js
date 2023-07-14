@@ -99,7 +99,7 @@ function display_msg_piece(final_list, current_index) {
     if (current_index >= final_list.length - 1) {
         post_process();
     } else {
-        setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 3000);
+        setTimeout(() => { display_msg_piece(final_list, current_index + 1); }, 500);
     }
 }
 
