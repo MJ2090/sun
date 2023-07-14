@@ -120,3 +120,14 @@ QUESTION_LLM_TYPES =(
     (QUESTION_LLM_TYPE_GPT, 'GPT'),
     (QUESTION_LLM_TYPE_GLM, 'GLM'),
 )
+
+GAGA_TYPE_1 = 'wolfram + gpt4'
+GAGA_TYPE_2 = 'wolfram + gpt3.5'
+GAGA_TYPE_3 = 'pure gpt4'
+GAGA_TYPE_4 = 'pure gpt3.5'
+GAGA_TYPES = (
+    (GAGA_TYPE_1, 'gpt 4 + wolfram'),
+    (GAGA_TYPE_2, 'gpt 3.5 + wolfram'),
+    (GAGA_TYPE_3, 'gpt 4 only'),
+    (GAGA_TYPE_4, 'gpt 3.5 only'),
+)

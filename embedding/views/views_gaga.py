@@ -2,7 +2,7 @@ import wolframalpha
 import openai
 import json
 from django.http import HttpResponse
-from embedding.forms.chat import ChatForm
+from embedding.forms.gaga import GagaForm
 from embedding.openai.features import feature_chat, feature_chat_with_function
 from embedding.models import PromptModel
 from django.shortcuts import render
@@ -209,7 +209,7 @@ def chat_async_gaga(request):
 def chat_gaga(request):
     ret = get_basic_data(request)
     ret['hide_nav'] = True
-    form = ChatForm()
+    form = GagaForm()
     ret['form'] = form
     ret['welcome_word'] = 'Chat with Gagamia'
     ret['ai_emoji'] = load_random_emoji()
