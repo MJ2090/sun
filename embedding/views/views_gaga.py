@@ -50,7 +50,7 @@ sample output: 'solve 10 + 432 + 10'
     return my_function
 
 
-def get_query_or_answer(question, gpt_only = False):
+def get_query_or_answer(question, gpt_only=False):
     messages = [
         {"role": "system", "content": "You answer questions."},
         {"role": "user", "content": f"The question: {question}"},
@@ -58,19 +58,19 @@ def get_query_or_answer(question, gpt_only = False):
     functions = [get_my_function()]
     if gpt_only:
         response = openai.ChatCompletion.create(
-        model=model,
-        temperature=0,
-        max_tokens=1000,
-        messages=messages,
-    )
+            model=model,
+            temperature=0,
+            max_tokens=1000,
+            messages=messages,
+        )
     else:
-      response = openai.ChatCompletion.create(
-          model=model,
-          temperature=0,
-          max_tokens=1000,
-          messages=messages,
-          functions=functions,
-      )
+        response = openai.ChatCompletion.create(
+            model=model,
+            temperature=0,
+            max_tokens=1000,
+            messages=messages,
+            functions=functions,
+        )
     ai_response = response['choices'][0]['message']
     if "function_call" in ai_response:
         my_call = ai_response['function_call']
@@ -163,11 +163,20 @@ def main():
 
 def chat_async_gaga(request):
     new_message = request.POST['message']
-    character = 'gaga'
+
+    character = request.POST['character']
+    if 'gpt4' in character:
+        model = 'gpt-4'
+    else:
+        model = 'gpt-3.5-turbo'
+    if 'wolfram' in character:
+        gpt_only = False
+    else:
+        gpt_only = True
+
     dialogue_id = request.POST.get('dialogue_id', '')
 
-    my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history)
+    messages = json.loads(PromptModel.objects.get(name='gaga').history)
     history = request.POST.get('history')
     my_json = json.loads(history)
     messages.extend(my_json)
@@ -177,10 +186,12 @@ def chat_async_gaga(request):
         openai_response, request_time = feature_chat(messages, model=model)
     else:
         functions = [get_my_function()]
-        openai_response, request_time = feature_chat_with_function(messages, model=model, functions=functions)
-    
+        openai_response, request_time = feature_chat_with_function(
+            messages, model=model, functions=functions)
+
     ai_response = openai_response["choices"][0]["message"]
     ai_message = None
+    rewrite_query = None
     if "function_call" in ai_response:
         my_call = ai_response['function_call']
         if my_call['name'] == 'get_math_answer':
@@ -193,17 +204,17 @@ def chat_async_gaga(request):
                 ai_message = rephrase(new_message, wolfram_answer)
     else:
         print("No function call ======================")
-        
+
     if ai_message is None:
         ai_message = ai_response['content']
-    print("ai_message========", ai_message)
+    print("ai_message============\n", ai_message)
 
     record_dialogue(request, 'User', new_message,
                     dialogue_id, 'gaga', request_time=request_time)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
                     'gaga', request_time=request_time)
 
-    return HttpResponse(json.dumps({'ai_message': ai_message}))
+    return HttpResponse(json.dumps({'ai_message': ai_message, 'rewrite_query': rewrite_query}))
 
 
 def chat_gaga(request):

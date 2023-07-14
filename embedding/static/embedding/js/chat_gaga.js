@@ -5,6 +5,7 @@ function chat_async_call() {
         return;
     }
     let csrf = $("input[name='csrfmiddlewaretoken']");
+    const character = document.querySelector("select[name='character']");
     let old_msg = $(".dialogue");
     let history_msg = [];
     let role = "user";
@@ -46,6 +47,7 @@ function chat_async_call() {
     request_data.append('dialogue_id', $("input[name='dialogue_id']").val());
     request_data.append('csrfmiddlewaretoken', csrf.val());
     request_data.append('source_id', source_id);
+    request_data.append('character', character.value);
     fetch("/chat_async_gaga/", {
         method: "POST",
         body: request_data,
