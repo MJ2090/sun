@@ -219,40 +219,6 @@ def chat_async_therapy_openai(request):
     return HttpResponse(json.dumps({'ai_message': ai_message, 'audio_address': audio_address}))
 
 
-def chat_async_gaga(request):
-    model = 'gpt-3.5-turbo'
-    new_message = request.POST['message']
-    character = 'gaga'
-    dialogue_id = request.POST.get('dialogue_id', '')
-
-    my_m = PromptModel.objects.get(name=character)
-    messages = json.loads(my_m.history)
-    history = request.POST.get('history')
-    my_json = json.loads(history)
-    messages.extend(my_json)
-    messages.append({"role": "user", "content": new_message})
-    openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
-    record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
-
-    record_dialogue(request, 'User', new_message,
-                    dialogue_id, 'therapy', request_time=request_time)
-    record_dialogue(request, 'AI', ai_message, dialogue_id,
-                    'therapy', request_time=request_time)
-
-    return HttpResponse(json.dumps({'ai_message': ai_message}))
-
-
-def chat_gaga(request):
-    ret = get_basic_data(request)
-    form = ChatForm()
-    ret['form'] = form
-    ret['welcome_word'] = 'Chat with Gagamia'
-    ret['ai_emoji'] = load_random_emoji()
-    form.fields['dialogue_id'].initial = load_random_string(10)
-    return render(request, 'embedding/gaga.html', ret)
-
-
 def chat_therapy_gpt(request):
     ret = get_basic_data(request)
     form = ChatForm()

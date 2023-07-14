@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import views_yangmei, views_tele, views_pay, views_olivia, views_admin, views_chat, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_sign, views_image, views_translation, views_grammar
+from .views import views_gaga, views_yangmei, views_tele, views_pay, views_olivia, views_admin, views_chat, views_embedding, views_demo, views_quiz, views_summary, views_tab, views_sign, views_image, views_translation, views_grammar
 
 
 urlpatterns = [
@@ -93,8 +93,8 @@ urlpatterns = [
     path('yangmei_intent/', views_yangmei.yangmei_intent, name='yangmei_intent'),
     path('stripe_call/', views_yangmei.yangmei_stripe_call, name='yangmei_stripe_call'),
 
-    path('gaga/', views_chat.chat_gaga, name='chat_gaga'),
-    path('chat_async_gaga/', views_chat.chat_async_gaga, name='chat_async_gaga'),
+    path('gaga/', views_gaga.chat_gaga, name='chat_gaga'),
+    path('chat_async_gaga/', views_gaga.chat_async_gaga, name='chat_async_gaga'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
