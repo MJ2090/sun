@@ -124,9 +124,8 @@ def get_math_answer(query):
     client = wolframalpha.Client(appid)
     res = client.query(query)
     ans = []
-    print("33333333333 4444")
     for pod in res.pods:
-        print("33333333333", pod['@title'])
+        print("we have title =====================", pod['@title'])
         if pod['@title'] in ['Solution over the reals', 'Results', 'Result', 'Exact result', 'Substitution']:
             for sub in pod.subpods:
                 ans.append(sub.plaintext)
