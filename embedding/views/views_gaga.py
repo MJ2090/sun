@@ -93,13 +93,14 @@ def ask_one_question(question):
             final_ans = rephrase(question, wolfram_answer)
             print("Got Wolfram Answer:")
             print(final_ans)
-            return rephrase(question, wolfram_answer)
+            return final_ans
     print("Got GPT Answer:")
     print(gpt_answer)
 
 
-def rephrase(question, answer):
-    print("rephrase start:", question, answer)
+def rephrase(question, answer_list):
+    print("rephrase start:", question, answer_list)
+    answer = '\n'.join(answer_list)
     base_prompt = f"""
 There is a question and an answer, rephrase the answer so that it sounds more nature.
 question: {question}
@@ -210,10 +211,13 @@ def chat_async_gaga(request):
         ai_message = ai_response['content']
     print("ai_message============\n", ai_message)
 
+    print(999911)
     record_dialogue(request, 'User', new_message,
                     dialogue_id, 'gaga', request_time=request_time)
+    print(999922)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
                     'gaga', request_time=request_time)
+    print(999933)
 
     return HttpResponse(json.dumps({'ai_message': ai_message, 'rewritten_query': rewritten_query}))
 
