@@ -8,6 +8,8 @@ from embedding.models import PromptModel
 from django.shortcuts import render
 from embedding.utils import record_dialogue, load_random_emoji, load_random_string, get_basic_data, record_consumption
 import embedding.static_values as sc
+from django.views.decorators.csrf import csrf_exempt
+import stripe
 
 
 # model="gpt-3.5-turbo"
@@ -211,13 +213,10 @@ def chat_async_gaga(request):
         ai_message = ai_response['content']
     print("ai_message============\n", ai_message)
 
-    print(999911)
     record_dialogue(request, 'User', new_message,
                     dialogue_id, 'gaga', request_time=request_time)
-    print(999922)
     record_dialogue(request, 'AI', ai_message, dialogue_id,
                     'gaga', request_time=request_time)
-    print(999933)
 
     return HttpResponse(json.dumps({'ai_message': ai_message, 'rewritten_query': rewritten_query}))
 
@@ -231,3 +230,47 @@ def chat_gaga(request):
     ret['ai_emoji'] = load_random_emoji()
     form.fields['dialogue_id'].initial = load_random_string(10)
     return render(request, 'embedding/gaga.html', ret)
+
+
+@csrf_exempt
+def gaga_pay_session(request):
+    STRIPE_SECRET_KEY = "sk_test_51NOPgRK9OtnDAoGtqq3TBQZSV4wSoJ7Sz4RzPTSEMsenuBHo6xjE2O05ttTpy16L4duTOZKZ56PdLWeBGnrawjyw00FzMvjoqx"
+    stripe.api_key = STRIPE_SECRET_KEY
+    YOUR_DOMAIN = "https://localhost/"
+    prod_id = request.POST.get("prod_id", "prod_1")
+    if prod_id == "prod_1":
+        price = 400
+        name = "3 Months Membership"
+    else:
+        price = 49800
+        name = "1 Year Membership"
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "cny",
+                        "product_data": {
+                            "name": name,
+                            "images": [
+                                "https://www.classgaga.com/images/mascot.png",
+                            ],
+                        },
+                        "unit_amount": price,
+                    },
+                    "quantity": 1,
+                },
+            ],
+            mode="payment",
+            success_url=YOUR_DOMAIN + "/success.html",
+        )
+    except Exception as e:
+        print(e)
+        return str(e)
+
+    ret = {"url": checkout_session.url}
+    return HttpResponse(json.dumps(ret))
+
+
+def gagapay(request):
+    return render(request, "embedding/gagapay.html", {})
