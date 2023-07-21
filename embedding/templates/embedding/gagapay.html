@@ -35,7 +35,8 @@
             })
                 .then(response => response.json())
                 .then((response) => {
-                    window.open(response.url, '_blank').focus();
+                    location.href = response.url;
+                    // window.open(response.url, '_blank').focus();
                 });
         }
 
