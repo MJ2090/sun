@@ -10,7 +10,7 @@ from embedding.utils import record_dialogue, load_random_emoji, load_random_stri
 import embedding.static_values as sc
 from django.views.decorators.csrf import csrf_exempt
 import stripe
-
+import os
 
 # model="gpt-3.5-turbo"
 model = "gpt-4"
@@ -234,7 +234,9 @@ def chat_gaga(request):
 
 @csrf_exempt
 def gaga_pay_session(request):
-    STRIPE_SECRET_KEY = "sk_test_51NOPgRK9OtnDAoGtqq3TBQZSV4wSoJ7Sz4RzPTSEMsenuBHo6xjE2O05ttTpy16L4duTOZKZ56PdLWeBGnrawjyw00FzMvjoqx"
+    STRIPE_SECRET_KEY = os.environ["GAGA_STRIPE_SECRET_KEY"]
+    if not STRIPE_SECRET_KEY:
+        STRIPE_SECRET_KEY = "sk_test_51NOPgRK9OtnDAoGtqq3TBQZSV4wSoJ7Sz4RzPTSEMsenuBHo6xjE2O05ttTpy16L4duTOZKZ56PdLWeBGnrawjyw00FzMvjoqx"
     stripe.api_key = STRIPE_SECRET_KEY
     YOUR_DOMAIN = "https://localhost/"
     prod_id = request.POST.get("prod_id", "prod_1")
