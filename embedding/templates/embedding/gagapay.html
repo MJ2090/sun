@@ -15,7 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        const stripe = Stripe("pk_live_51MyeVkHDR3k1aZOHkBfRpVmtiyS1aH1HGj9zqMy9h1P62ZEVyD6cZfi6cDrWT2YJw5opTUQJKKxgBAi87CjVu1NR00gW6uZ8Qs");
+
         function payment_init() {
             const btns = document.querySelectorAll(".payment-btn");
             btns.forEach(btn => {
@@ -95,6 +98,9 @@
             </div>
         </header>
 
+        <div id="payment-element">
+        </div>
+        
         <main>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
                 <div class="col">
