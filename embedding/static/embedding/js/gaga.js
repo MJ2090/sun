@@ -45,6 +45,9 @@ async function create_order(e) {
     elements = stripe.elements({ appearance, clientSecret });
     const paymentElement = elements.create("payment", paymentElementOptions);
     paymentElement.mount("#payment-element");
+
+    const myModal = new bootstrap.Modal('#gagaModal', {});
+    myModal.show();
 }
 
 async function handleSubmit(e) {

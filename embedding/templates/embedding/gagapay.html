@@ -46,18 +46,33 @@
             </div>
         </header>
 
-        <div class="col-12">
-            <form id="payment-form">
-              <div id="link-authentication-element">
-              </div>
-              <div id="payment-element">
-              </div>
-              <button id="submit" class="mt-4 btn-primary w-100 btn">
-                <span id="button-text">Order now</span>
-              </button>
-              <div id="payment-message" class="hidden"></div>
-            </form>
-          </div>
+        <form id="payment-form">
+            <div class="modal" tabindex="-1" id="gagaModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" style="border:none">
+                            <h5 class="modal-title">Classgaga</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12">
+                                <div id="link-authentication-element">
+                                </div>
+                                <div id="payment-element">
+                                </div>
+                                <div id="payment-message" class="hidden"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="border:none">
+                            <button id="submit" class="mt-4 btn-primary w-100 btn">
+                                <span id="button-text">Order now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
 
         <main>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
