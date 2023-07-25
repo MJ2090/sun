@@ -234,7 +234,7 @@ def chat_gaga(request):
 
 @csrf_exempt
 def gaga_pay_session(request):
-    STRIPE_SECRET_KEY = os.environ["GAGA_STRIPE_SECRET_KEY"]
+    STRIPE_SECRET_KEY = os.environ.get("GAGA_STRIPE_SECRET_KEY", "")
     if not STRIPE_SECRET_KEY:
         STRIPE_SECRET_KEY = "sk_test_51NOPgRK9OtnDAoGtqq3TBQZSV4wSoJ7Sz4RzPTSEMsenuBHo6xjE2O05ttTpy16L4duTOZKZ56PdLWeBGnrawjyw00FzMvjoqx"
     stripe.api_key = STRIPE_SECRET_KEY
