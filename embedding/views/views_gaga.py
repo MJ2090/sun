@@ -276,3 +276,31 @@ def gaga_pay_session(request):
 
 def gagapay(request):
     return render(request, "embedding/gagapay.html", {})
+
+
+@csrf_exempt
+def gaga_intent(request):
+    print("in request,", request.POST)
+    prod_id = request.POST.get("prod_id", "prod_1")
+    if prod_id == "prod_1":
+        price = 400
+        name = "3 Months Membership"
+    else:
+        price = 49800
+        name = "1 Year Membership"
+
+    intent = stripe.PaymentIntent.create(
+        amount=price,
+        currency="cny",
+        payment_method_types=["alipay", "wechat_pay"],
+    )
+    print("intent=", intent)
+
+    return HttpResponse(
+        json.dumps(
+            {
+                "clientSecret": intent["client_secret"],
+                "price": price,
+            }
+        )
+    )

@@ -97,6 +97,7 @@ urlpatterns = [
     path('chat_async_gaga/', views_gaga.chat_async_gaga, name='chat_async_gaga'),
     path('gagapay/', views_gaga.gagapay, name='gagapay'),
     path('gaga_pay_session/', views_gaga.gaga_pay_session, name='gaga_pay_session'),
+    path('gaga_intent/', views.gaga_intent, name='gaga_intent'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

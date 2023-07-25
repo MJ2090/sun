@@ -20,7 +20,7 @@
             const btns = document.querySelectorAll(".payment-btn");
             btns.forEach(btn => {
                 btn.addEventListener("click", e => {
-                    async_fetch(e);
+                    gaga_intent(e);
                 });
             });
         }
@@ -29,7 +29,7 @@
             const request_data = new FormData();
             const prod_id = e.target.getAttribute("value");
             request_data.append('prod_id', prod_id);
-            fetch("/gaga_pay_session/", {
+            fetch("/create_order/", {
                 method: "POST",
                 body: request_data,
             })
@@ -38,6 +38,28 @@
                     location.href = response.url;
                     // window.open(response.url, '_blank').focus();
                 });
+        }
+
+        async function create_order(e) {
+            const prod_id = e.target.getAttribute("value");
+            const request_data = new FormData();
+            request_data.append('prod_id', prod_id);
+
+            const response = await fetch("/gaga_intent/", {
+                method: "POST",
+                body: request_data,
+            });
+
+            const { clientSecret, price, } = await response.json();
+            const appearance = {
+                theme: 'stripe',
+            };
+            const paymentElementOptions = {
+                layout: "tabs",
+            };
+            elements = stripe.elements({ appearance, clientSecret });
+            const paymentElement = elements.create("payment", paymentElementOptions);
+            paymentElement.mount("#payment-element");
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -51,7 +73,8 @@
     <div class="container py-3">
         <header>
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-                <a href="/" class="justify-content-center d-flex align-items-center link-body-emphasis text-decoration-none">
+                <a href="/"
+                    class="justify-content-center d-flex align-items-center link-body-emphasis text-decoration-none">
                     <img class="fs-4" src="https://www.classgaga.com/images/system_logo.png" style="
     width: 50%;
 ">
