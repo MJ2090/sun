@@ -292,7 +292,7 @@ def gaga_intent(request):
         price = 400
         name = "3 Months Membership"
     else:
-        price = 49800
+        price = 500
         name = "1 Year Membership"
 
     intent = stripe.PaymentIntent.create(

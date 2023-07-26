@@ -39,9 +39,23 @@ async function create_order(e) {
     const appearance = {
         theme: 'stripe',
     };
-    const paymentElementOptions = {
-        layout: "tabs",
+    let paymentElementOptions = {
+        layout: {
+            type: "accordion",
+            radios: true,
+        },
+        paymentMethodOrder: ["alipay", "apple_pay", "card"],
+        business: { name: 'Classgaga' },
     };
+    if (e.target.getAttribute("value") == "prod_2") {
+        paymentElementOptions = {
+            layout: {
+                type: "tabs",
+            },
+            paymentMethodOrder: ["alipay", "apple_pay", "card"],
+            business: { name: 'Classgaga' },
+        };
+    }
     elements = stripe.elements({ appearance, clientSecret });
     const paymentElement = elements.create("payment", paymentElementOptions);
     paymentElement.mount("#payment-element");
