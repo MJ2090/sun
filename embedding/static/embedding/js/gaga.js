@@ -55,6 +55,9 @@ async function create_order(e) {
             paymentMethodOrder: ["alipay", "apple_pay", "card"],
             business: { name: 'Classgaga' },
         };
+
+        document.querySelector(".title-1").innerHTML="12个月 会员课程";
+        document.querySelector(".title-2").innerHTML="CNY 498.00";
     }
     elements = stripe.elements({ appearance, clientSecret });
     const paymentElement = elements.create("payment", paymentElementOptions);
