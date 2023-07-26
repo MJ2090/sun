@@ -63,7 +63,7 @@ def yangmei_intent(request):
     intent = stripe.PaymentIntent.create(
         amount=price * 100,
         currency='cny',
-        payment_method_types=['alipay', 'wechat_pay']
+        payment_method_types=['alipay', 'wechat_pay', 'card']
     )
     print("intent=", intent)
     current_time = time.time()
