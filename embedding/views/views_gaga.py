@@ -298,7 +298,7 @@ def gaga_intent(request):
     intent = stripe.PaymentIntent.create(
         amount=price,
         currency="cny",
-        payment_method_types=["alipay", "wechat_pay"],
+        payment_method_types=["alipay", "card"],
     )
     print("intent=", intent)
 
