@@ -24,8 +24,8 @@ function chat_async_call() {
         history_msg.push(dic);
     }
     let history = JSON.stringify(history_msg);
-    character.prop("disabled", true);
-    model_selector.prop("disabled", true);
+    // character.prop("disabled", true);
+    // model_selector.prop("disabled", true);
     let new_msg_text = new_msg.val();
     new_msg.val('');
 

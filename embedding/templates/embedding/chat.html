@@ -2,8 +2,7 @@
 
 {% block privatecss %}
 {% load static %}
-<link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/google-light.min.css">
 <link rel="stylesheet" href="{% static 'embedding/css/chat.css' %}">
 {% endblock %}
 
@@ -14,15 +13,37 @@
 {% endblock %}
 
 {% block main %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Chat Settings</h5>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-12">
+      <label for="character" class="form-label">Choose a character</label>
+      {{ form.character }}
+      <div class="invalid-feedback">
+        :D
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="character" class="form-label">Choose a model</label>
+      {{ form.training_model }}
+      <div class="invalid-feedback">
+          :D
+      </div>
+  </div>
+  </div>
+</div>
+
 <div class="container px-4 py-4">
   <h4 class="mb-3">Enjoy a chat with AI</h4>
   <form class="row needs-validation" novalidate="" action="/chat/" method="post">
     {% csrf_token %}
 
-    <div class="col-md-4 col-lg-2 mobile-only">
+    <div class="col-12 mobile-only">
       {% include "comp/chat_menu.html" %}
     </div>
-    <div class="col-md-8 col-lg-10">
+    <div class="col-12 col-sm-11">
       <div class="row g-3">
         <div class="hidden">
           {{ form.dialogue_id }}
@@ -53,18 +74,19 @@
         </div>
         <div class="message-outer-container">
           <div class="message-container">
-          <div name="ai_title" style="height: 35px;" class="d-flex align-items-center mb-2">
-            <div class="symbol  symbol-35px symbol-circle ">
-              <img style="width: 35px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
+            <div name="ai_title" style="height: 35px;" class="d-flex align-items-center mb-2">
+              <div class="symbol  symbol-35px symbol-circle ">
+                <img style="width: 35px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
+              </div>
+              <div class="ms-2">
+                <span style="font-weight: 600; font-size: 14px;">A.I</span>
+                <span style="color: rgb(155, 160, 184); font-size: 13px;" class="msg-time">Now</span>
+              </div>
             </div>
-            <div class="ms-2">
-              <span style="font-weight: 600; font-size: 14px;">A.I</span>
-              <span style="color: rgb(155, 160, 184); font-size: 13px;" class="msg-time">Now</span>
+            <div class="d-flex justify-content-start mb-3" name="ai_msg">
+              <div class="p-3 dialogue-message dialogue-message-ai dialogue" data-kt-element="message-text" role="ai">
+                Hey there</div>
             </div>
-          </div>
-          <div class="d-flex justify-content-start mb-3" name="ai_msg">
-            <div class="p-3 dialogue-message dialogue-message-ai dialogue" data-kt-element="message-text" role="ai">Hey there</div>
-          </div>
           </div>
           <div class="spinner" name="spinner" style="display: none">
             <div class="loading">
@@ -82,16 +104,17 @@
           {{ form.message }}
           <button type="button" name="send_button" class="btn btn-primary send-button">
             <div>
-                <i width="1em" height="1em" class="bi-send"></i>
+              <i width="1em" height="1em" class="bi-send"></i>
             </div>
           </button>
         </div>
         {% include "comp/audio_comp.html" %}
       </div>
     </div>
-    <div class="col-md-4 col-lg-2 desktop-only">
-      {% include "comp/chat_menu.html" %}
-    </div>
+    <div class="col-sm-1 desktop-only" style="font-size: 30px">
+      <div data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i width="1em"
+          height="1em" class="bi-gear"></i></button>
+      </div>
   </form>
 </div>
 </div>
