@@ -34,8 +34,10 @@
     min-height: calc(100vh - 340px);
     height: 320px;
     overflow: scroll;
-    background-color: #f8f8f8;
+    background-color: fff;
     padding: 10px 20px 0 20px;
+    border-radius: 12px;
+    border: 1px rgb(239, 242, 245) solid;
   }
 }
 
