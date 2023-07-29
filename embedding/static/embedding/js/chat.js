@@ -34,10 +34,11 @@ function chat_async_call() {
     let human_title = $("div[name='human_title']").clone();
     content.append(human_title.get(0));
 
-    let human_msg = $("p[name='human_msg']").clone();
-    human_msg.addClass("dialogue");
-    human_msg.text(new_msg_text);
-    content.append(human_msg.get(0));
+    let human_msg = document.querySelector("div[name='human_msg']").cloneNode(true);
+    let human_msg_child = human_msg.children[0];
+    human_msg_child.classList.add("dialogue");
+    human_msg_child.innerText = new_msg_text;
+    content.append(human_msg);
 
     $("div[name='spinner']").show();
     timer = setTimeout(() => { display_still_thinking(); }, 10000);
@@ -115,12 +116,11 @@ function display_msg_piece(final_list, current_index) {
         let ai_title = $("div[name='ai_title']").clone();
         content.append(ai_title.get(0));
     }
-    let ai_msg = $("p[name='ai_msg']").clone();
-    ai_msg.css('display', 'none');
-    ai_msg.get(0).innerHTML = final_list[current_index];
-    ai_msg.addClass("dialogue");
-    content.append(ai_msg.get(0));
-    ai_msg.fadeIn();
+    let ai_msg = document.querySelector("div[name='ai_msg']").cloneNode(true);
+    let ai_msg_child = ai_msg.children[0];
+    ai_msg_child.classList.add("dialogue");
+    ai_msg_child.innerHTML = final_list[current_index];
+    content.append(ai_msg);
     hljs.highlightAll();
     if (current_index == 0) {
         $(".message-outer-container").animate({ scrollTop: $(".message-container").height() }, 400);

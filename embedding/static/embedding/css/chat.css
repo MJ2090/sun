@@ -22,8 +22,10 @@
     min-height: calc(100vh - 260px);
     height: 320px;
     overflow: scroll;
-    background-color: #f8f8f8;
+    background-color: #fff;
     padding: 10px 20px 0 20px;
+    border-radius: 12px;
+    border: 1px rgb(239, 242, 245) solid;
   }
 }
 
@@ -51,4 +53,14 @@
 .still-thinking {
   display: inline;
   margin-left: 10px;
+}
+
+.dialogue-message-human {
+  background-color: rgb(236 242 251);
+  border-radius: 6px;
+}
+
+.dialogue-message-ai {
+  background-color: rgb(238, 251, 236);
+  border-radius: 6px;
 }
