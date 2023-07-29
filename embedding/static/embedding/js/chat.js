@@ -31,8 +31,9 @@ function chat_async_call() {
 
     let content = $('.message-container');
 
-    let human_title = $("div[name='human_title']").clone();
-    content.append(human_title.get(0));
+    let human_title = document.querySelector("div[name='human_title']").cloneNode(true);
+    human_title.querySelector(".msg-time").innerText = get_time();
+    content.append(human_title);
 
     let human_msg = document.querySelector("div[name='human_msg']").cloneNode(true);
     let human_msg_child = human_msg.children[0];
@@ -64,8 +65,9 @@ function chat_async_call() {
         .then(
             response => response.json())
         .then((response) => {
-            let ai_title = $("div[name='ai_title']").clone();
-            content.append(ai_title.get(0));
+            let ai_title = document.querySelector("div[name='ai_title']").cloneNode(true);
+            content.append(ai_title);
+            ai_title.querySelector(".msg-time").innerText = get_time();
 
             let ai_message = response.ai_message;
             let is_code = ai_message.indexOf('```') != -1;
@@ -185,6 +187,15 @@ function chat_init() {
         this.play();
     });
     // Audio play ends
+}
+
+function get_time() {
+    const currentdate = new Date();
+    let comma = ":";
+    if (currentdate.getMinutes()<10) {
+        comma = ":0";
+    }
+    return currentdate.getHours() + comma + currentdate.getMinutes();
 }
 
 $(document).ready(function () {
