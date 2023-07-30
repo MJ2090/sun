@@ -47,18 +47,18 @@
       <div class="row g-3">
         <div class="hidden">
           {{ form.dialogue_id }}
-          <div name="human_title" style="height: 35px;" class="d-flex align-items-center mb-2 justify-content-end">
+          <div name="human_title" style="height: 32px;" class="d-flex align-items-center mb-2 justify-content-end">
             <div class="me-2">
               <span style="color: rgb(155, 160, 184); font-size: 13px;" class="msg-time">5 Hours</span>
               <span style="font-weight: 600; font-size: 14px;">You</span>
             </div>
-            <div class="symbol symbol-35px symbol-circle ">
-              <img style="width: 35px; border-radius: 20px;" src="{% static 'embedding/img/a_1.jpeg' %}">
+            <div>
+              <img style="width: 32px; border-radius: 20px;" src="{% static 'embedding/img/a_1.jpeg' %}">
             </div>
           </div>
-          <div name="ai_title" style="height: 35px;" class="d-flex align-items-center mb-2">
-            <div class="symbol  symbol-35px symbol-circle ">
-              <img style="width: 35px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
+          <div name="ai_title" style="height: 32px;" class="d-flex align-items-center mb-2">
+            <div>
+              <img style="width: 32px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
             </div>
             <div class="ms-2">
               <span style="font-weight: 600; font-size: 14px;">A.I</span>
@@ -66,17 +66,17 @@
             </div>
           </div>
           <div class="d-flex justify-content-end mb-3" name="human_msg">
-            <div class="p-3 dialogue-message dialogue-message-human" data-kt-element="message-text" role="human"></div>
+            <div class="px-3 py-2 dialogue-message dialogue-message-human" data-kt-element="message-text" role="human"></div>
           </div>
           <div class="d-flex justify-content-start mb-3" name="ai_msg">
-            <div class="p-3 dialogue-message dialogue-message-ai" data-kt-element="message-text" role="ai"></div>
+            <div class="px-3 py-2 dialogue-message dialogue-message-ai" data-kt-element="message-text" role="ai"></div>
           </div>
         </div>
         <div class="message-outer-container">
           <div class="message-container">
-            <div name="ai_title" style="height: 35px;" class="d-flex align-items-center mb-2">
-              <div class="symbol  symbol-35px symbol-circle ">
-                <img style="width: 35px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
+            <div name="ai_title" style="height: 32px;" class="d-flex align-items-center mb-2">
+              <div>
+                <img style="width: 32px; border-radius: 20px;" src="{% static 'embedding/img/olivia_avatar.jpeg' %}">
               </div>
               <div class="ms-2">
                 <span style="font-weight: 600; font-size: 14px;">A.I</span>
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-start mb-3" name="ai_msg">
-              <div class="p-3 dialogue-message dialogue-message-ai dialogue" data-kt-element="message-text" role="ai">Hey there</div>
+              <div class="px-3 py-2 dialogue-message dialogue-message-ai dialogue" data-kt-element="message-text" role="ai">Hey there</div>
             </div>
           </div>
           <div class="spinner" name="spinner" style="display: none">
