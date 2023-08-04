@@ -122,7 +122,7 @@ answer: {answer}
     return ai_response
 
 
-def get_math_answer(query):
+def get_math_answer_2(query):
     appid = "78U72L-P4W6T56RA5"
     client = wolframalpha.Client(appid)
     res = client.query(query)
@@ -134,6 +134,17 @@ def get_math_answer(query):
             for sub in pod.subpods:
                 ans.append(sub.plaintext)
     return ans
+
+
+def get_math_answer(query):
+    appid = "LKRWWW-WGKYKE6WRQ"
+    my_url = f"https://www.wolframalpha.com/api/v1/llm-api?input={query}&appid={appid}"
+    import requests
+    r = requests.get(my_url)
+    print(r.text)
+    print("=====================================================")
+    print(r.url)
+    return r.text
 
 
 def main():
@@ -200,7 +211,8 @@ def chat_async_gaga(request):
         my_call = ai_response['function_call']
         if my_call['name'] == 'get_math_answer':
             params = json.loads(my_call['arguments'])
-            rewritten_query = params['query']
+            # rewritten_query = params['query']
+            rewritten_query = new_message.replace("+", "%2b")
             print("Rewritten Query:", rewritten_query)
             wolfram_answer = get_math_answer(rewritten_query)
             if wolfram_answer:
