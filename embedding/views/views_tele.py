@@ -28,7 +28,7 @@ def tele(request):
         {"role": "user", "content": f"{user_msg}"},
     ]
     openai_response, _ = feature_chat(messages, model='gpt-3.5-turbo')
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     loop = asyncio.new_event_loop()
     task = loop.create_task(send_telegram_message(chat_id, ai_message))
     loop.run_until_complete(task)

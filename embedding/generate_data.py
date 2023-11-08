@@ -112,7 +112,7 @@ def call_openai(messages, model):
 
 def run_it(messages, count):
     openai_response = call_openai(messages, model='gpt-3.5-turbo')
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     file_name = f'data/therapy_{count}.txt'
     f = open(file_name, "w")
     f.write(ai_message)

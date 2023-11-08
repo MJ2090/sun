@@ -99,7 +99,7 @@ def text_summary_async(doc):
         else:
             text = read_text_from_txt(doc.filename)
         openai_response = feature_summary(text, max_words=150)
-        summary_text = openai_response["choices"][0]["message"]["content"]
+        summary_text = openai_response.choices[0].message.content
         doc.summarization = summary_text
         doc.save()
         print("text_summary_async finished")

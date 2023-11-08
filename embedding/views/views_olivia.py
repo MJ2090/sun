@@ -23,7 +23,7 @@ def olivia_async_chat(request):
     messages.append({"role": "user", "content": new_message})
 
     openai_response, _ = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     ret['ai_message'] = ai_message
     dialogue = record_new_dialogue(visitor, ai_message, d_uuid, role="ai")
     ret['m_uuid'] = dialogue.msg_uuid
@@ -185,7 +185,7 @@ def thread_assessment_overall(visitor, new_message, history_json, d_uuid):
     model = "gpt-4"
     messages = [{"role": "system", "content": prompt}]
     openai_response, _ = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     TherapyAssessment.objects.create(
         visitor=visitor, result=ai_message, timestamp=get_time())
     
@@ -209,7 +209,7 @@ def thread_check_suicide(visitor, new_message, history_json, d_uuid):
     model = "gpt-4"
     messages = [{"role": "system", "content": prompt}]
     openai_response, _ = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     SuicideAssessment.objects.create(
         visitor=visitor, result=ai_message, timestamp=get_time())
 

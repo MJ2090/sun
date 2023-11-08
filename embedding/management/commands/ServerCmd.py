@@ -51,7 +51,8 @@ class Command(BaseCommand):
         print("Msg from openai: ", response)
 
     def clean(self):
-        VisitorDialogue.objects.filter(ack=False).delete()
+        # VisitorDialogue.objects.filter(ack=False).delete()
+        
 
     def merge(self):
         pref = '/var/www/asuperdomain.com/static/embedding/data/'

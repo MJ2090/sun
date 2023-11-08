@@ -322,3 +322,7 @@ def gaga_intent(request):
             }
         )
     )
+
+
+# query = "solve x^2+y^2=153, y=-4x for x^2"
+# get_math_answer(query)

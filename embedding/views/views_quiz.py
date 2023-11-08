@@ -20,7 +20,7 @@ def quiz_async(request):
     llm_model = request.POST.get('llm_model')
     print("ocr_result: ", ocr_result)
     openai_response, request_time = feature_quiz(ocr_result, model=llm_model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     return HttpResponse(json.dumps({'question': ocr_result, 'answer': ai_message}))
 
 
@@ -52,7 +52,7 @@ def quiz_question_async(request):
         error_msg = 'ERROR'
     else:
         record_consumption(request, sc.MODEL_TYPES_QUIZ, openai_response)
-        ai_message = openai_response["choices"][0]["message"]["content"]
+        ai_message = openai_response.choices[0].message.content
         error_msg = ''
     quiz_record(request, original_question,
                 ai_message, llm_model, request_time, openai_response)
@@ -63,8 +63,8 @@ def quiz_question_async(request):
 def quiz_record(request, question, answer, llm_model, request_time, openai_response):
     response_time = time.time()
     if "usage" in openai_response:
-        token_request = openai_response["usage"]["prompt_tokens"]
-        token_response = openai_response["usage"]["completion_tokens"]
+        token_request = openai_response.usage.prompt_tokens
+        token_response = openai_response.usage.completion_tokens
     else:
         token_request = -1
         token_response = -1

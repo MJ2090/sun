@@ -25,7 +25,7 @@ def chat_async_customer_service(request):
             # return HttpResponse(json.dumps({'ai_message': answer}))
     if use_action:
         openai_response = feature_action(new_message, model='gpt-3.5-turbo')
-        action_score = openai_response["choices"][0]["message"]["content"]
+        action_score = openai_response.choices[0].message.content
         action_score = action_score.replace(
             '.', '').replace('\n', '').replace(' ', '')
         print('action_score= ', action_score, action_score.isnumeric())
@@ -53,7 +53,7 @@ def chat_async_customer_service(request):
 
     openai_response, request_time = feature_chat(
         messages, model='gpt-3.5-turbo')
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
@@ -82,7 +82,7 @@ def chat_async(request):
     print("Msg sent to openai: ", messages)
 
     openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
@@ -165,7 +165,7 @@ def sendchat_async_olivia(request):
     print("Msg sent to openai: ", messages)
 
     openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 
@@ -201,7 +201,7 @@ def chat_async_therapy_openai(request):
     print("Msg sent to openai: ", messages)
 
     openai_response, request_time = feature_chat(messages, model=model)
-    ai_message = openai_response["choices"][0]["message"]["content"]
+    ai_message = openai_response.choices[0].message.content
     print("\nMsg returned from openai: ", ai_message)
     record_consumption(request, sc.MODEL_TYPES_CHAT, openai_response)
 

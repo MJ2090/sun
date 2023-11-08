@@ -82,7 +82,7 @@ def record_consumption(request, model_type, openai_response, secret=''):
         if model_type == sc.MODEL_TYPES_IMAGE:
             token_amount = 0
         else:
-            token_amount = openai_response["usage"]["total_tokens"]
+            token_amount = openai_response.usage.total_tokens
         consumption = TokenConsumption.objects.create(user=get_user(request),
                                                       model_type=model_type,
                                                       token_amount=token_amount,

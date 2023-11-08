@@ -10,7 +10,7 @@ import json
 def grammar_async(request):
     original_text = request.POST.get('original_text', '')
     openai_response = feature_grammar(original_text, model='gpt-3.5-turbo')
-    fixed_text = openai_response["choices"][0]["message"]["content"]
+    fixed_text = openai_response.choices[0].message.content
     record_consumption(
         request, sc.MODEL_TYPES_GRAMMAR, openai_response)
     print(fixed_text)

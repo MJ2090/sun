@@ -162,7 +162,7 @@ def feature_summary(original_text, model='gpt-3.5-turbo-16k', max_words=0, max_t
             messages=messages,
         )
         print("Msg from openai: ", response)
-    except openai.error.InvalidRequestError as e:
+    except openai.BadRequestError as e:
         print(f"OpenAI API request InvalidRequestErro, retry #1..\n: {e}")
         half_len = len(original_text)//2
         # original_text = original_text[:half_len]
@@ -213,10 +213,10 @@ def feature_chat_with_function(messages, model, functions):
         )
         print("\nMsg returned from openai: ", response)
         return response, request_time
-    except openai.error.Timeout as e:
+    except openai.APITimeoutError as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D", request_time
-    except openai.error.APIError as e:
+    except openai.BadRequestError as e:
         print(f"OpenAI API request APIerror: {e} with message {messages}")
         return "ERROR IN OEPNAI API"
         
@@ -234,10 +234,10 @@ def feature_chat(messages, model, retry=0):
         )
         print("\nMsg returned from openai: ", response)
         return response, request_time
-    except openai.error.Timeout as e:
+    except openai.APITimeoutError as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "Sorry it was time out :D", request_time
-    except openai.error.APIError as e:
+    except openai.BadRequestError as e:
         print(f"OpenAI API request APIerror: {e} with message {messages}")
         if retry == 0:
             return feature_chat(messages, model, retry=1)
@@ -258,22 +258,22 @@ def feature_quiz(context, model="gpt-4", temperature=0.5, q_type=''):
         )
         print(f"Msg from openai {model}: {response}")
         return response, request_time
-    except openai.error.Timeout as e:
+    except openai.APITimeoutError as e:
         print(f"OpenAI API request timed out: {e} with message {messages}")
         return "ERROR", request_time
-    except openai.error.APIError as e:
+    except openai.APIConnectionError as e:
         # Handle API error here, e.g. retry or log
         print(f"OpenAI API returned an API Error: {e}")
         return "ERROR", request_time
-    except openai.error.APIConnectionError as e:
+    except openai.APIConnectionError as e:
         # Handle connection error here
         print(f"Failed to connect to OpenAI API: {e}")
         return "ERROR", request_time
-    except openai.error.RateLimitError as e:
+    except openai.RateLimitError as e:
         # Handle rate limit error (we recommend using exponential backoff)
         print(f"OpenAI API request exceeded rate limit: {e}")
         return "ERROR", request_time
-    except openai.error.InvalidRequestError as e:
+    except openai.BadRequestError as e:
         # Handle InvalidRequestError
         print(f"OpenAI API request is invalid: {e}")
         return "ERROR", request_time

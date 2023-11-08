@@ -1,7 +1,8 @@
 import openai
-from openai.embeddings_utils import distances_from_embeddings
+# from openai.embeddings_utils import distances_from_embeddings
 import time
 from embedding.llm import glm
+import numpy as np
 
 
 def create_context(question, df, max_len=1800):
@@ -14,8 +15,9 @@ def create_context(question, df, max_len=1800):
         input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
-    df['distances'] = distances_from_embeddings(
-        q_embeddings, df['embeddings'].values, distance_metric='cosine')
+    df["distances"] = df.ada_v2.apply(lambda x: cosine_similarity(x, q_embeddings))
+    # df['distances'] = distances_from_embeddings(
+    #     q_embeddings, df['embeddings'].values, distance_metric='cosine')
 
     ret = []
     cur_len = 0
@@ -87,7 +89,7 @@ def answer_question_openai(
         )
         if debug:
             print(f"Msg returned from openai:\n{response}\n\n")
-        return response["choices"][0]["message"]["content"], context
+        return response.choices[0].message.content, context
     except Exception as e:
         print(e)
         return ""
@@ -117,3 +119,7 @@ def get_glm_embedding_prompt(
 
     system_prompt = f"根据下文提供的内容回答问题. 如果无法从下文中得到答案, 回答 我不知.\n\n内容: {context_str}\n\n问题: {question}"
     return system_prompt
+
+
+def cosine_similarity(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
