@@ -1,10 +1,11 @@
-from langchain.document_loaders import PyPDFLoader
+# from langchain.document_loaders import PyPDFLoader
 
 def load_pdf_pages(file_name):
-    loader = PyPDFLoader(file_name)
-    pages = loader.load_and_split()
-    print(f"load_pdf finished processing {file_name}")
-    return pages
+    # loader = PyPDFLoader(file_name)
+    # pages = loader.load_and_split()
+    # print(f"load_pdf finished processing {file_name}")
+    # return pages
+    pass
 
 
 def load_pdf_text(file_name):
