@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
     def clean(self):
         # VisitorDialogue.objects.filter(ack=False).delete()
-        
+        pass
 
     def merge(self):
         pref = '/var/www/asuperdomain.com/static/embedding/data/'

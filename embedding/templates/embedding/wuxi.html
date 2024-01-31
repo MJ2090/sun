@@ -16,7 +16,7 @@
   <li class="list-group-item hidden none">{% translate "list not available" %}</li>
   <li class="list-group-item hidden block">
     <div style="display: flex; justify-content: space-between;">
-      <a target="blank"></a>
+      <a target="_blank"></a>
     </div>
     <p class="pt-2 summary-p" style="min-height: 100px" name="doc_p">{% translate "Summarization -- " %}</p>
     <div class="summary-shadow"></div>
@@ -111,7 +111,7 @@
         <div class="col-12">
           <div style="display: flex; justify-content: space-between;">
             <label for="answer" class="form-label">{% translate "Answer" %}</label>
-            <a type="button" data-bs-toggle="modal" style="color:#6363ff" target="blank" data-bs-target="#contextModal">{% translate "Show context" %}</a>
+            <a type="button" data-bs-toggle="modal" style="color:#6363ff" target="_blank" data-bs-target="#contextModal">{% translate "Show context" %}</a>
           </div>
           {{ form.answer }}
           <div class="pt-2 spinner" name="spinner" style="display: none">
